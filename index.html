@@ -94,7 +94,7 @@
         { 
           id: 'p2', 
           name: 'Lenire', 
-          description: 'Percorso dedicato a tutte quelle cuti che oltre ad aver bisogno di essere purificate hanno bisogno di essere rigenerate.', 
+          description: 'Percorso dedicato a tutte quelle cuti che hanno bisogno di essere rigenerate e riportate in equilibrio.', 
           sessions: 'da 3 a 5 sedute (1 a settimana)', 
           tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', 
           price: 'Lui: 67€ | Lei: 89/93€' 
@@ -102,7 +102,7 @@
         { 
           id: 'p3', 
           name: 'Detossinare', 
-          description: 'Percorso dedicato per cuti asfittiche e intossinate che richiedono una eliminazione di scorie metaboliche e un incremento di nutrimento al bulbo.', 
+          description: 'Percorso dedicato per cuti asfittiche, anaerobiche e intossinate per eliminare scorie metaboliche, apportare ossigeno e nutrimento al bulbo.', 
           sessions: 'da 5 a 7 sedute (1 a settimana)', 
           tools: 'Vacum terapia, Altra frequenza, Cascata', 
           price: 'Lui: 47€ | Lei: 67/71€' 
@@ -120,7 +120,7 @@
           name: 'Riparare', 
           description: 'Percorso dedicato a ristrutturare e riparare capelli decheratinizzati, doppie punte, carenza di idratazione, nutrimento e danni meccanici.', 
           sessions: '4 sedute (1 a settimana)', 
-          tools: 'Laser a fotoringiovanimento, Fototerapia', 
+          tools: 'Laser a fotoringiovanimento, Fototerapia, Cuffia nebulizzata', 
           price: 'Da definire' 
         },
         { 
@@ -274,7 +274,7 @@
                     <i className="fa-solid fa-arrow-left"></i>
                   </button>
                   <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                    Seleziona <span className="text-[#EAB308] ml-2">Tipologia Percorso</span>
+                    <span className="text-[#EAB308]">I NOSTRI PERCORSI</span>
                   </div>
                   <div className="w-14"></div>
                 </header>
@@ -303,6 +303,7 @@
         // --- LISTA DEI PERCORSI (MAIN O MANTENIMENTO) ---
         if ((section === 'percorsi-main' || section === 'percorsi-mantenimento') && !selectedPath) {
           const pathsToShow = section === 'percorsi-main' ? MOCK_PATHS : MOCK_MAINTENANCE_PATHS;
+          const currentTitle = section === 'percorsi-main' ? 'PERCORSI' : 'PERCORSI DI MANTENIMENTO';
           return html`
             <div className="h-full animate-fade-in pb-12">
               <header className="flex items-center justify-between mb-10">
@@ -310,7 +311,7 @@
                   <i className="fa-solid fa-arrow-left"></i>
                 </button>
                 <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                  Lista <span className="text-[#EAB308] ml-2">${section === 'percorsi-main' ? 'Percorsi' : 'Mantenimento'}</span>
+                  <span className="text-[#EAB308]">${currentTitle}</span>
                 </div>
                 <div className="w-14"></div>
               </header>
@@ -454,6 +455,7 @@
         }
 
         if (!section) {
+          const currentLabel = gender === 'donna' ? 'LISTINO DONNA' : gender === 'uomo' ? 'LISTINO UOMO' : 'I NOSTRI PERCORSI';
           return html`
             <div className="h-full animate-fade-in">
               <header className="flex items-center justify-between mb-10">
@@ -461,12 +463,18 @@
                   <i className="fa-solid fa-arrow-left"></i>
                 </button>
                 <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                  Percorso <span className="text-[#EAB308] ml-2">${gender}</span>
+                  <span className="text-[#EAB308]">${currentLabel}</span>
                 </div>
                 <div className="w-14"></div>
               </header>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                ${SECTIONS.filter(s => !s.id.startsWith('percorsi')).map(s => html`
+                ${SECTIONS.filter(s => {
+                    const isPercorso = s.id.startsWith('percorsi');
+                    if (isPercorso) return false;
+                    // Se è selezionato 'uomo', nascondi colorazioni e schiariture
+                    if (gender === 'uomo' && (s.id === 'colorazioni' || s.id === 'schiariture')) return false;
+                    return true;
+                }).map(s => html`
                   <button key=${s.id} onClick=${() => setSection(s.id)} className="bg-white p-8 rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group text-center flex flex-col items-center justify-center min-h-[220px]">
                     <div className="w-14 h-14 bg-slate-50 text-[#EAB308] rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-black group-hover:scale-110 transition-all">
                       <i className=${`fa-solid ${s.icon}`}></i>
@@ -479,6 +487,56 @@
           `;
         }
 
+        // --- VISIONE SPECIFICA ---
+        if (section === 'visione') {
+          return html`
+            <div className="h-full animate-zoom-in max-w-4xl mx-auto pb-12">
+              <header className="flex items-center justify-between mb-10">
+                <button onClick=${() => setSection(null)} className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all">
+                  <i className="fa-solid fa-arrow-left"></i>
+                </button>
+                <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                  <span className="text-[#EAB308]">LA NOSTRA VISIONE</span>
+                </h2>
+                <div className="w-14"></div>
+              </header>
+
+              <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
+                <div className="p-12 md:p-20 max-w-3xl mx-auto flex flex-col justify-center text-center">
+                  <div className="mb-12">
+                    <h1 className="text-4xl md:text-6xl font-black text-black tracking-tighter uppercase leading-tight">La nostra visione</h1>
+                    <div className="w-20 h-1 bg-[#EAB308] mx-auto mt-8"></div>
+                  </div>
+                  
+                  <div className="space-y-8 text-slate-700 leading-relaxed text-xl">
+                    <p>
+                      <strong className="text-black">Un capello bello nasce da una cute sana.</strong><br/>
+                      E una cute sana nasce dall’<strong className="text-black">ascolto della persona.</strong>
+                    </p>
+                    <p>
+                      In Beautrì Parrucchieri mettiamo <strong className="text-black">te al centro</strong> di ogni percorso.
+                    </p>
+                    <p className="italic text-2xl font-medium py-8 text-black/80">
+                      Il nostro slogan, <br/>
+                      <strong className="text-black">“Capelli sani nascono da persone ascoltate”</strong>, <br/>
+                      racconta il nostro modo di lavorare ogni giorno.
+                    </p>
+                    <p>
+                      Uniamo <strong className="text-black">cronobiologia</strong>, prodotti personalizzati e <strong className="text-black">tecnologie innovative</strong> per creare bellezza partendo dalla salute dei tuoi capelli.
+                    </p>
+                    <p>
+                      Ogni stagione porta cambiamenti e nuove esigenze: per questo il nostro approccio si adatta a ogni persona e a ogni servizio, senza lasciare nulla al caso.
+                    </p>
+                    <p>
+                      I nostri non sono semplici servizi, ma <strong className="text-black">esperienze autentiche</strong>, dove <strong className="text-black">salute e bellezza</strong> si incontrano per creare un benessere profondo e duraturo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
         return html`
           <div className="h-full animate-zoom-in">
             <header className="flex items-center justify-between mb-10">
@@ -486,7 +544,7 @@
                 <i className="fa-solid fa-arrow-left"></i>
               </button>
               <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">
-                ${SECTIONS.find(s => s.id === section)?.label}
+                <span className="text-[#EAB308]">${SECTIONS.find(s => s.id === section)?.label}</span>
               </h2>
               <div className="w-14"></div>
             </header>
