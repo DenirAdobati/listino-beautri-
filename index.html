@@ -72,6 +72,61 @@
         { id: 'percorsi-mantenimento', label: 'PERCORSI DI MANTENIMENTO', icon: 'fa-shield-heart' },
       ];
 
+      const BEST_PROPOSALS_DONNA = [
+        {
+          id: 'bp1',
+          name: 'TRANSFORMER',
+          price: 'da 17€ a 27€',
+          description: 'Trasformiamo il tuo colore in una vera e propria ricostruzione dello stelo. Abbiamo la soluzione per te! Un concentrato naturale di aminoacidi che mentre colorano, lucidano e ravvivano i riflessi, proteggono profondamente e riparano la struttura rendendoli sani e splendenti.',
+          icon: 'fa-arrows-rotate'
+        },
+        {
+          id: 'bp2',
+          name: 'BIONDO PROTETTO',
+          price: 'da €19 a €27',
+          description: 'Trasformiamo la schiaritura in un trattamento ristrutturante per capelli dall’effetto “wow”. Prepariamo la struttura cheratinica con i “mattoni” essenziali, potenziati dall’ossigenoterapia. Aminoacidi e polipeptidi cheratinici restituiscono lucentezza e elasticità.',
+          icon: 'fa-shield-halved'
+        },
+        {
+          id: 'bp3',
+          name: 'CUTE NO STRESS',
+          price: 'da €21 a €29',
+          description: 'Ridare sollievo e beneficio a cuoi capelluti rigidi o stressati da ritmi frenetici o sudorazioni. Toglie infiammazioni, distende la cute e cala la tensione sul cuoio capelluto. Perfetto per cuti con iperidrosi.',
+          icon: 'fa-brain'
+        },
+        {
+          id: 'bp4',
+          name: 'PIU’ VITA AL TUO RIFLESSO',
+          price: 'da 17€ a 23€',
+          description: 'Infiniti riflessi con pigmenti naturali organici per un effetto temporaneo e massima libertà. Azione dell’ossigenoterapia per idratare e riflessare con collagene marino e proteine dell’avena senza solfati.',
+          icon: 'fa-sparkles'
+        },
+        {
+          id: 'bp5',
+          name: 'NEUTRALIZZANTE',
+          price: 'da 17€ a 27€',
+          description: 'Tramite aerografo eroghiamo ossigeno puro e Mix di oli essenziali (Timo, Arancio Amaro, Hennè). Riportiamo il pH in equilibrio eliminando ogni residuo di colore e neutralizzando pruriti post-colorazione.',
+          icon: 'fa-wind'
+        },
+        {
+          id: 'bp6',
+          name: 'OSSIGENOTERAPIA IDROMINERALE',
+          price: 'da 17€ a 27€',
+          description: 'Per capelli deboli e senza tono che tendono ad afflosciarsi. Restituiamo forza, vigore ed elasticità alla struttura per evitare rotture dello stelo e migliorare la durata della colorazione.',
+          icon: 'fa-droplet'
+        }
+      ];
+
+      const BEST_PROPOSALS_UOMO = [
+        {
+          id: 'bp_u1',
+          name: 'CUTE NO STRESS',
+          price: 'da €21 a €29',
+          description: 'Tensioni giornaliere, ritmi frenetici, ansia, stile di vita sbagliati, percorsi di chemioterapia, eccessive sudorazioni, apportano un vero stress al nostro cuoio capelluto, che tenderà ad essere sempre più rigido meno irrorato sino ad arrivare a quella odiata sensazione di dolore. Di conseguenza il tutto andrà a riflettere sul follicolo pilifero e sui capelli futuri. Ricordatevi che solo da un cuoio capelluto sano nascono capelli sani. Ecco la soluzione mirata per togliere tensioni in cute, ridare sollievo e beneficio. La tua cute ti ringraziera! TOGLIE INFIAMMAZIONI E DISTENDE LA CUTE, CALA LA TENSIONE SUL CUOIO CAPELLUTO, PER CUTI CON IPERIDROSI.',
+          icon: 'fa-brain'
+        }
+      ];
+
       const LASER_TABLE_DATA = [
         { name: 'ALOPECIA ANDROGENETICA', sessions: '12', duration: "40'", prices: { uomo: '80', donna: '100', donnaPlus: '110' } },
         { name: 'CADUTA STAGIONALE', sessions: '8', duration: "40'", prices: { uomo: '80', donna: '100', donnaPlus: '110' } },
@@ -94,7 +149,7 @@
         { 
           id: 'p2', 
           name: 'Lenire', 
-          description: 'Percorso dedicato a tutte quelle cuti che hanno bisogno di essere rigenerate e riportate in equilibrio.', 
+          description: 'Percorso dedicato a tutte quelle cuti che havevano bisogno di essere rigenerate e riportate in equilibrio.', 
           sessions: 'da 3 a 5 sedute (1 a settimana)', 
           tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', 
           price: 'Lui: 67€ | Lei: 89/93€' 
@@ -221,6 +276,17 @@
         const [section, setSection] = useState(null);
         const [selectedPath, setSelectedPath] = useState(null);
 
+        // Funzione per il tasto indietro fisso
+        const FixedBackButton = ({ onClick }) => html`
+          <button 
+            onClick=${onClick} 
+            className="fixed top-8 right-8 z-40 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all active:scale-95 border border-white"
+            aria-label="Torna indietro"
+          >
+            <i className="fa-solid fa-arrow-left"></i>
+          </button>
+        `;
+
         if (!gender) {
           return html`
             <div className="h-full flex flex-col animate-fade-in pb-12">
@@ -268,33 +334,32 @@
         // --- SUB-PAGE PER "I NOSTRI PERCORSI" ---
         if (gender === 'percorsi' && !section) {
             return html`
-              <div className="h-full animate-fade-in pb-12">
-                <header className="flex items-center justify-between mb-10">
-                  <button onClick=${() => setGender(null)} className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all">
-                    <i className="fa-solid fa-arrow-left"></i>
-                  </button>
-                  <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                    <span className="text-[#EAB308]">I NOSTRI PERCORSI</span>
+              <div className="h-full relative">
+                <${FixedBackButton} onClick=${() => setGender(null)} />
+                <div className="animate-fade-in pb-12">
+                  <header className="flex items-center justify-center mb-10">
+                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                      <span className="text-[#EAB308]">I NOSTRI PERCORSI</span>
+                    </div>
+                  </header>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full">
+                    <button onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                      <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[90px] opacity-40 group-hover:opacity-60 transition-opacity"></div>
+                      <div className="relative z-10 flex flex-col h-full items-center justify-center text-center">
+                          <i className="fa-solid fa-route text-4xl text-[#EAB308] mb-6"></i>
+                          <h2 className="text-4xl font-black text-white tracking-tighter uppercase">PERCORSI</h2>
+                      </div>
+                    </button>
+
+                    <button onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                      <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-white rounded-full blur-[90px] opacity-30"></div>
+                      <div className="relative z-10 flex flex-col h-full items-center justify-center text-center">
+                          <i className="fa-solid fa-shield-heart text-4xl text-black mb-6"></i>
+                          <h2 className="text-4xl font-black text-black tracking-tighter uppercase">PERCORSI DI MANTENIMENTO</h2>
+                      </div>
+                    </button>
                   </div>
-                  <div className="w-14"></div>
-                </header>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full">
-                  <button onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
-                    <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[90px] opacity-40 group-hover:opacity-60 transition-opacity"></div>
-                    <div className="relative z-10 flex flex-col h-full items-center justify-center text-center">
-                        <i className="fa-solid fa-route text-4xl text-[#EAB308] mb-6"></i>
-                        <h2 className="text-4xl font-black text-white tracking-tighter uppercase">PERCORSI</h2>
-                    </div>
-                  </button>
-
-                  <button onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
-                    <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-white rounded-full blur-[90px] opacity-30"></div>
-                    <div className="relative z-10 flex flex-col h-full items-center justify-center text-center">
-                        <i className="fa-solid fa-shield-heart text-4xl text-black mb-6"></i>
-                        <h2 className="text-4xl font-black text-black tracking-tighter uppercase">PERCORSI DI MANTENIMENTO</h2>
-                    </div>
-                  </button>
                 </div>
               </div>
             `;
@@ -305,27 +370,26 @@
           const pathsToShow = section === 'percorsi-main' ? MOCK_PATHS : MOCK_MAINTENANCE_PATHS;
           const currentTitle = section === 'percorsi-main' ? 'PERCORSI' : 'PERCORSI DI MANTENIMENTO';
           return html`
-            <div className="h-full animate-fade-in pb-12">
-              <header className="flex items-center justify-between mb-10">
-                <button onClick=${() => setSection(null)} className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all">
-                  <i className="fa-solid fa-arrow-left"></i>
-                </button>
-                <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                  <span className="text-[#EAB308]">${currentTitle}</span>
-                </div>
-                <div className="w-14"></div>
-              </header>
+            <div className="h-full relative">
+              <${FixedBackButton} onClick=${() => setSection(null)} />
+              <div className="animate-fade-in pb-12">
+                <header className="flex items-center justify-center mb-10">
+                  <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">${currentTitle}</span>
+                  </div>
+                </header>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full">
-                ${pathsToShow.map(p => html`
-                  <button key=${p.id} onClick=${() => setSelectedPath(p)} className="bg-white p-8 md:p-12 rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden text-center">
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-full -mr-12 -mt-12 group-hover:bg-[#EAB308]/10 transition-colors"></div>
-                    <div className="text-xl md:text-2xl font-black text-black tracking-tight uppercase leading-tight group-hover:scale-105 transition-transform px-4">
-                      ${p.name}
-                    </div>
-                    <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-6"></div>
-                  </button>
-                `)}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full">
+                  ${pathsToShow.map(p => html`
+                    <button key=${p.id} onClick=${() => setSelectedPath(p)} className="bg-white p-8 md:p-12 rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden text-center">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-full -mr-12 -mt-12 group-hover:bg-[#EAB308]/10 transition-colors"></div>
+                      <div className="text-xl md:text-2xl font-black text-black tracking-tight uppercase leading-tight group-hover:scale-105 transition-transform px-4">
+                        ${p.name}
+                      </div>
+                      <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-6"></div>
+                    </button>
+                  `)}
+                </div>
               </div>
             </div>
           `;
@@ -337,117 +401,116 @@
           const isLaserPath = selectedPath.name === 'Laser';
           
           return html`
-            <div className="h-full animate-zoom-in max-w-4xl mx-auto pb-12">
-              <header className="flex items-center justify-between mb-10">
-                <button onClick=${() => setSelectedPath(null)} className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all">
-                  <i className="fa-solid fa-arrow-left"></i>
-                </button>
-                <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">
-                  DETTAGLIO PERCORSO
-                </h2>
-                <div className="w-14"></div>
-              </header>
+            <div className="h-full relative">
+              <${FixedBackButton} onClick=${() => setSelectedPath(null)} />
+              <div className="animate-zoom-in max-w-4xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                  <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">
+                    DETTAGLIO PERCORSO
+                  </h2>
+                </header>
 
-              <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white relative">
-                <div className="bg-black p-12 text-center relative overflow-hidden">
-                   <div className="absolute top-[-50%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[100px] opacity-20"></div>
-                   <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase relative z-10 leading-tight">${selectedPath.name}</h1>
-                   <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6 relative z-10"></div>
-                </div>
-
-                <div className="p-10 md:p-16 space-y-12">
-                  <section>
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-10 h-10 bg-slate-50 text-[#EAB308] rounded-full flex items-center justify-center text-sm shadow-inner">
-                        <i className="fa-solid fa-quote-left"></i>
-                      </div>
-                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Descrizione Percorso</h3>
-                    </div>
-                    <p className="text-slate-600 font-medium leading-relaxed text-lg italic">"${selectedPath.description}"</p>
-                  </section>
-
-                  <div className=${`grid grid-cols-1 ${isLaserPath ? '' : 'md:grid-cols-2'} gap-12 border-t border-slate-50 pt-12`}>
-                    ${!isLaserPath && html`
-                    <section>
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-10 h-10 bg-slate-50 text-[#EAB308] rounded-full flex items-center justify-center text-sm shadow-inner">
-                          <i className="fa-solid fa-calendar-check"></i>
-                        </div>
-                        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Numero di Sedute</h3>
-                      </div>
-                      <p className="text-2xl font-black text-black uppercase tracking-tighter">${selectedPath.sessions}</p>
-                    </section>
-                    `}
-
-                    <section>
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-10 h-10 bg-slate-50 text-[#EAB308] rounded-full flex items-center justify-center text-sm shadow-inner">
-                          <i className="fa-solid fa-screwdriver-wrench"></i>
-                        </div>
-                        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Strumenti di Supporto</h3>
-                      </div>
-                      <ul className="space-y-2">
-                        ${toolsList.map(tool => html`
-                          <li key=${tool} className="flex items-center gap-3 text-lg font-bold text-black uppercase tracking-tight">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#EAB308]"></div>
-                            ${tool}
-                          </li>
-                        `)}
-                      </ul>
-                    </section>
+                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white relative">
+                  <div className="bg-black p-12 text-center relative overflow-hidden">
+                    <div className="absolute top-[-50%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[100px] opacity-20"></div>
+                    <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase relative z-10 leading-tight">${selectedPath.name}</h1>
+                    <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6 relative z-10"></div>
                   </div>
 
-                  ${isLaserPath ? html`
-                    <section className="bg-white rounded-[3rem] p-4 md:p-8 border border-slate-100 shadow-sm overflow-x-auto">
-                      <div className="flex items-center gap-3 mb-8 px-4">
-                        <i className="fa-solid fa-table-list text-[#EAB308]"></i>
-                        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Listino laser</h3>
-                      </div>
-                      <div className="space-y-6 min-w-[600px] px-2">
-                        ${LASER_TABLE_DATA.map((row, idx) => html`
-                          <div key=${idx} className="flex items-center justify-between border-b border-slate-50 pb-4 last:border-0">
-                            <div className="w-1/3">
-                              <p className="text-[13px] font-black text-slate-800 uppercase tracking-tight leading-tight">${row.name}</p>
-                            </div>
-                            <div className="w-1/4 flex items-center gap-2 text-slate-400">
-                              <span className="text-xs font-bold whitespace-nowrap">${row.sessions} sedute x </span>
-                              <i className="fa-regular fa-clock text-[10px] text-[#EAB308]"></i>
-                              <span className="text-xs font-bold">${row.duration}</span>
-                            </div>
-                            <div className="flex gap-2">
-                              <div className="bg-slate-50 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-slate-100">
-                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Uomo</span>
-                                <span className="bg-[#EAB308] text-white text-[11px] font-black px-2 py-0.5 rounded-full">€${row.prices.uomo}</span>
-                              </div>
-                              <div className="bg-slate-50 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-slate-100">
-                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Donna</span>
-                                <span className="bg-[#EAB308] text-white text-[11px] font-black px-2 py-0.5 rounded-full">€${row.prices.donna}</span>
-                              </div>
-                              <div className="bg-slate-50 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-slate-100">
-                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Donna+</span>
-                                <span className="bg-[#EAB308] text-white text-[11px] font-black px-2 py-0.5 rounded-full">€${row.prices.donnaPlus}</span>
-                              </div>
-                            </div>
-                          </div>
-                        `)}
-                      </div>
-                    </section>
-                  ` : html`
-                    <section className="bg-slate-50 rounded-[3rem] p-10 flex flex-col items-center justify-center gap-4 border border-slate-100 shadow-inner">
-                      <div className="flex flex-col items-center text-center">
-                        <div className="w-14 h-14 bg-white text-[#EAB308] rounded-2xl flex items-center justify-center text-xl shadow-sm mb-4">
-                          <i className="fa-solid fa-coins"></i>
+                  <div className="p-10 md:p-16 space-y-12">
+                    <section>
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-10 h-10 bg-slate-50 text-[#EAB308] rounded-full flex items-center justify-center text-sm shadow-inner">
+                          <i className="fa-solid fa-quote-left"></i>
                         </div>
-                        <h3 className="text-[12px] font-black text-black uppercase tracking-[0.2em] mb-1">Investimento a seduta</h3>
-                        <p className="text-[10px] font-black text-[#EAB308] uppercase tracking-widest mb-6 px-4 py-1.5 bg-black rounded-full inline-block">
-                          Prezzo riservato solo a chi effettua il percorso
-                        </p>
+                        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Descrizione Percorso</h3>
                       </div>
-                      <div className="text-3xl md:text-5xl font-black text-black tracking-tighter text-center whitespace-pre-line leading-tight">
-                        ${selectedPath.price}
-                      </div>
+                      <p className="text-slate-600 font-medium leading-relaxed text-lg italic">"${selectedPath.description}"</p>
                     </section>
-                  `}
+
+                    <div className=${`grid grid-cols-1 ${isLaserPath ? '' : 'md:grid-cols-2'} gap-12 border-t border-slate-50 pt-12`}>
+                      ${!isLaserPath && html`
+                      <section>
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="w-10 h-10 bg-slate-50 text-[#EAB308] rounded-full flex items-center justify-center text-sm shadow-inner">
+                            <i className="fa-solid fa-calendar-check"></i>
+                          </div>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Numero di Sedute</h3>
+                        </div>
+                        <p className="text-2xl font-black text-black uppercase tracking-tighter">${selectedPath.sessions}</p>
+                      </section>
+                      `}
+
+                      <section>
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="w-10 h-10 bg-slate-50 text-[#EAB308] rounded-full flex items-center justify-center text-sm shadow-inner">
+                            <i className="fa-solid fa-screwdriver-wrench"></i>
+                          </div>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Strumenti di Supporto</h3>
+                        </div>
+                        <ul className="space-y-2">
+                          ${toolsList.map(tool => html`
+                            <li key=${tool} className="flex items-center gap-3 text-lg font-bold text-black uppercase tracking-tight">
+                              <div className="w-1.5 h-1.5 rounded-full bg-[#EAB308]"></div>
+                              ${tool}
+                            </li>
+                          `)}
+                        </ul>
+                      </section>
+                    </div>
+
+                    ${isLaserPath ? html`
+                      <section className="bg-white rounded-[3rem] p-4 md:p-8 border border-slate-100 shadow-sm overflow-x-auto">
+                        <div className="flex items-center gap-3 mb-8 px-4">
+                          <i className="fa-solid fa-table-list text-[#EAB308]"></i>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Listino laser</h3>
+                        </div>
+                        <div className="space-y-6 min-w-[600px] px-2">
+                          ${LASER_TABLE_DATA.map((row, idx) => html`
+                            <div key=${idx} className="flex items-center justify-between border-b border-slate-50 pb-4 last:border-0">
+                              <div className="w-1/3">
+                                <p className="text-[13px] font-black text-slate-800 uppercase tracking-tight leading-tight">${row.name}</p>
+                              </div>
+                              <div className="w-1/4 flex items-center gap-2 text-slate-400">
+                                <span className="text-xs font-bold whitespace-nowrap">${row.sessions} sedute x </span>
+                                <i className="fa-regular fa-clock text-[10px] text-[#EAB308]"></i>
+                                <span className="text-xs font-bold">${row.duration}</span>
+                              </div>
+                              <div className="flex gap-2">
+                                <div className="bg-slate-50 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-slate-100">
+                                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Uomo</span>
+                                  <span className="bg-[#EAB308] text-white text-[11px] font-black px-2 py-0.5 rounded-full">€${row.prices.uomo}</span>
+                                </div>
+                                <div className="bg-slate-50 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-slate-100">
+                                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Donna</span>
+                                  <span className="bg-[#EAB308] text-white text-[11px] font-black px-2 py-0.5 rounded-full">€${row.prices.donna}</span>
+                                </div>
+                                <div className="bg-slate-50 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-slate-100">
+                                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Donna+</span>
+                                  <span className="bg-[#EAB308] text-white text-[11px] font-black px-2 py-0.5 rounded-full">€${row.prices.donnaPlus}</span>
+                                </div>
+                              </div>
+                            </div>
+                          `)}
+                        </div>
+                      </section>
+                    ` : html`
+                      <section className="bg-slate-50 rounded-[3rem] p-10 flex flex-col items-center justify-center gap-4 border border-slate-100 shadow-inner">
+                        <div className="flex flex-col items-center text-center">
+                          <div className="w-14 h-14 bg-white text-[#EAB308] rounded-2xl flex items-center justify-center text-xl shadow-sm mb-4">
+                            <i className="fa-solid fa-coins"></i>
+                          </div>
+                          <h3 className="text-[12px] font-black text-black uppercase tracking-[0.2em] mb-1">Investimento a seduta</h3>
+                          <p className="text-[10px] font-black text-[#EAB308] uppercase tracking-widest mb-6 px-4 py-1.5 bg-black rounded-full inline-block">
+                            Prezzo riservato solo a chi effettua il percorso
+                          </p>
+                        </div>
+                        <div className="text-3xl md:text-5xl font-black text-black tracking-tighter text-center whitespace-pre-line leading-tight">
+                          ${selectedPath.price}
+                        </div>
+                      </section>
+                    `}
+                  </div>
                 </div>
               </div>
             </div>
@@ -457,31 +520,30 @@
         if (!section) {
           const currentLabel = gender === 'donna' ? 'LISTINO DONNA' : gender === 'uomo' ? 'LISTINO UOMO' : 'I NOSTRI PERCORSI';
           return html`
-            <div className="h-full animate-fade-in">
-              <header className="flex items-center justify-between mb-10">
-                <button onClick=${() => setGender(null)} className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all">
-                  <i className="fa-solid fa-arrow-left"></i>
-                </button>
-                <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                  <span className="text-[#EAB308]">${currentLabel}</span>
+            <div className="h-full relative">
+              <${FixedBackButton} onClick=${() => setGender(null)} />
+              <div className="animate-fade-in">
+                <header className="flex items-center justify-center mb-10">
+                  <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">${currentLabel}</span>
+                  </div>
+                </header>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                  ${SECTIONS.filter(s => {
+                      const isPercorso = s.id.startsWith('percorsi');
+                      if (isPercorso) return false;
+                      // Se è selezionato 'uomo', nascondi colorazioni e schiariture
+                      if (gender === 'uomo' && (s.id === 'colorazioni' || s.id === 'schiariture')) return false;
+                      return true;
+                  }).map(s => html`
+                    <button key=${s.id} onClick=${() => setSection(s.id)} className="bg-white p-8 rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group text-center flex flex-col items-center justify-center min-h-[220px]">
+                      <div className="w-14 h-14 bg-slate-50 text-[#EAB308] rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-black group-hover:scale-110 transition-all">
+                        <i className=${`fa-solid ${s.icon}`}></i>
+                      </div>
+                      <h3 className="text-[11px] font-black text-black tracking-[0.1em] uppercase leading-tight">${s.label}</h3>
+                    </button>
+                  `)}
                 </div>
-                <div className="w-14"></div>
-              </header>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                ${SECTIONS.filter(s => {
-                    const isPercorso = s.id.startsWith('percorsi');
-                    if (isPercorso) return false;
-                    // Se è selezionato 'uomo', nascondi colorazioni e schiariture
-                    if (gender === 'uomo' && (s.id === 'colorazioni' || s.id === 'schiariture')) return false;
-                    return true;
-                }).map(s => html`
-                  <button key=${s.id} onClick=${() => setSection(s.id)} className="bg-white p-8 rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group text-center flex flex-col items-center justify-center min-h-[220px]">
-                    <div className="w-14 h-14 bg-slate-50 text-[#EAB308] rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-black group-hover:scale-110 transition-all">
-                      <i className=${`fa-solid ${s.icon}`}></i>
-                    </div>
-                    <h3 className="text-[11px] font-black text-black tracking-[0.1em] uppercase leading-tight">${s.label}</h3>
-                  </button>
-                `)}
               </div>
             </div>
           `;
@@ -490,46 +552,60 @@
         // --- VISIONE SPECIFICA ---
         if (section === 'visione') {
           return html`
-            <div className="h-full animate-zoom-in max-w-4xl mx-auto pb-12">
-              <header className="flex items-center justify-between mb-10">
-                <button onClick=${() => setSection(null)} className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all">
-                  <i className="fa-solid fa-arrow-left"></i>
-                </button>
-                <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                  <span className="text-[#EAB308]">LA NOSTRA VISIONE</span>
-                </h2>
-                <div className="w-14"></div>
-              </header>
+            <div className="h-full relative">
+              <${FixedBackButton} onClick=${() => setSection(null)} />
+              <div className="animate-zoom-in max-w-5xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                  <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">LA NOSTRA VISIONE</span>
+                  </h2>
+                </header>
 
-              <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
-                <div className="p-12 md:p-20 max-w-3xl mx-auto flex flex-col justify-center text-center">
-                  <div className="mb-12">
-                    <h1 className="text-4xl md:text-6xl font-black text-black tracking-tighter uppercase leading-tight">La nostra visione</h1>
-                    <div className="w-20 h-1 bg-[#EAB308] mx-auto mt-8"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
+                  <div className="p-12 md:p-16 flex flex-col justify-center text-left">
+                    <div className="mb-10">
+                      <h1 className="text-4xl md:text-5xl font-black text-black tracking-tighter uppercase leading-tight">La nostra visione</h1>
+                      <div className="w-16 h-1 bg-[#EAB308] mt-6"></div>
+                    </div>
+                    
+                    <div className="space-y-6 text-slate-700 leading-relaxed text-lg">
+                      <p>
+                        <strong className="text-black">Un capello bello nasce da una cute sana.</strong><br/>
+                        E una cute sana nasce dall’<strong className="text-black">ascolto della persona.</strong>
+                      </p>
+                      <p>
+                        In Beautrì Parrucchieri mettiamo <strong className="text-black">te al centro</strong> di ogni percorso.
+                      </p>
+                      <p className="italic text-xl font-medium border-l-4 border-[#EAB308] pl-6 py-2 my-8">
+                        Il nostro slogan, <br/>
+                        <strong className="text-black">“Capelli sani nascono da persone ascoltate”</strong>, <br/>
+                        racconta il nostro modo di lavorare ogni giorno.
+                      </p>
+                      <p>
+                        Uniamo <strong className="text-black">cronobiologia</strong>, prodotti personalizzati e <strong className="text-black">tecnologie innovative</strong> per creare bellezza partendo dalla salute dei tuoi capelli.
+                      </p>
+                      <p>
+                        Ogni stagione porta cambiamenti e nuove esigenze: per questo il nostro approccio si adatta a ogni persona e a ogni servizio, senza lasciare nulla al caso.
+                      </p>
+                      <p>
+                        I nostri non sono semplici servizi, ma <strong className="text-black">esperienze autentiche</strong>, dove <strong className="text-black">salute e bellezza</strong> si incontrano per creare un benessere profondo e duraturo.
+                      </p>
+                    </div>
                   </div>
-                  
-                  <div className="space-y-8 text-slate-700 leading-relaxed text-xl">
-                    <p>
-                      <strong className="text-black">Un capello bello nasce da una cute sana.</strong><br/>
-                      E una cute sana nasce dall’<strong className="text-black">ascolto della persona.</strong>
-                    </p>
-                    <p>
-                      In Beautrì Parrucchieri mettiamo <strong className="text-black">te al centro</strong> di ogni percorso.
-                    </p>
-                    <p className="italic text-2xl font-medium py-8 text-black/80">
-                      Il nostro slogan, <br/>
-                      <strong className="text-black">“Capelli sani nascono da persone ascoltate”</strong>, <br/>
-                      racconta il nostro modo di lavorare ogni giorno.
-                    </p>
-                    <p>
-                      Uniamo <strong className="text-black">cronobiologia</strong>, prodotti personalizzati e <strong className="text-black">tecnologie innovative</strong> per creare bellezza partendo dalla salute dei tuoi capelli.
-                    </p>
-                    <p>
-                      Ogni stagione porta cambiamenti e nuove esigenze: per questo il nostro approccio si adatta a ogni persona e a ogni servizio, senza lasciare nulla al caso.
-                    </p>
-                    <p>
-                      I nostri non sono semplici servizi, ma <strong className="text-black">esperienze autentiche</strong>, dove <strong className="text-black">salute e bellezza</strong> si incontrano per creare un benessere profondo e duraturo.
-                    </p>
+                  <div className="relative min-h-[400px] md:h-auto overflow-hidden bg-white">
+                    <img 
+                      src="https://drive.google.com/uc?id=1BryhB96zxdWKyDxVUBSPZL1H2f9KNj0Y" 
+                      alt="Beautrì Visione" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onError=${(e) => { 
+                        if (!e.target.dataset.triedThumbnail) {
+                          e.target.dataset.triedThumbnail = "true";
+                          e.target.src = "https://drive.google.com/thumbnail?id=1BryhB96zxdWKyDxVUBSPZL1H2f9KNj0Y&sz=w1600";
+                        } else {
+                          e.target.src = 'https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=2074&auto=format&fit=crop';
+                        }
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -537,26 +613,69 @@
           `;
         }
 
-        return html`
-          <div className="h-full animate-zoom-in">
-            <header className="flex items-center justify-between mb-10">
-              <button onClick=${() => setSection(null)} className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all">
-                <i className="fa-solid fa-arrow-left"></i>
-              </button>
-              <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">
-                <span className="text-[#EAB308]">${SECTIONS.find(s => s.id === section)?.label}</span>
-              </h2>
-              <div className="w-14"></div>
-            </header>
-            <div className="bg-white rounded-[4rem] p-20 flex flex-col items-center justify-center text-center shadow-sm border border-white">
-              <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-8">
-                <i className="fa-solid fa-ellipsis text-[#EAB308] text-2xl"></i>
+        // --- MIGLIORI PROPOSTE SPECIFICA ---
+        if (section === 'migliori-proposte') {
+          const currentProposals = gender === 'uomo' ? BEST_PROPOSALS_UOMO : BEST_PROPOSALS_DONNA;
+          const introText = gender === 'uomo' 
+            ? "Le nostre migliori proposte che puoi abbinare ad ogni servizio in base alle tue esigenze. Questa sezione è il “Fiore all’occhiello” del nostro Menù che ti da la possibilità di ottenere ancor più un miglior risultato del servizio che vuoi effettuare. É stato creato per dare la possibilità di proteggere, intensificare, e fortificare i tuoi capelli con un risultato immediato e già visibile al momento del servizio."
+            : "Le nostre migliori proposte che puoi abbinare ad ogni servizio in base alle tue esigenze. Create per trasformare e dare vita nuova allo stelo già visibile al momento del servizio.";
+
+          return html`
+            <div className="h-full relative">
+              <${FixedBackButton} onClick=${() => setSection(null)} />
+              <div className="animate-zoom-in max-w-6xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                  <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">LE NOSTRE MIGLIORI PROPOSTE</span>
+                  </h2>
+                </header>
+
+                <div className="bg-black rounded-[4rem] p-12 md:p-16 mb-12 shadow-2xl relative overflow-hidden text-center">
+                  <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[100px] opacity-20"></div>
+                  <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase mb-6 relative z-10">
+                    MIGLIORI PROPOSTE
+                  </h1>
+                  <div className="max-w-3xl mx-auto text-slate-400 text-sm md:text-base leading-relaxed font-medium uppercase tracking-wider">
+                    ${introText}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  ${currentProposals.map(p => html`
+                    <div key=${p.id} className="bg-white rounded-[3rem] p-10 flex flex-col shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+                      <div className="w-14 h-14 bg-slate-50 text-[#EAB308] rounded-2xl flex items-center justify-center text-xl mb-6 group-hover:bg-black group-hover:scale-110 transition-all shadow-inner">
+                        <i className=${`fa-solid ${p.icon}`}></i>
+                      </div>
+                      <h3 className="text-xl font-black text-black tracking-tight uppercase mb-2 leading-tight">${p.name}</h3>
+                      <div className="text-[#EAB308] font-black text-lg mb-6">${p.price}</div>
+                      <p className="text-slate-600 text-sm font-medium leading-relaxed mb-4">${p.description}</p>
+                    </div>
+                  `)}
+                </div>
               </div>
-              <h3 className="text-3xl font-black text-black uppercase tracking-tight mb-4 italic">In fase di creazione</h3>
-              <p className="text-slate-400 max-w-xs text-sm font-medium leading-relaxed uppercase tracking-widest text-[10px]">
-                Stiamo configurando l'eccellenza per la sezione <br/>
-                <span className="text-black font-black">${SECTIONS.find(s => s.id === section)?.label}</span>
-              </p>
+            </div>
+          `;
+        }
+
+        return html`
+          <div className="h-full relative">
+            <${FixedBackButton} onClick=${() => setSection(null)} />
+            <div className="animate-zoom-in">
+              <header className="flex items-center justify-center mb-10">
+                <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">
+                  <span className="text-[#EAB308]">${SECTIONS.find(s => s.id === section)?.label}</span>
+                </h2>
+              </header>
+              <div className="bg-white rounded-[4rem] p-20 flex flex-col items-center justify-center text-center shadow-sm border border-white">
+                <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-8">
+                  <i className="fa-solid fa-ellipsis text-[#EAB308] text-2xl"></i>
+                </div>
+                <h3 className="text-3xl font-black text-black uppercase tracking-tight mb-4 italic">In fase di creazione</h3>
+                <p className="text-slate-400 max-w-xs text-sm font-medium leading-relaxed uppercase tracking-widest text-[10px]">
+                  Stiamo configurando l'eccellenza per la sezione <br/>
+                  <span className="text-black font-black">${SECTIONS.find(s => s.id === section)?.label}</span>
+                </p>
+              </div>
             </div>
           </div>
         `;
