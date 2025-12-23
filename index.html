@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BEAUTRÍ PARRUCCHIERI - Listino Digitale</title>
-    <!-- Tailwind CSS per lo styling -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome per le icone -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -103,6 +103,37 @@
         { id: 'm1', name: 'MANTENIMENTO 1', description: 'Percorso di mantenimento post-trattamento urto per stabilizzare i risultati ottenuti.', sessions: '4 incontri', tools: 'Microcamera HD, Lozioni specifiche', price: '€ 65' },
         { id: 'm2', name: 'MANTENIMENTO 2', description: 'Prevenzione stagionale e rinforzo periodico della struttura capillare.', sessions: '3 incontri', tools: 'Ossigeno, Maschere nutrienti', price: '€ 70' },
         { id: 'm3', name: 'MANTENIMENTO 3', description: 'Protezione continua del cuoio capelluto sensibile.', sessions: '2 incontri', tools: 'Vapozono, Oli lenitivi', price: '€ 60' }
+      ];
+      
+      const TRICOLOGICI_TREATMENTS = [
+        {
+          title: 'IGIENIZZARE & PURIFICARE',
+          description: 'Trattamenti specifici per cuti con eccesso di sebo, forfora, desquamazione e prurito.',
+          technologiesDescription: 'Potenziamo l’efficacia di argille e peeling naturali con strumenti tecnologici all’avanguardia, come:',
+          technologies: ['ultrasuoni', 'nebulizzazione', 'corrente galvanica'],
+          price: 'Investimento a seduta: …'
+        },
+        {
+          title: 'LENIRE',
+          description: 'Trattamenti specifici per cuti dolenti, con psoriasi ed escoriazioni, pensati per purificare e rigenerare.',
+          technologiesDescription: 'Potenziamo l’efficacia di argille, peeling e impacchi naturali con strumenti tecnologici all’avanguardia, come:',
+          technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
+          price: 'Investimento a seduta: …'
+        },
+        {
+          title: 'DETOSSINARE',
+          description: 'Trattamenti dedicati a eliminare le scorie metaboliche e ad apportare ossigeno e nutrimento al bulbo.',
+          technologiesDescription: 'Potenziamo l’efficacia di prodotti detossinanti con strumenti tecnologici all’avanguardia, come:',
+          technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
+          price: 'Investimento a seduta: …'
+        },
+        {
+          title: 'RIPARARE',
+          description: 'Trattamenti specifici per ristrutturare i capelli, ridurre vetrosità, crespo e doppie punte.',
+          technologiesDescription: 'Potenziamo l’efficacia di oleazioni, maschere e prodotti ristrutturanti con strumenti tecnologici all’avanguardia, come:',
+          technologies: ['laser a fotoringiovanimento', 'fototerapia', 'nebulizzazione'],
+          price: 'Investimento a seduta: …'
+        }
       ];
 
       // --- COMPONENTI ---
@@ -537,6 +568,44 @@
             </div>
             `}
           </div>
+        </div>
+      `;
+
+      const TricologiciList = () => html`
+        <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
+           <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+                <div className="bg-black p-12 text-center text-white relative uppercase">
+                  <h1 className="text-4xl font-black tracking-tighter">TRATTAMENTI TRICOLOGICI</h1>
+                  <div className="w-12 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+                </div>
+                <div className="p-10 md:p-16 text-center normal-case">
+                  <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
+                    Scopri i nostri percorsi specifici per la salute della cute e la bellezza dei tuoi capelli.
+                  </p>
+                </div>
+           </div>
+
+           <div className="space-y-8">
+             ${TRICOLOGICI_TREATMENTS.map(t => html`
+               <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+                 <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-6 group-hover:text-[#EAB308] transition-colors">${t.title}</h2>
+                 <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6">
+                    ${t.description}
+                 </p>
+                 <div className="bg-slate-50 rounded-[2rem] p-8 mb-6">
+                    <p className="text-sm font-bold text-slate-500 mb-4 uppercase tracking-widest">${t.technologiesDescription}</p>
+                    <div className="flex flex-wrap gap-3">
+                        ${t.technologies.map(tech => html`
+                            <span className="bg-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider border border-slate-200 shadow-sm text-black">
+                                ${tech}
+                            </span>
+                        `)}
+                    </div>
+                 </div>
+                 <div className="text-xl font-black text-[#EAB308] tracking-widest">${t.price}</div>
+               </div>
+             `)}
+           </div>
         </div>
       `;
 
@@ -1050,6 +1119,15 @@
               <div className="h-full relative animate-fade-in">
                 <${FixedBackButton} />
                 <${StilisticoList} gender=${gender} />
+              </div>
+            `;
+        }
+
+        if (section === 'trattamenti-tricologici') {
+            return html`
+              <div className="h-full relative animate-fade-in">
+                <${FixedBackButton} />
+                <${TricologiciList} />
               </div>
             `;
         }
