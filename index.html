@@ -392,6 +392,112 @@
         </div>
       `;
 
+      const FormaList = () => html`
+        <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
+          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+            <div className="bg-black p-12 text-center text-white relative uppercase">
+              <h1 className="text-4xl font-black tracking-tighter">Forma</h1>
+              <div className="w-12 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+            </div>
+            <div className="p-10 md:p-16 text-center normal-case">
+              <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
+                Benvenuta nel mondo della forma di Beautrì Parrucchieri!
+                Sogni capelli sempre in ordine, ogni giorno e in ogni situazione? Ami
+                provare trattamenti esclusivi per valorizzare i tuoi capelli? Abbiamo
+                formulazioni innovative per disciplinare ogni tipo di capello,
+                superando i limiti tradizionali con trattamenti personalizzati che si
+                adattano al tuo stile di vita frenetico.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-12">
+            <!-- Benefits -->
+            <section className="bg-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-lg text-black relative overflow-hidden">
+               <div className="relative z-10">
+                  <h2 className="text-3xl font-black tracking-tighter uppercase mb-8">Con i nostri trattamenti puoi:</h2>
+                  <div className="bg-white/20 p-8 rounded-[2rem] backdrop-blur-sm border border-black/5">
+                    <ul className="space-y-4">
+                      ${['Creare ricci e volume dove necessario', 'Ottenere un effetto anti-crespo o controllo del volume', 'Scegliere un liscio perfetto'].map(item => html`
+                        <li className="flex items-start gap-4">
+                          <span className="w-6 h-6 bg-black text-[#EAB308] rounded-full flex items-center justify-center text-xs shrink-0 mt-1">
+                            <i className="fa-solid fa-check"></i>
+                          </span>
+                          <span className="font-bold text-lg leading-tight">${item}</span>
+                        </li>
+                      `)}
+                    </ul>
+                  </div>
+                  <div className="mt-8 p-6 bg-black rounded-[2rem] text-white">
+                    <span className="text-[#EAB308] font-black uppercase text-xs tracking-widest block mb-2">Risultati:</span>
+                    <p className="text-sm font-medium leading-relaxed">
+                      Capelli più sani, morbidi e luminosi, facili da gestire in ogni occasione: dall’ufficio alla palestra, fino al mare o alla piscina.
+                    </p>
+                  </div>
+               </div>
+            </section>
+
+            <!-- Disciplinante Organico -->
+            <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white">
+               <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
+                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase">DISCIPLINANTE ORGANICO</h2>
+                  <div className="bg-slate-100 text-slate-500 px-6 py-3 rounded-full text-xs font-black tracking-widest uppercase border border-slate-200">
+                    Prezzo su preventivo
+                  </div>
+               </div>
+               
+               <div className="prose max-w-none text-slate-600 mb-8">
+                 <p className="text-lg leading-relaxed mb-6">
+                   Questo trattamento interagisce con la struttura naturale del capello,
+                   creando nuovi legami tra gli aminoacidi già presenti e rinforzandoli
+                   in profondità. Grazie a un complesso di attivi vegetali, simili alla
+                   cheratina naturale, rinforza i fusti in modo significativo.
+                 </p>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
+                     <i className="fa-solid fa-temperature-high text-[#EAB308] text-2xl mb-4"></i>
+                     <h4 className="font-black uppercase text-xs mb-3 text-black tracking-widest">Applicazione</h4>
+                     <p className="text-sm text-slate-600 leading-relaxed">
+                       Durante l’applicazione in salone, il calore della piastra facilita il
+                       legame con le fibre capillari, garantendo risultati unici.
+                     </p>
+                  </div>
+                  <div className="bg-black p-8 rounded-[2rem] text-white">
+                     <i className="fa-solid fa-star text-[#EAB308] text-2xl mb-4"></i>
+                     <h4 className="font-black uppercase text-xs mb-3 text-[#EAB308] tracking-widest">Personalizzazione</h4>
+                     <p className="text-sm text-slate-300 leading-relaxed mb-4">
+                       Adatto a ogni esigenza: ricci, crespi, naturali, colorati o grossi.
+                     </p>
+                     <p className="text-xs font-bold border-t border-white/20 pt-4 mt-2 text-slate-400 uppercase tracking-wider">
+                       Durata: fino a 5 mesi
+                     </p>
+                  </div>
+               </div>
+            </section>
+
+            <!-- Movimento Armonioso -->
+            <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white group hover:border-[#EAB308]/30 transition-all">
+               <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-[#EAB308] text-xl">
+                      <i className="fa-solid fa-wind"></i>
+                    </div>
+                    <h2 className="text-3xl font-black text-black tracking-tighter uppercase">MOVIMENTO ARMONIOSO</h2>
+                  </div>
+                  <div className="text-2xl font-black text-[#EAB308] tracking-widest whitespace-nowrap">93€ / 103€</div>
+               </div>
+               <p className="text-slate-600 text-lg font-medium leading-relaxed pl-16 border-l-2 border-slate-100">
+                 Trattamento di ondulazione che garantisce ricci di qualsiasi forma
+                 e dimensione di elevata qualità con una durata di almeno tre mesi
+                 sempre nel rispetto della salute dei tuoi capelli.
+               </p>
+            </section>
+          </div>
+        </div>
+      `;
+
       const DigitalMenu = () => {
         const [gender, setGender] = useState(null);
         const [section, setSection] = useState(null);
@@ -878,6 +984,15 @@
               </div>
             </div>
           `;
+        }
+
+        if (section === 'forma' && gender === 'donna') {
+            return html`
+              <div className="h-full relative animate-fade-in">
+                <${FixedBackButton} />
+                <${FormaList} />
+              </div>
+            `;
         }
 
         return html`
