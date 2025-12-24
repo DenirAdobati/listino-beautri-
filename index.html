@@ -138,6 +138,13 @@
       ];
 
       // --- COMPONENTI ---
+      
+      const FixedBackButton = ({ onClick }) => html`
+        <button onClick=${onClick} className="fixed top-8 right-8 z-40 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all active:scale-95 border border-white">
+          <i className="fa-solid fa-arrow-left"></i>
+        </button>
+      `;
+
       const Sidebar = ({ activeTab, setActiveTab, onClose }) => {
         return html`
           <div className="w-[320px] bg-white h-screen flex flex-col p-8 shadow-2xl relative border-r border-white/20">
@@ -154,6 +161,212 @@
               </button>
             </nav>
             <div className="flex-1 flex flex-col min-h-0">
+            </div>
+          </div>
+        `;
+      };
+      
+      const PathDetail = ({ path, onBack }) => {
+        const isLaser = path.name === 'Laser';
+        // Check if this is the "MANTENIMENTO 1" path (id: 'm1')
+        const isBaseMaintenance = path.id === 'm1';
+        
+        // State for the interactive maintenance flow
+        const [step1Answer, setStep1Answer] = useState(null);
+        const [step2Answer, setStep2Answer] = useState(null);
+
+        // Reset state when path changes
+        useEffect(() => {
+          setStep1Answer(null);
+          setStep2Answer(null);
+        }, [path]);
+
+        if (isBaseMaintenance) {
+            return html`
+              <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
+                <${FixedBackButton} onClick=${onBack} />
+                <header className="flex items-center justify-center mb-10">
+                    <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO BASE</h2>
+                </header>
+
+                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
+                   <div className="bg-black p-12 text-center text-white relative uppercase">
+                      <h1 className="text-4xl font-black tracking-tighter">BASE</h1>
+                      <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+                   </div>
+
+                   <div className="p-10 md:p-16 normal-case space-y-10">
+                      <!-- Introduction & Q1 -->
+                      <div className="space-y-6">
+                        <h3 className="text-2xl font-black text-[#EAB308] uppercase">Complimenti!</h3>
+                        <p className="text-slate-600 text-lg leading-relaxed">
+                          Se Daniela ti sta presentando la fase di mantenimento è perché hai terminato il tuo Percorso di Igienizzazione/Purificazione e stai per intraprendere il percorso di mantenimento.
+                        </p>
+                        <p className="text-xl font-bold text-black">Quanto sei soddisfatto\a dei risultati raggiunti?</p>
+                        
+                        <div className="flex gap-4">
+                            <button onClick=${() => setStep1Answer('yes')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step1Answer === 'yes' ? 'bg-green-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-green-600 hover:bg-green-50'}`}>SÌ</button>
+                            <button onClick=${() => setStep1Answer('no')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step1Answer === 'no' ? 'bg-red-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-red-600 hover:bg-red-50'}`}>NO</button>
+                        </div>
+                      </div>
+
+                      <!-- Reaction 1 & Q2 -->
+                      ${step1Answer && html`
+                        <div className="space-y-6 animate-fade-in border-l-4 border-[#EAB308] pl-6 py-2">
+                           <p className="text-slate-700 text-lg font-medium italic">
+                             "La cute grigiastra piena di scorie, la desquamazione sugli abiti, il prurito insistente sono solo un cattivo ricordo."
+                           </p>
+                           <p className="text-xl font-bold text-black pt-4">
+                             Ti piacerebbe mantenere questi risultati, poterli potenziare ulteriormente ed essere accompagnato da Daniela e tutto il team di Beautrì parrucchieri per un anno intero?
+                           </p>
+                           <div className="flex gap-4">
+                              <button onClick=${() => setStep2Answer('yes')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step2Answer === 'yes' ? 'bg-green-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-green-600 hover:bg-green-50'}`}>SÌ</button>
+                              <button onClick=${() => setStep2Answer('no')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step2Answer === 'no' ? 'bg-red-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-red-600 hover:bg-red-50'}`}>NO</button>
+                           </div>
+                        </div>
+                      `}
+
+                      <!-- Final Block -->
+                      ${step2Answer && html`
+                        <div className="space-y-8 animate-fade-in pt-8 border-t border-slate-100">
+                          
+                          <!-- Analogy Section -->
+                          <div className="bg-slate-50 p-8 rounded-[3rem]">
+                            <p className="font-bold text-black mb-4">Non commettere l’errore di gettare i risultati raggiunti: sarebbe un vero peccato, denaro e tempo prezioso buttati.</p>
+                            <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                              Immagina di aver affrontato una dieta per perdere qualche chilo o semplicemente per avere un’alimentazione equilibrata e sana. Raggiunti i tuoi risultati desiderati, se inizi a mangiare nuovamente come non ci fosse un domani, cibo spazzatura in quantità enormi, è più che normale che il risultato raggiunto svanisca in pochissimo tempo.
+                            </p>
+                            <p className="text-slate-600 text-sm leading-relaxed font-bold">
+                              Ecco, ora riporta questo esempio anche per i risultati raggiunti con i tuoi capelli.
+                            </p>
+                            <p className="text-slate-600 text-sm leading-relaxed mt-4">
+                              Ritornare alle vecchie abitudini, utilizzando prodotti scadenti e fare il fai da te senza una guida ti farà perdere tutto quello che hai recuperato. In meno di un mese ti ritroverai con scaglie bianche sugli abiti e con le mani tra i capelli per il prurito insistente.
+                            </p>
+                          </div>
+
+                          <!-- Key Points -->
+                          <div>
+                            <h3 className="text-xl font-black text-black uppercase mb-6">Ricorda!</h3>
+                            <p className="text-slate-600 mb-6">Questa è la fase più importante e delicata, ed è quella da non sottovalutare, anzi… tre sono i motivi per cui ti consigliamo il mantenimento:</p>
+                            <ul className="space-y-3">
+                               <li className="flex items-center gap-3"><span className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black font-bold text-xs">1</span> <span className="font-bold text-slate-700">Mantenere i risultati raggiunti</span></li>
+                               <li className="flex items-center gap-3"><span className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black font-bold text-xs">2</span> <span className="font-bold text-slate-700">Potenziare i risultati già avuti</span></li>
+                               <li className="flex items-center gap-3"><span className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black font-bold text-xs">3</span> <span className="font-bold text-slate-700">Essere monitorato un anno intero da Daniela su whatsapp oppure telefonicamente</span></li>
+                            </ul>
+                          </div>
+
+                          <!-- Encouragement -->
+                          <div className="bg-[#EAB308] text-black p-8 rounded-[3rem] shadow-lg">
+                             <h4 className="text-xl font-black uppercase mb-4">Può sembrarti impegnativo, ma non lo è!</h4>
+                             <p className="font-medium">Immagina quando gli amici, le amiche, i tuoi familiari ti chiederanno “che cosa hai fatto per avere capelli così belli” tu sarai fiero di te stesso\a.</p>
+                          </div>
+
+                          <!-- Details -->
+                          <div>
+                            <div className="bg-black text-white p-8 rounded-[3rem] mb-6">
+                               <h3 className="text-[#EAB308] font-black uppercase text-lg mb-4">Il percorso di mantenimento (12 mesi) comprende:</h3>
+                               <ul className="space-y-4 text-sm">
+                                 <li className="flex items-start gap-4">
+                                   <i className="fa-solid fa-calendar-check text-[#EAB308] mt-1"></i>
+                                   <div>
+                                     <strong className="block text-lg">12 Sedute</strong>
+                                     <span className="text-slate-400">Dove POTENZIAMO L’EFFICACIA DI ARGILLE E PEELING NATURALI CON STRUMENTI TECNOLOGICI ALL’AVANGUARDIA, COME:</span>
+                                     <div className="flex flex-wrap gap-2 mt-2">
+                                        <span className="bg-white/10 px-3 py-1 rounded-full text-xs">NEBULIZZAZIONE</span>
+                                        <span className="bg-white/10 px-3 py-1 rounded-full text-xs">ULTRASUONI</span>
+                                        <span className="bg-white/10 px-3 py-1 rounded-full text-xs">CORRENTE GALVANICA</span>
+                                     </div>
+                                   </div>
+                                 </li>
+                                 <li className="flex items-center gap-4">
+                                   <i className="fa-solid fa-gift text-[#EAB308]"></i>
+                                   <span className="font-bold">2 Beautrì check in omaggio</span>
+                                 </li>
+                                 <li className="flex items-center gap-4">
+                                   <i className="fa-brands fa-whatsapp text-[#EAB308]"></i>
+                                   <span className="font-bold">Supporto via whatsapp 5 giorni su 7</span>
+                                 </li>
+                               </ul>
+                            </div>
+                            <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                              Tutto il percorso è strutturato in maniera tale da coprire le esigenze di ogni persona per tutte le stagionalità, alternando le varie sedute con cadenza mensile. Questo ci permette di fare un ottimo lavoro e mantenere e potenziare i risultati già raggiunti.
+                            </p>
+                            <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl">
+                               <h4 className="font-black text-black uppercase text-xs mb-2">Prodotti di mantenimento</h4>
+                               <p className="text-slate-600 text-sm">
+                                 In abbinamento (lozione e shampoo) per casa verranno personalizzati su misura per ogni persona.
+                               </p>
+                            </div>
+                          </div>
+
+                          <!-- Disclaimer -->
+                          <div className="border-2 border-red-500/20 bg-red-50 p-6 rounded-3xl">
+                             <h4 className="text-red-600 font-black uppercase text-xs tracking-widest mb-2"><i className="fa-solid fa-circle-exclamation mr-2"></i>Importante</h4>
+                             <p className="text-red-900 text-sm font-medium leading-relaxed">
+                               Daniela la nostra Tecnica Tricologa potrà effettuare modifiche qualora si presentassero delle problematiche di salute che andrebbero ad influire sul percorso creato su base annuale. Inoltre valuterà la scelta dei prodotti, la loro personalizzazione e la modalità d’uso.
+                             </p>
+                          </div>
+
+                       </div>
+                      `}
+                   </div>
+                </div>
+              </div>
+            `;
+        }
+
+        // Standard Path View
+        return html`
+          <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
+            <${FixedBackButton} onClick=${onBack} />
+            <header className="flex items-center justify-center mb-10">
+              <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">DETTAGLIO PERCORSO</h2>
+            </header>
+            <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
+              <div className="bg-black p-12 text-center text-white relative uppercase">
+                <h1 className="text-4xl font-black tracking-tighter">${path.name}</h1>
+                <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+              </div>
+              <div className="p-10 md:p-16 space-y-12 normal-case">
+                <section>
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Descrizione</h3>
+                  <p className="text-slate-600 font-medium leading-relaxed text-lg italic normal-case">"${path.description}"</p>
+                </section>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-slate-50 uppercase tracking-wider font-bold text-xs">
+                  ${!isLaser && html`
+                    <section>
+                      <h3 className="text-xs font-black text-slate-400 tracking-widest mb-4">Sedute</h3>
+                      <p className="text-2xl font-black text-black">${path.sessions}</p>
+                    </section>
+                  `}
+                  <section>
+                    <h3 className="text-xs font-black text-slate-400 tracking-widest mb-4">Strumenti</h3>
+                    <p className="text-lg font-bold text-black">${path.tools}</p>
+                  </section>
+                </div>
+                ${isLaser ? html`
+                  <section className="bg-white rounded-[3rem] p-4 border border-slate-100 shadow-sm overflow-x-auto uppercase">
+                    <div className="space-y-6 min-w-[600px] px-2">
+                      ${LASER_TABLE_DATA.map((row, idx) => html`
+                        <div key=${idx} className="flex items-center justify-between border-b border-slate-50 pb-4 last:border-0 uppercase">
+                          <div className="w-1/3 text-[13px] font-black">${row.name}</div>
+                          <div className="w-1/4 text-xs font-bold text-slate-400">${row.sessions} sedute - ${row.duration}</div>
+                          <div className="flex gap-2">
+                            <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">U €${row.prices.uomo}</span>
+                            <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">D €${row.prices.donna}</span>
+                            <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">D+ €${row.prices.donnaPlus}</span>
+                          </div>
+                        </div>
+                      `)}
+                    </div>
+                  </section>
+                ` : html`
+                  <section className="bg-slate-50 rounded-[3rem] p-10 text-center uppercase border border-slate-100">
+                    <h3 className="text-[12px] font-black text-black tracking-[0.2em] mb-4">Investimento a seduta</h3>
+                    <div className="text-3xl md:text-5xl font-black text-[#EAB308] tracking-tighter">${path.price}</div>
+                  </section>
+                `}
+              </div>
             </div>
           </div>
         `;
@@ -796,12 +1009,6 @@
           else setGender(null);
         };
 
-        const FixedBackButton = () => html`
-          <button onClick=${handleBack} className="fixed top-8 right-8 z-40 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all active:scale-95 border border-white">
-            <i className="fa-solid fa-arrow-left"></i>
-          </button>
-        `;
-
         if (!gender) {
           return html`
             <div className="h-full flex flex-col animate-fade-in">
@@ -844,7 +1051,7 @@
         if (gender === 'percorsi' && !section) {
           return html`
             <div className="h-full relative animate-fade-in">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <header className="flex items-center justify-center mb-10">
                 <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
                   <span className="text-[#EAB308]">I NOSTRI PERCORSI</span>
@@ -872,7 +1079,7 @@
           const list = section === 'percorsi-main' ? MOCK_PATHS : MOCK_MAINTENANCE_PATHS;
           return html`
             <div className="h-full relative animate-fade-in">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <header className="flex items-center justify-center mb-10">
                 <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
                   <span className="text-[#EAB308]">${section === 'percorsi-main' ? 'PERCORSI' : 'PERCORSI DI MANTENIMENTO'}</span>
@@ -891,67 +1098,13 @@
         }
 
         if (selectedPath) {
-          const isLaser = selectedPath.name === 'Laser';
-          return html`
-            <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
-              <${FixedBackButton} />
-              <header className="flex items-center justify-center mb-10">
-                <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">DETTAGLIO PERCORSO</h2>
-              </header>
-              <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
-                <div className="bg-black p-12 text-center text-white relative uppercase">
-                  <h1 className="text-4xl font-black tracking-tighter">${selectedPath.name}</h1>
-                  <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
-                </div>
-                <div className="p-10 md:p-16 space-y-12 normal-case">
-                  <section>
-                    <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Descrizione</h3>
-                    <p className="text-slate-600 font-medium leading-relaxed text-lg italic normal-case">"${selectedPath.description}"</p>
-                  </section>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-slate-50 uppercase tracking-wider font-bold text-xs">
-                    ${!isLaser && html`
-                      <section>
-                        <h3 className="text-xs font-black text-slate-400 tracking-widest mb-4">Sedute</h3>
-                        <p className="text-2xl font-black text-black">${selectedPath.sessions}</p>
-                      </section>
-                    `}
-                    <section>
-                      <h3 className="text-xs font-black text-slate-400 tracking-widest mb-4">Strumenti</h3>
-                      <p className="text-lg font-bold text-black">${selectedPath.tools}</p>
-                    </section>
-                  </div>
-                  ${isLaser ? html`
-                    <section className="bg-white rounded-[3rem] p-4 border border-slate-100 shadow-sm overflow-x-auto uppercase">
-                      <div className="space-y-6 min-w-[600px] px-2">
-                        ${LASER_TABLE_DATA.map((row, idx) => html`
-                          <div key=${idx} className="flex items-center justify-between border-b border-slate-50 pb-4 last:border-0 uppercase">
-                            <div className="w-1/3 text-[13px] font-black">${row.name}</div>
-                            <div className="w-1/4 text-xs font-bold text-slate-400">${row.sessions} sedute - ${row.duration}</div>
-                            <div className="flex gap-2">
-                              <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">U €${row.prices.uomo}</span>
-                              <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">D €${row.prices.donna}</span>
-                              <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">D+ €${row.prices.donnaPlus}</span>
-                            </div>
-                          </div>
-                        `)}
-                      </div>
-                    </section>
-                  ` : html`
-                    <section className="bg-slate-50 rounded-[3rem] p-10 text-center uppercase border border-slate-100">
-                      <h3 className="text-[12px] font-black text-black tracking-[0.2em] mb-4">Investimento a seduta</h3>
-                      <div className="text-3xl md:text-5xl font-black text-[#EAB308] tracking-tighter">${selectedPath.price}</div>
-                    </section>
-                  `}
-                </div>
-              </div>
-            </div>
-          `;
+          return html`<${PathDetail} path=${selectedPath} onBack=${handleBack} />`;
         }
 
         if (!section) {
           return html`
             <div className="h-full relative animate-fade-in">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <header className="flex items-center justify-center mb-10 uppercase font-black text-[11px] tracking-widest">
                 <div className="bg-white px-8 py-3 rounded-full shadow-sm border border-white">LISTINO <span className="text-[#EAB308]">${gender}</span></div>
               </header>
@@ -999,7 +1152,7 @@
         if (section === 'visione') {
           return html`
             <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <div className="grid grid-cols-1 md:grid-cols-2 bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
                 <div className="p-12 flex flex-col justify-center normal-case">
                   <h1 className="text-4xl font-black text-black uppercase tracking-tighter mb-6">La nostra visione</h1>
@@ -1030,7 +1183,7 @@
           const props = gender === 'uomo' ? BEST_PROPOSALS_UOMO : BEST_PROPOSALS_DONNA;
           return html`
             <div className="h-full relative animate-zoom-in max-w-6xl mx-auto pb-12">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <div className="bg-black rounded-[4rem] p-12 mb-12 text-center text-white relative">
                 <h1 className="text-4xl font-black uppercase tracking-tighter mb-4">MIGLIORI PROPOSTE</h1>
                 <p className="max-w-3xl mx-auto text-slate-400 text-sm uppercase font-medium">Create per trasformare e dare vita nuova allo stelo già visibile al momento del servizio.</p>
@@ -1052,7 +1205,7 @@
         if (section === 'colorazioni' && gender === 'donna' && !subSection) {
           return html`
             <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <div className="flex flex-col gap-8 uppercase">
                 <button onClick=${() => setSubSection('color-pass')} className="bg-black rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl transition-all hover:scale-[1.02] active:scale-95">
                   <div className="relative z-10 flex flex-col items-center">
@@ -1080,7 +1233,7 @@
         if (subSection === 'colorazioni-list-main') {
           return html`
             <div className="h-full relative animate-fade-in">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <${ColorazioniList} />
             </div>
           `;
@@ -1089,7 +1242,7 @@
         if (subSection === 'schiariture-list') {
           return html`
             <div className="h-full relative animate-fade-in">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <${SchiaritureList} />
             </div>
           `;
@@ -1098,7 +1251,7 @@
         if (subSection === 'color-pass') {
           return html`
             <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
                 <div className="bg-black p-12 text-center text-white relative uppercase">
                   <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/20">
@@ -1143,7 +1296,7 @@
         if (section === 'spa') {
           return html`
             <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12">
-              <${FixedBackButton} />
+              <${FixedBackButton} onClick=${handleBack} />
               <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
                 <div className="bg-teal-900 p-12 text-center text-white relative uppercase">
                   <h1 className="text-4xl font-black tracking-tighter">SPA</h1>
@@ -1306,7 +1459,7 @@
         if (section === 'forma' && gender === 'donna') {
             return html`
               <div className="h-full relative animate-fade-in">
-                <${FixedBackButton} />
+                <${FixedBackButton} onClick=${handleBack} />
                 <${FormaList} />
               </div>
             `;
@@ -1315,7 +1468,7 @@
         if (section === 'stilistico') {
             return html`
               <div className="h-full relative animate-fade-in">
-                <${FixedBackButton} />
+                <${FixedBackButton} onClick=${handleBack} />
                 <${StilisticoList} gender=${gender} />
               </div>
             `;
@@ -1324,7 +1477,7 @@
         if (section === 'trattamenti-tricologici') {
             return html`
               <div className="h-full relative animate-fade-in">
-                <${FixedBackButton} />
+                <${FixedBackButton} onClick=${handleBack} />
                 <${TricologiciList} />
               </div>
             `;
@@ -1333,7 +1486,7 @@
         if (section === 'novita') {
             return html`
               <div className="h-full relative animate-fade-in">
-                <${FixedBackButton} />
+                <${FixedBackButton} onClick=${handleBack} />
                 <${NovitaList} />
               </div>
             `;
@@ -1341,7 +1494,7 @@
 
         return html`
           <div className="h-full relative animate-zoom-in">
-            <${FixedBackButton} />
+            <${FixedBackButton} onClick=${handleBack} />
             <div className="bg-white rounded-[4rem] p-20 flex flex-col items-center justify-center text-center shadow-sm uppercase tracking-widest">
               <i className="fa-solid fa-ellipsis text-[#EAB308] text-4xl mb-8"></i>
               <h3 className="text-3xl font-black italic mb-4 tracking-tighter">Contenuto in arrivo</h3>
