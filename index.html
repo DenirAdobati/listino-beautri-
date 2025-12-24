@@ -159,6 +159,19 @@
                 <i className="fa-solid fa-house text-sm"></i>
                 <span className="font-bold text-[11px] tracking-[0.2em] uppercase">Home</span>
               </button>
+
+              <!-- TASTI NUOVI RICHIESTI -->
+              <button onClick=${() => { setActiveTab('consulenza'); onClose(); }} className=${`w-full py-4 rounded-2xl flex items-center gap-4 px-6 transition-all border ${activeTab === 'consulenza' ? 'bg-[#EAB308] text-black border-[#EAB308] shadow-md' : 'bg-white border-slate-100 text-slate-500 hover:border-[#EAB308] hover:text-[#EAB308]'}`}>
+                <i className="fa-solid fa-clipboard-user text-sm"></i>
+                <span className="font-bold text-[11px] tracking-[0.2em] uppercase">Consulenza Beautrìco</span>
+              </button>
+
+              <button onClick=${() => { setActiveTab('baby-check'); onClose(); }} className=${`w-full py-4 rounded-2xl flex items-center gap-4 px-6 transition-all border ${activeTab === 'baby-check' ? 'bg-rose-100 text-rose-600 border-rose-200 shadow-md' : 'bg-white border-slate-100 text-slate-500 hover:bg-rose-50 hover:text-rose-500'}`}>
+                <i className="fa-solid fa-baby text-sm"></i>
+                <span className="font-bold text-[11px] tracking-[0.2em] uppercase">Baby check</span>
+              </button>
+              <!-- FINE TASTI NUOVI -->
+
             </nav>
             <div className="flex-1 flex flex-col min-h-0">
             </div>
