@@ -394,12 +394,14 @@
           </div>
 
           <div className="space-y-12">
-            <!-- COLORE SICURO -->
-            <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white">
+            <!-- COLORE SICURO - THEME SAFE/MEDICAL -->
+            <section className="bg-slate-50 rounded-[3rem] p-10 md:p-14 shadow-sm border border-slate-200 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-40 -z-10"></div>
               <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
                 <div className="flex-1">
-                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-2">COLORE SICURO</h2>
-                  <div className="text-2xl font-black text-[#EAB308] tracking-widest">97€ / 103€</div>
+                  <span className="inline-block bg-blue-100 text-blue-700 text-[10px] font-black tracking-widest px-3 py-1 rounded-full mb-4 uppercase">Tema Colore Sicuro</span>
+                  <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase mb-2">COLORE SICURO</h2>
+                  <div className="text-2xl font-black text-blue-600 tracking-widest">97€ / 103€</div>
                   <p className="text-slate-500 font-bold uppercase text-xs mt-2">Colorazione con probiotici senza: AMMONIACA, PPD, RESORCINA E NICHEL</p>
                   <p className="text-slate-400 text-[10px] font-bold italic normal-case">i più potenti allergeni che una colorazione può contenere</p>
                 </div>
@@ -407,8 +409,8 @@
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 normal-case">
                 <div className="space-y-6">
-                  <div className="bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
-                    <h4 className="text-black font-black uppercase text-xs mb-4 underline decoration-[#EAB308] decoration-2 underline-offset-4">Cos’è il microbioma del cuoio capelluto?</h4>
+                  <div className="bg-white p-6 rounded-[2rem] border border-blue-50 shadow-sm">
+                    <h4 className="text-blue-900 font-black uppercase text-xs mb-4 underline decoration-blue-300 decoration-2 underline-offset-4">Cos’è il microbioma del cuoio capelluto?</h4>
                     <p className="text-slate-600 text-sm leading-relaxed mb-4">
                       È l’insieme di microrganismi (microbiota) che vivono sul cuoio
                       capelluto e svolgono una funzione difensiva. Questo equilibrio può
@@ -424,63 +426,69 @@
                     </p>
                   </div>
                 </div>
-                <div className="bg-black text-white p-8 rounded-[3rem] uppercase flex flex-col justify-center">
-                  <h4 className="text-[#EAB308] text-xs font-black tracking-widest mb-4">Addio colorazioni aggressive, benvenuta colorazione probiotica “All Free”</h4>
-                  <p className="text-slate-300 text-xs leading-relaxed mb-6 normal-case">Una colorazione innovativa che rispetta sia la natura che il capello, grazie a preziosi attivi probiotici che trattano delicatamente cute e capelli.</p>
-                  <div className="space-y-2">
-                    <div className="text-[11px] font-black text-[#EAB308] mb-2">Adatta a:</div>
-                    ${['• • Allergici al colore', '• • Gravidanza', '• • Post-chemioterapia', '• • Cuti delicate o con dermatiti e psoriasi'].map(item => html`
-                      <div className="text-[11px] font-bold text-slate-200">${item}</div>
-                    `)}
+                <div className="bg-blue-900 text-white p-8 rounded-[3rem] uppercase flex flex-col justify-center relative overflow-hidden">
+                  <div className="relative z-10">
+                    <h4 className="text-blue-200 text-xs font-black tracking-widest mb-4">Addio colorazioni aggressive, benvenuta colorazione probiotica “All Free”</h4>
+                    <p className="text-blue-100 text-xs leading-relaxed mb-6 normal-case">Una colorazione innovativa che rispetta sia la natura che il capello, grazie a preziosi attivi probiotici che trattano delicatamente cute e capelli.</p>
+                    <div className="space-y-2">
+                        <div className="text-[11px] font-black text-white mb-2">Adatta a:</div>
+                        ${['• • Allergici al colore', '• • Gravidanza', '• • Post-chemioterapia', '• • Cuti delicate o con dermatiti e psoriasi'].map(item => html`
+                        <div className="text-[11px] font-bold text-blue-200">${item}</div>
+                        `)}
+                    </div>
+                    <div className="mt-8 pt-4 border-t border-white/10 text-[10px] font-black tracking-widest text-blue-300 italic normal-case">Risultati: Massimo rispetto della cute, senza prurito o fastidi.</div>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-white/10 text-[10px] font-black tracking-widest text-slate-400 italic normal-case">Risultati: Massimo rispetto della cute, senza prurito o fastidi.</div>
                 </div>
               </div>
             </section>
 
-            <!-- COLORAZIONE VEGANA -->
-            <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white">
+            <!-- COLORAZIONE VEGANA - THEME NATURE -->
+            <section className="bg-[#F5F7F2] rounded-[3rem] p-10 md:p-14 shadow-sm border border-[#E2E8D8] relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-64 h-64 bg-green-100 rounded-full blur-3xl opacity-50 -z-10"></div>
               <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
                 <div className="flex-1">
-                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-2">COLORAZIONE VEGANA</h2>
-                  <div className="text-2xl font-black text-[#EAB308] tracking-widest">da 89€ a 97€</div>
+                   <span className="inline-block bg-[#E2E8D8] text-[#3A4D39] text-[10px] font-black tracking-widest px-3 py-1 rounded-full mb-4 uppercase">Tema Colorazione Vegana</span>
+                  <h2 className="text-3xl font-black text-[#3A4D39] tracking-tighter uppercase mb-2">COLORAZIONE VEGANA</h2>
+                  <div className="text-2xl font-black text-[#739072] tracking-widest">da 89€ a 97€</div>
                 </div>
               </div>
-              <div className="space-y-8 normal-case text-slate-600">
+              <div className="space-y-8 normal-case text-[#4F5E4E]">
                 <p className="text-lg leading-relaxed max-w-4xl">
                   Grazie agli attivi di origine naturale e alla sostituzione dell’acqua
                   con sostanze idratanti, questo colore ha rivoluzionato l’esperienza
                   della colorazione. È il primo colore senza acqua, più concentrato,
                   senza odori né bruciori, e con effetti benefici sui capelli.
                 </p>
-                <div className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
-                  <p className="font-black text-black uppercase text-xs mb-3">Ingredienti chiave:</p>
-                  <p className="text-sm leading-relaxed">
+                <div className="bg-white p-8 rounded-[2rem] border border-[#E2E8D8]">
+                  <p className="font-black text-[#3A4D39] uppercase text-xs mb-3">Ingredienti chiave:</p>
+                  <p className="text-sm leading-relaxed text-[#4F5E4E]">
                     Aloe vera, spirulina, olio d’oliva, olio di limnanthes alba,
                     burro di babassu, burro di karitè, aminoacidi vegetali, olio di vetiver
                     e collagene marino: un mix di oli naturali per idratare e lenire anche
                     le cuti più sensibili.
                   </p>
                 </div>
-                <div className="bg-black p-8 rounded-[3rem] text-white text-center uppercase tracking-tighter">
-                  <p className="text-[11px] font-black tracking-[0.2em]">Privo di ammoniaca, fragranze e nichel, con ingredienti vegani, offre 72 nuance intermiscelabili, perfette per ogni esigenza.</p>
-                  <p className="text-[#EAB308] text-xs font-black mt-4 italic tracking-widest">Un ‘esperienza tutta da vivere.</p>
+                <div className="bg-[#3A4D39] p-8 rounded-[3rem] text-white text-center uppercase tracking-tighter">
+                  <p className="text-[11px] font-black tracking-[0.2em] text-[#E2E8D8]">Privo di ammoniaca, fragranze e nichel, con ingredienti vegani, offre 72 nuance intermiscelabili, perfette per ogni esigenza.</p>
+                  <p className="text-[#96B894] text-xs font-black mt-4 italic tracking-widest">Un ‘esperienza tutta da vivere.</p>
                 </div>
               </div>
             </section>
 
-            <!-- COLORAZIONE ZEN -->
-            <section className="bg-black text-white rounded-[4rem] p-12 md:p-20 relative overflow-hidden">
+            <!-- COLORAZIONE ZEN - THEME ZEN (BLACK/GOLD) -->
+            <section className="bg-[#1A1A1A] text-white rounded-[4rem] p-12 md:p-20 relative overflow-hidden border border-white/5">
+               <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[120px] opacity-10 -z-10"></div>
                <div className="relative z-10">
                  <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
                    <div className="flex-1">
+                     <span className="inline-block bg-white/10 text-[#EAB308] text-[10px] font-black tracking-widest px-3 py-1 rounded-full mb-4 uppercase border border-white/5">Tema Zen</span>
                      <h2 className="text-4xl font-black tracking-tighter uppercase mb-2">Colorazione Zen</h2>
                      <div className="text-2xl font-black text-[#EAB308] tracking-widest">da 107€ a 117€</div>
                      <p className="text-[#EAB308] text-sm font-black italic mt-4 normal-case">Dove la lentezza diventa lusso e il colore si fa rituale.</p>
                    </div>
                  </div>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                   <div className="normal-case text-slate-300">
+                   <div className="normal-case text-neutral-400">
                      <p className="text-sm leading-relaxed mb-8">
                         Un trattamento ispirato ai rituali orientali, in cui la colorazione
                         non è solo tecnica ma esperienza sensoriale.
@@ -488,14 +496,14 @@
                         si uniscono per donare benessere profondo e armonia.
                      </p>
                      <p className="text-[#EAB308] font-black uppercase text-xs mb-4 tracking-widest">Pigmenti naturali selezionati per:</p>
-                     <ul className="space-y-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+                     <ul className="space-y-2 text-xs font-bold uppercase tracking-wider text-neutral-500">
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[#EAB308] rounded-full"></span> Migliorare la struttura del capello</li>
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[#EAB308] rounded-full"></span> Rispettare il cuoio capelluto</li>
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[#EAB308] rounded-full"></span> Potenziare la brillantezza</li>
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[#EAB308] rounded-full"></span> Prolungare la durata del colore</li>
                      </ul>
                    </div>
-                   <div className="bg-white/5 rounded-[3rem] p-10 flex flex-col items-center justify-center text-center border border-white/10">
+                   <div className="bg-white/5 rounded-[3rem] p-10 flex flex-col items-center justify-center text-center border border-white/10 backdrop-blur-sm">
                       <p className="text-[#EAB308] text-lg font-black italic leading-relaxed normal-case">
                         "Un momento di pausa, silenzio e bellezza per ritrovare l’equilibrio,
                         dentro e fuori."
