@@ -190,6 +190,165 @@
           setStep2Answer(null);
         }, [path]);
 
+        if (isLaser) {
+            return html`
+              <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
+                
+                <!-- HEADER SEZIONE -->
+                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+                   <div className="bg-black p-12 text-center text-white relative uppercase">
+                      <h1 className="text-3xl md:text-5xl font-black tracking-tighter">LASER A FOTOBIOSTIMOLAZIONE</h1>
+                      <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+                      <p className="mt-6 text-slate-300 text-sm font-medium normal-case max-w-2xl mx-auto">
+                        "Il primo salone in Italia a prendersi cura di cute e capelli con la fotobiostimolazione laser."
+                      </p>
+                   </div>
+                   <div className="p-10 md:p-16 space-y-8">
+                      <div className="text-center max-w-4xl mx-auto">
+                        <p className="text-slate-600 text-lg leading-relaxed mb-6">
+                            In un mondo in cui spesso la bellezza si ferma all’apparenza, noi abbiamo scelto di andare più in profondità.
+                        </p>
+                        <p className="text-black font-bold text-xl mb-6">
+                            Da Beautrí, non ci occupiamo solo di capelli, ma del loro vero benessere, partendo dalla salute del cuoio capelluto.
+                        </p>
+                        <p className="text-slate-600 text-lg leading-relaxed">
+                            Abbiamo creato dei percorsi personalizzati con laser a fotobiostimolazione: un trattamento innovativo che stimola e rigenera, e che può migliorare anche situazioni molto delicate, come quelle legate ad <strong className="text-black">alopecie, psoriasi o dermatiti</strong>.
+                        </p>
+                      </div>
+                   </div>
+                </div>
+
+                <!-- BENEFICI / LISTA -->
+                <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-10">
+                   <div className="flex flex-col md:flex-row gap-8 items-start">
+                      <div className="flex-1">
+                          <h2 className="text-3xl font-black text-[#EAB308] tracking-tighter uppercase mb-2">Il benessere parte dalla radice</h2>
+                          <p className="text-slate-500 font-bold uppercase text-xs tracking-widest mb-8">Grazie alla fotobiostimolazione:</p>
+                          
+                          <ul className="space-y-6">
+                              <li className="flex items-start gap-4">
+                                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0 mt-1"><i className="fa-solid fa-check"></i></div>
+                                  <div>
+                                      <p className="text-black font-bold text-lg">Stimoliamo la microcircolazione e l’energia del capello (ATP)</p>
+                                      <p className="text-slate-500 text-sm">favorendo la crescita dove serve;</p>
+                                  </div>
+                              </li>
+                              <li className="flex items-start gap-4">
+                                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0 mt-1"><i className="fa-solid fa-check"></i></div>
+                                  <div>
+                                      <p className="text-black font-bold text-lg">Eliminiamo le infiammazioni e riequilibriamo la cute</p>
+                                      <p className="text-slate-500 text-sm">alleviando prurito, rossori e desquamazioni;</p>
+                                  </div>
+                              </li>
+                              <li className="flex items-start gap-4">
+                                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0 mt-1"><i className="fa-solid fa-check"></i></div>
+                                  <div>
+                                      <p className="text-black font-bold text-lg">Lavoriamo in profondità</p>
+                                      <p className="text-slate-500 text-sm">su problemi cronici come psoriasi o dermatiti.</p>
+                                  </div>
+                              </li>
+                          </ul>
+
+                          <div className="mt-8 bg-slate-50 p-6 rounded-2xl border-l-4 border-[#EAB308]">
+                              <p className="text-slate-700 italic">
+                                  "Il tutto viene inserito in un percorso settimanale, completamente costruito su misura per te. Ogni seduta è affiancata da prodotti personalizzati che ti accompagneranno anche a casa."
+                              </p>
+                          </div>
+                      </div>
+                   </div>
+                </section>
+
+                <!-- TABELLA PREZZI -->
+                <section className="bg-black text-white rounded-[3rem] p-10 md:p-14 shadow-lg mb-10 relative overflow-hidden">
+                   <div className="relative z-10">
+                       <h2 className="text-3xl font-black text-white uppercase tracking-tighter mb-8 text-center">I NOSTRI PERCORSI</h2>
+                       <div className="space-y-6">
+                          ${LASER_TABLE_DATA.map((row, idx) => html`
+                            <div key=${idx} className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6 last:border-0 gap-4">
+                              <div className="w-full md:w-1/3">
+                                  <div className="text-lg font-black text-[#EAB308] uppercase">${row.name}</div>
+                              </div>
+                              <div className="w-full md:w-1/4 flex items-center gap-2 text-slate-300 text-sm font-bold uppercase">
+                                  <i className="fa-regular fa-clock"></i> ${row.sessions} sedute - ${row.duration}
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                <span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Uomo €${row.prices.uomo}</span>
+                                <span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna €${row.prices.donna}</span>
+                                <span className="bg-[#EAB308] text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna+ €${row.prices.donnaPlus}</span>
+                              </div>
+                            </div>
+                          `)}
+                       </div>
+                       <p className="text-center text-slate-400 text-xs mt-8 italic">* Ogni seduta è compresa di piega</p>
+                   </div>
+                </section>
+
+                <!-- FOTORINGIOVANIMENTO -->
+                <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-10">
+                    <div className="mb-10 text-center">
+                        <h2 className="text-3xl font-black text-[#EAB308] tracking-tighter uppercase mb-2">LASER PER FOTORINGIOVANIMENTO</h2>
+                        <p className="text-black font-bold text-lg uppercase tracking-widest">Ridai forza e bellezza ai tuoi capelli</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div className="prose text-slate-600">
+                            <p className="mb-4">Hai i capelli spenti, rovinati, sfibrati da piastre, colori, decolorazioni? Ti sembra che non rispondano più ai trattamenti, che siano fragili e senza corpo?</p>
+                            <p className="font-bold text-black mb-4">Il laser per fotoringiovanimento è pensato proprio per questo.</p>
+                            <p>Stimola la rigenerazione capillare, aiuta a ristrutturare le rotture del capello, reintegra gli aminoacidi e la cistina persi con i trattamenti aggressivi.</p>
+                            <p className="mt-4 italic">Il risultato? Capelli che tornano a splendere, più forti, elastici, belli al tatto e alla vista.</p>
+                        </div>
+                        <div className="bg-slate-50 p-8 rounded-[2rem]">
+                            <h4 className="font-black text-black uppercase text-xs tracking-widest mb-6">Ideale per:</h4>
+                            <ul className="space-y-3">
+                                ${['Capelli decheratinizzati', 'Capelli con doppie punte', 'Capelli con carenza di idratazione', 'Danni meccanici o chimici', 'Capelli con carenze nutritive'].map(item => html`
+                                    <li className="flex items-center gap-3">
+                                        <i className="fa-solid fa-check text-green-500"></i>
+                                        <span className="text-sm font-bold text-slate-700">${item}</span>
+                                    </li>
+                                `)}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PACCHETTO FOTORINGIOVANIMENTO -->
+                <section className="bg-[#FEF9C3] rounded-[3rem] p-10 md:p-14 border border-yellow-200 shadow-lg text-center relative overflow-hidden">
+                    <div className="relative z-10">
+                        <h3 className="text-2xl font-black text-yellow-900 uppercase mb-2">PACCHETTO DI FOTORINGIOVANIMENTO</h3>
+                        <div className="w-24 h-1 bg-yellow-500 mx-auto mb-6"></div>
+                        
+                        <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-8">
+                             <div className="flex items-center gap-2 text-yellow-800 font-bold text-lg">
+                                <i className="fa-regular fa-clock"></i> 4 sedute x 40' (4 settimane)
+                             </div>
+                        </div>
+
+                        <div className="flex justify-center gap-4 mb-8">
+                            <div className="bg-white px-8 py-4 rounded-2xl shadow-sm border border-yellow-100">
+                                <div className="text-xs font-black text-yellow-600 uppercase tracking-widest mb-1">Donna</div>
+                                <div className="text-3xl font-black text-yellow-900">€447</div>
+                            </div>
+                            <div className="bg-white px-8 py-4 rounded-2xl shadow-sm border border-yellow-100 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-4 h-4 bg-yellow-400 rotate-45 translate-x-2 -translate-y-2"></div>
+                                <div className="text-xs font-black text-yellow-600 uppercase tracking-widest mb-1">Donna+</div>
+                                <div className="text-3xl font-black text-yellow-900">€487</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white/60 inline-block p-6 rounded-2xl backdrop-blur-sm">
+                            <p className="font-bold text-yellow-900 mb-2">+ 2 prodotti personalizzati per il mantenimento a casa:</p>
+                            <div className="flex justify-center gap-4 text-sm font-medium text-yellow-800">
+                                <span><i className="fa-solid fa-bottle-droplet mr-2"></i>1 Shampoo</span>
+                                <span><i className="fa-solid fa-jar mr-2"></i>1 Maschera</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+              </div>
+            `;
+        }
+
         if (isBaseMaintenance) {
             return html`
               <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
@@ -474,23 +633,8 @@
                     <p className="text-lg font-bold text-black">${path.tools}</p>
                   </section>
                 </div>
-                ${isLaser ? html`
-                  <section className="bg-white rounded-[3rem] p-4 border border-slate-100 shadow-sm overflow-x-auto uppercase">
-                    <div className="space-y-6 min-w-[600px] px-2">
-                      ${LASER_TABLE_DATA.map((row, idx) => html`
-                        <div key=${idx} className="flex items-center justify-between border-b border-slate-50 pb-4 last:border-0 uppercase">
-                          <div className="w-1/3 text-[13px] font-black">${row.name}</div>
-                          <div className="w-1/4 text-xs font-bold text-slate-400">${row.sessions} sedute - ${row.duration}</div>
-                          <div className="flex gap-2">
-                            <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">U €${row.prices.uomo}</span>
-                            <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">D €${row.prices.donna}</span>
-                            <span className="bg-[#EAB308] text-white text-[11px] font-black px-3 py-1 rounded-full">D+ €${row.prices.donnaPlus}</span>
-                          </div>
-                        </div>
-                      `)}
-                    </div>
-                  </section>
-                ` : html`
+                <!-- REMOVED OLD LASER TABLE LOGIC HERE AS IT IS HANDLED ABOVE IN isLaser BLOCK -->
+                ${!isLaser && html`
                   <section className="bg-slate-50 rounded-[3rem] p-10 text-center uppercase border border-slate-100">
                     <h3 className="text-[12px] font-black text-black tracking-[0.2em] mb-4">Investimento a seduta</h3>
                     <div className="text-3xl md:text-5xl font-black text-[#EAB308] tracking-tighter">${path.price}</div>
