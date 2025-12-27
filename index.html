@@ -181,6 +181,7 @@
         const isLaser = path.name === 'Laser';
         const isBaseMaintenance = path.id === 'm1';
         const isIntermediateMaintenance = path.id === 'm2';
+        const isAdvancedMaintenance = path.id === 'm3';
         
         const [step1Answer, setStep1Answer] = useState(null);
         const [step2Answer, setStep2Answer] = useState(null);
@@ -543,6 +544,148 @@
             `;
         }
 
+        if (isAdvancedMaintenance) {
+            return html`
+              <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                    <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO AVANZATO</h2>
+                </header>
+
+                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
+                   <div className="bg-black p-12 text-center text-white relative uppercase">
+                      <h1 className="text-4xl font-black tracking-tighter">AVANZATO</h1>
+                      <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+                   </div>
+
+                   <div className="p-10 md:p-16 normal-case space-y-10">
+                      <div className="space-y-6">
+                        <h3 className="text-2xl font-black text-[#EAB308] uppercase">Complimenti!</h3>
+                        <p className="text-slate-600 text-lg leading-relaxed">
+                           Se Daniela ti sta presentando la fase di mantenimento è perché hai terminato il tuo Percorso di laser a fotobiostimolazione.
+                        </p>
+                        <p className="text-xl font-bold text-black">Quanto sei soddisfatto\a dei risultati raggiunti?</p>
+                        
+                        <div className="flex gap-4">
+                            <button onClick=${() => setStep1Answer('yes')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step1Answer === 'yes' ? 'bg-green-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-green-600 hover:bg-green-50'}`}>SÌ</button>
+                            <button onClick=${() => setStep1Answer('no')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step1Answer === 'no' ? 'bg-red-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-red-600 hover:bg-red-50'}`}>NO</button>
+                        </div>
+                      </div>
+
+                      ${step1Answer && html`
+                        <div className="space-y-6 animate-fade-in border-l-4 border-[#EAB308] pl-6 py-2">
+                           <p className="text-slate-700 text-lg font-medium italic">
+                             "🚨I tuoi capelli hanno ripreso corpo? toccandoli li senti più forti ed anche il volume è migliorato?
+                             <br/><br/>
+                             🚨Cute arrossata e lucida, dolente e tesa, sono solo un cattivo e ricordo.
+                             <br/><br/>
+                             Finalmente non ti senti più a disagio, per gli sguardi inappropriati delle persone che ti conoscono e non solo..."
+                           </p>
+                           <p className="text-xl font-bold text-black pt-4">
+                             Ti piacerebbe mantenere questi risultati,poterli potenziare ulteriormente ed essere accompagnato da Daniela da tutto il team di Beautri parrucchieri per un anno intero?
+                           </p>
+                           <div className="flex gap-4">
+                              <button onClick=${() => setStep2Answer('yes')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step2Answer === 'yes' ? 'bg-green-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-green-600 hover:bg-green-50'}`}>SÌ</button>
+                              <button onClick=${() => setStep2Answer('no')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step2Answer === 'no' ? 'bg-red-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-red-600 hover:bg-red-50'}`}>NO</button>
+                           </div>
+                        </div>
+                      `}
+
+                      ${step2Answer && html`
+                        <div className="space-y-8 animate-fade-in pt-8 border-t border-slate-100">
+                          
+                          <div className="bg-slate-50 p-8 rounded-[3rem]">
+                            <p className="font-bold text-black mb-4">Non commettere l’errore di gettare i risultati raggiunti sarebbe un vero peccato,tempo e denaro buttati.</p>
+                            <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                              Immagina di aver affrontato una dieta per perdere qualche chilo o
+                              semplicemente per avere un’alimentazione equilibrata e sana, raggiunti i
+                              tuoi risultati desiderati se inizi a mangiare nuovamente come non ci fosse un
+                              domani,cibo spazzatura in quantità enormi è più che normale che il risultato
+                              raggiunto svanisce in pochissimo tempo. Ecco ora riporta questo esempio
+                              anche per i risultati raggiunti con i tuoi capelli.
+                            </p>
+                            <p className="text-slate-600 text-sm leading-relaxed mt-4">
+                              Per troppo tempo hai sottovalutato questa situazione, non lasciare che i
+                              duri risultati raggiunti svaniscono in un batter d’occhio. Certe dinamiche
+                              vanno sempre monitorate e certe anomalie ci accompagnano per tutta la
+                              nostra vita. Importante è riportare il giusto equilibrio ed allontanare il più
+                              possibile quello che la genetica ci ha riservato.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-black text-black uppercase mb-6">Ricordati che questa è la fase più importante e delicata, ed è quella da non sottovalutare, anzi…</h3>
+                            <p className="text-slate-600 mb-6 font-bold uppercase">tre sono i motivi perche’ ti consigliamo il mantenimento:</p>
+                            <ul className="space-y-3">
+                               <li className="flex items-start gap-3"><span className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black font-bold text-xs mt-1">1</span> <span className="font-medium text-slate-700">Il laser ha lenito il cuoio capelluto, riducendo rossori, dermatiti e psoriasi e stimolato l’ATP (l’energia del capello )quindi il tuo diradamento ha lasciato il posto a capelli sani ed irrobustiti.</span></li>
+                               <li className="flex items-start gap-3"><span className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black font-bold text-xs mt-1">2</span> <span className="font-medium text-slate-700">Ma il percorso non finisce qui! Come ti sarà stato spiegato, il laser funziona come un allenamento: mantiene l’equilibrio cutaneo e riduce la riproduzione cellulare anche a riposo. Ora è importante non vanificare il lavoro fatto.</span></li>
+                               <li className="flex items-start gap-3"><span className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black font-bold text-xs mt-1">3</span> <span className="font-medium text-slate-700">Immagina una dieta: se torni a mangiare senza controllo, i risultati scompaiono. Lo stesso vale per i tuoi capelli. Monitoraggio e costanza sono essenziali per mantenere i progressi raggiunti.</span></li>
+                            </ul>
+                          </div>
+
+                          <div className="bg-[#EAB308] text-black p-8 rounded-[3rem] shadow-lg">
+                             <h4 className="text-xl font-black uppercase mb-4">Perché il mantenimento è fondamentale?</h4>
+                             <ul className="space-y-2 font-medium">
+                                <li className="flex items-center gap-3"><i className="fa-solid fa-check"></i> Mantieni i risultati ottenuti</li>
+                                <li className="flex items-center gap-3"><i className="fa-solid fa-check"></i> Potenzi i benefici raggiunti</li>
+                                <li className="flex items-center gap-3"><i className="fa-solid fa-check"></i> Sei seguito per un anno da Daniela</li>
+                             </ul>
+                          </div>
+
+                          <div>
+                            <div className="bg-black text-white p-8 rounded-[3rem] mb-6">
+                               <h3 className="text-[#EAB308] font-black uppercase text-lg mb-4">Il percorso di mantenimento (12 mesi) comprende:</h3>
+                               <ul className="space-y-4 text-sm">
+                                 <li className="flex items-start gap-4">
+                                   <i className="fa-solid fa-laser text-[#EAB308] mt-1"></i>
+                                   <div>
+                                     <strong className="block text-lg">8 Sedute Laser a fotobiomodulazione</strong>
+                                   </div>
+                                 </li>
+                                 <li className="flex items-start gap-4">
+                                   <i className="fa-solid fa-wand-magic-sparkles text-[#EAB308] mt-1"></i>
+                                   <div>
+                                     <strong className="block text-lg">4 Sedute di potenziamento</strong>
+                                     <span className="text-slate-400">Dove POTENZIAMO L’EFFICACIA DI ARGILLE,PEELING NATURALI e DI PRODOTTI DETOSSINANTI CON STRUMENTI TECNOLOGICI ALL’AVANGUARDIA, COME:</span>
+                                     <div className="flex flex-wrap gap-2 mt-2">
+                                        ${['NEBULIZZAZIONE', 'ULTRASUONI', 'CORRENTE GALVANICA', 'VACUM TERAPIA', 'ALTA FREQUENZA', 'CASCATA', 'OSSIGENOTERAPIA'].map(tag => html`
+                                            <span className="bg-white/10 px-3 py-1 rounded-full text-xs">${tag}</span>
+                                        `)}
+                                     </div>
+                                   </div>
+                                 </li>
+                                 <li className="flex items-center gap-4">
+                                   <i className="fa-solid fa-gift text-[#EAB308]"></i>
+                                   <span className="font-bold">2 Beautrì check in omaggio</span>
+                                 </li>
+                                 <li className="flex items-center gap-4">
+                                   <i className="fa-brands fa-whatsapp text-[#EAB308]"></i>
+                                   <span className="font-bold">Supporto via whatsapp 5 giorni su 7</span>
+                                 </li>
+                               </ul>
+                            </div>
+                            <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                              Ogni trattamento è strutturato per seguire le stagionalità e le esigenze
+                              individuali, con prodotti personalizzati (shampoo e lozione) da utilizzare
+                              a casa. Daniela sarà sempre a disposizione per eventuali modifiche e
+                              supporto.
+                            </p>
+                            <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl">
+                               <h4 className="font-black text-black uppercase text-xs mb-2">Conclusione</h4>
+                               <p className="text-slate-600 text-sm">
+                                 Non sottovalutare questa fase importante e delicata: mantieni la tua cute sana e
+                                 continua a goderti il benessere che hai conquistato!
+                               </p>
+                            </div>
+                          </div>
+
+                       </div>
+                      `}
+                   </div>
+                </div>
+              </div>
+            `;
+        }
+
         // Standard Path View
         return html`
           <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
@@ -571,7 +714,6 @@
                     <p className="text-lg font-bold text-black">${path.tools}</p>
                   </section>
                 </div>
-                <!-- REMOVED OLD LASER TABLE LOGIC HERE AS IT IS HANDLED ABOVE IN isLaser BLOCK -->
                 ${!isLaser && html`
                   <section className="bg-slate-50 rounded-[3rem] p-10 text-center uppercase border border-slate-100">
                     <h3 className="text-[12px] font-black text-black tracking-[0.2em] mb-4">Investimento a seduta</h3>
