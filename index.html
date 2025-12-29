@@ -751,39 +751,74 @@
                   <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Descrizione</h3>
                   <p className="text-slate-600 font-medium leading-relaxed text-lg italic normal-case">"${path.description}"</p>
                 </section>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-slate-50 uppercase tracking-wider font-bold text-xs">
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 border-t border-slate-50 uppercase tracking-wider font-bold text-xs">
                   ${!isLaser && html`
                     <section>
-                      <h3 className="text-xs font-black text-slate-400 tracking-widest mb-4">Sedute</h3>
-                      <p className="text-2xl font-black text-black">${path.sessions}</p>
+                      <h3 className="text-xs font-black text-slate-400 tracking-widest mb-6">Il Percorso prevede</h3>
+                      <div className="group relative bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 hover:border-[#EAB308] hover:bg-white hover:shadow-lg transition-all duration-300 overflow-hidden h-full">
+                        <!-- Decorazione sfondo -->
+                        <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#EAB308] rounded-full opacity-10 blur-2xl group-hover:opacity-20 transition-opacity"></div>
+                        
+                        <div className="relative z-10 flex flex-col h-full justify-between gap-6">
+                            <div className="flex items-center justify-between">
+                                <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center text-lg shadow-md group-hover:scale-110 transition-transform duration-300">
+                                    <i className="fa-solid fa-layer-group"></i>
+                                </div>
+                                <div className="text-3xl text-slate-200 group-hover:text-[#EAB308] transition-colors duration-300">
+                                    <i className="fa-solid fa-route"></i>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <p className="text-3xl font-black text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-[#EAB308] transition-colors">
+                                    ${path.sessions}
+                                </p>
+                            </div>
+                            
+                            <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                                <div className="h-full bg-black w-1/3 rounded-full group-hover:w-full group-hover:bg-[#EAB308] transition-all duration-1000 ease-in-out"></div>
+                            </div>
+                        </div>
+                      </div>
                     </section>
                   `}
+                  
                   <section>
-                     <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black shadow-sm">
-                           <i className="fa-solid fa-screwdriver-wrench text-xs"></i>
-                        </div>
-                        <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase">Strumenti</h3>
+                     <h3 className="text-xs font-black text-slate-400 tracking-widest mb-6">Tecnologie</h3>
+                     <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 h-full">
+                         <div className="flex items-center gap-3 mb-6">
+                            <div className="w-10 h-10 rounded-full bg-[#EAB308] flex items-center justify-center text-black shadow-sm">
+                               <i className="fa-solid fa-screwdriver-wrench text-sm"></i>
+                            </div>
+                            <span className="text-xs font-black text-black uppercase tracking-wide">Strumenti utilizzati</span>
+                         </div>
+                         
+                         ${path.enhancement && html`
+                            <div className="mb-6 bg-yellow-50 p-4 rounded-xl border border-yellow-100">
+                                <p className="text-[9px] font-black text-yellow-700 leading-relaxed tracking-wide">
+                                <i className="fa-solid fa-bolt mr-1"></i> ${path.enhancement}
+                                </p>
+                            </div>
+                         `}
+                         
+                         <ul className="space-y-4">
+                            ${toolsList.map(t => html`
+                              <li className="flex items-center gap-3 group">
+                                 <span className="w-2 h-2 bg-slate-200 rounded-full group-hover:bg-black transition-colors"></span>
+                                 <span className="text-sm font-bold text-slate-700 leading-tight group-hover:text-black transition-colors">${t.trim()}</span>
+                              </li>
+                            `)}
+                         </ul>
                      </div>
-                     ${path.enhancement && html`
-                        <p className="text-[10px] font-black text-[#EAB308] mb-4 leading-relaxed tracking-wider">
-                           ${path.enhancement}
-                        </p>
-                     `}
-                     <ul className="space-y-3">
-                        ${toolsList.map(t => html`
-                          <li className="flex items-start gap-3">
-                             <span className="w-1.5 h-1.5 bg-black rounded-full mt-2 shrink-0"></span>
-                             <span className="text-lg font-bold text-black leading-tight">${t.trim()}</span>
-                          </li>
-                        `)}
-                     </ul>
                   </section>
                 </div>
+                
                 ${!isLaser && html`
-                  <section className="bg-slate-50 rounded-[3rem] p-10 text-center uppercase border border-slate-100">
-                    <h3 className="text-[12px] font-black text-black tracking-[0.2em] mb-4">Investimento a seduta</h3>
-                    <div className="text-3xl md:text-5xl font-black text-[#EAB308] tracking-tighter">${path.price}</div>
+                  <section className="bg-slate-50 rounded-[3rem] p-10 text-center uppercase border border-slate-100 mt-8 relative overflow-hidden group hover:border-[#EAB308] transition-all">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#EAB308] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <h3 className="text-[10px] font-black text-slate-400 tracking-[0.3em] mb-4">Investimento a seduta</h3>
+                    <div className="text-3xl md:text-5xl font-black text-[#EAB308] tracking-tighter group-hover:scale-105 transition-transform duration-300">${path.price}</div>
                   </section>
                 `}
               </div>
