@@ -148,9 +148,9 @@
       ];
 
       const MOCK_MAINTENANCE_PATHS = [
-        { id: 'm1', name: 'MANTENIMENTO BASE', description: 'Percorso di mantenimento post-trattamento urto per stabilizzare i risultati ottenuti.', sessions: '4 incontri', tools: 'Microcamera HD, Lozioni specifiche', price: '€ 65' },
-        { id: 'm2', name: 'MANTENIMENTO INTERMEDIO', description: 'Prevenzione stagionale e rinforzo periodico della struttura capillare.', sessions: '3 incontri', tools: 'Ossigeno, Maschere nutrienti', price: '€ 70' },
-        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: 'Protezione continua del cuoio capelluto sensibile.', sessions: '2 incontri', tools: 'Vapozono, Oli lenitivi', price: '€ 60' }
+        { id: 'm1', name: 'MANTENIMENTO BASE', description: 'Percorso di mantenimento post-trattamento urto per stabilizzare i risultati ottenuti.', sessions: '4 incontri', tools: 'Microcamera HD, Lozioni specifiche', price: 'Lui 52€ | Lei 74/78€' },
+        { id: 'm2', name: 'MANTENIMENTO INTERMEDIO', description: 'Prevenzione stagionale e rinforzo periodico della struttura capillare.', sessions: '3 incontri', tools: 'Ossigeno, Maschere nutrienti', price: 'Lui 67€ | Lei 89/93€' },
+        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: 'Protezione continua del cuoio capelluto sensibile.', sessions: '2 incontri', tools: 'Vapozono, Oli lenitivi', price: 'Lui 76€ | Lei 96/104€' }
       ];
       
       const TRICOLOGICI_TREATMENTS = [
@@ -444,6 +444,19 @@
                                </p>
                             </div>
                           </div>
+                          
+                          <!-- PREZZO E DISCLAIMER AGGIUNTO -->
+                          <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
+                              <div className="absolute top-0 left-0 w-full h-1 bg-[#EAB308]"></div>
+                              <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Investimento a seduta</h4>
+                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-4">${path.price}</div>
+                              <div className="inline-block bg-slate-100 px-4 py-2 rounded-full">
+                                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                                      <i className="fa-solid fa-lock mr-2 text-[#EAB308]"></i>
+                                      I prezzi sono riservati solo a chi fa i percorsi
+                                  </p>
+                              </div>
+                          </div>
 
                           <div className="border-2 border-red-500/20 bg-red-50 p-6 rounded-3xl">
                              <h4 className="text-red-600 font-black uppercase text-xs tracking-widest mb-2"><i className="fa-solid fa-circle-exclamation mr-2"></i>Importante</h4>
@@ -571,6 +584,19 @@
                                  I prodotti di mantenimento in abbinamento (lozione e shampoo) per casa verranno personalizzati su misura per ogni persona.
                                </p>
                             </div>
+                          </div>
+
+                          <!-- PREZZO E DISCLAIMER AGGIUNTO -->
+                          <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
+                              <div className="absolute top-0 left-0 w-full h-1 bg-[#EAB308]"></div>
+                              <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Investimento a seduta</h4>
+                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-4">${path.price}</div>
+                              <div className="inline-block bg-slate-100 px-4 py-2 rounded-full">
+                                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                                      <i className="fa-solid fa-lock mr-2 text-[#EAB308]"></i>
+                                      I prezzi sono riservati solo a chi fa i percorsi
+                                  </p>
+                              </div>
                           </div>
 
                           <div className="border-2 border-red-500/20 bg-red-50 p-6 rounded-3xl">
@@ -723,6 +749,29 @@
                                  continua a goderti il benessere che hai conquistato!
                                </p>
                             </div>
+                          </div>
+
+                          <!-- PREZZO E DISCLAIMER AGGIUNTO -->
+                          <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
+                              <div className="absolute top-0 left-0 w-full h-1 bg-[#EAB308]"></div>
+                              <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Investimento a seduta</h4>
+                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-4">${path.price}</div>
+                              <div className="inline-block bg-slate-100 px-4 py-2 rounded-full">
+                                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                                      <i className="fa-solid fa-lock mr-2 text-[#EAB308]"></i>
+                                      I prezzi sono riservati solo a chi fa i percorsi
+                                  </p>
+                              </div>
+                          </div>
+
+                          <div className="border-2 border-red-500/20 bg-red-50 p-6 rounded-3xl">
+                             <h4 className="text-red-600 font-black uppercase text-xs tracking-widest mb-2"><i className="fa-solid fa-circle-exclamation mr-2"></i>Importante</h4>
+                             <p className="text-red-900 text-sm font-medium leading-relaxed">
+                               Daniela la nostra Tecnica Tricologa potrà effettuare modifiche
+                               qualora si presentassero delle problematiche di salute che andrebbero ad
+                               influire sul percorso creato su base annuale. Inoltre valuterà la scelta dei
+                               prodotti, la loro personalizzazione e la modalità d’uso.
+                             </p>
                           </div>
 
                        </div>
