@@ -290,31 +290,56 @@
                                     </ul>
                                 </div>
 
-                                <div className="bg-[#1a1a1a] rounded-[2.5rem] p-8 text-center text-white relative overflow-hidden">
-                                    <div className="relative z-10">
-                                        <h3 className="font-black text-white uppercase text-lg mb-6">Pacchetto Fotoringiovanimento</h3>
-                                        <div className="inline-block bg-[#EAB308] text-black px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest mb-6">4 Sedute (4 settimane)</div>
-                                        <div className="flex justify-center gap-4 mb-6">
-                                            <div className="bg-white/10 px-6 py-3 rounded-xl border border-white/10">
-                                                <div className="text-xs text-slate-400 uppercase tracking-widest mb-1">Donna</div>
-                                                <div className="text-xl font-black text-[#EAB308]">€447</div>
-                                            </div>
-                                            <div className="bg-white/10 px-6 py-3 rounded-xl border border-white/10">
-                                                <div className="text-xs text-slate-400 uppercase tracking-widest mb-1">Donna+</div>
-                                                <div className="text-xl font-black text-[#EAB308]">€487</div>
-                                            </div>
+                                <div className="bg-[#1a1a1a] rounded-[2.5rem] p-8 relative overflow-hidden">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 relative z-10">
+                                        <!-- Sessions -->
+                                        <div className="bg-white/5 border border-white/10 p-4 rounded-2xl text-center flex flex-col justify-center">
+                                            <div className="text-slate-500 text-[9px] font-black uppercase tracking-widest mb-2">Durata</div>
+                                            <div className="text-white font-black text-lg"><i className="fa-regular fa-clock text-[#EAB308] mr-2"></i>4 Sedute</div>
+                                            <div className="text-slate-500 text-[9px] mt-1 uppercase">1 a settimana</div>
                                         </div>
-                                        <div className="bg-[#EAB308]/10 border border-[#EAB308]/30 p-4 rounded-xl mb-6 mx-auto inline-block">
-                                            <div className="flex items-center gap-3 justify-center">
-                                                <div className="w-8 h-8 rounded-full bg-[#EAB308] flex items-center justify-center text-black text-sm"><i className="fa-solid fa-gift"></i></div>
-                                                <div className="text-left">
-                                                    <p className="text-[#EAB308] font-black text-xs uppercase tracking-wider">OMAGGIO INCLUSO</p>
-                                                    <p className="text-white text-[10px] font-medium uppercase">Shampoo + Prodotto stelo personalizzati</p>
+                                        <!-- Tools -->
+                                        <div className="bg-white/5 border border-white/10 p-4 rounded-2xl text-center flex flex-col justify-center">
+                                            <div className="text-slate-500 text-[9px] font-black uppercase tracking-widest mb-2">Strumento</div>
+                                            <div className="text-white font-black text-lg"><i className="fa-solid fa-laser text-[#EAB308] mr-2"></i>Laser</div>
+                                            <div className="text-slate-500 text-[9px] mt-1 uppercase">Fotoringiovanimento</div>
+                                        </div>
+                                        <!-- Price 1 -->
+                                        <div className="bg-[#EAB308] p-4 rounded-2xl text-center flex flex-col justify-center shadow-lg transform hover:scale-105 transition-transform">
+                                            <div className="text-black/60 text-[9px] font-black uppercase tracking-widest mb-1">Donna</div>
+                                            <div className="text-black font-black text-2xl">€447</div>
+                                        </div>
+                                        <!-- Price 2 -->
+                                        <div className="bg-[#EAB308] p-4 rounded-2xl text-center flex flex-col justify-center shadow-lg transform hover:scale-105 transition-transform">
+                                            <div className="text-black/60 text-[9px] font-black uppercase tracking-widest mb-1">Donna+</div>
+                                            <div className="text-black font-black text-2xl">€487</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- New Prominent Gift Section -->
+                                    <div className="bg-gradient-to-br from-white/10 to-transparent border border-[#EAB308]/50 p-6 rounded-3xl relative overflow-hidden group">
+                                        <div className="absolute -right-10 -bottom-10 text-[#EAB308] opacity-10 rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                                            <i className="fa-solid fa-gift text-9xl"></i>
+                                        </div>
+                                        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                                            <div className="w-20 h-20 bg-[#EAB308] rounded-2xl flex items-center justify-center text-black text-3xl shadow-[0_0_30px_rgba(234,179,8,0.3)] shrink-0 animate-pulse">
+                                                <i className="fa-solid fa-gift"></i>
+                                            </div>
+                                            <div className="text-center md:text-left">
+                                                <h4 className="text-[#EAB308] font-black uppercase text-xs tracking-[0.2em] mb-2">Esclusivo per te</h4>
+                                                <h3 className="text-2xl font-black text-white uppercase italic mb-3">Omaggio Incluso</h3>
+                                                <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                                                    <span className="bg-white/10 px-4 py-2 rounded-lg text-xs font-bold text-white uppercase border border-white/10 flex items-center gap-2">
+                                                        <i className="fa-solid fa-bottle-droplet text-[#EAB308]"></i> Shampoo
+                                                    </span>
+                                                    <span className="bg-white/10 px-4 py-2 rounded-lg text-xs font-bold text-white uppercase border border-white/10 flex items-center gap-2">
+                                                        <i className="fa-solid fa-spray-can-sparkles text-[#EAB308]"></i> Prodotto Stelo
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p className="text-[#EAB308] text-[10px] font-bold uppercase tracking-widest">* Ogni seduta è compresa di piega</p>
                                     </div>
+                                    <p className="text-center text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-6">* Ogni seduta è compresa di piega</p>
                                 </div>
                             </div>
                         </section>
@@ -345,34 +370,50 @@
                                     </div>
                                 </div>
 
-                                <div className="bg-slate-50 rounded-[2.5rem] p-8 text-center border border-slate-100">
-                                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                                        <div className="text-left">
-                                            <h3 className="font-black text-slate-900 uppercase text-xs tracking-widest mb-1">Percorso</h3>
-                                            <p className="text-lg font-bold">3 sedute in 3 mesi</p>
-                                            <p className="text-xs text-slate-500">(una seduta al mese)</p>
+                                <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 relative overflow-hidden">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 relative z-10">
+                                        <!-- Sessions -->
+                                        <div className="bg-white border border-blue-100 p-4 rounded-2xl text-center flex flex-col justify-center shadow-sm">
+                                            <div className="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-2">Durata</div>
+                                            <div className="text-blue-900 font-black text-lg"><i className="fa-regular fa-clock text-blue-500 mr-2"></i>3 Sedute</div>
+                                            <div className="text-slate-400 text-[9px] mt-1 uppercase">In 3 mesi (1 al mese)</div>
                                         </div>
-                                        <div className="text-left">
-                                            <h3 className="font-black text-slate-900 uppercase text-xs tracking-widest mb-1">Supporto</h3>
-                                            <p className="text-sm font-medium">Cuffia nebulizzata</p>
+                                        <!-- Tools -->
+                                        <div className="bg-white border border-blue-100 p-4 rounded-2xl text-center flex flex-col justify-center shadow-sm">
+                                            <div className="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-2">Strumento</div>
+                                            <div className="text-blue-900 font-black text-lg"><i className="fa-solid fa-headset text-blue-500 mr-2"></i>Cuffia</div>
+                                            <div className="text-slate-400 text-[9px] mt-1 uppercase">Nebulizzata</div>
                                         </div>
-                                        <div className="text-left">
-                                            <h3 className="font-black text-slate-900 uppercase text-xs tracking-widest mb-1">Investimento</h3>
-                                            <p className="text-lg font-black text-blue-600">Da definire</p>
+                                        <!-- Price -->
+                                        <div className="bg-blue-600 p-4 rounded-2xl text-center flex flex-col justify-center shadow-lg transform hover:scale-105 transition-transform">
+                                            <div className="text-blue-200 text-[9px] font-black uppercase tracking-widest mb-1">Investimento</div>
+                                            <div className="text-white font-black text-xl uppercase">Da Definire</div>
                                         </div>
                                     </div>
-                                    <div className="mt-8 pt-6 border-t border-slate-200">
-                                        <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl mb-4 inline-block shadow-sm">
-                                            <div className="flex items-center gap-3 justify-center">
-                                                <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm"><i className="fa-solid fa-gift"></i></div>
-                                                <div className="text-left">
-                                                    <p className="text-blue-900 font-black text-xs uppercase tracking-wider">OMAGGIO INCLUSO</p>
-                                                    <p className="text-slate-600 text-[10px] font-medium uppercase">Shampoo + Prodotto stelo</p>
+
+                                    <div className="bg-gradient-to-r from-blue-50 to-white border border-blue-200 p-6 rounded-3xl relative overflow-hidden group shadow-sm">
+                                        <div className="absolute -right-6 -bottom-6 text-blue-100 opacity-50 rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                                            <i className="fa-solid fa-gift text-8xl"></i>
+                                        </div>
+                                        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                                            <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-3xl shadow-md shrink-0 animate-bounce">
+                                                <i className="fa-solid fa-gift"></i>
+                                            </div>
+                                            <div className="text-center md:text-left">
+                                                <h4 className="text-blue-400 font-black uppercase text-xs tracking-[0.2em] mb-2">Regalo per te</h4>
+                                                <h3 className="text-2xl font-black text-blue-900 uppercase italic mb-3">Omaggio Incluso</h3>
+                                                <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                                                    <span className="bg-white px-4 py-2 rounded-lg text-xs font-bold text-blue-800 uppercase border border-blue-100 flex items-center gap-2 shadow-sm">
+                                                        <i className="fa-solid fa-bottle-droplet text-blue-500"></i> Shampoo
+                                                    </span>
+                                                    <span className="bg-white px-4 py-2 rounded-lg text-xs font-bold text-blue-800 uppercase border border-blue-100 flex items-center gap-2 shadow-sm">
+                                                        <i className="fa-solid fa-spray-can-sparkles text-blue-500"></i> Prodotto Stelo
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p className="text-blue-400 text-[10px] font-bold uppercase tracking-widest">* Ogni seduta è compresa di piega</p>
                                     </div>
+                                    <p className="text-center text-blue-300 text-[10px] font-bold uppercase tracking-widest mt-6">* Ogni seduta è compresa di piega</p>
                                 </div>
                             </div>
                         </section>
@@ -394,34 +435,49 @@
                                     <p className="text-xs font-bold uppercase tracking-widest text-slate-400 text-center mt-6">Adatte per: capelli trattati, sfibrati o danneggiati</p>
                                 </div>
 
-                                <div className="bg-amber-50 rounded-[2.5rem] p-8 text-center border border-amber-100">
-                                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                                        <div className="text-left">
-                                            <h3 className="font-black text-amber-900 uppercase text-xs tracking-widest mb-1">Percorso</h3>
-                                            <p className="text-lg font-bold text-amber-950">3 sedute in 60 gg</p>
-                                            <p className="text-xs text-amber-800/60">(una ogni 20 giorni)</p>
+                                <div className="bg-amber-50 rounded-[2.5rem] p-8 border border-amber-100 relative overflow-hidden">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 relative z-10">
+                                        <!-- Sessions -->
+                                        <div className="bg-white border border-amber-100 p-4 rounded-2xl text-center flex flex-col justify-center shadow-sm">
+                                            <div className="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-2">Durata</div>
+                                            <div className="text-amber-900 font-black text-lg"><i className="fa-regular fa-clock text-amber-600 mr-2"></i>3 Sedute</div>
+                                            <div className="text-slate-400 text-[9px] mt-1 uppercase">In 60 gg (1 ogni 20gg)</div>
                                         </div>
-                                        <div className="text-left">
-                                            <h3 className="font-black text-amber-900 uppercase text-xs tracking-widest mb-1">Supporto</h3>
-                                            <p className="text-sm font-medium text-amber-950">Fototerapia</p>
+                                        <!-- Tools -->
+                                        <div className="bg-white border border-amber-100 p-4 rounded-2xl text-center flex flex-col justify-center shadow-sm">
+                                            <div className="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-2">Strumento</div>
+                                            <div className="text-amber-900 font-black text-lg"><i className="fa-solid fa-lightbulb text-amber-600 mr-2"></i>Fototerapia</div>
                                         </div>
-                                        <div className="text-left">
-                                            <h3 className="font-black text-amber-900 uppercase text-xs tracking-widest mb-1">Investimento</h3>
-                                            <p className="text-lg font-black text-amber-700">Da definire</p>
+                                        <!-- Price -->
+                                        <div className="bg-amber-700 p-4 rounded-2xl text-center flex flex-col justify-center shadow-lg transform hover:scale-105 transition-transform">
+                                            <div className="text-amber-200 text-[9px] font-black uppercase tracking-widest mb-1">Investimento</div>
+                                            <div className="text-white font-black text-xl uppercase">Da Definire</div>
                                         </div>
                                     </div>
-                                    <div className="mt-8 pt-6 border-t border-amber-200">
-                                        <div className="bg-white border border-amber-200 p-4 rounded-xl mb-4 inline-block shadow-sm">
-                                            <div className="flex items-center gap-3 justify-center">
-                                                <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm"><i className="fa-solid fa-gift"></i></div>
-                                                <div className="text-left">
-                                                    <p className="text-amber-900 font-black text-xs uppercase tracking-wider">OMAGGIO INCLUSO</p>
-                                                    <p className="text-slate-600 text-[10px] font-medium uppercase">Shampoo + Prodotto stelo</p>
+
+                                    <div className="bg-gradient-to-r from-amber-50 to-white border border-amber-200 p-6 rounded-3xl relative overflow-hidden group shadow-sm">
+                                        <div className="absolute -right-6 -bottom-6 text-amber-100 opacity-50 rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                                            <i className="fa-solid fa-gift text-8xl"></i>
+                                        </div>
+                                        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                                            <div className="w-20 h-20 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-700 text-3xl shadow-md shrink-0 animate-bounce">
+                                                <i className="fa-solid fa-gift"></i>
+                                            </div>
+                                            <div className="text-center md:text-left">
+                                                <h4 className="text-amber-500 font-black uppercase text-xs tracking-[0.2em] mb-2">Regalo per te</h4>
+                                                <h3 className="text-2xl font-black text-amber-900 uppercase italic mb-3">Omaggio Incluso</h3>
+                                                <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                                                    <span className="bg-white px-4 py-2 rounded-lg text-xs font-bold text-amber-800 uppercase border border-amber-100 flex items-center gap-2 shadow-sm">
+                                                        <i className="fa-solid fa-bottle-droplet text-amber-600"></i> Shampoo
+                                                    </span>
+                                                    <span className="bg-white px-4 py-2 rounded-lg text-xs font-bold text-amber-800 uppercase border border-amber-100 flex items-center gap-2 shadow-sm">
+                                                        <i className="fa-solid fa-spray-can-sparkles text-amber-600"></i> Prodotto Stelo
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p className="text-amber-600 text-[10px] font-bold uppercase tracking-widest">* Ogni seduta è compresa di piega</p>
                                     </div>
+                                    <p className="text-center text-amber-400 text-[10px] font-bold uppercase tracking-widest mt-6">* Ogni seduta è compresa di piega</p>
                                 </div>
                             </div>
                         </section>
