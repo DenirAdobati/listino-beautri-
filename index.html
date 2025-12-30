@@ -159,28 +159,28 @@
           description: 'Trattamenti specifici per cuti con eccesso di sebo, forfora, desquamazione e prurito.',
           technologiesDescription: 'Potenziamo l’efficacia di argille e peeling naturali con strumenti tecnologici all’avanguardia, come:',
           technologies: ['ultrasuoni', 'nebulizzazione', 'corrente galvanica'],
-          price: 'Investimento a seduta: …'
+          prices: { donna: '59/63€', uomo: '37€' }
         },
         {
           title: 'LENIRE',
           description: 'Trattamenti specifici per cuti dolenti, con psoriasi ed escoriazioni, pensati per purificare e rigenerare.',
           technologiesDescription: 'Potenziamo l’efficacia di argille, peeling e impacchi naturali con strumenti tecnologici all’avanguardia, come:',
           technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
-          price: 'Investimento a seduta: …'
+          prices: { donna: '89/93€', uomo: '67€' }
         },
         {
           title: 'DETOSSINARE',
           description: 'Trattamenti dedicati a eliminare le scorie metaboliche e ad apportare ossigeno e nutrimento al bulbo.',
           technologiesDescription: 'Potenziamo l’efficacia di prodotti detossinanti con strumenti tecnologici all’avanguardia, come:',
           technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
-          price: 'Investimento a seduta: …'
+          prices: { donna: '67/71€', uomo: '47€' }
         },
         {
           title: 'NUTRIRE',
           description: 'Trattamenti specifici per ristrutturare i capelli, ridurre vetrosità, crespo e doppie punte.',
           technologiesDescription: 'Potenziamo l’efficacia di oleazioni, maschere e prodotti ristrutturanti con strumenti tecnologici all’avanguardia, come:',
           technologies: ['laser a fotoringiovanimento', 'fototerapia', 'nebulizzazione'],
-          price: 'Investimento a seduta: …'
+          prices: { donna: '89/93€', uomo: '67€' }
         }
       ];
 
@@ -1552,7 +1552,7 @@
         </div>
       `;
 
-      const TricologiciList = () => html`
+      const TricologiciList = ({ gender }) => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
            <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
                 <div className="bg-black p-12 text-center text-white relative uppercase">
@@ -1567,7 +1567,9 @@
            </div>
 
            <div className="space-y-8">
-             ${TRICOLOGICI_TREATMENTS.map(t => html`
+             ${TRICOLOGICI_TREATMENTS.map(t => {
+               const price = gender === 'uomo' ? t.prices.uomo : t.prices.donna;
+               return html`
                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-6 group-hover:text-[#EAB308] transition-colors">${t.title}</h2>
                  <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6">
@@ -1583,9 +1585,9 @@
                         `)}
                     </div>
                  </div>
-                 <div className="text-xl font-black text-[#EAB308] tracking-widest">${t.price}</div>
+                 <div className="text-xl font-black text-[#EAB308] tracking-widest">Investimento a seduta: ${price}</div>
                </div>
-             `)}
+             `})}
            </div>
         </div>
       `;
@@ -2401,7 +2403,7 @@
             if (section === 'trattamenti-tricologici') {
                 return html`
                 <div className="h-full relative animate-fade-in">
-                    <${TricologiciList} />
+                    <${TricologiciList} gender=${gender} />
                 </div>
                 `;
             }
