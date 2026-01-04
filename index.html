@@ -223,6 +223,200 @@
           </div>
         `;
       };
+
+      // --- NUOVO COMPONENTE PER LA SEZIONE "COME FUNZIONANO" ---
+      const HowItWorksList = () => html`
+        <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
+          <!-- Header -->
+          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+            <div className="bg-black p-12 text-center text-white relative uppercase">
+              <h1 className="text-3xl md:text-5xl font-black tracking-tighter">COME FUNZIONANO?</h1>
+              <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+            </div>
+            <div className="p-10 md:p-16 text-center">
+                <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
+                    Tutto quello che devi sapere sui nostri percorsi di salute e mantenimento per i tuoi capelli.
+                </p>
+            </div>
+          </div>
+
+          <div className="space-y-16">
+            
+            <!-- SEZIONE 1: PERCORSI PERSONALIZZATI -->
+            <section>
+                <div className="flex items-center gap-4 mb-8 px-4">
+                    <div className="w-12 h-12 bg-black text-[#EAB308] rounded-full flex items-center justify-center text-xl shadow-lg font-black">1</div>
+                    <h2 className="text-3xl font-black text-black uppercase tracking-tighter">I NOSTRI PERCORSI PERSONALIZZATI</h2>
+                </div>
+                
+                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-8">
+                     <p className="text-lg leading-relaxed text-slate-700 mb-6">
+                        Tutti i nostri percorsi sono creati su misura con l’obiettivo di ristabilire l’equilibrio perduto di cute e capelli.
+                        Ogni percorso prevede sedute a <strong className="text-black">cadenza settimanale</strong>, perché la costanza è un elemento fondamentale per ottenere risultati reali e duraturi.
+                     </p>
+                     <p className="text-lg leading-relaxed text-slate-700">
+                        Al termine di ogni percorso, conoscenza, metodo, atteggiamento e innovazione tecnologica si uniscono per trasformare le aspettative iniziali in un’esperienza esclusiva e consapevole, costruita intorno alla persona.
+                     </p>
+                </div>
+
+                <!-- Beautrì Check -->
+                <div className="bg-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-lg text-black mb-8 relative overflow-hidden">
+                    <h3 className="text-2xl font-black uppercase mb-6 flex items-center gap-3">
+                        <i className="fa-solid fa-magnifying-glass"></i> Beautrì Check inclusi nel percorso
+                    </h3>
+                    <p className="font-medium mb-8">Durante il percorso sono inclusi 2 Beautrì Check (valore 47 € ciascuno), fondamentali per monitorare l’evoluzione dei risultati:</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-black text-white p-8 rounded-[2rem]">
+                            <div className="text-[#EAB308] font-black text-sm uppercase tracking-widest mb-2">1° Check</div>
+                            <p className="text-sm">Al termine dell’ultima seduta delle fasi di:</p>
+                            <ul className="mt-4 space-y-2">
+                                <li className="flex items-center gap-2 font-bold"><i className="fa-solid fa-check text-[#EAB308]"></i> Igienizzazione / Purificazione</li>
+                                <li className="flex items-center gap-2 font-bold"><i className="fa-solid fa-check text-[#EAB308]"></i> Lenire</li>
+                            </ul>
+                        </div>
+                        <div className="bg-black text-white p-8 rounded-[2rem]">
+                            <div className="text-[#EAB308] font-black text-sm uppercase tracking-widest mb-2">2° Check</div>
+                            <p className="text-sm">Al termine dell’ultima seduta delle fasi di:</p>
+                            <ul className="mt-4 space-y-2">
+                                <li className="flex items-center gap-2 font-bold"><i className="fa-solid fa-check text-[#EAB308]"></i> Detossinare</li>
+                                <li className="flex items-center gap-2 font-bold"><i className="fa-solid fa-check text-[#EAB308]"></i> Nutrire</li>
+                                <li className="flex items-center gap-2 font-bold"><i className="fa-solid fa-check text-[#EAB308]"></i> Laser</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagamento & Garanzie Grid -->
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100">
+                        <h3 className="text-xl font-black uppercase mb-6 flex items-center gap-3"><i className="fa-solid fa-wallet text-[#EAB308]"></i> Modalità di pagamento</h3>
+                        <div className="space-y-4 text-slate-700">
+                            <p>Il pagamento è a seduta.</p>
+                            <div className="bg-slate-50 p-4 rounded-xl border-l-4 border-[#EAB308] text-sm font-bold">
+                                Alla prima seduta viene richiesto il pagamento anticipato anche della seduta successiva.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100">
+                        <h3 className="text-xl font-black uppercase mb-6 flex items-center gap-3"><i className="fa-solid fa-star text-[#EAB308]"></i> Cosa garantiamo</h3>
+                         <ul className="space-y-3 text-sm text-slate-700">
+                            ${['Sedute potenziate con tecnologie', 'Modalità One to One in Comfort Room', 'Prodotti personalizzati', 'Supporto WhatsApp/Tel continuo', '2 Beautrì Check omaggio (94€)', 'Prezzi agevolati e bloccati', 'Priorità sulle novità'].map(i => html`
+                                <li className="flex items-start gap-3"><i className="fa-solid fa-check text-green-500 mt-1"></i> ${i}</li>
+                            `)}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Regole e Impegno -->
+                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border-l-8 border-[#EAB308]">
+                    <h3 className="text-2xl font-black uppercase mb-6 text-black">Cosa chiediamo e Impegno Reciproco</h3>
+                    <div className="space-y-6 text-slate-700">
+                         <p><strong className="text-black">Rispetto della cadenza settimanale.</strong> In caso di mancato rispetto per motivi futili, tutte le agevolazioni decadono.</p>
+                         <p className="bg-yellow-50 p-4 rounded-xl text-yellow-800 text-sm font-bold italic">👉 In caso di imprevisti, parlane con noi: una soluzione si trova sempre.</p>
+                         <p>Collaborazione attiva tramite WhatsApp e utilizzo corretto dei prodotti.</p>
+                         <hr className="border-slate-100" />
+                         <p className="italic text-sm">
+                            "Oggi non è possibile seguire tutti indistintamente. Proprio perché teniamo profondamente alla qualità del servizio, diamo grande valore al rispetto reciproco. Questo regolamento è la base per garantirti risultati reali."
+                         </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEZIONE 2: MANTENIMENTO -->
+            <section>
+                <div className="flex items-center gap-4 mb-8 px-4 mt-16 border-t border-slate-200 pt-16">
+                    <div className="w-12 h-12 bg-[#EAB308] text-black rounded-full flex items-center justify-center text-xl shadow-lg font-black">2</div>
+                    <div>
+                        <h2 className="text-3xl font-black text-black uppercase tracking-tighter">IL MANTENIMENTO</h2>
+                        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">La fase più importante</p>
+                    </div>
+                </div>
+
+                 <div className="bg-black text-white rounded-[3rem] p-10 md:p-14 shadow-lg mb-8 relative overflow-hidden">
+                     <div className="relative z-10">
+                        <p className="text-lg leading-relaxed mb-6 font-medium">
+                            È proprio qui che i risultati si stabilizzano, si proteggono e si potenziano nel tempo.
+                            Ti consigliamo il mantenimento per tre motivi fondamentali:
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                             <div className="bg-white/10 p-6 rounded-2xl"><i className="fa-solid fa-lock text-[#EAB308] mb-2"></i><br/>Mantenere i risultati raggiunti</div>
+                             <div className="bg-white/10 p-6 rounded-2xl"><i className="fa-solid fa-arrow-trend-up text-[#EAB308] mb-2"></i><br/>Potenziare i benefici</div>
+                             <div className="bg-white/10 p-6 rounded-2xl"><i className="fa-solid fa-user-doctor text-[#EAB308] mb-2"></i><br/>Essere accompagnati per 1 anno</div>
+                        </div>
+                        <p className="italic text-slate-400">"Immagina quando amici, familiari o colleghi ti chiederanno cosa hai fatto per avere capelli così belli… e tu potrai esserne orgoglioso/a."</p>
+                     </div>
+                </div>
+
+                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-8">
+                    <h3 className="text-2xl font-black uppercase mb-4">Il Percorso (12 Mesi)</h3>
+                    <ul className="space-y-4 mb-8">
+                        <li className="flex items-center gap-3 font-bold text-lg"><i className="fa-solid fa-calendar-days text-[#EAB308]"></i> 12 sedute a cadenza mensile</li>
+                        <li className="flex items-center gap-3 font-bold text-lg"><i className="fa-solid fa-microchip text-[#EAB308]"></i> Tecnologie avanzate</li>
+                        <li className="flex items-center gap-3 font-bold text-lg"><i className="fa-solid fa-gift text-[#EAB308]"></i> 2 Beautrì Check omaggio</li>
+                    </ul>
+                </div>
+
+                <!-- Modalità Pagamento Mantenimento -->
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div className="bg-[#EAB308] rounded-[3rem] p-10 shadow-lg relative overflow-hidden text-black">
+                        <h3 className="text-xl font-black uppercase mb-4">🔹 Pagamento Unica Quota</h3>
+                        <p className="text-sm font-bold mb-4">La formula più vantaggiosa:</p>
+                        <ul className="bg-white/20 p-6 rounded-2xl space-y-2 font-bold mb-4">
+                            <li><i className="fa-solid fa-gift"></i> 1 seduta OMAGGIO</li>
+                            <li><i className="fa-solid fa-bottle-droplet"></i> 1 prodotto OMAGGIO</li>
+                            <li><i className="fa-solid fa-magnifying-glass"></i> 2 Check OMAGGIO (94€)</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-200">
+                        <h3 className="text-xl font-black uppercase mb-4">🔹 Pagamento a Seduta</h3>
+                        <p className="text-sm text-slate-600 mb-4">Alla prima seduta richiesto pagamento anticipato della successiva.</p>
+                        <ul className="bg-slate-50 p-6 rounded-2xl space-y-2 text-sm mb-4">
+                            <li className="font-bold"><i className="fa-solid fa-check text-green-500"></i> 2 Check OMAGGIO (94€)</li>
+                            <li className="text-slate-400 line-through"><i className="fa-solid fa-xmark"></i> Seduta omaggio</li>
+                            <li className="text-slate-400 line-through"><i className="fa-solid fa-xmark"></i> Prodotto omaggio</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cosa garantiamo e chiediamo mantenimento -->
+                 <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border-l-8 border-black">
+                    <h3 className="text-2xl font-black uppercase mb-6">Regolamento Mantenimento</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div>
+                            <h4 className="font-black uppercase text-sm mb-4 text-[#EAB308]">Cosa garantiamo</h4>
+                            <ul className="space-y-2 text-sm text-slate-700">
+                                <li>• Sedute potenziate</li>
+                                <li>• One to One in Comfort Room</li>
+                                <li>• Prodotti personalizzati</li>
+                                <li>• Supporto continuo</li>
+                                <li>• Prezzi bloccati</li>
+                            </ul>
+                        </div>
+                        <div>
+                             <h4 className="font-black uppercase text-sm mb-4 text-[#EAB308]">Cosa chiediamo</h4>
+                             <ul className="space-y-2 text-sm text-slate-700">
+                                <li>• Cadenza mensile (max 35gg)</li>
+                                <li>• Rispetto appuntamenti</li>
+                                <li>• Collaborazione attiva</li>
+                                <li>• Utilizzo corretto prodotti</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="mt-8 pt-8 border-t border-slate-100">
+                        <p className="font-medium italic text-slate-600 text-sm">
+                            "Questo regolamento rappresenta la base del percorso di mantenimento ed è ciò che ci permette di accompagnarti con attenzione, continuità e professionalità durante tutto l’anno. È così che i risultati si mantengono."
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+          </div>
+        </div>
+      `;
       
       const PathDetail = ({ path }) => {
         const isLaser = path.name === 'Laser';
@@ -2022,22 +2216,39 @@
                     <span className="text-[#EAB308]">I NOSTRI PERCORSI</span>
                     </div>
                 </header>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full">
-                    <button onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[3rem] p-12 text-center relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
-                    <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
-                        <i className="fa-solid fa-route text-4xl text-[#EAB308] mb-6"></i>
-                        <h2 className="text-4xl font-black text-white tracking-tighter">PERCORSI</h2>
-                    </div>
+                
+                <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full">
+                    <!-- NEW BUTTON: Come funzionano -->
+                    <button onClick=${() => setSection('how-it-works')} className="w-full bg-white rounded-[3rem] p-8 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.01] active:scale-95 border border-slate-100">
+                         <div className="relative z-10 flex items-center justify-center gap-4">
+                            <div className="w-12 h-12 bg-[#EAB308] rounded-full flex items-center justify-center text-black text-xl shadow-md shrink-0">
+                                <i className="fa-solid fa-circle-info"></i>
+                            </div>
+                            <h2 className="text-xl md:text-2xl font-black text-black tracking-tighter uppercase">Come funzionano i nostri percorsi?</h2>
+                        </div>
                     </button>
-                    <button onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[3rem] p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
-                    <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
-                        <i className="fa-solid fa-shield-heart text-4xl text-black mb-6"></i>
-                        <h2 className="text-4xl font-black text-black tracking-tighter">MANTENIMENTO</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                        <button onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[3rem] p-12 text-center relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                        <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
+                            <i className="fa-solid fa-route text-4xl text-[#EAB308] mb-6"></i>
+                            <h2 className="text-4xl font-black text-white tracking-tighter">PERCORSI</h2>
+                        </div>
+                        </button>
+                        <button onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[3rem] p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                        <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
+                            <i className="fa-solid fa-shield-heart text-4xl text-black mb-6"></i>
+                            <h2 className="text-4xl font-black text-black tracking-tighter">MANTENIMENTO</h2>
+                        </div>
+                        </button>
                     </div>
-                    </button>
                 </div>
                 </div>
             `;
+            }
+
+            if (section === 'how-it-works') {
+                return html`<${HowItWorksList} />`;
             }
 
             if ((section === 'percorsi-main' || section === 'percorsi-mantenimento') && !selectedPath) {
