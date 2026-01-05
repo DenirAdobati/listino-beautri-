@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BEAUTRÍ PARRUCCHIERI - Listino Digitale</title>
+    <title>BEAUTRÍ PARRUCCHIERI - Menu Digitale</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome -->
@@ -2308,7 +2308,7 @@
                     <button onClick=${() => setGender('donna')} className="bg-black rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
                     <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[90px] opacity-40"></div>
                     <div className="relative z-10 flex flex-col h-full uppercase">
-                        <span className="text-white/40 text-[10px] font-bold tracking-[0.4em] mb-4 underline decoration-[#EAB308] decoration-2 underline-offset-8">LISTINO</span>
+                        <span className="text-white/40 text-[10px] font-bold tracking-[0.4em] mb-4 underline decoration-[#EAB308] decoration-2 underline-offset-8">MENU</span>
                         <h2 className="text-6xl font-black text-white tracking-tighter mt-auto">DONNA</h2>
                         <div className="w-12 h-1 bg-[#EAB308] mt-6"></div>
                     </div>
@@ -2316,7 +2316,7 @@
                     <button onClick=${() => setGender('uomo')} className="bg-white rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-sm border border-white transition-all hover:scale-[1.02] active:scale-95 h-64">
                     <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-slate-200 rounded-full blur-[90px] opacity-60"></div>
                     <div className="relative z-10 flex flex-col h-full uppercase">
-                        <span className="text-slate-400 text-[10px] font-bold tracking-[0.4em] mb-4 underline decoration-black decoration-2 underline-offset-8">LISTINO</span>
+                        <span className="text-slate-400 text-[10px] font-bold tracking-[0.4em] mb-4 underline decoration-black decoration-2 underline-offset-8">MENU</span>
                         <h2 className="text-6xl font-black text-black tracking-tighter mt-auto">UOMO</h2>
                         <div className="w-12 h-1 bg-black mt-6"></div>
                     </div>
@@ -2413,7 +2413,7 @@
             return html`
                 <div className="h-full relative animate-fade-in">
                 <header className="flex items-center justify-center mb-10 uppercase font-black text-[11px] tracking-widest">
-                    <div className="bg-white px-8 py-3 rounded-full shadow-sm border border-white">LISTINO <span className="text-[#EAB308]">${gender}</span></div>
+                    <div className="bg-white px-8 py-3 rounded-full shadow-sm border border-white">MENU <span className="text-[#EAB308]">${gender}</span></div>
                 </header>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     ${SECTIONS.filter(s => {
