@@ -99,7 +99,8 @@
           sessions: 'da 3 a 5 sedute', 
           tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', 
           price: 'Lui: 37€  Lei: 59/63€',
-          enhancement: 'POTENZIAMO L’EFFICACIA DI ARGILLE E PEELING NATURALI CON:'
+          enhancement: 'POTENZIAMO L’EFFICACIA DI ARGILLE E PEELING NATURALI CON:',
+          icon: 'fa-hands-bubbles'
         },
         { 
           id: 'p2', 
@@ -108,7 +109,8 @@
           sessions: 'da 3 a 5 sedute', 
           tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', 
           price: 'Lui: 67€  Lei: 89/93€',
-          enhancement: 'POTENZIAMO L’EFFICACIA DI ARGILLE, PEELING NATURALI, PRODOTTI LENITIVI CON:'
+          enhancement: 'POTENZIAMO L’EFFICACIA DI ARGILLE, PEELING NATURALI, PRODOTTI LENITIVI CON:',
+          icon: 'fa-feather'
         },
         { 
           id: 'p3', 
@@ -117,7 +119,8 @@
           sessions: 'da 5 a 7 sedute', 
           tools: 'Vacuum terapia, Alta frequenza, Cascata', 
           price: 'Lui: 47€  Lei: 67/71€',
-          enhancement: 'POTENZIAMO L’EFFICACIA DI OLI ESSENZIALI DETOSSINANTI CON:'
+          enhancement: 'POTENZIAMO L’EFFICACIA DI OLI ESSENZIALI DETOSSINANTI CON:',
+          icon: 'fa-leaf'
         },
         { 
           id: 'p4', 
@@ -126,7 +129,8 @@
           sessions: '5 sedute', 
           tools: 'Nebulizzazione, Ossigenoterapia, Alta frequenza', 
           price: 'Lui: 67€  Lei: 89/93€',
-          enhancement: 'POTENZIAMO L’EFFICACIA DI PRODOTTI E OLI ESSENZIALI NUTRITIVI E STIMOLANTI PER IL BULBO CON:'
+          enhancement: 'POTENZIAMO L’EFFICACIA DI PRODOTTI E OLI ESSENZIALI NUTRITIVI E STIMOLANTI PER IL BULBO CON:',
+          icon: 'fa-droplet'
         },
         { 
           id: 'p5', 
@@ -135,7 +139,8 @@
           sessions: '4 sedute', 
           tools: 'Laser a fotoringiovanimento, Fototerapia, Cuffia nebulizzata', 
           price: 'Da definire',
-          enhancement: 'POTENZIAMO L’EFFICACIA DI MASCHERE NATURALI, IDRATANTI, RISTRUTTURANTI E OLEAZIONI CON:'
+          enhancement: 'POTENZIAMO L’EFFICACIA DI MASCHERE NATURALI, IDRATANTI, RISTRUTTURANTI E OLEAZIONI CON:',
+          icon: 'fa-screwdriver-wrench'
         },
         { 
           id: 'p6', 
@@ -143,14 +148,15 @@
           description: 'Percorso dedicato per diradamenti psoriasi e dermatiti.', 
           sessions: 'Vedi tabella sotto', 
           tools: 'Laser a fobiostimolazione', 
-          price: 'Tabella' 
+          price: 'Tabella',
+          icon: 'fa-sun' 
         }
       ];
 
       const MOCK_MAINTENANCE_PATHS = [
-        { id: 'm1', name: 'MANTENIMENTO BASE', description: 'Percorso di mantenimento post-trattamento urto per stabilizzare i risultati ottenuti.', sessions: '4 incontri', tools: 'Microcamera HD, Lozioni specifiche', price: 'Lui 52€  Lei 74/78€' },
-        { id: 'm2', name: 'MANTENIMENTO INTERMEDIO', description: 'Prevenzione stagionale e rinforzo periodico della struttura capillare.', sessions: '3 incontri', tools: 'Ossigeno, Maschere nutrienti', price: 'Lui 67€  Lei 89/93€' },
-        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: 'Protezione continua del cuoio capelluto sensibile.', sessions: '2 incontri', tools: 'Vapozono, Oli lenitivi', price: 'Lui 76€  Lei 96/104€' }
+        { id: 'm1', name: 'MANTENIMENTO BASE', description: 'Percorso di mantenimento post-trattamento urto per stabilizzare i risultati ottenuti.', sessions: '4 incontri', tools: 'Microcamera HD, Lozioni specifiche', price: 'Lui 52€  Lei 74/78€', icon: 'fa-shield' },
+        { id: 'm2', name: 'MANTENIMENTO INTERMEDIO', description: 'Prevenzione stagionale e rinforzo periodico della struttura capillare.', sessions: '3 incontri', tools: 'Ossigeno, Maschere nutrienti', price: 'Lui 67€  Lei 89/93€', icon: 'fa-shield-halved' },
+        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: 'Protezione continua del cuoio capelluto sensibile.', sessions: '2 incontri', tools: 'Vapozono, Oli lenitivi', price: 'Lui 76€  Lei 96/104€', icon: 'fa-shield-heart' }
       ];
       
       const TRICOLOGICI_TREATMENTS = [
@@ -2385,6 +2391,11 @@
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full">
                     ${list.map(p => html`
                     <button key=${p.id} onClick=${() => setSelectedPath(p)} className="bg-white p-8 rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
+                        ${p.icon && html`
+                          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
+                              <i className=${`fa-solid ${p.icon}`}></i>
+                          </div>
+                        `}
                         <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">${p.name}</div>
                         <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
                     </button>
