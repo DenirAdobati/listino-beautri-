@@ -2028,7 +2028,7 @@
                      <div>
                         <h3 className="text-2xl font-black text-[#EAB308] uppercase mb-6 tracking-tighter">🤍 Perché nasce la Giornata Relax</h3>
                         <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                          San Valentino è il giorno dell’amore. Noi abbiamo scelto di dedicarlo anche a te stessa / te stesso.
+                          San Valentino è il giorno dell’amore. Noi abbiamo scelto di dedicarlo anche a te stessa/o. La Giornata Relax è dedicata non solo alle coppie per San Valentino, ma anche a tutte quelle persone che desiderano trascorrere un momento di tenerezza con i propri figli, un momento di spensieratezza con le amiche o regalare un momento di serenità a chi sta affrontando un periodo di chemioterapia.
                         </p>
                         <ul className="space-y-3">
                            ${['Regalare un momento di pausa vera', 'Sciogliere tensioni fisiche ed emotive', 'Ritrovare connessione con il proprio corpo', 'Vivere Beautrì in una dimensione intima'].map(t => html`
@@ -2111,6 +2111,38 @@
                      </div>
                   </div>
                </section>
+
+               <!-- PRICING SECTION ADDED HERE -->
+               <section className="mt-4 relative">
+                    <div className="bg-[#9F1239] rounded-[3rem] p-10 md:p-14 text-white text-center shadow-lg relative overflow-hidden">
+                        <!-- Sticker -->
+                        <div className="absolute top-10 right-10 bg-white text-[#9F1239] px-6 py-3 rounded-full font-black text-xs uppercase tracking-widest transform rotate-12 shadow-md animate-pulse z-20">
+                            <i className="fa-solid fa-ticket mr-2"></i>I posti sono limitati
+                        </div>
+
+                        <div className="relative z-10">
+                            <h2 className="text-3xl font-black uppercase mb-10 tracking-tighter text-white">Investimento per il tuo relax</h2>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                                <!-- Single -->
+                                <div className="bg-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm border border-white/20 flex flex-col justify-center items-center">
+                                    <p className="text-rose-200 font-bold uppercase text-xs tracking-widest mb-4">Per una persona</p>
+                                    <div className="text-5xl font-black text-white">99€</div>
+                                </div>
+
+                                <!-- Couple -->
+                                <div className="bg-white text-[#9F1239] rounded-[2.5rem] p-8 shadow-2xl transform md:scale-105 border-4 border-rose-200 flex flex-col justify-center items-center relative">
+                                    <div className="absolute -top-4 bg-rose-500 text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Offerta Coppia</div>
+                                    <p className="text-slate-500 font-bold uppercase text-xs tracking-widest mb-4">Per la coppia</p>
+                                    <div className="flex items-center justify-center gap-4">
+                                        <span className="text-2xl text-slate-400 line-through font-bold decoration-2 decoration-red-500">198€</span>
+                                        <span className="text-5xl font-black">179€</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
             </div>
           </div>
