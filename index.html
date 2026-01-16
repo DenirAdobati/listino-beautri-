@@ -2517,7 +2517,8 @@
             if (section === 'visione') {
             return html`
                 <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
                     <div className="p-12 flex flex-col justify-center normal-case">
                     <h1 className="text-4xl font-black text-black uppercase tracking-tighter mb-6">La nostra visione</h1>
                     <div className="w-16 h-1 bg-[#EAB308] mb-10"></div>
@@ -2539,6 +2540,12 @@
                     <img src="https://i.ibb.co/1cPY1s0/visione-beautri-1.jpg" alt="Visione Beautrì" className="w-full h-full object-cover" />
                     </div>
                 </div>
+
+                <!-- Video Section -->
+                <div className="aspect-video w-full rounded-[3rem] overflow-hidden mb-8 shadow-lg border border-white">
+                    <iframe className="w-full h-full" src="https://www.youtube.com/embed/OqYFsGRabSU" title="Video Visione Beautrì" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
                 </div>
             `;
             }
