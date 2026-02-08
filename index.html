@@ -2685,6 +2685,38 @@
                             </div>
                         </div>
                     </div>
+                    
+                    {/* NEW SECTION START */}
+                    <div className="bg-[#1a1a1a] rounded-[3rem] p-10 md:p-14 shadow-xl mb-12 relative overflow-hidden border border-white/10 text-white">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+                        <div className="relative z-10">
+                             <div className="text-center mb-10">
+                                <div className="inline-block bg-[#EAB308] text-black px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 shadow-lg">Vantaggio Esclusivo</div>
+                                <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter mb-4 text-white">
+                                    Le Migliori Proposte <span className="text-[#EAB308]">Incluse</span>
+                                </h2>
+                                <p className="text-slate-300 font-medium text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+                                    Chi ha il <span className="text-[#EAB308] font-black">Color Pass</span> può usufruire gratuitamente, una volta al mese, di una di queste migliori proposte in abbinamento ai servizi di colorazione o schiaritura.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                ${BEST_PROPOSALS_DONNA.map(p => html`
+                                    <div key=${p.id} className="bg-white/5 border border-white/10 p-6 rounded-[2rem] hover:bg-white/10 transition-all flex flex-col items-center text-center">
+                                        <div className="w-10 h-10 bg-[#EAB308] text-black rounded-xl flex items-center justify-center text-lg mb-3 shadow-md">
+                                            <i className=${`fa-solid ${p.icon}`}></i>
+                                        </div>
+                                        <h3 className="font-black text-sm uppercase mb-3 leading-tight">${p.name}</h3>
+                                        <div className="mt-auto w-full pt-3 border-t border-white/10">
+                                            <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest mb-1">Dal valore di</p>
+                                            <p className="text-[#EAB308] font-black text-lg">${p.price}</p>
+                                        </div>
+                                    </div>
+                                `)}
+                            </div>
+                        </div>
+                    </div>
+                    {/* NEW SECTION END */}
 
                     <!-- Comparative Table Section -->
                     <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border border-slate-100 mb-12">
