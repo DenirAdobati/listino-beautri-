@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <!-- MODIFICATO PER RESPONSIVE -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>BEAUTRÍ PARRUCCHIERI - Menu Digitale</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -42,6 +45,60 @@
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
       @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
+    
+<style>
+/* === RESET E BASE RESPONSIVE === */
+* { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; padding: 0; overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* === LAYOUT RESPONSIVE === */
+.container, div[class*="container"] { 
+    max-width: 100%; 
+    padding-left: 15px; 
+    padding-right: 15px; 
+}
+
+/* === TIPOGRAFIA MOBILE === */
+h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+p, li, span { font-size: clamp(1rem, 2.5vw, 1.125rem); line-height: 1.6; }
+
+/* === PULSANTI E LINK TOUCH-FRIENDLY === */
+a, button, input[type="submit"], input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* === TABLET (iPad) === */
+@media screen and (max-width: 1024px) {
+    body { font-size: 16px; }
+    .container { padding: 15px; }
+}
+
+/* === MOBILE (iPhone) === */
+@media screen and (max-width: 768px) {
+    body { font-size: 16px; }
+    table { display: block; overflow-x: auto; }
+    .desktop-only { display: none !important; }
+}
+
+/* === MOBILE PICCOLO === */
+@media screen and (max-width: 480px) {
+    .container { padding: 10px; }
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+}
+
+/* === FIX COMUNI === */
+.row { margin-left: 0; margin-right: 0; }
+.col, [class*="col-"] { padding-left: 10px; padding-right: 10px; }
+</style>
 <script type="importmap">
 {
   "imports": {
