@@ -2646,84 +2646,86 @@
                             <div className="w-24 h-24 bg-white/5 backdrop-blur-md rounded-3xl flex items-center justify-center mx-auto mb-8 border border-white/10 shadow-[0_0_40px_rgba(234,179,8,0.2)]">
                                 <i className="fa-solid fa-ticket text-[#EAB308] text-4xl"></i>
                             </div>
-                            <h1 className="text-5xl md:text-6xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-[#EAB308] to-white">COLOR PASS</h1>
-                            <p className="text-[#EAB308] font-bold tracking-[0.3em] text-xs md:text-sm italic">Il segreto per un colore sempre perfetto</p>
+                            <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-[#EAB308] to-white leading-tight">
+                                COLOR PASS:<br/>Il Segreto per un Colore Sempre Perfetto
+                            </h1>
+                            <p className="text-slate-300 font-medium text-sm md:text-base max-w-2xl mx-auto normal-case leading-relaxed">
+                                Non è un semplice servizio, è la strategia di bellezza che ti accompagna tutto l'anno per garantirti capelli sempre in ordine, sani e luminosi, senza lo stress della ricrescita.
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Intro Text -->
-                    <div className="text-center max-w-3xl mx-auto mb-12">
-                        <h3 className="text-2xl font-black text-black uppercase mb-4 tracking-tight">Perché scegliere Color Pass?</h3>
-                        <p className="text-slate-600 text-lg leading-relaxed font-medium italic">
-                            "Il Color Pass non è solo un servizio, è una strategia di bellezza che ti accompagna tutto l'anno per garantirti capelli sempre in ordine, sani e luminosi, senza lo stress della ricrescita."
-                        </p>
+                    <!-- Value Proposition (Special Section) -->
+                    <div className="bg-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-lg text-black mb-12 relative overflow-hidden text-center transform hover:scale-[1.01] transition-transform">
+                        <div className="absolute top-0 left-0 w-full h-full bg-white/10"></div>
+                        <div className="relative z-10">
+                            <div className="inline-block bg-black text-[#EAB308] px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest mb-6 border border-black/10">Valore Commerciale: 48 €</div>
+                            <h3 className="text-2xl md:text-3xl font-black uppercase mb-6 leading-tight">Un Regalo Esclusivo per Te</h3>
+                            <p className="text-lg md:text-xl leading-relaxed font-bold max-w-4xl mx-auto italic">
+                                "Abbiamo scelto di offrirlo come <span className="bg-black text-white px-2 py-0.5">OMAGGIO</span> a tutte le nostre clienti che scelgono un servizio di Colorazione o Schiaritura, perché la salute della tua cute e la perfezione del tuo riflesso sono la nostra priorità."
+                            </p>
+                        </div>
                     </div>
 
                     <!-- Comparative Table Section -->
                     <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border border-slate-100 mb-12">
-                        <h3 className="text-center text-xl font-black text-black uppercase mb-10 tracking-widest">Il Confronto</h3>
+                        <h3 className="text-center text-xl font-black text-black uppercase mb-10 tracking-widest flex items-center justify-center gap-3">
+                            <i className="fa-solid fa-scale-balanced text-[#EAB308]"></i> Il Confronto
+                        </h3>
                         
                         <!-- Table Header (Desktop) -->
                         <div className="hidden md:grid grid-cols-2 gap-8 mb-6 text-center uppercase tracking-widest text-xs font-black">
-                             <div className="text-green-600 flex items-center justify-center gap-2 bg-green-50 py-4 rounded-2xl">
-                                <i className="fa-solid fa-circle-check text-xl"></i> Con Color Pass
-                             </div>
-                             <div className="text-red-500 flex items-center justify-center gap-2 bg-red-50 py-4 rounded-2xl">
-                                <i className="fa-solid fa-circle-xmark text-xl"></i> Senza Color Pass
-                             </div>
+                                <div className="text-green-600 flex items-center justify-center gap-2 bg-green-50 py-4 rounded-2xl border border-green-100">
+                                <i className="fa-solid fa-circle-check text-xl"></i> Con Color Pass (Il segreto di Beautrì)
+                                </div>
+                                <div className="text-red-500 flex items-center justify-center gap-2 bg-red-50 py-4 rounded-2xl border border-red-100">
+                                <i className="fa-solid fa-circle-xmark text-xl"></i> Senza Color Pass (I disagi comuni)
+                                </div>
                         </div>
 
                         <!-- Comparison Rows -->
                         <div className="space-y-4">
                             ${[
                                 { 
-                                  title: "Luminosità", 
                                   positive: "Colore sempre luminoso e brillante", 
                                   negative: "Colore spesso opaco e spento" 
                                 },
                                 { 
-                                  title: "Ordine & Ricrescita", 
-                                  positive: "Nessuna ricrescita evidente", 
-                                  negative: "Ricrescita marcata e disordine" 
+                                  positive: "Nessuna ricrescita evidente: Programma studiato per eliminare il disordine visivo.", 
+                                  negative: "Ricrescita marcata: Quella sensazione di vedersi poco in ordine." 
                                 },
                                 { 
-                                  title: "Salute del Capello", 
-                                  positive: "Capelli sani, idratati e protetti", 
-                                  negative: "Struttura stressata e disidratata" 
+                                  positive: "Capelli sani, idratati e protetti: Rispetto totale del cuoio capillare.", 
+                                  negative: "Struttura stressata e disidratata: Spesso causata da rimedi \"fai da te\" o spray nocivi." 
                                 },
                                 { 
-                                  title: "Qualità del Colore", 
-                                  positive: "Sfumature naturali, no barrature", 
+                                  positive: "Sfumature naturali, no barrature: Evita toni scuri e accumuli di vecchia data.", 
                                   negative: "Toni irregolari e barrature visibili" 
                                 },
                                 { 
-                                  title: "Strategia", 
-                                  positive: "Strategia su misura, zero stress", 
-                                  negative: "Rimedi dell’ultimo minuto" 
+                                  positive: "Strategia su misura, zero stress: Un percorso pianificato per la tua tranquillità.", 
+                                  negative: "Rimedi dell’ultimo minuto: Stress e corse ai ripari poco efficaci." 
                                 }
                             ].map((row, idx) => html`
                                 <div key=${idx} className="grid grid-cols-1 md:grid-cols-2 gap-4 relative group">
-                                    <!-- Mobile Label -->
-                                    <div className="md:hidden text-center text-[10px] font-black uppercase text-slate-400 tracking-widest mb-1">${row.title}</div>
-                                    
                                     <!-- Positive Card -->
-                                    <div className="bg-green-50/50 border border-green-100 p-6 rounded-2xl flex items-center gap-4 transition-all hover:shadow-md hover:bg-green-50 hover:scale-[1.01]">
-                                        <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 shadow-sm">
-                                            <i className="fa-solid fa-check text-sm"></i>
+                                    <div className="bg-green-50/50 border border-green-100 p-6 rounded-2xl flex items-start gap-4 transition-all hover:shadow-md hover:bg-green-50 hover:scale-[1.01] h-full">
+                                        <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-1">
+                                            <i className="fa-solid fa-check text-xs"></i>
                                         </div>
-                                        <span className="font-bold text-slate-800 text-sm">${row.positive}</span>
+                                        <span className="font-bold text-slate-800 text-sm leading-relaxed">${row.positive}</span>
                                     </div>
 
                                     <!-- Negative Card -->
-                                    <div className="bg-red-50/50 border border-red-100 p-6 rounded-2xl flex items-center gap-4 transition-all opacity-70 hover:opacity-100 hover:bg-red-50">
-                                        <div className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center shrink-0 shadow-sm">
-                                            <i className="fa-solid fa-xmark text-sm"></i>
+                                    <div className="bg-red-50/50 border border-red-100 p-6 rounded-2xl flex items-start gap-4 transition-all opacity-80 hover:opacity-100 hover:bg-red-50 h-full">
+                                        <div className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-1">
+                                            <i className="fa-solid fa-xmark text-xs"></i>
                                         </div>
-                                        <span className="font-medium text-slate-600 text-sm">${row.negative}</span>
+                                        <span className="font-medium text-slate-600 text-sm leading-relaxed">${row.negative}</span>
                                     </div>
 
                                     <!-- Connector (Desktop) -->
-                                    <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full border border-slate-100 flex items-center justify-center text-slate-300 text-xs shadow-sm z-10">
+                                    <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full border border-slate-100 flex items-center justify-center text-slate-300 text-[10px] font-black shadow-sm z-10">
                                         VS
                                     </div>
                                 </div>
@@ -2732,14 +2734,22 @@
                     </div>
 
                     <!-- Final CTA / Summary -->
-                    <div className="bg-black text-white rounded-[3rem] p-10 md:p-14 text-center relative overflow-hidden">
+                    <div className="bg-black text-white rounded-[3rem] p-10 md:p-14 text-center relative overflow-hidden shadow-2xl">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#EAB308] to-transparent"></div>
-                        <h3 className="text-2xl font-black text-[#EAB308] uppercase mb-4 tracking-tight">Il risultato finale?</h3>
-                        <p className="text-lg font-medium leading-relaxed max-w-2xl mx-auto text-slate-300">
+                        <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#EAB308] rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
+                        
+                        <h3 className="text-2xl font-black text-[#EAB308] uppercase mb-4 tracking-tight">Il Risultato Finale</h3>
+                        <p className="text-lg md:text-xl font-medium leading-relaxed max-w-3xl mx-auto text-slate-300 mb-8">
                             Proteggere il capello, rispettare il cuoio capelluto e mantenere un colore uniforme durante tutto l'anno.
                         </p>
-                        <div className="mt-8 inline-block bg-white/10 backdrop-blur-md border border-white/20 px-8 py-3 rounded-full">
-                            <span className="text-white text-xs font-black uppercase tracking-[0.2em]">Chiedi info in salone</span>
+
+                        <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 md:p-10 max-w-4xl mx-auto">
+                            <p className="text-base md:text-lg text-white mb-8 leading-relaxed">
+                                Scopri come ricevere il tuo <span className="text-[#EAB308] font-bold">Color Pass in omaggio</span>. Sarà un’occasione unica che ti permetterà di essere orgogliosa del colore che indossi ed essere ammirata da amiche e conoscenti.
+                            </p>
+                            <button className="bg-[#EAB308] text-black text-sm md:text-base font-black uppercase tracking-[0.2em] px-10 py-4 rounded-full shadow-lg hover:bg-white hover:text-black transition-all hover:scale-105 active:scale-95">
+                                Chiedi info in salone
+                            </button>
                         </div>
                     </div>
                 </div>
