@@ -2656,14 +2656,33 @@
                     </div>
 
                     <!-- Value Proposition (Special Section) -->
-                    <div className="bg-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-lg text-black mb-12 relative overflow-hidden text-center transform hover:scale-[1.01] transition-transform">
-                        <div className="absolute top-0 left-0 w-full h-full bg-white/10"></div>
+                    <div className="bg-white border-4 border-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-xl text-black mb-12 relative overflow-hidden text-center transform hover:scale-[1.01] transition-transform">
+                        <!-- Gift Ribbon Effect -->
+                        <div className="absolute top-0 right-10 w-24 h-full bg-red-50 -skew-x-12 opacity-50 pointer-events-none"></div>
+                        <div className="absolute top-0 left-10 w-24 h-full bg-red-50 -skew-x-12 opacity-50 pointer-events-none"></div>
+
                         <div className="relative z-10">
-                            <div className="inline-block bg-black text-[#EAB308] px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest mb-6 border border-black/10">Valore Commerciale: 48 €</div>
-                            <h3 className="text-2xl md:text-3xl font-black uppercase mb-6 leading-tight">Un Regalo Esclusivo per Te</h3>
-                            <p className="text-lg md:text-xl leading-relaxed font-bold max-w-4xl mx-auto italic">
-                                "Abbiamo scelto di offrirlo come <span className="bg-black text-white px-2 py-0.5">OMAGGIO</span> a tutte le nostre clienti che scelgono un servizio di Colorazione o Schiaritura, perché la salute della tua cute e la perfezione del tuo riflesso sono la nostra priorità."
+                            <!-- Gift Icon -->
+                            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500 text-3xl shadow-sm animate-bounce">
+                                <i className="fa-solid fa-gift"></i>
+                            </div>
+
+                            <div className="inline-block bg-black text-[#EAB308] px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest mb-6 border border-black/10 shadow-md">
+                                Dal valore di 28 € al mese
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-black uppercase mb-6 leading-tight text-slate-900">Un Regalo per Te</h3>
+                            
+                            <p className="text-lg md:text-xl leading-relaxed font-medium max-w-4xl mx-auto text-slate-700 italic mb-8">
+                                "Ti ringraziamo per la tua fiducia. Per questo, noi per tutto il <span className="font-black text-black">2026</span> andremo a <span className="bg-[#EAB308] px-2 py-0.5 text-black font-black">OMAGGIARTI</span> del tuo Color Pass."
                             </p>
+
+                            <!-- PS Box -->
+                            <div className="bg-slate-50 border-l-4 border-red-500 p-6 rounded-r-xl text-left max-w-2xl mx-auto shadow-sm">
+                                <p className="text-slate-600 text-sm font-medium">
+                                    <strong className="text-red-600 uppercase mr-1">PS.</strong> Dovrai andare a rispettare quelle che sono le scadenze del tuo color pass per usufruirne.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
