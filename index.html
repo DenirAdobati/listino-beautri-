@@ -228,6 +228,7 @@ a, button, input[type="submit"], input[type="button"] {
       const TRICOLOGICI_TREATMENTS = [
         {
           title: 'IGIENIZZARE & PURIFICARE',
+          image: 'https://i.ibb.co/ks8QLXBV/Igienizzare-1.jpg', // MODIFICA: Immagine Aggiunta
           description: 'Trattamenti specifici per cuti con eccesso di sebo, forfora, desquamazione e prurito.',
           technologiesDescription: 'Potenziamo l’efficacia di argille e peeling naturali con strumenti tecnologici all’avanguardia, con:',
           technologies: ['ultrasuoni', 'nebulizzazione', 'corrente galvanica'],
@@ -235,6 +236,7 @@ a, button, input[type="submit"], input[type="button"] {
         },
         {
           title: 'LENIRE',
+          image: 'https://i.ibb.co/35BzD7JD/Lenire-1.jpg', // MODIFICA: Immagine Aggiunta
           description: 'Trattamenti specifici per cuti dolenti, con psoriasi ed escoriazioni, pensati per purificare e rigenerare.',
           technologiesDescription: 'Potenziamo l’efficacia di argille, peeling e impacchi naturali con strumenti tecnologici all’avanguardia, con:',
           technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
@@ -242,6 +244,7 @@ a, button, input[type="submit"], input[type="button"] {
         },
         {
           title: 'DETOSSINARE',
+          image: 'https://i.ibb.co/Hf34gVLt/Detossinare-1.jpg', // MODIFICA: Immagine Aggiunta
           description: 'Trattamenti dedicati a eliminare le scorie metaboliche e ad apportare ossigeno e nutrimento al bulbo.',
           technologiesDescription: 'Potenziamo l’efficacia di prodotti detossinanti con strumenti tecnologici all’avanguardia, con:',
           technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
@@ -249,6 +252,7 @@ a, button, input[type="submit"], input[type="button"] {
         },
         {
           title: 'NUTRIRE',
+          image: 'https://i.ibb.co/9HtTbKVG/Nutrire-1.jpg', // MODIFICA: Immagine Aggiunta
           description: 'Trattamenti specifici per apportare nutrimento sia al capello che alla cute.',
           technologiesDescription: 'Potenziamo l’efficacia dei prodotti, oli essenziali, nutritivi e stimolanti per il bulbo, con:',
           technologies: ['ossigenoterpia', 'alta frequenza', 'nebulizzazione'],
@@ -1990,21 +1994,35 @@ a, button, input[type="submit"], input[type="button"] {
                const price = gender === 'uomo' ? t.prices.uomo : t.prices.donna;
                return html`
                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
-                 <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-6 group-hover:text-[#EAB308] transition-colors">${t.title}</h2>
-                 <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6">
-                    ${t.description}
-                 </p>
-                 <div className="bg-slate-50 rounded-[2rem] p-8 mb-6">
-                    <p className="text-sm font-bold text-slate-500 mb-4 uppercase tracking-widest">${t.technologiesDescription}</p>
-                    <div className="flex flex-wrap gap-3">
-                        ${t.technologies.map(tech => html`
-                            <span className="bg-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider border border-slate-200 shadow-sm text-black">
-                                ${tech}
-                            </span>
-                        `)}
-                    </div>
+                 <!-- MODIFICA: Layout Flex per immagine -->
+                 <div className="flex flex-col lg:flex-row gap-8 items-center">
+                   
+                   <div className="flex-1 order-2 lg:order-1">
+                     <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-6 group-hover:text-[#EAB308] transition-colors">${t.title}</h2>
+                     <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6">
+                        ${t.description}
+                     </p>
+                     <div className="bg-slate-50 rounded-[2rem] p-8 mb-6">
+                        <p className="text-sm font-bold text-slate-500 mb-4 uppercase tracking-widest">${t.technologiesDescription}</p>
+                        <div className="flex flex-wrap gap-3">
+                            ${t.technologies.map(tech => html`
+                                <span className="bg-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider border border-slate-200 shadow-sm text-black">
+                                    ${tech}
+                                </span>
+                            `)}
+                        </div>
+                     </div>
+                     <div className="text-xl font-black text-[#EAB308] tracking-widest">Investimento a seduta: ${price}</div>
+                   </div>
+
+                   <!-- MODIFICA: Colonna Immagine -->
+                   <div className="w-full lg:w-1/3 shrink-0 order-1 lg:order-2 mb-6 lg:mb-0">
+                      <div className="rounded-[2rem] overflow-hidden shadow-lg border border-slate-100 relative aspect-square">
+                        <img src="${t.image}" alt="${t.title}" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                      </div>
+                   </div>
+
                  </div>
-                 <div className="text-xl font-black text-[#EAB308] tracking-widest">Investimento a seduta: ${price}</div>
                </div>
              `})}
            </div>
