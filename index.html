@@ -167,7 +167,8 @@ a, button, input[type="submit"], input[type="button"] {
           tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', 
           price: 'Lui: 37€  Lei: 59/63€',
           enhancement: 'POTENZIAMO L’EFFICACIA DI ARGILLE E PEELING NATURALI CON:',
-          icon: 'fa-hands-bubbles'
+          icon: 'fa-hands-bubbles',
+          imageUrl: 'https://i.ibb.co/bw1xkyB/Igenizzare-1.jpg'
         },
         { 
           id: 'p2', 
@@ -177,7 +178,8 @@ a, button, input[type="submit"], input[type="button"] {
           tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', 
           price: 'Lui: 67€  Lei: 89/93€',
           enhancement: 'POTENZIAMO L’EFFICACIA DI ARGILLE, PEELING NATURALI, PRODOTTI LENITIVI CON:',
-          icon: 'fa-feather'
+          icon: 'fa-feather',
+          imageUrl: 'https://i.ibb.co/Z643hyh1/lenire-1.jpg'
         },
         { 
           id: 'p3', 
@@ -187,7 +189,8 @@ a, button, input[type="submit"], input[type="button"] {
           tools: 'Vacuum terapia, Alta frequenza, Cascata', 
           price: 'Lui: 47€  Lei: 67/71€',
           enhancement: 'POTENZIAMO L’EFFICACIA DI OLI ESSENZIALI DETOSSINANTI CON:',
-          icon: 'fa-leaf'
+          icon: 'fa-leaf',
+          imageUrl: 'https://i.ibb.co/6Jtrp8Vg/detossinare-1.jpg'
         },
         { 
           id: 'p4', 
@@ -197,7 +200,8 @@ a, button, input[type="submit"], input[type="button"] {
           tools: 'Nebulizzazione, Ossigenoterapia, Alta frequenza', 
           price: 'Lui: 67€  Lei: 89/93€',
           enhancement: 'POTENZIAMO L’EFFICACIA DI PRODOTTI E OLI ESSENZIALI NUTRITIVI E STIMOLANTI PER IL BULBO CON:',
-          icon: 'fa-droplet'
+          icon: 'fa-droplet',
+          imageUrl: 'https://i.ibb.co/5Xvcq7Ts/nutrire-1.jpg'
         },
         { 
           id: 'p5', 
@@ -229,7 +233,7 @@ a, button, input[type="submit"], input[type="button"] {
       const TRICOLOGICI_TREATMENTS = [
         {
           title: 'IGIENIZZARE & PURIFICARE',
-          image: 'https://i.ibb.co/ks8QLXBV/Igienizzare-1.jpg', // MODIFICA: Immagine Aggiunta
+          image: 'https://i.ibb.co/ks8QLXBV/Igienizzare-1.jpg',
           description: 'Trattamenti specifici per cuti con eccesso di sebo, forfora, desquamazione e prurito.',
           technologiesDescription: 'Potenziamo l’efficacia di argille e peeling naturali con strumenti tecnologici all’avanguardia, con:',
           technologies: ['ultrasuoni', 'nebulizzazione', 'corrente galvanica'],
@@ -237,7 +241,7 @@ a, button, input[type="submit"], input[type="button"] {
         },
         {
           title: 'LENIRE',
-          image: 'https://i.ibb.co/35BzD7JD/Lenire-1.jpg', // MODIFICA: Immagine Aggiunta
+          image: 'https://i.ibb.co/35BzD7JD/Lenire-1.jpg',
           description: 'Trattamenti specifici per cuti dolenti, con psoriasi ed escoriazioni, pensati per purificare e rigenerare.',
           technologiesDescription: 'Potenziamo l’efficacia di argille, peeling e impacchi naturali con strumenti tecnologici all’avanguardia, con:',
           technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
@@ -245,7 +249,7 @@ a, button, input[type="submit"], input[type="button"] {
         },
         {
           title: 'DETOSSINARE',
-          image: 'https://i.ibb.co/Hf34gVLt/Detossinare-1.jpg', // MODIFICA: Immagine Aggiunta
+          image: 'https://i.ibb.co/Hf34gVLt/Detossinare-1.jpg',
           description: 'Trattamenti dedicati a eliminare le scorie metaboliche e ad apportare ossigeno e nutrimento al bulbo.',
           technologiesDescription: 'Potenziamo l’efficacia di prodotti detossinanti con strumenti tecnologici all’avanguardia, con:',
           technologies: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'],
@@ -253,7 +257,7 @@ a, button, input[type="submit"], input[type="button"] {
         },
         {
           title: 'NUTRIRE',
-          image: 'https://i.ibb.co/9HtTbKVG/Nutrire-1.jpg', // MODIFICA: Immagine Aggiunta
+          image: 'https://i.ibb.co/9HtTbKVG/Nutrire-1.jpg',
           description: 'Trattamenti specifici per apportare nutrimento sia al capello che alla cute.',
           technologiesDescription: 'Potenziamo l’efficacia dei prodotti, oli essenziali, nutritivi e stimolanti per il bulbo, con:',
           technologies: ['ossigenoterpia', 'alta frequenza', 'nebulizzazione'],
@@ -555,6 +559,11 @@ a, button, input[type="submit"], input[type="button"] {
                                 <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] relative z-10">Ridai forza e bellezza ai tuoi capelli</p>
                             </div>
                             <div className="p-10 md:p-12">
+                                <!-- MODIFICA: Inserimento Immagine Fotoringiovanimento -->
+                                <div className="mb-10 rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 max-w-2xl mx-auto">
+                                   <img src="https://i.ibb.co/C3wK2rNs/fotoringiovaniemto-1.jpg" alt="Fotoringiovanimento" className="w-full h-auto" />
+                                </div>
+
                                 <div className="mb-8 text-slate-600 leading-relaxed">
                                     <p className="font-bold text-black text-lg mb-4">Hai capelli spenti, rovinati, sfibrati da piastre, colori, decolorazioni?</p>
                                     <p className="mb-4">I tuoi capelli non rispondano più ai trattamenti, sono fragili e senza corpo?</p>
@@ -1434,6 +1443,14 @@ a, button, input[type="submit"], input[type="button"] {
                 <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
               </div>
               <div className="p-10 md:p-16 space-y-12 normal-case">
+                
+                <!-- MODIFICA: Inserimento Immagine Percorso se presente in MOCK_PATHS -->
+                ${path.imageUrl && html`
+                  <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 max-w-2xl mx-auto group">
+                     <img src="${path.imageUrl}" alt="${path.name}" className="w-full h-auto transition-transform duration-700 group-hover:scale-105" />
+                  </div>
+                `}
+
                 <section>
                   <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Descrizione</h3>
                   <p className="text-slate-600 font-medium leading-relaxed text-lg italic normal-case">"${path.description}"</p>
@@ -1737,7 +1754,7 @@ a, button, input[type="submit"], input[type="button"] {
                          </p>
                          <ul className="space-y-3">
                             <li className="flex items-center gap-3"><span className="w-2 h-2 bg-[#EAB308] rounded-full"></span><span className="text-sm font-bold uppercase tracking-wider">Olio di nocciole di albicocca</span></li>
-                            <li className="flex items-center gap-3"><span className="w-2 h-2 bg-[#EAB308] rounded-full"></span><span className="text-sm font-bold uppercase tracking-wider">Olio di nocciolo di pesca</span></li>
+                            <li className="flex items-center gap-3"><span className="w-2 h-2 bg-[#EAB308] rounded-full"></span><span className="text-sm font-bold uppercase tracking-wider">Olio di nocciolo di peach</span></li>
                             <li className="flex items-center gap-3"><span className="w-2 h-2 bg-[#EAB308] rounded-full"></span><span className="text-sm font-bold uppercase tracking-wider">Olio di semi di rosa canina</span></li>
                          </ul>
                       </div>
@@ -1995,7 +2012,7 @@ a, button, input[type="submit"], input[type="button"] {
                const price = gender === 'uomo' ? t.prices.uomo : t.prices.donna;
                return html`
                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
-                 <!-- MODIFICA: Layout Flex per immagine -->
+                 <!-- Layout Flex per immagine -->
                  <div className="flex flex-col lg:flex-row gap-8 items-center">
                    
                    <div className="flex-1 order-2 lg:order-1">
@@ -2016,7 +2033,7 @@ a, button, input[type="submit"], input[type="button"] {
                      <div className="text-xl font-black text-[#EAB308] tracking-widest">Investimento a seduta: ${price}</div>
                    </div>
 
-                   <!-- MODIFICA: Colonna Immagine -->
+                   <!-- Colonna Immagine -->
                    <div className="w-full lg:w-1/3 shrink-0 order-1 lg:order-2 mb-6 lg:mb-0">
                       <div className="rounded-[2rem] overflow-hidden shadow-lg border border-slate-100 relative aspect-square">
                         <img src="${t.image}" alt="${t.title}" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" loading="lazy" />
@@ -2080,7 +2097,7 @@ a, button, input[type="submit"], input[type="button"] {
                 </div>
             </div>
 
-            <!-- GALLERIA IMMAGINI AGGIUNTA -->
+            <!-- GALLERIA IMMAGINI -->
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="h-64 md:h-80 w-full rounded-[3rem] overflow-hidden shadow-lg border border-white relative">
                      <img src="https://i.ibb.co/k2cJ0SqZ/DSF0513-1.jpg" className="w-full h-full object-cover" alt="Baby Check 1" />
