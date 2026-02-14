@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -305,7 +304,6 @@ a, button, input[type="submit"], input[type="button"] {
         `;
       };
 
-      // --- NUOVO COMPONENTE PER LA SEZIONE "COME FUNZIONANO" ---
       const HowItWorksList = () => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
           <!-- Header -->
@@ -559,29 +557,38 @@ a, button, input[type="submit"], input[type="button"] {
                                 <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] relative z-10">Ridai forza e bellezza ai tuoi capelli</p>
                             </div>
                             <div className="p-10 md:p-12">
-                                <!-- MODIFICA: Inserimento Immagine Fotoringiovanimento -->
-                                <div className="mb-10 rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 max-w-2xl mx-auto">
-                                   <img src="https://i.ibb.co/C3wK2rNs/fotoringiovaniemto-1.jpg" alt="Fotoringiovanimento" className="w-full h-auto" />
-                                </div>
+                                
+                                <div className="flex flex-col lg:flex-row gap-12 items-center mb-10">
+                                  <div className="flex-1 text-slate-600 leading-relaxed">
+                                      <p className="font-bold text-black text-lg mb-4">Hai capelli spenti, rovinati, sfibrati da piastre, colori, decolorazioni?</p>
+                                      <p className="mb-4">I tuoi capelli non rispondano più ai trattamenti, sono fragili e senza corpo?</p>
+                                      <p className="mb-6">Il laser a fotoringiovanimento è pensato proprio per questo. Stimola la rigenerazione capillare, aiuta a ristrutturare le rotture del capello, reintegra gli aminoacidi e la cistina persi con i trattamenti aggressivi.</p>
+                                      
+                                      <div className="bg-slate-50 p-6 rounded-2xl border-l-4 border-[#EAB308] mb-6">
+                                          <h4 className="font-black text-black uppercase text-xs mb-2">Il risultato?</h4>
+                                          <p className="text-sm">Capelli che tornano a splendere, più forti, elastici, belli al tatto e alla vista. Non solo più belli, ma anche più resistenti ai trattamenti tecnici come colorazioni o colpi di sole.</p>
+                                      </div>
 
-                                <div className="mb-8 text-slate-600 leading-relaxed">
-                                    <p className="font-bold text-black text-lg mb-4">Hai capelli spenti, rovinati, sfibrati da piastre, colori, decolorazioni?</p>
-                                    <p className="mb-4">I tuoi capelli non rispondano più ai trattamenti, sono fragili e senza corpo?</p>
-                                    <p className="mb-6">Il laser a fotoringiovanimento è pensato proprio per questo. Stimola la rigenerazione capillare, aiuta a ristrutturare le rotture del capello, reintegra gli aminoacidi e la cistina persi con i trattamenti aggressivi.</p>
-                                    
-                                    <div className="bg-slate-50 p-6 rounded-2xl border-l-4 border-[#EAB308] mb-6">
-                                        <h4 className="font-black text-black uppercase text-xs mb-2">Il risultato?</h4>
-                                        <p className="text-sm">Capelli che tornano a splendere, più forti, elastici, belli al tatto e alla vista. Non solo più belli, ma anche più resistenti ai trattamenti tecnici come colorazioni o colpi di sole.</p>
+                                      <h4 className="font-black text-black uppercase text-xs mb-4 mt-8">Indicato per:</h4>
+                                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm mb-8">
+                                          <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Capelli decheratinizzati</li>
+                                          <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Doppie punte</li>
+                                          <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Disidratazione</li>
+                                          <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Capelli che si spezzano</li>
+                                      </ul>
+                                  </div>
+
+                                  <!-- IMMAGINE INTEGRATA STYLE LASER -->
+                                  <div className="w-full lg:w-1/2">
+                                    <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 group aspect-[4/5] lg:h-[450px]">
+                                         <img src="https://i.ibb.co/C3wK2rNs/fotoringiovaniemto-1.jpg" alt="Fotoringiovanimento" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                         <div className="absolute bottom-8 left-8 right-8">
+                                            <div className="inline-block bg-[#EAB308] text-black text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full mb-3 shadow-lg">Tecnologia Laser</div>
+                                            <h3 className="text-white font-black text-2xl uppercase leading-tight">Fotoringiovanimento</h3>
+                                         </div>
                                     </div>
-
-                                    <h4 className="font-black text-black uppercase text-xs mb-4 mt-8">Indicato per:</h4>
-                                    <ul className="space-y-2 text-sm mb-8">
-                                        <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Capelli decheratinizzati (da troppe decolorazioni)</li>
-                                        <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Capelli con doppie punte</li>
-                                        <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Capelli con carenza di idratazione</li>
-                                        <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Capelli che si spezzano (danni meccanici/chimici)</li>
-                                        <li className="flex items-start gap-2"><i className="fa-solid fa-check text-[#EAB308] mt-1"></i> Capelli con carenze nutritive e di cistina</li>
-                                    </ul>
+                                  </div>
                                 </div>
 
                                 <div className="bg-[#1a1a1a] rounded-[2.5rem] p-8 relative overflow-hidden">
@@ -1092,7 +1099,7 @@ a, button, input[type="submit"], input[type="button"] {
                       ${step1Answer && html`
                         <div className="space-y-6 animate-fade-in border-l-4 border-[#EAB308] pl-6 py-2">
                            <p className="text-slate-700 text-lg font-medium italic">
-                             "I tuoi capelli hanno ripreso corpo? Toccandoli li senti più forti ed anche il volume è migliorato? Cute arrossata e lucida, dolente e tesa, sono solo un cattivo e ricordo. Finalmente non ti senti più a disagio, per gli sguardi inappropriati delle persone che ti conoscono e non solo..."
+                             "I tuoi capelli hanno ripreso corpo? Toccandoli li senti più forti ed anche il volume è migliorato? Cute arrossata e lucida, dolente e tesa, sono solo un cattivo e ricordo. Finalmente non ti senti più a disagio, per gli sguardsi inappropriati delle persone che ti conoscono e non solo..."
                            </p>
                            <p className="text-xl font-bold text-black pt-4">
                              Ti piacerebbe mantenere questi risultati, poterli potenziare ulteriormente ed essere accompagnato da Daniela da tutto il team di Beautri parrucchieri per un anno intero?
@@ -1433,7 +1440,7 @@ a, button, input[type="submit"], input[type="button"] {
         const showInclusions = ['p1', 'p2', 'p3', 'p4'].includes(path.id);
 
         return html`
-          <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
+          <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
             <header className="flex items-center justify-center mb-10">
               <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">DETTAGLIO PERCORSO</h2>
             </header>
@@ -1444,16 +1451,53 @@ a, button, input[type="submit"], input[type="button"] {
               </div>
               <div className="p-10 md:p-16 space-y-12 normal-case">
                 
-                <!-- MODIFICA: Inserimento Immagine Percorso se presente in MOCK_PATHS -->
-                ${path.imageUrl && html`
-                  <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 max-w-2xl mx-auto group">
-                     <img src="${path.imageUrl}" alt="${path.name}" className="w-full h-auto transition-transform duration-700 group-hover:scale-105" />
-                  </div>
-                `}
+                <!-- INTEGRATION SECTION (Text/Inclusions vs Image) -->
+                <section className="flex flex-col lg:flex-row gap-12 items-center">
+                    <div className="flex-1 space-y-10 order-2 lg:order-1">
+                        <div>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Descrizione</h3>
+                          <p className="text-slate-600 font-medium leading-relaxed text-lg italic normal-case">"${path.description}"</p>
+                        </div>
+                        
+                        ${showInclusions && html`
+                        <div className="bg-slate-50 border border-slate-100 rounded-[2.5rem] p-8">
+                             <h3 className="text-xs font-black text-slate-400 tracking-widest mb-6 uppercase text-center md:text-left">Incluso nel percorso:</h3>
+                             <ul className="space-y-5">
+                                <li className="flex items-start gap-4">
+                                    <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-green-500 text-lg shadow-sm shrink-0">
+                                        <div className="flex gap-1 items-center"><i className="fa-brands fa-whatsapp"></i></div>
+                                    </div>
+                                    <p className="text-xs font-bold text-slate-700 leading-tight pt-2">Supporto WhatsApp/Tel continuo</p>
+                                </li>
+                                <li className="flex items-start gap-4">
+                                     <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#EAB308] text-lg shadow-sm shrink-0">
+                                        <i className="fa-solid fa-gift"></i>
+                                    </div>
+                                    <p className="text-xs font-bold text-slate-700 leading-tight pt-2">2 Beautrì Check omaggio (94 €)</p>
+                                </li>
+                                 <li className="flex items-start gap-4">
+                                     <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-blue-500 text-lg shadow-sm shrink-0">
+                                        <i className="fa-solid fa-user-shield"></i>
+                                    </div>
+                                    <p className="text-xs font-bold text-slate-700 leading-tight pt-2">One to One in Comfort Room</p>
+                                </li>
+                             </ul>
+                        </div>
+                        `}
+                    </div>
 
-                <section>
-                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Descrizione</h3>
-                  <p className="text-slate-600 font-medium leading-relaxed text-lg italic normal-case">"${path.description}"</p>
+                    ${path.imageUrl && html`
+                      <div className="w-full lg:w-1/2 order-1 lg:order-2">
+                        <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 group aspect-[4/5] lg:h-[450px]">
+                             <img src="${path.imageUrl}" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="${path.name}" />
+                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                             <div className="absolute bottom-8 left-8 right-8">
+                                <div className="inline-block bg-[#EAB308] text-black text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full mb-3 shadow-lg">Percorso Salute</div>
+                                <h3 className="text-white font-black text-2xl uppercase leading-tight">${path.name}</h3>
+                             </div>
+                        </div>
+                      </div>
+                    `}
                 </section>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 border-t border-slate-50 uppercase tracking-wider font-bold text-xs">
@@ -1461,9 +1505,7 @@ a, button, input[type="submit"], input[type="button"] {
                     <section>
                       <h3 className="text-xs font-black text-slate-400 tracking-widest mb-6">Il Percorso prevede</h3>
                       <div className="group relative bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 hover:border-[#EAB308] hover:bg-white hover:shadow-lg transition-all duration-300 overflow-hidden h-full">
-                        <!-- Decorazione sfondo -->
                         <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#EAB308] rounded-full opacity-10 blur-2xl group-hover:opacity-20 transition-opacity"></div>
-                        
                         <div className="relative z-10 flex flex-col h-full justify-between gap-6">
                             <div className="flex items-center justify-between">
                                 <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center text-lg shadow-md group-hover:scale-110 transition-transform duration-300">
@@ -1473,13 +1515,11 @@ a, button, input[type="submit"], input[type="button"] {
                                     <i className="fa-solid fa-route"></i>
                                 </div>
                             </div>
-                            
                             <div>
                                 <p className="text-3xl font-black text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-[#EAB308] transition-colors">
                                     ${path.sessions}
                                 </p>
                             </div>
-                            
                             <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                                 <div className="h-full bg-black w-1/3 rounded-full group-hover:w-full group-hover:bg-[#EAB308] transition-all duration-1000 ease-in-out"></div>
                             </div>
@@ -1517,32 +1557,6 @@ a, button, input[type="submit"], input[type="button"] {
                      </div>
                   </section>
                 </div>
-
-                ${showInclusions && html`
-                <div className="mt-8 bg-slate-50 border border-slate-100 rounded-[2.5rem] p-8">
-                     <h3 className="text-xs font-black text-slate-400 tracking-widest mb-6 uppercase">Incluso nel percorso troverai:</h3>
-                     <ul className="space-y-6">
-                        <li className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-green-500 text-xl shadow-sm shrink-0">
-                                <div className="flex gap-1 items-center"><i className="fa-brands fa-whatsapp"></i><i className="fa-solid fa-phone text-xs text-slate-400"></i></div>
-                            </div>
-                            <p className="text-sm font-bold text-slate-700 leading-tight">Supporto WhatsApp e/o telefonico per tutta la durata del percorso</p>
-                        </li>
-                        <li className="flex items-center gap-4">
-                             <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-[#EAB308] text-xl shadow-sm shrink-0">
-                                <i className="fa-solid fa-gift"></i>
-                            </div>
-                            <p className="text-sm font-bold text-slate-700 leading-tight">2 Beautrì Check in omaggio (valore totale 94 €) per il monitoraggio dei risultati</p>
-                        </li>
-                         <li className="flex items-center gap-4">
-                             <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-blue-500 text-xl shadow-sm shrink-0">
-                                <i className="fa-solid fa-user-shield"></i>
-                            </div>
-                            <p className="text-sm font-bold text-slate-700 leading-tight">Possibilità di svolgere le sedute in modalità One to One in Comfort Room</p>
-                        </li>
-                     </ul>
-                </div>
-                `}
                 
                 ${!isLaser && html`
                   <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[3rem] mb-8 mt-8 text-center shadow-lg relative overflow-hidden group">
