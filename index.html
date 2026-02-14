@@ -48,56 +48,194 @@
     
 <style>
 /* === RESET E BASE RESPONSIVE === */
-* { box-sizing: border-box; }
-html { font-size: 16px; -webkit-text-size-adjust: 100%; }
-body { margin: 0; padding: 0; overflow-x: hidden; }
-img { max-width: 100%; height: auto; display: block; }
+* { 
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html { 
+    font-size: 16px; 
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+body { 
+    margin: 0; 
+    padding: 0; 
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+img { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+}
 
 /* === LAYOUT RESPONSIVE === */
 .container, div[class*="container"] { 
     max-width: 100%; 
-    padding-left: 15px; 
-    padding-right: 15px; 
+    padding-left: 1rem; 
+    padding-right: 1rem; 
 }
-
-/* === TIPOGRAFIA MOBILE === */
-h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-p, li, span { font-size: clamp(1rem, 2.5vw, 1.125rem); line-height: 1.6; }
 
 /* === PULSANTI E LINK TOUCH-FRIENDLY === */
-a, button, input[type="submit"], input[type="button"] {
+a, button, input[type="submit"], input[type="button"], [role="button"] {
     min-height: 44px;
     min-width: 44px;
-    padding: 12px 20px;
-    display: inline-block;
-    text-align: center;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-/* === TABLET (iPad) === */
-@media screen and (max-width: 1024px) {
+/* === TABLET E iPAD (Uso principale) === */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Ottimizzazione per iPad degli operatori */
     body { font-size: 16px; }
-    .container { padding: 15px; }
+    .container { padding: 1.25rem; }
+    
+    /* Assicura che le tabelle siano ben leggibili su iPad */
+    table {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+    
+    /* Pulsanti dimensionati bene per touch su iPad */
+    button, a {
+        min-height: 48px;
+        font-size: 1rem;
+    }
 }
 
-/* === MOBILE (iPhone) === */
-@media screen and (max-width: 768px) {
-    body { font-size: 16px; }
-    table { display: block; overflow-x: auto; }
-    .desktop-only { display: none !important; }
+/* === iPHONE E SMARTPHONE (Clienti) === */
+@media screen and (max-width: 767px) {
+    body { 
+        font-size: 16px;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+    
+    /* Tabelle scrollabili orizzontalmente su smartphone */
+    table { 
+        display: block; 
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+    
+    /* Nascondi elementi non essenziali */
+    .desktop-only { 
+        display: none !important; 
+    }
+    
+    /* Padding ridotto per massimizzare spazio */
+    .container { 
+        padding: 0.75rem; 
+    }
+    
+    /* Menu hamburger più grande su smartphone */
+    button[class*="fixed top"] {
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+    }
+    
+    /* Sezioni con padding ridotto */
+    section[class*="rounded"] {
+        padding: 1.5rem !important;
+        border-radius: 2rem !important;
+    }
+    
+    /* Titoli adattivi */
+    h1, h2[class*="text-4xl"], h2[class*="text-5xl"] {
+        font-size: 1.75rem !important;
+    }
+    
+    h3[class*="text-3xl"] {
+        font-size: 1.5rem !important;
+    }
+    
+    h4[class*="text-2xl"] {
+        font-size: 1.25rem !important;
+    }
+    
+    /* Grid responsive */
+    .grid[class*="grid-cols-2"],
+    .grid[class*="grid-cols-3"],
+    .grid[class*="md:grid-cols-2"],
+    .grid[class*="md:grid-cols-3"] {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    }
+    
+    /* Pulsanti ben dimensionati */
+    button, a[class*="px-"], [role="button"] {
+        padding: 0.875rem 1.25rem !important;
+        min-height: 48px;
+        font-size: 1rem !important;
+    }
+    
+    /* Badge prezzi responsive */
+    div[class*="rounded-full"][class*="px-"] {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1.25rem !important;
+    }
 }
 
-/* === MOBILE PICCOLO === */
-@media screen and (max-width: 480px) {
-    .container { padding: 10px; }
-    h1 { font-size: 1.75rem; }
-    h2 { font-size: 1.5rem; }
+/* === iPHONE PICCOLI (SE, 12/13 mini) === */
+@media screen and (max-width: 375px) {
+    .container { 
+        padding: 0.5rem; 
+    }
+    
+    h1, h2[class*="text-4xl"], h2[class*="text-5xl"] {
+        font-size: 1.5rem !important;
+    }
+    
+    button[class*="fixed top"] {
+        width: 3rem !important;
+        height: 3rem !important;
+    }
+    
+    section[class*="rounded"] {
+        padding: 1.25rem !important;
+        border-radius: 1.5rem !important;
+    }
 }
 
 /* === FIX COMUNI === */
-.row { margin-left: 0; margin-right: 0; }
-.col, [class*="col-"] { padding-left: 10px; padding-right: 10px; }
+.row { 
+    margin-left: 0; 
+    margin-right: 0; 
+}
+
+.col, [class*="col-"] { 
+    padding-left: 0.625rem; 
+    padding-right: 0.625rem; 
+}
+
+/* Fix per Safari iOS */
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Previeni zoom indesiderato su input focus (iOS) */
+@media screen and (max-width: 767px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* Migliora la leggibilità delle tabelle su mobile */
+@media screen and (max-width: 767px) {
+    table td, table th {
+        padding: 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+}
 </style>
 <script type="importmap">
 {
