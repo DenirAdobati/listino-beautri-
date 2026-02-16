@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <!-- MODIFICATO PER RESPONSIVE -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>BEAUTRÍ PARRUCCHIERI - Menu Digitale</title>
@@ -19,7 +20,8 @@
         background-color: #F3F0EA;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
       /* Aggiunta richiesta: Scorrimento fluido */
       html {
@@ -30,15 +32,16 @@
         scroll-margin-top: 100px;
       }
 
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 6px;
+      .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #e2e8f0 transparent;
       }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent;
+      .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
       }
       .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #e2e8f0;
-        border-radius: 10px;
+          background: #e2e8f0;
+          border-radius: 10px;
       }
       .animate-fade-in { animation: fadeIn 0.7s ease-out; }
       .animate-zoom-in { animation: zoomIn 0.5s ease-out; }
@@ -110,7 +113,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 @media screen and (max-width: 767px) {
     body { 
         font-size: 16px;
-        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        padding-top: max(env(safe-area-inset-top), 16px);
+        padding-bottom: max(env(safe-area-inset-bottom), 16px);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
     }
     
     /* Tabelle scrollabili orizzontalmente su smartphone */
@@ -235,6 +241,45 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
         padding: 0.5rem !important;
         font-size: 0.875rem !important;
     }
+}
+
+/* FIX HOVER TOUCH */
+@media (hover: none) and (pointer: coarse) {
+    .hover\:scale-105:hover,
+    .hover\:scale-\[1\.02\]:hover,
+    .group:hover .group-hover\:scale-105 {
+        transform: none;
+    }
+    .hover\:scale-105:active {
+        transform: scale(1.05);
+        transition: transform 0.15s;
+    }
+}
+
+/* OTTIMIZZA ANIMAZIONI */
+@media (max-width: 640px) {
+    .animate-zoom-in,
+    .animate-fade-in {
+        animation-duration: 0.3s;
+    }
+    .transition-all {
+        transition-duration: 0.2s !important;
+    }
+    .animate-pulse,
+    .animate-bounce {
+        animation: none;
+    }
+}
+
+/* FIX SCROLL iOS */
+body {
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+}
+.overflow-y-auto,
+.custom-scrollbar {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
 }
 </style>
 <script type="importmap">
@@ -405,14 +450,14 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
       // --- COMPONENTI ---
       
       const FixedBackButton = ({ onClick }) => html`
-        <button onClick=${onClick} className="fixed top-8 right-8 z-40 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all active:scale-95 border border-white">
+        <button onClick=${onClick} className="fixed top-4 right-4 sm:top-8 sm:right-8 z-40 w-16 h-16 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center shadow-lg text-black hover:bg-black hover:text-white transition-all active:scale-95 border border-white">
           <i className="fa-solid fa-arrow-left"></i>
         </button>
       `;
 
       const Sidebar = ({ activeTab, setActiveTab, onClose }) => {
         return html`
-          <div className="w-[320px] bg-white h-screen flex flex-col p-8 shadow-2xl relative border-r border-white/20">
+          <div className="w-[280px] sm:w-[320px] bg-white h-screen flex flex-col p-4 sm:p-8 shadow-2xl relative border-r border-white/20">
             <button onClick=${onClose} className="absolute top-8 right-8 w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-black transition-colors">
               <i className="fa-solid fa-xmark"></i>
             </button>
@@ -445,12 +490,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
       const HowItWorksList = () => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
           <!-- Header -->
-          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-            <div className="bg-black p-12 text-center text-white relative uppercase">
-              <h1 className="text-3xl md:text-5xl font-black tracking-tighter">COME FUNZIONANO?</h1>
+          <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+            <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter">COME FUNZIONANO?</h1>
               <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
             </div>
-            <div className="p-10 md:p-16 text-center">
+            <div className="p-6 md:p-10 lg:p-16 text-center">
                 <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                     Tutto quello che devi sapere sui nostri percorsi di salute e mantenimento per i tuoi capelli.
                 </p>
@@ -463,10 +508,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             <section>
                 <div className="flex items-center gap-4 mb-8 px-4">
                     <div className="w-12 h-12 bg-black text-[#EAB308] rounded-full flex items-center justify-center text-xl shadow-lg font-black">1</div>
-                    <h2 className="text-3xl font-black text-black uppercase tracking-tighter">I NOSTRI PERCORSI PERSONALIZZATI</h2>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black uppercase tracking-tighter">I NOSTRI PERCORSI PERSONALIZZATI</h2>
                 </div>
                 
-                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-8">
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white mb-8">
                      <p className="text-lg leading-relaxed text-slate-700 mb-6">
                         Tutti i nostri percorsi sono creati su misura con l’obiettivo di ristabilire l’equilibrio perduto di cute e capelli.
                         Ogni percorso prevede sedute a <strong className="text-black">cadenza settimanale</strong>, perché la costanza è un elemento fondamentale per ottenere risultati reali e duraturi.
@@ -477,13 +522,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Beautrì Check -->
-                <div className="bg-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-lg text-black mb-8 relative overflow-hidden">
+                <div className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-lg text-black mb-8 relative overflow-hidden">
                     <h3 className="text-2xl font-black uppercase mb-6 flex items-center gap-3">
                         <i className="fa-solid fa-magnifying-glass"></i> Beautrì Check inclusi nel percorso
                     </h3>
                     <p className="font-medium mb-8">Durante il percorso sono inclusi 2 Beautrì Check (valore totale 94€), fondamentali per monitorare l’evoluzione dei risultati:</p>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                         <div className="bg-black text-white p-8 rounded-[2rem]">
                             <div className="text-[#EAB308] font-black text-sm uppercase tracking-widest mb-2">1° Check</div>
                             <p className="text-sm">Al termine dell’ultima seduta delle fasi di:</p>
@@ -505,8 +550,8 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Pagamento & Garanzie Grid -->
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
+                    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-slate-100">
                         <h3 className="text-xl font-black uppercase mb-6 flex items-center gap-3"><i className="fa-solid fa-wallet text-[#EAB308]"></i> Modalità di pagamento</h3>
                         <div className="space-y-4 text-slate-700">
                             <p>Il pagamento è a seduta.</p>
@@ -516,7 +561,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-100">
+                    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-slate-100">
                         <h3 className="text-xl font-black uppercase mb-6 flex items-center gap-3"><i className="fa-solid fa-star text-[#EAB308]"></i> Cosa garantiamo</h3>
                          <ul className="space-y-3 text-sm text-slate-700">
                             ${['Sedute potenziate con tecnologie', 'Modalità One to One in Comfort Room', 'Prodotti personalizzati', 'Supporto WhatsApp/Tel continuo', '2 Beautrì Check omaggio (valore totale 94 €)', 'Prezzi agevolati e bloccati', 'Priorità sulle novità'].map(i => html`
@@ -527,8 +572,8 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Regole e Impegno -->
-                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border-l-8 border-[#EAB308]">
-                    <h3 className="text-2xl font-black uppercase mb-6 text-black">Cosa chiediamo e Impegno Reciproco</h3>
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border-l-8 border-[#EAB308]">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase mb-6 text-black">Cosa chiediamo e Impegno Reciproco</h3>
                     <div className="space-y-6 text-slate-700">
                          <p><strong className="text-black">Rispetto della cadenza settimanale.</strong> In caso di mancato rispetto per motivi futili, tutte le agevolazioni decadono.</p>
                          <p className="bg-yellow-50 p-4 rounded-xl text-yellow-800 text-sm font-bold italic">👉 In caso di imprevisti, parlane con noi: una soluzione si trova sempre.</p>
@@ -546,18 +591,18 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 <div className="flex items-center gap-4 mb-8 px-4 mt-16 border-t border-slate-200 pt-16">
                     <div className="w-12 h-12 bg-[#EAB308] text-black rounded-full flex items-center justify-center text-xl shadow-lg font-black">2</div>
                     <div>
-                        <h2 className="text-3xl font-black text-black uppercase tracking-tighter">IL MANTENIMENTO</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black uppercase tracking-tighter">IL MANTENIMENTO</h2>
                         <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">La fase più importante</p>
                     </div>
                 </div>
 
-                 <div className="bg-black text-white rounded-[3rem] p-10 md:p-14 shadow-lg mb-8 relative overflow-hidden">
+                 <div className="bg-black text-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-lg mb-8 relative overflow-hidden">
                      <div className="relative z-10">
                         <p className="text-lg leading-relaxed mb-6 font-medium">
                             È proprio qui che i risultati si stabilizzano, si proteggono e si potenziano nel tempo.
                             Ti consigliamo il mantenimento per tre motivi fondamentali:
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8">
                              <div className="bg-white/10 p-6 rounded-2xl"><i className="fa-solid fa-lock text-[#EAB308] mb-2"></i><br/>Mantenere i risultati raggiunti</div>
                              <div className="bg-white/10 p-6 rounded-2xl"><i className="fa-solid fa-arrow-trend-up text-[#EAB308] mb-2"></i><br/>Potenziare i benefici</div>
                              <div className="bg-white/10 p-6 rounded-2xl"><i className="fa-solid fa-user-doctor text-[#EAB308] mb-2"></i><br/>Essere accompagnati per 1 anno</div>
@@ -566,7 +611,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                      </div>
                 </div>
 
-                <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-8">
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white mb-8">
                     <h3 className="text-2xl font-black uppercase mb-4">Il Percorso (12 Mesi)</h3>
                     <ul className="space-y-4 mb-8">
                         <li className="flex items-center gap-3 font-bold text-lg"><i className="fa-solid fa-calendar-days text-[#EAB308]"></i> 12 sedute a cadenza mensile</li>
@@ -576,8 +621,8 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Modalità Pagamento Mantenimento -->
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                    <div className="bg-[#EAB308] rounded-[3rem] p-10 shadow-lg relative overflow-hidden text-black border-4 border-white transform transition-all hover:scale-[1.02]">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
+                    <div className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-lg relative overflow-hidden text-black border-4 border-white transform transition-all hover:scale-[1.02]">
                         <!-- Sticker -->
                         <div className="absolute top-6 right-6 bg-red-600 text-white px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg rotate-3 z-10 animate-pulse">
                             Il più richiesto
@@ -601,7 +646,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                         </ul>
                     </div>
 
-                    <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-slate-200">
+                    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-slate-200">
                         <h3 className="text-xl font-black uppercase mb-4">🔹 Pagamento a Seduta</h3>
                         <p className="text-sm text-slate-600 mb-4">Alla prima seduta richiesto pagamento anticipato della successiva.</p>
                         <ul className="bg-slate-50 p-6 rounded-2xl space-y-2 text-sm mb-4">
@@ -613,9 +658,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Cosa garantiamo e chiediamo mantenimento -->
-                 <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border-l-8 border-black">
-                    <h3 className="text-2xl font-black uppercase mb-6">Regolamento Mantenimento</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                 <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border-l-8 border-black">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase mb-6">Regolamento Mantenimento</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                         <div>
                             <h4 className="font-black uppercase text-sm mb-4 text-[#EAB308]">Cosa garantiamo</h4>
                             <ul className="space-y-2 text-sm text-slate-700">
@@ -673,12 +718,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </header>
 
                     <!-- Title Card -->
-                    <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-                    <div className="bg-black p-12 text-center text-white relative uppercase">
-                        <h1 className="text-4xl font-black tracking-tighter">RIPARA / RISTRUTTURARE</h1>
+                    <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+                    <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">RIPARA / RISTRUTTURARE</h1>
                         <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
                     </div>
-                    <div className="p-10 md:p-16 text-center">
+                    <div className="p-6 md:p-10 lg:p-16 text-center">
                         <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                             Tre percorsi esclusivi per ridare vita, forza e splendore ai tuoi capelli.
                         </p>
@@ -688,13 +733,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     <div className="space-y-12">
                     
                         <!-- 1. FOTORINGIOVANIMENTO -->
-                        <section className="bg-white rounded-[3rem] overflow-hidden shadow-sm border border-white hover:border-[#EAB308]/30 transition-all">
-                            <div className="bg-[#1a1a1a] p-10 text-white relative overflow-hidden text-center">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-[#EAB308] rounded-full blur-[80px] opacity-10"></div>
+                        <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-sm border border-white hover:border-[#EAB308]/30 transition-all">
+                            <div className="bg-[#1a1a1a] p-6 md:p-10 text-white relative overflow-hidden text-center">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-[#EAB308] rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-10"></div>
                                 <h2 className="text-3xl font-black text-[#EAB308] uppercase tracking-tighter mb-2 relative z-10">FOTORINGIOVANIMENTO</h2>
                                 <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] relative z-10">Ridai forza e bellezza ai tuoi capelli</p>
                             </div>
-                            <div className="p-10 md:p-12">
+                            <div className="p-6 md:p-12 lg:p-16">
                                 
                                 <div className="flex flex-col lg:flex-row gap-12 items-center mb-10">
                                   <div className="flex-1 text-slate-600 leading-relaxed">
@@ -730,7 +775,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                                 </div>
 
                                 <div className="bg-[#1a1a1a] rounded-[2.5rem] p-8 relative overflow-hidden">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 relative z-10">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 relative z-10">
                                         <!-- Sessions -->
                                         <div className="bg-white/5 border border-white/10 p-4 rounded-2xl text-center flex flex-col justify-center">
                                             <div className="text-slate-500 text-[9px] font-black uppercase tracking-widest mb-2">Durata</div>
@@ -784,18 +829,18 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                         </section>
 
                         <!-- 2. RIGENERAZIONE DELLO STELO -->
-                        <section className="bg-white rounded-[3rem] overflow-hidden shadow-sm border border-white hover:border-blue-200 transition-all">
-                            <div className="bg-slate-50 p-10 relative overflow-hidden text-center">
-                                <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full blur-[80px] opacity-60"></div>
+                        <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-sm border border-white hover:border-blue-200 transition-all">
+                            <div className="bg-slate-50 p-6 md:p-10 relative overflow-hidden text-center">
+                                <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-60"></div>
                                 <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tighter mb-2 relative z-10">Rigenerazione dello stelo</h2>
                                 <p className="text-blue-600 font-bold uppercase text-[10px] tracking-[0.2em] relative z-10">Purezza e ricostruzione</p>
                             </div>
-                            <div className="p-10 md:p-12">
+                            <div className="p-6 md:p-12 lg:p-16">
                                 <div className="mb-8 text-slate-600 leading-relaxed">
                                     <p className="font-bold text-black text-lg mb-4">Lo sai che il capello è una spugna?</p>
                                     <p className="mb-4">Tutto ciò che noi mettiamo lui lo assorbe, comprese le polvere sottili dell'atmosfera. Questo porta ad avere capelli vetrosi, opachi e con viraggi di colore indesiderati. Per questo abbiamo creato “Rigenerazione dello stelo".</p>
                                     
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-8">
                                         <div className="bg-blue-50 p-6 rounded-3xl">
                                             <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mb-4"><i className="fa-solid fa-droplet"></i></div>
                                             <h4 className="font-black text-blue-900 uppercase text-xs mb-2">Fase di Igienizzazione</h4>
@@ -810,7 +855,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                                 </div>
 
                                 <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 relative overflow-hidden">
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 relative z-10">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 relative z-10">
                                         <!-- Sessions -->
                                         <div className="bg-white border border-blue-100 p-4 rounded-2xl text-center flex flex-col justify-center shadow-sm">
                                             <div className="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-2">Durata</div>
@@ -858,13 +903,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                         </section>
 
                         <!-- 3. OLEAZIONI -->
-                        <section className="bg-white rounded-[3rem] overflow-hidden shadow-sm border border-white hover:border-amber-200 transition-all">
-                            <div className="bg-[#451a03] p-10 relative overflow-hidden text-center">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-600 rounded-full blur-[80px] opacity-40"></div>
+                        <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-sm border border-white hover:border-amber-200 transition-all">
+                            <div className="bg-[#451a03] p-6 md:p-10 relative overflow-hidden text-center">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-600 rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-40"></div>
                                 <h2 className="text-3xl font-black text-amber-50 uppercase tracking-tighter mb-2 relative z-10">Oleazioni</h2>
                                 <p className="text-amber-200 font-bold uppercase text-[10px] tracking-[0.2em] relative z-10">Lucentezza e Corposità</p>
                             </div>
-                            <div className="p-10 md:p-12">
+                            <div className="p-6 md:p-12 lg:p-16">
                                 <div className="mb-8 text-slate-600 leading-relaxed">
                                     <p className="font-bold text-black text-lg mb-4">I tuoi capelli non hanno più la lucentezza, corposità ed al tatto li senti ruvidi e stopposi?</p>
                                     <p className="mb-4">Le sedute di oleazione potenziate con la fototerapia sono studiate proprio per farti avere i capelli di un tempo. Ridonano lucentezza, corposità, setosità e ti fanno ritrovare la morbidezza di un riccio “perso”.</p>
@@ -875,7 +920,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                                 </div>
 
                                 <div className="bg-amber-50 rounded-[2.5rem] p-8 border border-amber-100 relative overflow-hidden">
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 relative z-10">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 relative z-10">
                                         <!-- Sessions -->
                                         <div className="bg-white border border-amber-100 p-4 rounded-2xl text-center flex flex-col justify-center shadow-sm">
                                             <div className="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-2">Durata</div>
@@ -931,15 +976,15 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
               <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
                 
                 <!-- HEADER SEZIONE -->
-                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-                   <div className="bg-black p-12 text-center text-white relative uppercase">
-                      <h1 className="text-3xl md:text-5xl font-black tracking-tighter">LASER A FOTOBIOSTIMOLAZIONE</h1>
+                <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+                   <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                      <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">LASER A FOTOBIOSTIMOLAZIONE</h1>
                       <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
                       <p className="mt-6 text-slate-300 text-sm font-medium normal-case max-w-2xl mx-auto">
                         "Il primo salone in Italia a prendersi cura di cute e capelli con la fotobiostimolazione laser."
                       </p>
                    </div>
-                   <div className="p-10 md:p-16 space-y-8">
+                   <div className="p-6 md:p-10 lg:p-16 space-y-8">
                       <div className="text-center max-w-4xl mx-auto">
                         <p className="text-slate-600 text-lg leading-relaxed mb-6">
                             In un mondo in cui spesso la bellezza si ferma all’apparenza, noi abbiamo scelto di andare più in profondità.
@@ -955,10 +1000,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- BENEFICI / LISTA CON IMMAGINE INTEGRATA -->
-                <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-10">
+                <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white mb-10">
                    <div className="flex flex-col lg:flex-row gap-12 items-center">
                       <div className="flex-1">
-                          <h2 className="text-3xl font-black text-[#EAB308] tracking-tighter uppercase mb-2">Il benessere parte dalla radice</h2>
+                          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#EAB308] tracking-tighter uppercase mb-2">Il benessere parte dalla radice</h2>
                           <p className="text-slate-500 font-bold uppercase text-xs tracking-widest mb-8">Grazie alla fotobiostimolazione:</p>
                           
                           <ul className="space-y-6">
@@ -1007,9 +1052,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </section>
 
                 <!-- TABELLA PREZZI -->
-                <section className="bg-black text-white rounded-[3rem] p-10 md:p-14 shadow-lg mb-10 relative overflow-hidden">
+                <section className="bg-black text-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-lg mb-10 relative overflow-hidden">
                    <div className="relative z-10">
-                       <h2 className="text-3xl font-black text-white uppercase tracking-tighter mb-8 text-center">I NOSTRI PERCORSI</h2>
+                       <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-8 text-center">I NOSTRI PERCORSI</h2>
                        <div className="space-y-6">
                           ${LASER_TABLE_DATA.map((row, idx) => html`
                             <div key=${idx} className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6 last:border-0 gap-4">
@@ -1042,13 +1087,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO BASE</h2>
                 </header>
 
-                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
-                   <div className="bg-black p-12 text-center text-white relative uppercase">
-                      <h1 className="text-4xl font-black tracking-tighter">BASE</h1>
+                <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white">
+                   <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                      <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">BASE</h1>
                       <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
                    </div>
 
-                   <div className="p-10 md:p-16 normal-case space-y-10">
+                   <div className="p-6 md:p-10 lg:p-16 normal-case space-y-10">
                       <div className="space-y-6">
                         <h3 className="text-2xl font-black text-[#EAB308] uppercase">Complimenti!</h3>
                         <p className="text-slate-600 text-lg leading-relaxed">
@@ -1080,7 +1125,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                       ${step2Answer && html`
                         <div className="space-y-8 animate-fade-in pt-8 border-t border-slate-100">
                           
-                          <div className="bg-slate-50 p-8 rounded-[3rem]">
+                          <div className="bg-slate-50 p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem]">
                             <p className="font-bold text-black mb-4">Non commettere l’errore di gettare i risultati raggiunti: sarebbe un vero peccato, denaro e tempo prezioso buttati.</p>
                             <p className="text-slate-600 text-sm leading-relaxed mb-4">
                               Immagina di aver affrontato una dieta per perdere qualche chilo o semplicemente per avere un’alimentazione equilibrata e sana. Raggiunti i tuoi risultati desiderati, se inizi a mangiare nuovamente come non ci fosse un domani, cibo spazzatura in quantità enormi, è più che normale che il risultato raggiunto svanisca in pochissimo tempo.
@@ -1103,13 +1148,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                             </ul>
                           </div>
 
-                          <div className="bg-[#EAB308] text-black p-8 rounded-[3rem] shadow-lg">
+                          <div className="bg-[#EAB308] text-black p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-lg">
                              <h4 className="text-xl font-black uppercase mb-4">Può sembrarti impegnativo, ma non lo è!</h4>
                              <p className="font-medium">Immagina quando gli amici, le amiche, i tuoi familiari ti chiederanno “che cosa hai fatto per avere capelli così belli” tu sarai fiero di te stesso\a.</p>
                           </div>
 
                           <div>
-                            <div className="bg-black text-white p-8 rounded-[3rem] mb-6">
+                            <div className="bg-black text-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6">
                                <h3 className="text-[#EAB308] font-black uppercase text-lg mb-4">Il percorso di mantenimento (12 mesi) comprende:</h3>
                                <ul className="space-y-4 text-sm">
                                  <li className="flex items-start gap-4">
@@ -1149,10 +1194,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                           <!-- PREZZO E DISCLAIMER AGGIUNTO -->
                           
                           <!-- NUOVO: UNICA SOLUZIONE -->
-                          <div className="bg-[#EAB308] p-8 rounded-[3rem] mb-6 text-center shadow-lg relative overflow-hidden text-black border-4 border-white transform hover:scale-[1.02] transition-transform">
+                          <div className="bg-[#EAB308] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6 text-center shadow-lg relative overflow-hidden text-black border-4 border-white transform hover:scale-[1.02] transition-transform">
                               <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase animate-pulse shadow-md">Il più richiesto</div>
                               <h4 className="text-black font-black uppercase text-sm tracking-widest mb-2">Pagamento in unica soluzione</h4>
-                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-6">Lui 572€ Lei 814/858€</div>
+                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-6">Lui 572€ Lei 814/858€</div>
                               
                               <div className="bg-white/20 rounded-2xl p-6 text-left inline-block w-full border border-black/5">
                                  <p className="font-black text-xs uppercase mb-4 text-center tracking-widest">In omaggio per te:</p>
@@ -1171,9 +1216,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                           </div>
 
                           <!-- VECCHIO: A SEDUTA -->
-                          <div className="bg-white border-2 border-slate-200 p-8 rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
+                          <div className="bg-white border-2 border-slate-200 p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
                               <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Pagamento seduta per seduta</h4>
-                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-4">${path.price}</div>
+                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-4">${path.price}</div>
                               
                               <!-- LISTA AGGIUNTA -->
                               <div className="mt-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
@@ -1214,17 +1259,17 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO INTERMEDIO</h2>
                 </header>
 
-                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
-                   <div className="bg-black p-12 text-center text-white relative uppercase">
-                      <h1 className="text-4xl font-black tracking-tighter">INTERMEDIO</h1>
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-xl overflow-hidden border border-white">
+                   <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                      <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">INTERMEDIO</h1>
                       <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
                    </div>
 
-                   <div className="p-10 md:p-16 normal-case space-y-10">
+                   <div className="p-6 md:p-10 lg:p-16 normal-case space-y-10">
                       <div className="space-y-6">
                         <h3 className="text-2xl font-black text-[#EAB308] uppercase">Complimenti!</h3>
                         <p className="text-slate-600 text-lg leading-relaxed">
-                           Se Daniela ti sta presentando la fase di mantenimento è perché hai terminato il tuo Percorso iniziale.
+                           Se Daniela ti sta presenting la fase di mantenimento è perché hai terminato il tuo Percorso iniziale.
                         </p>
                         <p className="text-xl font-bold text-black">Quanto sei soddisfatto/a dei risultati raggiunti?</p>
                         
@@ -1252,7 +1297,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                       ${step2Answer && html`
                         <div className="space-y-8 animate-fade-in pt-8 border-t border-slate-100">
                           
-                          <div className="bg-slate-50 p-8 rounded-[3rem]">
+                          <div className="bg-slate-50 p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem]">
                             <p className="font-bold text-black mb-4">Non commettere l’errore di gettare i risultati raggiunti sarebbe un vero peccato,tempo e denaro buttati.</p>
                             <p className="text-slate-600 text-sm leading-relaxed mb-4">
                               Immagina di aver affrontato una dieta per perdere qualche chilo o semplicemente per avere un’alimentazione equilibrata e sana, raggiunti i tuoi risultati desiderati se inizi a mangiare nuovamente come non ci fosse un domani,cibo spazzatura in quantità enormi è più che normale che il risultato raggiunto svanisce in pochissimo tempo.
@@ -1275,13 +1320,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                             </ul>
                           </div>
 
-                          <div className="bg-[#EAB308] text-black p-8 rounded-[3rem] shadow-lg">
+                          <div className="bg-[#EAB308] text-black p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-lg">
                              <h4 className="text-xl font-black uppercase mb-4">Può sembrare impegnativo, ma non lo è!</h4>
                              <p className="font-medium">Continua a vivere quella sensazione di benessere su un cuoio capelluto integro e senza escoriazioni, sarai veramente fiero di te stesso\a</p>
                           </div>
 
                           <div>
-                            <div className="bg-black text-white p-8 rounded-[3rem] mb-6">
+                            <div className="bg-black text-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6">
                                <h3 className="text-[#EAB308] font-black uppercase text-lg mb-4">Il percorso di mantenimento (12 mesi) comprende:</h3>
                                <ul className="space-y-4 text-sm">
                                  <li className="flex items-start gap-4">
@@ -1323,10 +1368,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                           <!-- PREZZO E DISCLAIMER AGGIUNTO -->
                           
                           <!-- NUOVO: UNICA SOLUZIONE -->
-                          <div className="bg-[#EAB308] p-8 rounded-[3rem] mb-6 text-center shadow-lg relative overflow-hidden text-black border-4 border-white transform hover:scale-[1.02] transition-transform">
+                          <div className="bg-[#EAB308] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6 text-center shadow-lg relative overflow-hidden text-black border-4 border-white transform hover:scale-[1.02] transition-transform">
                               <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase animate-pulse shadow-md">Il più richiesto</div>
                               <h4 className="text-black font-black uppercase text-sm tracking-widest mb-2">Pagamento in unica soluzione</h4>
-                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-6">Lui 737€ Lei 979/1023€</div>
+                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-6">Lui 737€ Lei 979/1023€</div>
                               
                               <div className="bg-white/20 rounded-2xl p-6 text-left inline-block w-full border border-black/5">
                                  <p className="font-black text-xs uppercase mb-4 text-center tracking-widest">In omaggio per te:</p>
@@ -1345,9 +1390,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                           </div>
 
                           <!-- VECCHIO: A SEDUTA -->
-                          <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
+                          <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
                               <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Pagamento seduta per seduta</h4>
-                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-4">${path.price}</div>
+                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-4">${path.price}</div>
                               
                               <!-- LISTA AGGIUNTA -->
                               <div className="mt-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
@@ -1391,17 +1436,17 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO AVANZATO</h2>
                 </header>
 
-                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
-                   <div className="bg-black p-12 text-center text-white relative uppercase">
-                      <h1 className="text-4xl font-black tracking-tighter">AVANZATO</h1>
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-xl overflow-hidden border border-white">
+                   <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                      <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">AVANZATO</h1>
                       <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
                    </div>
 
-                   <div className="p-10 md:p-16 normal-case space-y-10">
+                   <div className="p-6 md:p-10 lg:p-16 normal-case space-y-10">
                       <div className="space-y-6">
                         <h3 className="text-2xl font-black text-[#EAB308] uppercase">Complimenti!</h3>
                         <p className="text-slate-600 text-lg leading-relaxed">
-                           Se Daniela ti sta presentando la fase di mantenimento è perché hai terminato il tuo Percorso di laser a fotobiostimolazione.
+                           Se Daniela ti sta presenting la fase di mantenimento è perché hai terminato il tuo Percorso di laser a fotobiostimolazione.
                         </p>
                         <p className="text-xl font-bold text-black">Quanto sei soddisfatto/a dei risultati raggiunti?</p>
                         
@@ -1431,7 +1476,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                       ${step2Answer && html`
                         <div className="space-y-8 animate-fade-in pt-8 border-t border-slate-100">
                           
-                          <div className="bg-slate-50 p-8 rounded-[3rem]">
+                          <div className="bg-slate-50 p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem]">
                             <p className="font-bold text-black mb-4">Non commettere l’errore di gettare i risultati raggiunti sarebbe un vero peccato, tempo e denaro buttati.</p>
                             <p className="text-slate-600 text-sm leading-relaxed mb-4">
                               Immagina di aver affrontato una dieta per perdere qualche chilo o semplicemente per avere un’alimentazione equilibrata e sana, raggiunti i tuoi risultati desiderati se inizi a mangiare nuovamente come non ci fosse un domani, cibo spazzatura in quantità enormi è più che normale che il risultato raggiunto svanisce in pochissimo tempo.
@@ -1463,13 +1508,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                             </ul>
                           </div>
 
-                          <div className="bg-[#EAB308] text-black p-8 rounded-[3rem] shadow-lg">
+                          <div className="bg-[#EAB308] text-black p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-lg">
                              <h4 className="text-xl font-black uppercase mb-4">Può sembrare impegnativo, ma non lo è!</h4>
                              <p className="font-medium">Continua a vivere quella sensazione di benessere su un cuoio capelluto integro e senza escoriazioni, sarai veramente fiero di te stesso\a.</p>
                           </div>
 
                           <div>
-                            <div className="bg-black text-white p-8 rounded-[3rem] mb-6">
+                            <div className="bg-black text-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6">
                                <h3 className="text-[#EAB308] font-black uppercase text-lg mb-4">Il percorso di mantenimento (12 mesi) comprende:</h3>
                                <ul className="space-y-4 text-sm">
                                  <li className="flex items-start gap-4">
@@ -1515,10 +1560,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                           <!-- PREZZO E DISCLAIMER AGGIUNTO -->
 
                           <!-- NUOVO: UNICA SOLUZIONE -->
-                          <div className="bg-[#EAB308] p-8 rounded-[3rem] mb-6 text-center shadow-lg relative overflow-hidden text-black border-4 border-white transform hover:scale-[1.02] transition-transform">
+                          <div className="bg-[#EAB308] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6 text-center shadow-lg relative overflow-hidden text-black border-4 border-white transform hover:scale-[1.02] transition-transform">
                               <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase animate-pulse shadow-md">Il più richiesto</div>
                               <h4 className="text-black font-black uppercase text-sm tracking-widest mb-2">Pagamento in unica soluzione</h4>
-                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-6">Lui 836€ Lei 1056/1144€</div>
+                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-6">Lui 836€ Lei 1056/1144€</div>
                               
                               <div className="bg-white/20 rounded-2xl p-6 text-left inline-block w-full border border-black/5">
                                  <p className="font-black text-xs uppercase mb-4 text-center tracking-widest">In omaggio per te:</p>
@@ -1537,9 +1582,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                           </div>
 
                           <!-- VECCHIO: A SEDUTA -->
-                          <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
+                          <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
                               <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Pagamento seduta per seduta</h4>
-                              <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-4">${path.price}</div>
+                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-4">${path.price}</div>
 
                               <!-- LISTA AGGIUNTA -->
                               <div className="mt-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
@@ -1582,12 +1627,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             <header className="flex items-center justify-center mb-10">
               <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">DETTAGLIO PERCORSO</h2>
             </header>
-            <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white">
-              <div className="bg-black p-12 text-center text-white relative uppercase">
-                <h1 className="text-4xl font-black tracking-tighter">${path.name}</h1>
+            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-xl overflow-hidden border border-white">
+              <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">${path.name}</h1>
                 <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
               </div>
-              <div className="p-10 md:p-16 space-y-12 normal-case">
+              <div className="p-6 md:p-10 lg:p-16 space-y-12 normal-case">
                 
                 <!-- INTEGRATION SECTION (Text/Inclusions vs Image) -->
                 <section className="flex flex-col lg:flex-row gap-12 items-center">
@@ -1638,12 +1683,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     `}
                 </section>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 border-t border-slate-50 uppercase tracking-wider font-bold text-xs">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 pt-12 border-t border-slate-50 uppercase tracking-wider font-bold text-xs">
                   ${!isLaser && html`
                     <section>
                       <h3 className="text-xs font-black text-slate-400 tracking-widest mb-6">Il Percorso prevede</h3>
                       <div className="group relative bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 hover:border-[#EAB308] hover:bg-white hover:shadow-lg transition-all duration-300 overflow-hidden h-full">
-                        <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#EAB308] rounded-full opacity-10 blur-2xl group-hover:opacity-20 transition-opacity"></div>
+                        <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#EAB308] rounded-full opacity-10 blur-[40px] sm:blur-[70px] md:blur-[100px] group-hover:opacity-20 transition-opacity"></div>
                         <div className="relative z-10 flex flex-col h-full justify-between gap-6">
                             <div className="flex items-center justify-between">
                                 <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center text-lg shadow-md group-hover:scale-110 transition-transform duration-300">
@@ -1697,10 +1742,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
                 
                 ${!isLaser && html`
-                  <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[3rem] mb-8 mt-8 text-center shadow-lg relative overflow-hidden group">
+                  <div className="bg-white border-2 border-[#EAB308] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-8 mt-8 text-center shadow-lg relative overflow-hidden group">
                       <div className="absolute top-0 left-0 w-full h-1 bg-[#EAB308]"></div>
                       <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Investimento a seduta</h4>
-                      <div className="text-2xl md:text-3xl font-black text-black tracking-tighter mb-4">${path.price}</div>
+                      <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-4">${path.price}</div>
                       <div className="inline-block bg-slate-100 px-4 py-2 rounded-full">
                           <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
                               <i className="fa-solid fa-lock mr-2 text-[#EAB308]"></i>
@@ -1717,12 +1762,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
       const ColorazioniList = () => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
-          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-            <div className="bg-black p-12 text-center text-white relative uppercase">
-              <h1 className="text-4xl font-black tracking-tighter">Colorazioni</h1>
+          <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-xl overflow-hidden border border-white mb-10">
+            <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">Colorazioni</h1>
               <div className="w-12 h-1 bg-[#EAB308] mx-auto mt-6"></div>
             </div>
-            <div className="p-10 md:p-16 text-center normal-case">
+            <div className="p-6 md:p-10 lg:p-16 text-center normal-case">
               <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                 Benvenuta nel mondo delle colorazioni di Beutrì Parrucchieri,
                 dove ogni proposta è pensata per rispettare la salute di cute e
@@ -1738,14 +1783,14 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
           <div className="space-y-12">
             <!-- COLORE SICURO - THEME SAFE/MEDICAL -->
-            <section className="bg-slate-50 rounded-[3rem] p-10 md:p-14 shadow-sm border border-slate-200 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-40 -z-10"></div>
-              <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
+            <section className="bg-slate-50 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-slate-200 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-40 -z-10"></div>
+              <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-10">
                 <div className="flex-1">
                   <span className="inline-block bg-blue-100 text-blue-700 text-[10px] font-black tracking-widest px-3 py-1 rounded-full mb-4 uppercase">Tema Colore Sicuro</span>
                   <div className="flex items-center gap-3 mb-2">
                     <i className="fa-solid fa-lock text-3xl text-blue-600"></i>
-                    <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">COLORE SICURO</h2>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tighter uppercase">COLORE SICURO</h2>
                   </div>
                   <div className="text-2xl font-black text-blue-600 tracking-widest">97€ / 103€</div>
                   <p className="text-slate-500 font-bold uppercase text-xs mt-2">Colorazione con probiotici senza: AMMONIACA, PPD, RESORCINA E NICHEL</p>
@@ -1753,7 +1798,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 normal-case">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 normal-case">
                 <div className="space-y-6">
                   <div className="bg-white p-6 rounded-[2rem] border border-blue-50 shadow-sm">
                     <h4 className="text-blue-900 font-black uppercase text-xs mb-4 underline decoration-blue-300 decoration-2 underline-offset-4">Cos’è il microbioma del cuoio capelluto?</h4>
@@ -1772,7 +1817,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </p>
                   </div>
                 </div>
-                <div className="bg-blue-900 text-white p-8 rounded-[3rem] uppercase flex flex-col justify-center relative overflow-hidden">
+                <div className="bg-blue-900 text-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] uppercase flex flex-col justify-center relative overflow-hidden">
                   <div className="relative z-10">
                     <h4 className="text-blue-200 text-xs font-black tracking-widest mb-4">Addio colorazioni aggressive, benvenuta colorazione probiotica “All Free”</h4>
                     <p className="text-blue-100 text-xs leading-relaxed mb-6 normal-case">Una colorazione innovativa che rispetta sia la natura che il capello, grazie a preziosi attivi probiotici che trattano delicatamente cute e capelli.</p>
@@ -1789,14 +1834,14 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </section>
 
             <!-- COLORAZIONE VEGANA - THEME NATURE -->
-            <section className="bg-[#F5F7F2] rounded-[3rem] p-10 md:p-14 shadow-sm border border-[#E2E8D8] relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-64 h-64 bg-green-100 rounded-full blur-3xl opacity-50 -z-10"></div>
-              <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
+            <section className="bg-[#F5F7F2] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-[#E2E8D8] relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-64 h-64 bg-green-100 rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-50 -z-10"></div>
+              <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-10">
                 <div className="flex-1">
                    <span className="inline-block bg-[#E2E8D8] text-[#3A4D39] text-[10px] font-black tracking-widest px-3 py-1 rounded-full mb-4 uppercase">Tema Colorazione Vegana</span>
                   <div className="flex items-center gap-3 mb-2">
                     <i className="fa-solid fa-leaf text-3xl text-[#3A4D39]"></i>
-                    <h2 className="text-3xl font-black text-[#3A4D39] tracking-tighter uppercase">COLORAZIONE VEGANA</h2>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#3A4D39] tracking-tighter uppercase">COLORAZIONE VEGANA</h2>
                   </div>
                   <div className="text-2xl font-black text-[#739072] tracking-widest">da 89€ a 97€</div>
                 </div>
@@ -1817,7 +1862,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     le cuti più sensibili.
                   </p>
                 </div>
-                <div className="bg-[#3A4D39] p-8 rounded-[3rem] text-white text-center uppercase tracking-tighter">
+                <div className="bg-[#3A4D39] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] text-white text-center uppercase tracking-tighter">
                   <p className="text-[11px] font-black tracking-[0.2em] text-[#E2E8D8]">Privo di ammoniaca, fragranze e nichel, con ingredienti vegani, offre 72 nuance intermiscelabili, perfette per ogni esigenza.</p>
                   <p className="text-[#96B894] text-xs font-black mt-4 italic tracking-widest">Un ‘esperienza tutta da vivere.</p>
                 </div>
@@ -1825,21 +1870,21 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </section>
 
             <!-- COLORAZIONE ZEN - THEME ZEN (BLACK/GOLD) -->
-            <section className="bg-[#1A1A1A] text-white rounded-[4rem] p-12 md:p-20 relative overflow-hidden border border-white/5">
-               <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[120px] opacity-10 -z-10"></div>
+            <section className="bg-[#1A1A1A] text-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] p-6 md:p-12 lg:p-16 md:p-20 relative overflow-hidden border border-white/5">
+               <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[60px] sm:blur-[100px] md:blur-[150px] opacity-10 -z-10"></div>
                <div className="relative z-10">
-                 <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
+                 <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-12">
                    <div className="flex-1">
                      <span className="inline-block bg-white/10 text-[#EAB308] text-[10px] font-black tracking-widest px-3 py-1 rounded-full mb-4 uppercase border border-white/5">Tema Zen</span>
                      <div className="flex items-center gap-3 mb-2">
                         <i className="fa-solid fa-yin-yang text-3xl text-[#EAB308]"></i>
-                        <h2 className="text-4xl font-black tracking-tighter uppercase">Colorazione Zen</h2>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase">Colorazione Zen</h2>
                      </div>
                      <div className="text-2xl font-black text-[#EAB308] tracking-widest">da 107€ a 117€</div>
                      <p className="text-[#EAB308] text-sm font-black italic mt-4 normal-case">Dove la lentezza diventa lusso e il colore si fa rituale.</p>
                    </div>
                  </div>
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                    <div className="normal-case text-neutral-400">
                      <p className="text-sm leading-relaxed mb-8">
                         Un trattamento ispirato ai rituali orientali, in cui la colorazione
@@ -1855,7 +1900,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[#EAB308] rounded-full"></span> Prolungare la durata del colore</li>
                      </ul>
                    </div>
-                   <div className="bg-white/5 rounded-[3rem] p-10 flex flex-col items-center justify-center text-center border border-white/10 backdrop-blur-sm">
+                   <div className="bg-white/5 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-10 flex flex-col items-center justify-center text-center border border-white/10 backdrop-blur-sm">
                       <p className="text-[#EAB308] text-lg font-black italic leading-relaxed normal-case">
                         "Un momento di pausa, silenzio e bellezza per ritrovare l’equilibrio,
                         dentro e fuori."
@@ -1873,12 +1918,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
       const SchiaritureList = () => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
-          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-            <div className="bg-black p-12 text-center text-white relative uppercase">
-              <h1 className="text-4xl font-black tracking-tighter">Schiariture</h1>
+          <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+            <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">Schiariture</h1>
               <div className="w-12 h-1 bg-[#EAB308] mx-auto mt-6"></div>
             </div>
-            <div className="p-10 md:p-16 text-center normal-case">
+            <div className="p-6 md:p-10 lg:p-16 text-center normal-case">
               <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                 Benvenuta nel mondo delle schiariture di Beautrì Parrucchieri,
                 dove bellezza e salute dei capelli vanno di pari passo.
@@ -1896,10 +1941,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
           </div>
 
           <div className="space-y-12">
-            <section className="bg-black text-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-black relative overflow-hidden">
+            <section className="bg-black text-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-black relative overflow-hidden">
                <div className="relative z-10">
                   <h2 className="text-3xl font-black text-[#EAB308] tracking-tighter uppercase mb-8">I nostri decoloranti</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                       <div>
                          <p className="text-slate-300 text-sm leading-relaxed mb-6 normal-case">
                            Protegge la fibra capillare durante l’applicazione grazie ad oli antiossidanti ristrutturanti ed idratanti come:
@@ -1920,7 +1965,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                </div>
             </section>
 
-            <div className="grid grid-cols-1 gap-8">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8">
               ${[
                 {
                   name: "RAGGI DI LUCE",
@@ -1948,7 +1993,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                   desc: "Sei alla ricerca di un biondo oltre la perfezione? Biondo raffinato plus è la scelta da noi consigliata per te, che oltre ad un biondo stupendo ti permette di apportare ingredienti antiossidanti e ristrutturanti."
                 }
               ].map(service => html`
-                <div className="bg-white rounded-[3rem] p-10 md:p-12 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 lg:p-16 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
                   <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
                      <h3 className="text-2xl font-black text-black uppercase tracking-tighter group-hover:text-[#EAB308] transition-colors">${service.name}</h3>
                      <div className="text-xl font-black text-[#EAB308] tracking-widest whitespace-nowrap">${service.price}</div>
@@ -1963,12 +2008,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
       const FormaList = () => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
-          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-            <div className="bg-black p-12 text-center text-white relative uppercase">
-              <h1 className="text-4xl font-black tracking-tighter">Forma</h1>
+          <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+            <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">Forma</h1>
               <div className="w-12 h-1 bg-[#EAB308] mx-auto mt-6"></div>
             </div>
-            <div className="p-10 md:p-16 text-center normal-case">
+            <div className="p-6 md:p-10 lg:p-16 text-center normal-case">
               <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                 Benvenuta nel mondo della forma di Beautrì Parrucchieri!
                 Sogni capelli sempre in ordine, ogni giorno e in ogni situazione? Ami
@@ -1982,7 +2027,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
           <div className="space-y-12">
             <!-- Benefits -->
-            <section className="bg-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-lg text-black relative overflow-hidden">
+            <section className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-lg text-black relative overflow-hidden">
                <div className="relative z-10">
                   <h2 className="text-3xl font-black tracking-tighter uppercase mb-8">Con i nostri trattamenti puoi:</h2>
                   <div className="bg-white/20 p-8 rounded-[2rem] backdrop-blur-sm border border-black/5">
@@ -2007,9 +2052,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </section>
 
             <!-- Disciplinante Organico -->
-            <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white">
+            <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white">
                <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
-                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase">DISCIPLINANTE ORGANICO</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase">DISCIPLINANTE ORGANICO</h2>
                   <div className="bg-slate-100 text-slate-500 px-6 py-3 rounded-full text-xs font-black tracking-widest uppercase border border-slate-200">
                     Prezzo su preventivo
                   </div>
@@ -2024,7 +2069,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                  </p>
                </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                   <div className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
                      <i className="fa-solid fa-temperature-high text-[#EAB308] text-2xl mb-4"></i>
                      <h4 className="font-black uppercase text-xs mb-3 text-black tracking-widest">Applicazione</h4>
@@ -2047,13 +2092,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </section>
 
             <!-- Movimento Armonioso -->
-            <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white group hover:border-[#EAB308]/30 transition-all">
+            <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white group hover:border-[#EAB308]/30 transition-all">
                <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-[#EAB308] text-xl">
                       <i className="fa-solid fa-wind"></i>
                     </div>
-                    <h2 className="text-3xl font-black text-black tracking-tighter uppercase">MOVIMENTO ARMONIOSO</h2>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase">MOVIMENTO ARMONIOSO</h2>
                   </div>
                   <div className="text-2xl font-black text-[#EAB308] tracking-widest whitespace-nowrap">93€ / 103€</div>
                </div>
@@ -2069,12 +2114,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
       const StilisticoList = ({ gender }) => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
-          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-            <div className="bg-black p-12 text-center text-white relative uppercase">
-              <h1 className="text-4xl font-black tracking-tighter">Stilistico</h1>
+          <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+            <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">Stilistico</h1>
               <div className="w-12 h-1 bg-[#EAB308] mx-auto mt-6"></div>
             </div>
-            <div className="p-10 md:p-16 text-center normal-case">
+            <div className="p-6 md:p-10 lg:p-16 text-center normal-case">
               <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                 ${gender === 'donna' 
                   ? "Benvenuta nel mondo stilistico di Beautrì Parrucchieri. Immagina La tua Esperienza esclusiva che ha inizio con una calorosa accoglienza da parte di tutto il team,zona spa con tecniche di massaggio rilassanti, musica e luci rilassanti, una calda tisana, un dolcetto ed un caldo plaid."
@@ -2087,9 +2132,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
           <div className="space-y-8">
             ${gender === 'donna' ? html`
             <!-- BEAUTRI STYLING -->
-            <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
-               <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6">
-                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRI STYLING</h2>
+            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+               <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-6">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRI STYLING</h2>
                   <div className="text-2xl font-black text-[#EAB308] tracking-widest whitespace-nowrap">39€ / 41€</div>
                </div>
                <p className="text-slate-600 text-lg font-medium leading-relaxed">
@@ -2098,9 +2143,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
 
             <!-- BEAUTRI CUT -->
-            <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
-               <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6">
-                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRI CUT</h2>
+            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+               <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-6">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRI CUT</h2>
                   <div className="text-2xl font-black text-[#EAB308] tracking-widest whitespace-nowrap">57€ / 61€</div>
                </div>
                <p className="text-slate-600 text-lg font-medium leading-relaxed">
@@ -2109,9 +2154,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
             ` : html`
             <!-- BEAUTRI CUT UOMO -->
-            <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
-               <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6">
-                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRÌ CUT</h2>
+            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+               <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-6">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRÌ CUT</h2>
                   <div className="text-2xl font-black text-[#EAB308] tracking-widest whitespace-nowrap">39€</div>
                </div>
                <p className="text-slate-600 text-lg font-medium leading-relaxed">
@@ -2122,9 +2167,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
 
             <!-- BEAUTRI CUT OLISTICO UOMO -->
-            <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
-               <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6">
-                  <h2 className="text-3xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRÌ CUT OLISTICO</h2>
+            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+               <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-6">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">BEAUTRÌ CUT OLISTICO</h2>
                   <div className="text-2xl font-black text-[#EAB308] tracking-widest whitespace-nowrap">39€</div>
                </div>
                <p className="text-slate-600 text-lg font-medium leading-relaxed">
@@ -2147,12 +2192,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
       const TricologiciList = ({ gender }) => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
-           <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-                <div className="bg-black p-12 text-center text-white relative uppercase">
-                  <h1 className="text-4xl font-black tracking-tighter">TRATTAMENTI TRICOLOGICI</h1>
+           <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+                <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">TRATTAMENTI TRICOLOGICI</h1>
                   <div className="w-12 h-1 bg-[#EAB308] mx-auto mt-6"></div>
                 </div>
-                <div className="p-10 md:p-16 text-center normal-case">
+                <div className="p-6 md:p-10 lg:p-16 text-center normal-case">
                   <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                     Scopri i nostri percorsi specifici per la salute della cute e la bellezza dei tuoi capelli.
                   </p>
@@ -2163,12 +2208,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
              ${TRICOLOGICI_TREATMENTS.map(t => {
                const price = gender === 'uomo' ? t.prices.uomo : t.prices.donna;
                return html`
-               <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+               <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
                  <!-- Layout Flex per immagine -->
                  <div className="flex flex-col lg:flex-row gap-8 items-center">
                    
                    <div className="flex-1 order-2 lg:order-1">
-                     <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-6 group-hover:text-[#EAB308] transition-colors">${t.title}</h2>
+                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase mb-6 group-hover:text-[#EAB308] transition-colors">${t.title}</h2>
                      <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6">
                         ${t.description}
                      </p>
@@ -2202,10 +2247,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
       // --- COMPONENTE NOVITÀ MODIFICATO: WORK IN PROGRESS ---
       const NovitaList = () => html`
         <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
-          <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+          <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
             <!-- Header -->
-            <div className="bg-black p-12 text-center text-white relative uppercase">
-              <h1 className="text-4xl font-black tracking-tighter">NOVITÀ</h1>
+            <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">NOVITÀ</h1>
               <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
             </div>
 
@@ -2213,7 +2258,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center text-[#EAB308] text-4xl mb-8 shadow-inner">
                     <i className="fa-solid fa-screwdriver-wrench"></i>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-black italic mb-6 tracking-tighter text-black">Work in Progress</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic mb-6 tracking-tighter text-black">Work in Progress</h2>
                 <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.3em] max-w-md leading-relaxed">
                     Stiamo preparando grandi novità per te.<br/>L'eccellenza Beautrí richiede tempo, cura e passione.
                 </p>
@@ -2227,19 +2272,19 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
           <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
             
             <!-- Header Image/Banner -->
-            <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10 relative">
-                <div className="bg-[#FEF9C3] p-12 text-center text-yellow-900 relative overflow-hidden">
+            <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10 relative">
+                <div className="bg-[#FEF9C3] p-6 md:p-12 text-center text-yellow-900 relative overflow-hidden">
                     <i className="fa-solid fa-baby absolute top-10 left-10 text-6xl opacity-20 text-yellow-600"></i>
                     <i className="fa-solid fa-heart absolute bottom-10 right-10 text-6xl opacity-20 text-rose-400"></i>
                     
-                    <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-4">🧸 BABY CHECK BEAUTRÌ 🧸</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter mb-4">🧸 BABY CHECK BEAUTRÌ 🧸</h1>
                     <div className="inline-block bg-white px-6 py-2 rounded-full mb-4 shadow-sm">
                         <span className="text-yellow-600 font-black tracking-widest text-xs uppercase">👶 PER BAMBINI DA 0 A 9 ANNI 👶</span>
                     </div>
                     <p className="text-xl font-bold text-yellow-800">✨ La soluzione ai capelli del tuo bimbo ✨</p>
                 </div>
                 
-                <div className="p-10 md:p-16 text-center">
+                <div className="p-6 md:p-10 lg:p-16 text-center">
                     <p className="text-slate-600 text-lg leading-relaxed max-w-4xl mx-auto mb-8 font-medium">
                         Il <strong>Baby Check</strong> 🍼 è un controllo dedicato alla cute e ai capelli dei bambini, pensato per accompagnare genitori 👨‍👩‍👧‍👦 e figli con delicatezza, ascolto e competenza nei primi anni di crescita 🌱.
                     </p>
@@ -2250,19 +2295,19 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
 
             <!-- GALLERIA IMMAGINI -->
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="h-64 md:h-80 w-full rounded-[3rem] overflow-hidden shadow-lg border border-white relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
+                <div className="h-64 md:h-80 w-full rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-lg border border-white relative">
                      <img src="https://i.ibb.co/k2cJ0SqZ/DSF0513-1.jpg" className="w-full h-full object-cover" alt="Baby Check 1" />
                 </div>
-                <div className="h-64 md:h-80 w-full rounded-[3rem] overflow-hidden shadow-lg border border-white relative">
+                <div className="h-64 md:h-80 w-full rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-lg border border-white relative">
                      <img src="https://i.ibb.co/mr1yGbpq/DSF0546-1.jpg" className="w-full h-full object-cover" alt="Baby Check 2" />
                 </div>
             </div>
 
             <!-- Info Grid (Costo / Durata) -->
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
                 <!-- Costo -->
-                <div className="bg-[#F59E0B] rounded-[3rem] p-8 text-white relative overflow-hidden shadow-lg">
+                <div className="bg-[#F59E0B] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-8 text-white relative overflow-hidden shadow-lg">
                     <div className="absolute top-0 right-0 p-4 opacity-20"><i className="fa-solid fa-sack-dollar text-6xl"></i></div>
                     <h3 className="text-2xl font-black uppercase mb-2">💰 Costo</h3>
                     <div className="flex items-center gap-4">
@@ -2272,7 +2317,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Durata -->
-                <div className="bg-[#F59E0B] rounded-[3rem] p-8 text-white relative overflow-hidden shadow-lg">
+                <div className="bg-[#F59E0B] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-8 text-white relative overflow-hidden shadow-lg">
                     <div className="absolute top-0 right-0 p-4 opacity-20"><i className="fa-solid fa-stopwatch text-6xl"></i></div>
                     <h3 className="text-2xl font-black uppercase mb-2">⏱️ Durata</h3>
                     <div className="flex items-center gap-4">
@@ -2282,8 +2327,8 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
 
             <!-- Cosa facciamo Section -->
-            <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white mb-8">
-                <h2 className="text-3xl font-black text-black uppercase mb-8 tracking-tighter">🧐 Cosa facciamo durante il Baby Check</h2>
+            <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white mb-8">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black uppercase mb-8 tracking-tighter">🧐 Cosa facciamo durante il Baby Check</h2>
                 <ul className="space-y-4">
                     ${[
                         "🔍 Analisi della cute e dei capelli del tuoi piccolo",
@@ -2306,9 +2351,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
 
             <!-- A chi è dedicato & Approccio Grid -->
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
                 <!-- A chi è dedicato -->
-                <div className="bg-[#FEF9C3] rounded-[3rem] p-10 border border-[#FDE047]">
+                <div className="bg-[#FEF9C3] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 border border-[#FDE047]">
                     <h3 className="text-2xl font-black text-yellow-900 uppercase mb-6">🎯 A chi è dedicato</h3>
                     <p className="text-yellow-800 font-bold mb-4">Il Baby Check è indicato per:</p>
                     <ul className="space-y-3">
@@ -2328,7 +2373,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Il nostro approccio -->
-                <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm flex flex-col justify-center">
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 border border-slate-100 shadow-sm flex flex-col justify-center">
                     <h3 className="text-2xl font-black text-black uppercase mb-6">❤️ Il nostro approccio</h3>
                     <div className="space-y-6">
                          <p className="text-slate-600 text-lg font-medium leading-relaxed">
@@ -2342,9 +2387,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
 
             <!-- Chi lo esegue & Strumenti -->
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
                 <!-- Chi lo esegue -->
-                <div className="bg-[#F59E0B] rounded-[3rem] p-10 text-white shadow-lg flex flex-col h-full">
+                <div className="bg-[#F59E0B] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-white shadow-lg flex flex-col h-full">
                     <h3 className="text-center text-2xl font-black uppercase mb-6">👩‍⚕️ Chi la esegue?</h3>
                     <div className="bg-white text-black p-8 rounded-[2rem] flex-1 flex flex-col justify-center">
                         <h4 className="font-black text-2xl mb-2 text-center">Daniela Modina 🖋️</h4>
@@ -2362,7 +2407,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Strumenti -->
-                <div className="bg-[#F59E0B] rounded-[3rem] p-10 text-white shadow-lg flex flex-col h-full">
+                <div className="bg-[#F59E0B] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-white shadow-lg flex flex-col h-full">
                     <div className="flex items-center gap-4 mb-8">
                             <i className="fa-solid fa-microscope text-4xl"></i>
                             <h3 className="text-2xl font-black uppercase leading-tight">🔬 Che tipo di "strumenti" vengono usati:</h3>
@@ -2394,8 +2439,8 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             </div>
             
             <!-- Location -->
-            <div className="bg-[#F59E0B] rounded-[3rem] p-10 text-white relative overflow-hidden shadow-lg">
-                <div className="flex items-center justify-center gap-6 relative z-10">
+            <div className="bg-[#F59E0B] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-white relative overflow-hidden shadow-lg">
+                <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 relative z-10">
                     <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl"><i className="fa-solid fa-location-dot"></i></div>
                     <div>
                         <h3 className="text-2xl font-black uppercase mb-1">📍 Dove si svolge?</h3>
@@ -2425,31 +2470,31 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             return html`
                 <div className="h-full flex flex-col animate-fade-in">
                 <header className="mb-10 text-center">
-                    <h1 className="text-4xl font-black text-black tracking-tight mb-2 uppercase">BEAUTRÍ</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tight mb-2 uppercase">BEAUTRÍ</h1>
                     <p className="text-slate-400 font-bold uppercase tracking-[0.3em] text-[10px]">Percorsi di salute per i tuoi capelli</p>
                 </header>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full mb-8">
-                    <button id="menu-donna" onClick=${() => setGender('donna')} className="bg-black rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
-                    <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[90px] opacity-40"></div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto w-full mb-8">
+                    <button id="menu-donna" onClick=${() => setGender('donna')} className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-left relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                    <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-[#EAB308] rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-40"></div>
                     <div className="relative z-10 flex flex-col h-full uppercase">
                         <span className="text-white/40 text-[10px] font-bold tracking-[0.4em] mb-4 underline decoration-[#EAB308] decoration-2 underline-offset-8">MENU</span>
-                        <h2 className="text-6xl font-black text-white tracking-tighter mt-auto">DONNA</h2>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter mt-auto">DONNA</h2>
                         <div className="w-12 h-1 bg-[#EAB308] mt-6"></div>
                     </div>
                     </button>
-                    <button id="menu-uomo" onClick=${() => setGender('uomo')} className="bg-white rounded-[3rem] p-12 text-left relative overflow-hidden group shadow-sm border border-white transition-all hover:scale-[1.02] active:scale-95 h-64">
-                    <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-slate-200 rounded-full blur-[90px] opacity-60"></div>
+                    <button id="menu-uomo" onClick=${() => setGender('uomo')} className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-left relative overflow-hidden group shadow-sm border border-white transition-all hover:scale-[1.02] active:scale-95 h-64">
+                    <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-slate-200 rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-60"></div>
                     <div className="relative z-10 flex flex-col h-full uppercase">
                         <span className="text-slate-400 text-[10px] font-bold tracking-[0.4em] mb-4 underline decoration-black decoration-2 underline-offset-8">MENU</span>
-                        <h2 className="text-6xl font-black text-black tracking-tighter mt-auto">UOMO</h2>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter mt-auto">UOMO</h2>
                         <div className="w-12 h-1 bg-black mt-6"></div>
                     </div>
                     </button>
                 </div>
                 <div className="max-w-4xl mx-auto w-full">
-                    <button id="nostri-percorsi" onClick=${() => setGender('percorsi')} className="w-full bg-[#EAB308] rounded-[3rem] p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.01] active:scale-95">
-                    <div className="relative z-10 flex items-center justify-center gap-8">
-                        <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter uppercase leading-tight">I NOSTRI PERCORSI</h2>
+                    <button id="nostri-percorsi" onClick=${() => setGender('percorsi')} className="w-full bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.01] active:scale-95">
+                    <div className="relative z-10 flex items-center justify-center gap-4 sm:gap-6 md:gap-8">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tighter uppercase leading-tight">I NOSTRI PERCORSI</h2>
                         <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-[#EAB308] text-2xl shadow-lg shrink-0">
                         <i className="fa-solid fa-route"></i>
                         </div>
@@ -2469,9 +2514,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </div>
                 </header>
                 
-                <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full">
+                <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto w-full">
                     <!-- NEW BUTTON: Come funzionano -->
-                    <button onClick=${() => setSection('how-it-works')} className="w-full bg-white rounded-[3rem] p-8 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.01] active:scale-95 border border-slate-100">
+                    <button onClick=${() => setSection('how-it-works')} className="w-full bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-8 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.01] active:scale-95 border border-slate-100">
                          <div className="relative z-10 flex items-center justify-center gap-4">
                             <div className="w-12 h-12 bg-[#EAB308] rounded-full flex items-center justify-center text-black text-xl shadow-md shrink-0">
                                 <i className="fa-solid fa-circle-info"></i>
@@ -2480,17 +2525,17 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                         </div>
                     </button>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                        <button id="percorsi" onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[3rem] p-12 text-center relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 w-full">
+                        <button id="percorsi" onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
                         <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
                             <i className="fa-solid fa-route text-4xl text-[#EAB308] mb-6"></i>
-                            <h2 className="text-4xl font-black text-white tracking-tighter">PERCORSI</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter">PERCORSI</h2>
                         </div>
                         </button>
-                        <button id="percorsi-mantenimento" onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[3rem] p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                        <button id="percorsi-mantenimento" onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
                         <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
                             <i className="fa-solid fa-shield-heart text-4xl text-black mb-6"></i>
-                            <h2 className="text-4xl font-black text-black tracking-tighter">MANTENIMENTO</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter">MANTENIMENTO</h2>
                         </div>
                         </button>
                     </div>
@@ -2512,9 +2557,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     <span className="text-[#EAB308]">${section === 'percorsi-main' ? 'PERCORSI' : 'PERCORSI DI MANTENIMENTO'}</span>
                     </div>
                 </header>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto w-full">
                     ${list.map(p => html`
-                    <button key=${p.id} onClick=${() => setSelectedPath(p)} className="bg-white p-8 rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
+                    <button key=${p.id} onClick=${() => setSelectedPath(p)} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
                         ${p.icon && html`
                           <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
                               <i className=${`fa-solid ${p.icon}`}></i>
@@ -2539,7 +2584,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 <header className="flex items-center justify-center mb-10 uppercase font-black text-[11px] tracking-widest">
                     <div className="bg-white px-8 py-3 rounded-full shadow-sm border border-white">MENU <span className="text-[#EAB308]">${gender}</span></div>
                 </header>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                     ${SECTIONS.filter(s => {
                         if (gender === 'uomo' && (s.id === 'colorazioni' || s.id === 'forma')) return false;
                         return true;
@@ -2548,7 +2593,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                         return html`
                         <button key=${s.id} onClick=${() => setSection(s.id)} 
                             className=${`
-                            p-8 rounded-[3rem] shadow-sm transition-all group text-center flex flex-col items-center justify-center min-h-[220px]
+                            p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm transition-all group text-center flex flex-col items-center justify-center min-h-[220px]
                             ${isNovita 
                                 ? 'bg-white border-2 border-[#EAB308] hover:scale-[1.02] shadow-md' 
                                 : 'bg-white border border-white hover:border-[#EAB308]/30'}
@@ -2578,13 +2623,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12 overflow-y-auto custom-scrollbar">
                     
                     <!-- Hero Text Section -->
-                    <div className="bg-black text-white rounded-[4rem] p-12 md:p-16 text-center shadow-2xl mb-8 relative overflow-hidden">
+                    <div className="bg-black text-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] p-6 md:p-10 lg:p-16 text-center shadow-2xl mb-8 relative overflow-hidden">
                          <!-- Ambient Background Effect -->
-                         <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
-                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-slate-700 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+                         <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[60px] sm:blur-[100px] md:blur-[150px] opacity-20 pointer-events-none"></div>
+                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-slate-700 rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-20 pointer-events-none"></div>
                          
                          <div className="relative z-10 flex flex-col items-center">
-                            <h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-8 leading-tight">La Nostra<br/><span className="text-[#EAB308]">Visione</span></h1>
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter mb-8 leading-tight">La Nostra<br/><span className="text-[#EAB308]">Visione</span></h1>
                             
                             <p className="text-xl md:text-2xl font-medium leading-relaxed max-w-3xl mx-auto mb-10 text-slate-300">
                                 <span className="text-white font-bold">Un capello bello nasce da una cute sana.</span><br/>
@@ -2594,14 +2639,14 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                             <!-- Quote Card -->
                             <div className="bg-white/5 backdrop-blur-md p-10 rounded-[2.5rem] border border-white/10 max-w-2xl mx-auto mb-10 transform hover:scale-[1.02] transition-transform duration-500 shadow-xl">
                                 <i className="fa-solid fa-quote-left text-[#EAB308] text-4xl mb-6 block opacity-80"></i>
-                                <p className="text-3xl md:text-4xl font-black italic tracking-tighter text-white leading-tight">"Capelli sani nascono da persone ascoltate"</p>
+                                <p className="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-tighter text-white leading-tight">"Capelli sani nascono da persone ascoltate"</p>
                                 <div className="mt-6 flex items-center justify-end gap-3 opacity-60">
                                     <span className="h-[1px] w-12 bg-[#EAB308]"></span>
                                     <span className="text-xs uppercase tracking-widest text-[#EAB308]">Il nostro motto</span>
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full text-left">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 w-full text-left">
                                 <div className="bg-white/5 p-6 rounded-3xl border border-white/5">
                                     <h4 className="text-[#EAB308] font-black uppercase text-xs tracking-widest mb-3">Metodo</h4>
                                     <p className="text-slate-300 text-sm leading-relaxed">Uniamo <strong className="text-white">cronobiologia</strong>, prodotti personalizzati e <strong className="text-white">tecnologie innovative</strong> per creare bellezza partendo dalla salute.</p>
@@ -2615,7 +2660,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </div>
 
                     <!-- Video Section Highlight -->
-                    <div className="group relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white bg-black transform transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                    <div className="group relative rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white bg-black transform transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
                         <div className="absolute top-6 left-6 z-20 bg-[#EAB308] text-black px-6 py-3 rounded-full font-black text-[10px] md:text-xs uppercase tracking-widest shadow-lg flex items-center gap-2 animate-pulse">
                             <div className="w-2 h-2 bg-red-600 rounded-full"></div>
                             Guarda la nostra storia
@@ -2634,13 +2679,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             const props = gender === 'uomo' ? BEST_PROPOSALS_UOMO : BEST_PROPOSALS_DONNA;
             return html`
                 <div className="h-full relative animate-zoom-in max-w-6xl mx-auto pb-12">
-                <div className="bg-black rounded-[4rem] p-12 mb-12 text-center text-white relative">
-                    <h1 className="text-4xl font-black uppercase tracking-tighter mb-4">MIGLIORI PROPOSTE</h1>
+                <div className="bg-black rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] p-6 md:p-12 mb-12 text-center text-white relative">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter mb-4">MIGLIORI PROPOSTE</h1>
                     <p className="max-w-3xl mx-auto text-slate-400 text-sm uppercase font-medium">Create per trasformare e dare vita nuova allo stelo già visibile al momento del servizio.</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     ${props.map(p => html`
-                    <div key=${p.id} className="bg-white rounded-[3rem] p-10 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all uppercase">
+                    <div key=${p.id} className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all uppercase">
                         <div className="w-12 h-12 bg-slate-50 text-[#EAB308] rounded-xl flex items-center justify-center text-lg mb-6 shadow-inner"><i className=${`fa-solid ${p.icon}`}></i></div>
                         <h3 className="text-xl font-black text-black mb-2">${p.name}</h3>
                         <div className="text-[#EAB308] font-black mb-6 tracking-widest">${p.price}</div>
@@ -2655,23 +2700,23 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             if (section === 'colorazioni' && gender === 'donna' && !subSection) {
             return html`
                 <div className="h-full relative animate-zoom-in max-w-4xl mx-auto pb-12">
-                <div className="flex flex-col gap-8 uppercase">
-                    <button onClick=${() => setSubSection('color-pass')} className="bg-black rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl transition-all hover:scale-[1.02] active:scale-95">
+                <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 uppercase">
+                    <button onClick=${() => setSubSection('color-pass')} className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center relative overflow-hidden shadow-2xl transition-all hover:scale-[1.02] active:scale-95">
                     <div className="relative z-10 flex flex-col items-center">
                         <i className="fa-solid fa-ticket text-[#EAB308] text-4xl mb-4"></i>
-                        <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">COLOR PASS</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter">COLOR PASS</h2>
                         <p className="text-[#EAB308] text-[10px] md:text-xs font-bold tracking-[0.2em] mt-4 italic opacity-90 uppercase">IL SEGRETO PER UN COLORE SEMPRE PERFETTO</p>
                         <div className="w-12 h-1 bg-[#EAB308] mt-6"></div>
                     </div>
                     </button>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <button onClick=${() => setSubSection('colorazioni-list-main')} className="bg-white rounded-[3rem] p-12 text-center shadow-sm border border-slate-100 transition-all hover:scale-[1.02] active:scale-95 flex flex-col items-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                    <button onClick=${() => setSubSection('colorazioni-list-main')} className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center shadow-sm border border-slate-100 transition-all hover:scale-[1.02] active:scale-95 flex flex-col items-center">
                         <i className="fa-solid fa-brush text-[#EAB308] text-3xl mb-4"></i>
-                        <h2 className="text-3xl font-black text-black tracking-tighter">COLORAZIONI</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter">COLORAZIONI</h2>
                     </button>
-                    <button onClick=${() => setSubSection('schiariture-list')} className="bg-white rounded-[3rem] p-12 text-center shadow-sm border border-slate-100 transition-all hover:scale-[1.02] active:scale-95 flex flex-col items-center">
+                    <button onClick=${() => setSubSection('schiariture-list')} className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center shadow-sm border border-slate-100 transition-all hover:scale-[1.02] active:scale-95 flex flex-col items-center">
                         <i className="fa-solid fa-wand-magic-sparkles text-[#EAB308] text-3xl mb-4"></i>
-                        <h2 className="text-3xl font-black text-black tracking-tighter">SCHIARITURE</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter">SCHIARITURE</h2>
                     </button>
                     </div>
                 </div>
@@ -2699,13 +2744,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             return html`
                 <div className="h-full relative animate-zoom-in max-w-6xl mx-auto pb-12">
                     <!-- Header Card -->
-                    <div className="bg-gradient-to-br from-neutral-900 to-black rounded-[4rem] shadow-2xl overflow-hidden border border-white/10 mb-10 relative">
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
-                        <div className="p-12 text-center text-white relative uppercase z-10">
+                    <div className="bg-gradient-to-br from-neutral-900 to-black rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-2xl overflow-hidden border border-white/10 mb-10 relative">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[60px] sm:blur-[100px] md:blur-[150px] opacity-20 pointer-events-none"></div>
+                        <div className="p-6 md:p-12 text-center text-white relative uppercase z-10">
                             <div className="w-24 h-24 bg-white/5 backdrop-blur-md rounded-3xl flex items-center justify-center mx-auto mb-8 border border-white/10 shadow-[0_0_40px_rgba(234,179,8,0.2)]">
                                 <i className="fa-solid fa-ticket text-[#EAB308] text-4xl"></i>
                             </div>
-                            <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-[#EAB308] to-white leading-tight">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-[#EAB308] to-white leading-tight">
                                 COLOR PASS:<br/>Il Segreto per un Colore Sempre Perfetto
                             </h1>
                             <p className="text-slate-300 font-medium text-sm md:text-base max-w-2xl mx-auto normal-case leading-relaxed">
@@ -2715,7 +2760,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </div>
 
                     <!-- Value Proposition (Special Section) -->
-                    <div className="bg-white border-4 border-[#EAB308] rounded-[3rem] p-10 md:p-14 shadow-xl text-black mb-12 relative overflow-hidden text-center transform hover:scale-[1.01] transition-transform">
+                    <div className="bg-white border-4 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-xl text-black mb-12 relative overflow-hidden text-center transform hover:scale-[1.01] transition-transform">
                         <!-- Gift Ribbon Effect -->
                         <div className="absolute top-0 right-10 w-24 h-full bg-red-50 -skew-x-12 opacity-50 pointer-events-none"></div>
                         <div className="absolute top-0 left-10 w-24 h-full bg-red-50 -skew-x-12 opacity-50 pointer-events-none"></div>
@@ -2748,8 +2793,8 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </div>
                     
                    
-                    <div className="bg-[#1a1a1a] rounded-[3rem] p-10 md:p-14 shadow-xl mb-12 relative overflow-hidden border border-white/10 text-white">
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+                    <div className="bg-[#1a1a1a] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-xl mb-12 relative overflow-hidden border border-white/10 text-white">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#EAB308] rounded-full blur-[60px] sm:blur-[100px] md:blur-[150px] opacity-10 pointer-events-none"></div>
                         <div className="relative z-10">
                              <div className="text-center mb-10">
                                 <div className="inline-block bg-[#EAB308] text-black px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 shadow-lg">Vantaggio Esclusivo</div>
@@ -2761,7 +2806,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                                 </p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                 ${BEST_PROPOSALS_DONNA.map(p => html`
                                     <div key=${p.id} className="bg-white/5 border border-white/10 p-6 rounded-[2rem] hover:bg-white/10 transition-all flex flex-col items-center text-center">
                                         <div className="w-10 h-10 bg-[#EAB308] text-black rounded-xl flex items-center justify-center text-lg mb-3 shadow-md">
@@ -2780,7 +2825,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     
 
                     <!-- Comparative Table Section -->
-                    <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border border-slate-100 mb-12">
+                    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 shadow-xl border border-slate-100 mb-12">
                         <h3 className="text-center text-xl font-black text-black uppercase mb-10 tracking-widest flex items-center justify-center gap-3">
                             <i className="fa-solid fa-scale-balanced text-[#EAB308]"></i> Il Confronto
                         </h3>
@@ -2819,7 +2864,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                                   negative: "Rimedi dell’ultimo minuto: Stress e corse ai ripari poco efficaci." 
                                 }
                             ].map((row, idx) => html`
-                                <div key=${idx} className="grid grid-cols-1 md:grid-cols-2 gap-4 relative group">
+                                <div key=${idx} className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative group">
                                     <!-- Positive Card -->
                                     <div className="bg-green-50/50 border border-green-100 p-6 rounded-2xl flex items-start gap-4 transition-all hover:shadow-md hover:bg-green-50 hover:scale-[1.01] h-full">
                                         <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-1">
@@ -2846,9 +2891,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </div>
 
                     <!-- Final CTA / Summary -->
-                    <div className="bg-black text-white rounded-[3rem] p-10 md:p-14 text-center relative overflow-hidden shadow-2xl">
+                    <div className="bg-black text-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 text-center relative overflow-hidden shadow-2xl">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#EAB308] to-transparent"></div>
-                        <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#EAB308] rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
+                        <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#EAB308] rounded-full blur-[40px] sm:blur-[70px] md:blur-[100px] opacity-10 pointer-events-none"></div>
                         
                         <h3 className="text-2xl font-black text-[#EAB308] uppercase mb-4 tracking-tight">Il Risultato Finale</h3>
                         <p className="text-lg md:text-xl font-medium leading-relaxed max-w-3xl mx-auto text-slate-300 mb-8">
@@ -2872,12 +2917,12 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
             return html`
                 <div className="h-full relative animate-zoom-in max-w-5xl mx-auto pb-12">
                 
-                <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-                    <div className="bg-teal-900 p-12 text-center text-white relative uppercase">
-                    <h1 className="text-4xl font-black tracking-tighter">SPA</h1>
+                <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+                    <div className="bg-teal-900 p-6 md:p-12 text-center text-white relative uppercase">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">SPA</h1>
                     <div className="w-12 h-1 bg-teal-200 mx-auto mt-6"></div>
                     </div>
-                    <div className="p-10 md:p-16 text-center normal-case">
+                    <div className="p-6 md:p-10 lg:p-16 text-center normal-case">
                     <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto">
                         Benvenuti nella nostra zona Spa, dove ogni trattamento è creato
                         per immergervi in una vera sensazione di benessere generale.
@@ -2886,13 +2931,13 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                 </div>
 
                 <!-- Video Insertion -->
-                <div class="aspect-video w-full rounded-[3rem] overflow-hidden mb-8">
+                <div class="aspect-video w-full rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden mb-8">
                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/c7hDiS4EC4M" title="Video SPA Beautrì" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
 
                 <div className="space-y-12">
                     <!-- Poltrone -->
-                    <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white">
+                    <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                             <!-- Content -->
                             <div className="flex flex-col justify-center space-y-8">
@@ -2900,7 +2945,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                                     <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 text-3xl shrink-0">
                                         <i className="fa-solid fa-chair"></i>
                                     </div>
-                                    <h2 className="text-3xl font-black text-black uppercase tracking-tight leading-none">Comfort<br/>Assoluto</h2>
+                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black uppercase tracking-tight leading-none">Comfort<br/>Assoluto</h2>
                                 </div>
                                 
                                 <p className="text-slate-600 font-medium leading-relaxed text-lg">
@@ -2939,7 +2984,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </section>
 
                     <!-- Spa Mist II -->
-                    <section className="bg-teal-900 text-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-teal-900 relative overflow-hidden">
+                    <section className="bg-teal-900 text-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-teal-900 relative overflow-hidden">
                     <div className="relative z-10">
                         <h2 className="text-3xl font-black text-teal-200 tracking-tighter uppercase mb-6">Spa Mist II</h2>
                         <p className="text-slate-300 text-lg leading-relaxed mb-8 normal-case">
@@ -2947,7 +2992,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                             poteva mancare Spa Mist II che garantisce la penetrazione di
                             principi attivi idratanti, nutrienti e riparatori.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                             <div className="bg-white/10 p-8 rounded-[2rem] border border-white/5">
                                 <i className="fa-solid fa-cloud-showers-heavy text-teal-200 text-2xl mb-4"></i>
                                 <h3 className="font-black uppercase text-xs mb-2 tracking-widest">Tecnologia ad Ultrasuoni</h3>
@@ -2969,10 +3014,10 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </section>
 
                     <!-- Yume Headbath -->
-                    <section className="bg-white rounded-[3rem] p-10 md:p-14 shadow-sm border border-white">
+                    <section className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white">
                     <div className="flex flex-col gap-8">
                         <div>
-                            <h2 className="text-3xl font-black text-black tracking-tighter uppercase mb-2">Yume Headbath</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase mb-2">Yume Headbath</h2>
                             <div className="text-teal-600 font-black uppercase text-xs tracking-widest">Cascata di benessere</div>
                         </div>
                         <div className="prose prose-slate max-w-none">
@@ -3002,9 +3047,9 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                     </section>
 
                     <!-- Soft Touch -->
-                    <section className="bg-teal-100 rounded-[3rem] p-10 md:p-14 shadow-lg text-black relative overflow-hidden">
+                    <section className="bg-teal-100 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-lg text-black relative overflow-hidden">
                     <div className="relative z-10">
-                        <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-10 border-b border-black/10 pb-8">
+                        <div className="flex flex-col md:flex-row justify-between items-start gap-4 sm:gap-6 md:gap-8 mb-10 border-b border-black/10 pb-8">
                             <div>
                                 <h2 className="text-4xl font-black tracking-tighter uppercase text-teal-900">Soft Touch</h2>
                                 <p className="font-bold text-xs uppercase tracking-widest opacity-80 mt-2 text-teal-800">Rituale Antico Orientale</p>
@@ -3031,7 +3076,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                                 </p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 <div className="bg-white p-6 rounded-[2rem] text-center group hover:bg-teal-50 transition-colors">
                                 <i className="fa-solid fa-gem text-teal-600 text-2xl mb-3 transition-colors"></i>
                                 <h4 className="text-teal-900 font-black uppercase text-xs mb-2 transition-colors">Giada Verde</h4>
@@ -3090,7 +3135,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
             return html`
             <div className="h-full relative animate-zoom-in">
-                <div className="bg-white rounded-[4rem] p-20 flex flex-col items-center justify-center text-center shadow-sm uppercase tracking-widest">
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-20 flex flex-col items-center justify-center text-center shadow-sm uppercase tracking-widest">
                 <i className="fa-solid fa-ellipsis text-[#EAB308] text-4xl mb-8"></i>
                 <h3 className="text-3xl font-black italic mb-4 tracking-tighter">Contenuto in arrivo</h3>
                 <p className="text-slate-400 text-[10px] uppercase">Stiamo preparando l'eccellenza Beautrí</p>
@@ -3115,7 +3160,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
 
         return html`
           <div className="flex h-screen overflow-hidden relative">
-            <button onClick=${() => setIsOpen(true)} className="fixed top-8 left-8 z-40 w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-black border border-white active:scale-95 transition-transform">
+            <button onClick=${() => setIsOpen(true)} className="fixed top-4 left-4 sm:top-8 sm:left-8 z-40 w-16 h-16 sm:w-14 sm:h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-black border border-white active:scale-95 transition-transform">
               <i className="fa-solid fa-bars-staggered text-xl"></i>
             </button>
             
@@ -3133,7 +3178,7 @@ a, button, input[type="submit"], input[type="button"], [role="button"] {
                   activeTab === 'baby-check' ? html`<${BabyCheckList} />` : 
                   html`
                   <div className="h-full flex flex-col items-center justify-center animate-zoom-in">
-                    <div className="bg-white rounded-[3rem] p-12 shadow-sm w-full max-w-2xl text-center uppercase tracking-widest">
+                    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-12 shadow-sm w-full max-w-2xl text-center uppercase tracking-widest">
                       <i className="fa-solid fa-note-sticky text-4xl text-[#EAB308] mb-6"></i>
                       <h2 className="text-2xl font-black mb-4 tracking-tighter">NOTE</h2>
                       <p className="text-slate-400 text-sm font-bold normal-case">Le tue note vengono salvate automaticamente nella barra laterale</p>
