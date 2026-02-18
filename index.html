@@ -2309,9 +2309,9 @@ body {
                              <i className="fa-regular fa-clock"></i> ${row.duration}
                            </div>
                            <div className="flex flex-wrap gap-2">
-                             <span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Uomo €${row.prices.uomo}</span>
-                             <span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna €${row.prices.donna}</span>
-                             <span className="bg-[#EAB308] text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna+ €${row.prices.donnaPlus}</span>
+                             ${gender === 'uomo' && html`<span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Uomo €${row.prices.uomo}</span>`}
+                             ${gender === 'donna' && html`<span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna €${row.prices.donna}</span>`}
+                             ${gender === 'donna' && html`<span className="bg-[#EAB308] text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna+ €${row.prices.donnaPlus}</span>`}
                            </div>
                          </div>
                        `)}
