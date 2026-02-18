@@ -446,6 +446,16 @@ body {
         }
       ];
 
+      const LASER_TRICOLOGICI_DATA = [
+        { name: 'ALOPECIA ANDROGENETICA', duration: "40'", prices: { uomo: '84', donna: '104', donnaPlus: '114' } },
+        { name: 'CADUTA STAGIONALE', duration: "40'", prices: { uomo: '84', donna: '104', donnaPlus: '114' } },
+        { name: 'PSORIASI', duration: "40'", prices: { uomo: '84', donna: '104', donnaPlus: '114' } },
+        { name: 'FORFORA', duration: "40'", prices: { uomo: '84', donna: '104', donnaPlus: '114' } },
+        { name: 'DERMATITE SEBORROICA', duration: "60'", prices: { uomo: '124', donna: '144', donnaPlus: '154' } },
+        { name: 'ECZEMA/ERITEMA', duration: "40'", prices: { uomo: '84', donna: '104', donnaPlus: '114' } },
+        { name: 'CUTE SEBORROICA', duration: "40'", prices: { uomo: '84', donna: '104', donnaPlus: '114' } }
+      ];
+
       // --- COMPONENTI ---
       
       const FixedBackButton = ({ onClick }) => html`
@@ -2239,6 +2249,81 @@ body {
                  </div>
                </div>
              `})}
+
+             <!-- LASER A FOTOBIOSTIMOLAZIONE -->
+             <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-16 shadow-sm border border-white hover:border-[#EAB308]/30 transition-all group">
+               <div className="flex flex-col gap-8">
+                 <div>
+                   <div className="flex items-center gap-3 mb-2">
+                     <div className="w-12 h-12 bg-[#EAB308]/10 rounded-2xl flex items-center justify-center">
+                       <i className="fa-solid fa-sun text-[#EAB308] text-xl"></i>
+                     </div>
+                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter uppercase group-hover:text-[#EAB308] transition-colors">LASER A FOTOBIOSTIMOLAZIONE</h2>
+                   </div>
+                   <p className="text-slate-600 text-lg font-medium italic leading-relaxed mt-4 border-l-4 border-[#EAB308]/30 pl-6 py-2">
+                     "Il primo salone in Italia a prendersi cura di cute e capelli con la fotobiostimolazione laser."
+                   </p>
+                 </div>
+
+                 <div className="space-y-6">
+                   <p className="text-slate-600 text-lg font-medium leading-relaxed">
+                     Un trattamento innovativo che agisce in profondità sulla salute del cuoio capelluto, stimolando la rigenerazione cellulare e migliorando anche condizioni delicate come alopecia, psoriasi e dermatiti.
+                   </p>
+
+                   <div className="bg-slate-50 rounded-[2rem] p-8">
+                     <p className="text-sm font-bold text-slate-500 mb-4 uppercase tracking-widest">Benefici:</p>
+                     <ul className="space-y-3">
+                       <li className="flex items-start gap-3">
+                         <div className="w-6 h-6 rounded-full bg-[#EAB308]/10 flex items-center justify-center shrink-0 mt-0.5">
+                           <i className="fa-solid fa-check text-[#EAB308] text-xs"></i>
+                         </div>
+                         <span className="text-slate-700 text-sm font-medium">Stimola la microcircolazione e favorisce la crescita del capello</span>
+                       </li>
+                       <li className="flex items-start gap-3">
+                         <div className="w-6 h-6 rounded-full bg-[#EAB308]/10 flex items-center justify-center shrink-0 mt-0.5">
+                           <i className="fa-solid fa-check text-[#EAB308] text-xs"></i>
+                         </div>
+                         <span className="text-slate-700 text-sm font-medium">Riduce infiammazioni, prurito, rossori e desquamazioni</span>
+                       </li>
+                       <li className="flex items-start gap-3">
+                         <div className="w-6 h-6 rounded-full bg-[#EAB308]/10 flex items-center justify-center shrink-0 mt-0.5">
+                           <i className="fa-solid fa-check text-[#EAB308] text-xs"></i>
+                         </div>
+                         <span className="text-slate-700 text-sm font-medium">Agisce in profondità su problemi cronici come psoriasi e dermatiti</span>
+                       </li>
+                     </ul>
+                   </div>
+                 </div>
+
+                 <!-- Tabella Prezzi Laser -->
+                 <div className="bg-black text-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-10 relative overflow-hidden">
+                   <div className="relative z-10">
+                     <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tighter mb-6 text-center">LISTINO PREZZI</h3>
+                     <div className="space-y-6">
+                       ${LASER_TRICOLOGICI_DATA.map((row, idx) => html`
+                         <div key=${idx} className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6 last:border-0 gap-4">
+                           <div className="w-full md:w-1/3">
+                             <div className="text-lg font-black text-[#EAB308] uppercase">${row.name}</div>
+                           </div>
+                           <div className="w-full md:w-1/6 flex items-center gap-2 text-slate-300 text-sm font-bold uppercase">
+                             <i className="fa-regular fa-clock"></i> ${row.duration}
+                           </div>
+                           <div className="flex flex-wrap gap-2">
+                             <span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Uomo €${row.prices.uomo}</span>
+                             <span className="bg-white text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna €${row.prices.donna}</span>
+                             <span className="bg-[#EAB308] text-black text-[12px] font-black px-4 py-2 rounded-full uppercase">Donna+ €${row.prices.donnaPlus}</span>
+                           </div>
+                         </div>
+                       `)}
+                     </div>
+                     <div className="mt-8 bg-[#EAB308]/20 border border-[#EAB308]/40 rounded-2xl p-4 text-center">
+                       <p className="text-[#EAB308] font-black text-sm uppercase tracking-wider"><i className="fa-solid fa-circle-info mr-2"></i>La piega è inclusa nel prezzo.</p>
+                     </div>
+                   </div>
+                 </div>
+
+               </div>
+             </div>
            </div>
         </div>
       `;
