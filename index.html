@@ -433,7 +433,7 @@ main.overflow-y-auto {
       import { createRoot } from 'react-dom/client';
       import htm from 'htm';
 
-      const { useState, useEffect } = React;
+      const { useState, useEffect, useRef, useCallback } = React;
       const html = htm.bind(React.createElement);
 
       // --- DATI ---
@@ -2668,11 +2668,16 @@ main.overflow-y-auto {
           </div>
         `;
 
-      const DigitalMenu = () => {
+      const DigitalMenu = ({ scrollToTop }) => {
         const [gender, setGender] = useState(null);
         const [section, setSection] = useState(null);
         const [subSection, setSubSection] = useState(null);
         const [selectedPath, setSelectedPath] = useState(null);
+
+        // Scroll in cima ad ogni cambio di vista
+        useEffect(() => {
+          if (scrollToTop) scrollToTop();
+        }, [gender, section, subSection, selectedPath]);
 
         const handleBack = () => {
           if (selectedPath) setSelectedPath(null);
@@ -3373,6 +3378,19 @@ main.overflow-y-auto {
       const App = () => {
         const [activeTab, setActiveTab] = useState('home');
         const [isOpen, setIsOpen] = useState(false);
+        const mainRef = useRef(null);
+
+        // Funzione globale per scrollare in cima — accessibile dai figli
+        const scrollToTop = useCallback(() => {
+          if (mainRef.current) {
+            mainRef.current.scrollTo({ top: 0, behavior: 'instant' });
+          }
+        }, []);
+
+        // Scroll in cima quando cambia tab
+        useEffect(() => {
+          scrollToTop();
+        }, [activeTab]);
 
         return html`
           <div className="flex flex-col overflow-hidden relative" style=${{ height: 'var(--app-height, 100vh)' }}>
@@ -3388,9 +3406,9 @@ main.overflow-y-auto {
             <div className=${`fixed top-0 left-0 h-full z-50 transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
               <${Sidebar} activeTab=${activeTab} setActiveTab=${setActiveTab} onClose=${() => setIsOpen(false)} />
             </div>
-            <main className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6">
+            <main ref=${mainRef} className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6">
               <div className="max-w-[1200px] mx-auto pt-16 sm:pt-20 pb-8">
-                ${activeTab === 'home' ? html`<${DigitalMenu} />` : 
+                ${activeTab === 'home' ? html`<${DigitalMenu} scrollToTop=${scrollToTop} />` : 
                   activeTab === 'baby-check' ? html`<${BabyCheckList} />` : 
                   html`
                   <div className="flex flex-col items-center justify-center animate-zoom-in py-20">
