@@ -2754,11 +2754,25 @@ main.overflow-y-auto {
           } else if (hash === 'percorsi') {
             setGender('percorsi');
           }
-          // Pulisce l'hash dopo la navigazione per evitare problemi con il back button
-          if (hash) {
+        }, []);
+
+        // Aggiorna l'URL hash quando cambia la navigazione
+        useEffect(() => {
+          let newHash = '';
+          if (gender === 'donna') {
+            newHash = 'menu-donna';
+          } else if (gender === 'uomo') {
+            newHash = 'menu-uomo';
+          } else if (gender === 'percorsi') {
+            newHash = 'percorsi';
+          }
+          
+          if (newHash) {
+            history.replaceState(null, '', '#' + newHash);
+          } else {
             history.replaceState(null, '', window.location.pathname);
           }
-        }, []);
+        }, [gender]);
 
         // Scroll in cima ad ogni cambio di vista
         useEffect(() => {
