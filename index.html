@@ -2744,6 +2744,22 @@ main.overflow-y-auto {
         const [subSection, setSubSection] = useState(null);
         const [selectedPath, setSelectedPath] = useState(null);
 
+        // Deep link: legge l'hash dall'URL al caricamento
+        useEffect(() => {
+          const hash = window.location.hash.replace('#', '');
+          if (hash === 'menu-donna') {
+            setGender('donna');
+          } else if (hash === 'menu-uomo') {
+            setGender('uomo');
+          } else if (hash === 'percorsi') {
+            setGender('percorsi');
+          }
+          // Pulisce l'hash dopo la navigazione per evitare problemi con il back button
+          if (hash) {
+            history.replaceState(null, '', window.location.pathname);
+          }
+        }, []);
+
         // Scroll in cima ad ogni cambio di vista
         useEffect(() => {
           if (scrollToTop) scrollToTop();
