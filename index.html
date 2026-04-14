@@ -2530,29 +2530,281 @@ main.overflow-y-auto {
         </div>
       `;
 
-      // --- COMPONENTE NOVITÀ MODIFICATO: WORK IN PROGRESS ---
-      const NovitaList = () => html`
-        <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
-          <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
-            <!-- Header -->
-            <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter">NOVITÀ</h1>
-              <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
-            </div>
-
-            <div className="p-16 md:p-24 flex flex-col items-center justify-center text-center uppercase tracking-widest">
-                <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center text-[#EAB308] text-4xl mb-8 shadow-inner">
-                    <i className="fa-solid fa-screwdriver-wrench"></i>
+        // --- COMPONENTE NOVITÀ: UN GIOCO GOLOSO ---
+      const NovitaList = () => {
+        const [isSpinning, setIsSpinning] = useState(false);
+        const [rotation, setRotation] = useState(0);
+        const [prize, setPrize] = useState(null);
+        const [showModal, setShowModal] = useState(false);
+ 
+        const prizes = [
+          { name: 'Lindor', color: '#C41E3A' },
+          { name: 'Cremino', color: '#B8860B' },
+          { name: 'Bacio Perugina', color: '#1E3A5F' },
+          { name: 'Lindor', color: '#C41E3A' },
+          { name: 'Cremino', color: '#B8860B' },
+          { name: 'Bacio Perugina', color: '#1E3A5F' }
+        ];
+ 
+        const spinWheel = () => {
+          if (isSpinning) return;
+          setIsSpinning(true);
+          setPrize(null);
+ 
+          const prizeIndex = Math.floor(Math.random() * prizes.length);
+          const selectedPrize = prizes[prizeIndex];
+ 
+          const segmentSize = 360 / prizes.length;
+          const targetAngle = 360 - (prizeIndex * segmentSize + segmentSize / 2);
+          const spins = 5 + Math.floor(Math.random() * 4);
+          const newRotation = rotation + (spins * 360) + targetAngle - (rotation % 360);
+ 
+          setRotation(newRotation);
+ 
+          setTimeout(() => {
+            setPrize(selectedPrize);
+            setShowModal(true);
+            setIsSpinning(false);
+          }, 5200);
+        };
+ 
+        return html`
+          <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+            
+            <div className="rounded-[2rem] sm:rounded-[3rem] shadow-2xl overflow-hidden mb-10 relative">
+              
+              <!-- HEADER CON CIOCCOLATO CHE COLA -->
+              <div className="bg-gradient-to-b from-[#2C1810] via-[#3D2317] to-[#4A2C1A] relative overflow-hidden">
+                
+                <!-- Cioccolato che cola -->
+                <div className="absolute top-0 left-0 w-full h-20 z-10">
+                  <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="chocoGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style=${{ stopColor: '#3D2317' }} />
+                        <stop offset="100%" style=${{ stopColor: '#5D3A1A' }} />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="1200" height="15" fill="#3D2317"/>
+                    <path d="M0,15 Q60,15 60,45 Q60,70 45,70 Q30,70 30,50 Q30,15 90,15" fill="url(#chocoGrad1)"/>
+                    <path d="M90,15 Q130,15 130,35 Q130,50 120,50 Q110,50 110,38 Q110,15 160,15" fill="url(#chocoGrad1)"/>
+                    <path d="M160,15 Q220,15 220,55 Q220,75 200,75 Q180,75 180,50 Q180,15 270,15" fill="url(#chocoGrad1)"/>
+                    <path d="M270,15 Q310,15 310,40 Q310,55 298,55 Q286,55 286,42 Q286,15 360,15" fill="url(#chocoGrad1)"/>
+                    <path d="M360,15 Q420,15 420,60 Q420,78 400,78 Q380,78 380,55 Q380,15 480,15" fill="url(#chocoGrad1)"/>
+                    <path d="M480,15 Q520,15 520,38 Q520,52 510,52 Q500,52 500,40 Q500,15 570,15" fill="url(#chocoGrad1)"/>
+                    <path d="M570,15 Q630,15 630,50 Q630,68 612,68 Q594,68 594,48 Q594,15 690,15" fill="url(#chocoGrad1)"/>
+                    <path d="M690,15 Q730,15 730,42 Q730,58 718,58 Q706,58 706,44 Q706,15 790,15" fill="url(#chocoGrad1)"/>
+                    <path d="M790,15 Q850,15 850,58 Q850,76 830,76 Q810,76 810,52 Q810,15 910,15" fill="url(#chocoGrad1)"/>
+                    <path d="M910,15 Q950,15 950,36 Q950,48 940,48 Q930,48 930,38 Q930,15 1000,15" fill="url(#chocoGrad1)"/>
+                    <path d="M1000,15 Q1060,15 1060,52 Q1060,70 1042,70 Q1024,70 1024,48 Q1024,15 1120,15" fill="url(#chocoGrad1)"/>
+                    <path d="M1120,15 Q1160,15 1160,40 Q1160,54 1148,54 Q1136,54 1136,42 Q1136,15 1200,15 L1200,0 L0,0 L0,15" fill="url(#chocoGrad1)"/>
+                  </svg>
                 </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic mb-6 tracking-tighter text-black">Work in Progress</h2>
-                <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.3em] max-w-md leading-relaxed">
-                    Stiamo preparando grandi novità per te.<br/>L'eccellenza Beautrí richiede tempo, cura e passione.
-                </p>
-                <div className="w-12 h-1 bg-slate-100 mt-12 rounded-full"></div>
+ 
+                <!-- Contenuto header -->
+                <div className="relative z-20 pt-24 pb-12 px-6 text-center">
+                  <div className="inline-block bg-gradient-to-r from-[#EAB308] via-[#F59E0B] to-[#EAB308] text-[#2C1810] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest mb-6 shadow-lg border-2 border-white/20">
+                    🍫 Novità Esclusiva 🍫
+                  </div>
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white uppercase mb-4" style=${{ textShadow: '3px 3px 8px rgba(0,0,0,0.6)' }}>
+                    Un Gioco Goloso
+                  </h1>
+                  <p className="text-[#D4A574] text-lg md:text-xl font-medium max-w-2xl mx-auto">
+                    La tua opinione vale cioccolato... scopri quale ti aspetta!
+                  </p>
+                </div>
+ 
+                <div className="absolute top-36 left-10 text-2xl opacity-30">✨</div>
+                <div className="absolute top-40 right-16 text-xl opacity-25">✨</div>
+                <div className="absolute bottom-8 left-1/4 text-xl opacity-20">🍫</div>
+                <div className="absolute bottom-6 right-1/4 text-xl opacity-20">🍫</div>
+              </div>
+ 
+              <!-- CONTENUTO PRINCIPALE -->
+              <div className="bg-gradient-to-b from-[#FDF6E3] to-[#FFF8DC] p-6 md:p-10 lg:p-14 relative">
+                
+                <!-- Come funziona -->
+                <div className="bg-gradient-to-br from-[#4A2C17] to-[#2C1810] rounded-[2rem] p-6 md:p-8 mb-10 shadow-xl border-4 border-[#EAB308]/30 relative z-10">
+                  <h2 className="text-xl md:text-2xl font-black text-[#EAB308] uppercase text-center mb-6 tracking-wide">
+                    <i className="fa-solid fa-gift mr-3"></i>Come Funziona
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 text-center border border-white/10">
+                      <div className="w-12 h-12 bg-[#EAB308] text-[#2C1810] rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 shadow-lg">1</div>
+                      <div className="flex items-center justify-center gap-1 mb-3">
+                        <div className="flex text-[#EAB308] text-base">
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/480px-Google_%22G%22_logo.svg.png" alt="Google" className="w-5 h-5 ml-2"/>
+                      </div>
+                      <h3 className="text-white font-bold text-sm uppercase mb-2">Lascia una Recensione</h3>
+                      <p className="text-[#D4A574] text-xs">Scansiona il QR e racconta la tua esperienza</p>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 text-center border border-white/10">
+                      <div className="w-12 h-12 bg-[#EAB308] text-[#2C1810] rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 shadow-lg">2</div>
+                      <div className="text-3xl mb-3">🎰</div>
+                      <h3 className="text-white font-bold text-sm uppercase mb-2">Gira la Ruota</h3>
+                      <p className="text-[#D4A574] text-xs">Scopri quale dolcezza ti aspetta!</p>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 text-center border border-white/10">
+                      <div className="w-12 h-12 bg-[#EAB308] text-[#2C1810] rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 shadow-lg">3</div>
+                      <div className="text-3xl mb-3">🏆</div>
+                      <h3 className="text-white font-bold text-sm uppercase mb-2">Ritira il Premio</h3>
+                      <p className="text-[#D4A574] text-xs">Goditi il tuo cioccolatino!</p>
+                    </div>
+                  </div>
+                </div>
+ 
+                <!-- QR CODE -->
+                <div className="bg-white rounded-[2rem] p-6 md:p-8 mb-10 shadow-lg border-2 border-[#EAB308]/20 relative z-10">
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <div className="relative">
+                      <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-[#EAB308] rounded-2xl px-4 py-2" style=${{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 75%, 60% 75%, 50% 100%, 40% 75%, 0% 75%)' }}>
+                        <span className="text-[#2C1810] font-bold text-sm whitespace-nowrap">📱 Scansiona qui!</span>
+                      </div>
+                      <div className="bg-white p-3 rounded-2xl shadow-lg border-4 border-[#EAB308]/30 mt-4">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://g.page/r/CW6M9hJNV-ekEAE/review&color=4A2C17" alt="QR Code Recensioni" className="w-40 h-40 md:w-44 md:h-44"/>
+                      </div>
+                    </div>
+                    <div className="text-center md:text-left">
+                      <h3 className="text-xl md:text-2xl font-black text-[#4A2C17] uppercase mb-2">
+                        <i className="fa-solid fa-qrcode mr-2 text-[#EAB308]"></i>Recensisci
+                      </h3>
+                      <p className="text-[#5D3A1A] text-sm md:text-base max-w-xs">
+                        Inquadra con il tuo telefono e lascia una recensione sulla tua esperienza da Beautrì
+                      </p>
+                      <div className="flex items-center justify-center md:justify-start gap-1 mt-3 text-[#EAB308]">
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+ 
+                <!-- TENTA LA FORTUNA -->
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl md:text-3xl font-black text-[#4A2C17] uppercase">🎰 Tenta la Fortuna! 🎰</h3>
+                </div>
+ 
+                <div className="flex flex-col items-center mb-10 relative z-10">
+                  
+                  <div className="relative w-72 h-72 md:w-96 md:h-96 mb-8">
+                    
+                    <div className="absolute -inset-5 rounded-full bg-gradient-to-br from-[#EAB308] via-[#D4A574] to-[#EAB308] shadow-2xl" style=${{ boxShadow: '0 0 50px rgba(234, 179, 8, 0.5)' }}></div>
+                    <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-[#4A2C17] to-[#2C1810]"></div>
+                    
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-30">
+                      <div className="w-0 h-0 border-l-[22px] border-r-[22px] border-t-[40px] border-l-transparent border-r-transparent border-t-[#EAB308]" style=${{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }}></div>
+                    </div>
+ 
+                    <svg 
+                      className="absolute inset-0 w-full h-full" 
+                      viewBox="0 0 400 400"
+                      style=${{ transform: 'rotate(' + rotation + 'deg)', transition: isSpinning ? 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none' }}
+                    >
+                      <defs>
+                        <linearGradient id="lindorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style=${{ stopColor: '#C41E3A' }}/>
+                          <stop offset="100%" style=${{ stopColor: '#8B0000' }}/>
+                        </linearGradient>
+                        <linearGradient id="creminoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style=${{ stopColor: '#D4A574' }}/>
+                          <stop offset="100%" style=${{ stopColor: '#8B7355' }}/>
+                        </linearGradient>
+                        <linearGradient id="bacioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style=${{ stopColor: '#1E3A5F' }}/>
+                          <stop offset="100%" style=${{ stopColor: '#0D1B2A' }}/>
+                        </linearGradient>
+                      </defs>
+                      
+                      <path d="M200,200 L200,0 A200,200 0 0,1 373.2,100 Z" fill="url(#lindorGrad)"/>
+                      <path d="M200,200 L373.2,100 A200,200 0 0,1 373.2,300 Z" fill="url(#creminoGrad)"/>
+                      <path d="M200,200 L373.2,300 A200,200 0 0,1 200,400 Z" fill="url(#bacioGrad)"/>
+                      <path d="M200,200 L200,400 A200,200 0 0,1 26.8,300 Z" fill="url(#lindorGrad)"/>
+                      <path d="M200,200 L26.8,300 A200,200 0 0,1 26.8,100 Z" fill="url(#creminoGrad)"/>
+                      <path d="M200,200 L26.8,100 A200,200 0 0,1 200,0 Z" fill="url(#bacioGrad)"/>
+                      
+                      <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(30, 200, 200) translate(0, -130)">LINDOR</text>
+                      <text x="200" y="200" fill="white" font-size="14" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(90, 200, 200) translate(0, -130)">CREMINO</text>
+                      <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(150, 200, 200) translate(0, -130)">BACIO</text>
+                      <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(210, 200, 200) translate(0, -130)">LINDOR</text>
+                      <text x="200" y="200" fill="white" font-size="14" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(270, 200, 200) translate(0, -130)">CREMINO</text>
+                      <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(330, 200, 200) translate(0, -130)">BACIO</text>
+                      
+                      <circle cx="200" cy="200" r="45" fill="#4A2C17" stroke="#EAB308" stroke-width="6"/>
+                      <text x="200" y="210" text-anchor="middle" font-size="35">🍫</text>
+                    </svg>
+                  </div>
+ 
+                  <button 
+                    onClick=${spinWheel}
+                    disabled=${isSpinning}
+                    className="bg-gradient-to-r from-[#EAB308] via-[#F59E0B] to-[#EAB308] text-[#2C1810] px-12 py-5 rounded-full text-xl md:text-2xl font-black uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all border-4 border-white/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                    style=${{ boxShadow: '0 10px 40px rgba(234, 179, 8, 0.5)' }}
+                  >
+                    ${isSpinning ? '🎰 Girando...' : '🎰 Gira la Ruota!'}
+                  </button>
+                </div>
+ 
+                <!-- BOX P.S. -->
+                <div className="bg-gradient-to-br from-[#4A2C17] to-[#2C1810] rounded-[2rem] p-6 md:p-8 text-center border-4 border-[#EAB308]/30 shadow-xl relative z-10">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <span className="bg-[#EAB308] text-[#2C1810] px-4 py-1 rounded-full text-sm font-black uppercase">P.S.</span>
+                  </div>
+                  <h3 className="text-[#EAB308] font-black text-xl md:text-2xl uppercase mb-3">
+                    ⭐ Hai già lasciato una recensione? ⭐
+                  </h3>
+                  <p className="text-[#D4A574] font-medium text-lg md:text-xl">
+                    Fantastico! Gira la ruota e goditi il tuo cioccolatino! 🍫
+                  </p>
+                </div>
+ 
+              </div>
             </div>
+ 
+            <!-- MODAL PREMIO -->
+            ${showModal && prize && html`
+              <div 
+                className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+                onClick=${() => setShowModal(false)}
+              >
+                <div 
+                  className="bg-gradient-to-b from-[#FDF6E3] to-[#FFF8DC] rounded-[2rem] p-8 md:p-12 max-w-md w-full text-center shadow-2xl border-4 border-[#EAB308] animate-zoom-in"
+                  onClick=${(e) => e.stopPropagation()}
+                >
+                  <div className="text-6xl mb-6">🎉</div>
+                  <h2 className="text-3xl font-black text-[#2C1810] uppercase mb-2">Complimenti!</h2>
+                  <p className="text-[#5D3A1A] font-medium mb-6 text-lg">Hai vinto un delizioso</p>
+                  <div 
+                    className="text-3xl font-black uppercase mb-6 py-4 px-8 rounded-full inline-block text-white shadow-xl"
+                    style=${{ background: 'linear-gradient(135deg, ' + prize.color + ', ' + prize.color + 'dd)' }}
+                  >
+                    ${prize.name}
+                  </div>
+                  <p className="text-[#8B7355] text-base mb-8">
+                    Mostra questo schermo al nostro team<br/>e ritira il tuo premio! 🍫
+                  </p>
+                  <button 
+                    onClick=${() => setShowModal(false)}
+                    className="bg-gradient-to-r from-[#4A2C17] to-[#2C1810] text-white px-10 py-4 rounded-full font-bold uppercase tracking-wide hover:scale-105 transition-all shadow-xl text-lg"
+                  >
+                    🏆 Ritira il Premio 🏆
+                  </button>
+                </div>
+              </div>
+            `}
+ 
           </div>
-        </div>
-      `;
+        `;
+      };    
+      
       
       const BabyCheckList = () => html`
           <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
