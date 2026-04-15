@@ -1907,7 +1907,11 @@ main.overflow-y-auto {
         `;
       };
 
-      const ColorazioniList = () => html`
+     const ColorazioniList = () => {
+        const [showTransformerCS, setShowTransformerCS] = useState(false);
+        const [showTransformerVegana, setShowTransformerVegana] = useState(false);
+        
+        return html`
         <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
           <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-xl overflow-hidden border border-white mb-10">
             <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
@@ -1920,10 +1924,10 @@ main.overflow-y-auto {
                 dove ogni proposta è pensata per rispettare la salute di cute e
                 capelli, creando bellezza. Un viaggio unico per realizzare ogni
                 desiderio cromatico in totale comfort. Grazie a prodotti certificati
-                e formulazioni all’avanguardia, offriamo risultati sorprendenti:
+                e formulazioni all'avanguardia, offriamo risultati sorprendenti:
                 copertura impeccabile, riflessi intensi e capelli più sani e luminosi.
                 Inoltre, evitiamo strumenti che possano danneggiare la struttura dei
-                tuoi capelli, garantendo un’esperienza sicura e innovativa.
+                tuoi capelli, garantendo un'esperienza sicura e innovativa.
               </p>
             </div>
           </div>
@@ -1948,14 +1952,14 @@ main.overflow-y-auto {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 normal-case">
                 <div className="space-y-6">
                   <div className="bg-white p-6 rounded-[2rem] border border-blue-50 shadow-sm">
-                    <h4 className="text-blue-900 font-black uppercase text-xs mb-4 underline decoration-blue-300 decoration-2 underline-offset-4">Cos’è il microbioma del cuoio capelluto?</h4>
+                    <h4 className="text-blue-900 font-black uppercase text-xs mb-4 underline decoration-blue-300 decoration-2 underline-offset-4">Cos'è il microbioma del cuoio capelluto?</h4>
                     <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                      È l’insieme di microrganismi (microbiota) che vivono sul cuoio
+                      È l'insieme di microrganismi (microbiota) che vivono sul cuoio
                       capelluto e svolgono una funzione difensiva. Questo equilibrio può
                       essere alterato da fattori come la colorazione.
                     </p>
                     <p className="text-slate-600 text-sm leading-relaxed">
-                      Quando i microrganismi “amici” (prebiotici) diminuiscono, i batteri
+                      Quando i microrganismi "amici" (prebiotici) diminuiscono, i batteri
                       nocivi proliferano, causando squilibri. Per questo è fondamentale
                       integrare elementi prebiotici che nutrano e rinforzino il microbiota,
                       garantendo protezione naturale per cute e capelli.
@@ -1966,7 +1970,7 @@ main.overflow-y-auto {
                 </div>
                 <div className="bg-blue-900 text-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] uppercase flex flex-col justify-center relative overflow-hidden">
                   <div className="relative z-10">
-                    <h4 className="text-blue-200 text-xs font-black tracking-widest mb-4">Addio colorazioni aggressive, benvenuta colorazione probiotica “All Free”</h4>
+                    <h4 className="text-blue-200 text-xs font-black tracking-widest mb-4">Addio colorazioni aggressive, benvenuta colorazione probiotica "All Free"</h4>
                     <p className="text-blue-100 text-xs leading-relaxed mb-6 normal-case">Una colorazione innovativa che rispetta sia la natura che il capello, grazie a preziosi attivi probiotici che trattano delicatamente cute e capelli.</p>
                     <div className="space-y-2">
                         <div className="text-[11px] font-black text-white mb-2">Adatta a:</div>
@@ -1977,6 +1981,45 @@ main.overflow-y-auto {
                     <div className="mt-8 pt-4 border-t border-white/10 text-[10px] font-black tracking-widest text-blue-300 italic normal-case">Risultati: Massimo rispetto della cute, senza prurito o fastidi.</div>
                   </div>
                 </div>
+              </div>
+
+              <!-- UPGRADE TRANSFORMER COLORE SICURO -->
+              <div className="mt-10 pt-8 border-t-2 border-dashed border-[#EAB308]/30">
+                <button 
+                  onClick=${() => setShowTransformerCS(!showTransformerCS)}
+                  className="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-gradient-to-r from-[#EAB308]/10 to-transparent p-5 rounded-2xl border-2 border-[#EAB308]/30 hover:border-[#EAB308] transition-all group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#EAB308] rounded-xl flex items-center justify-center text-black text-xl shadow-lg group-hover:scale-110 transition-transform">
+                      <i className="fa-solid fa-plus"></i>
+                    </div>
+                    <div className="text-left">
+                      <p className="text-[10px] font-black text-[#EAB308] uppercase tracking-widest">Potenzia il tuo servizio</p>
+                      <p className="text-lg font-black text-slate-800 uppercase">Aggiungi TRANSFORMER</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="bg-[#EAB308] text-black px-4 py-2 rounded-full font-black text-sm">+17€ / +27€</span>
+                    <i className=${`fa-solid fa-chevron-down text-[#EAB308] transition-transform duration-300 ${showTransformerCS ? 'rotate-180' : ''}`}></i>
+                  </div>
+                </button>
+                
+                ${showTransformerCS && html`
+                  <div className="mt-4 bg-white border-2 border-[#EAB308] rounded-[2rem] p-6 md:p-8 animate-fade-in shadow-lg">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
+                      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl shrink-0 shadow-inner">
+                        <i className="fa-solid fa-arrows-rotate"></i>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-black text-black uppercase mb-1">TRANSFORMER</h3>
+                        <div className="text-[#EAB308] font-black text-lg mb-4">DA 17€ A 27€</div>
+                        <p className="text-slate-600 leading-relaxed">
+                          Trasformiamo il tuo colore in una vera e propria ricostruzione dello stelo. Abbiamo la soluzione per te! Un concentrato naturale di aminoacidi che mentre colorano, lucidano e ravvivano i riflessi, proteggono profondamente e riparano la struttura rendendoli sani e splendenti.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                `}
               </div>
             </section>
 
@@ -1995,15 +2038,15 @@ main.overflow-y-auto {
               </div>
               <div className="space-y-8 normal-case text-[#4F5E4E]">
                 <p className="text-lg leading-relaxed max-w-4xl">
-                  Grazie agli attivi di origine naturale e alla sostituzione dell’acqua
-                  con sostanze idratanti, questo colore ha rivoluzionato l’esperienza
+                  Grazie agli attivi di origine naturale e alla sostituzione dell'acqua
+                  con sostanze idratanti, questo colore ha rivoluzionato l'esperienza
                   della colorazione. È il primo colore senza acqua, più concentrato,
                   senza odori né bruciori, e con effetti benefici sui capelli.
                 </p>
                 <div className="bg-white p-8 rounded-[2rem] border border-[#E2E8D8]">
                   <p className="font-black text-[#3A4D39] uppercase text-xs mb-3">Ingredienti chiave:</p>
                   <p className="text-sm leading-relaxed text-[#4F5E4E]">
-                    Aloe vera, spirulina, olio d’oliva, olio di limnanthes alba,
+                    Aloe vera, spirulina, olio d'oliva, olio di limnanthes alba,
                     burro di babassu, burro di karitè, aminoacidi vegetali, olio di vetiver
                     e collagene marino: un mix di oli naturali per idratare e lenire anche
                     le cuti più sensibili.
@@ -2011,8 +2054,47 @@ main.overflow-y-auto {
                 </div>
                 <div className="bg-[#3A4D39] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] text-white text-center uppercase tracking-tighter">
                   <p className="text-[11px] font-black tracking-[0.2em] text-[#E2E8D8]">Privo di ammoniaca, fragranze e nichel, con ingredienti vegani, offre 72 nuance intermiscelabili, perfette per ogni esigenza.</p>
-                  <p className="text-[#96B894] text-xs font-black mt-4 italic tracking-widest">Un ‘esperienza tutta da vivere.</p>
+                  <p className="text-[#96B894] text-xs font-black mt-4 italic tracking-widest">Un 'esperienza tutta da vivere.</p>
                 </div>
+              </div>
+
+              <!-- UPGRADE TRANSFORMER COLORAZIONE VEGANA -->
+              <div className="mt-10 pt-8 border-t-2 border-dashed border-[#EAB308]/30">
+                <button 
+                  onClick=${() => setShowTransformerVegana(!showTransformerVegana)}
+                  className="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-gradient-to-r from-[#EAB308]/10 to-transparent p-5 rounded-2xl border-2 border-[#EAB308]/30 hover:border-[#EAB308] transition-all group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#EAB308] rounded-xl flex items-center justify-center text-black text-xl shadow-lg group-hover:scale-110 transition-transform">
+                      <i className="fa-solid fa-plus"></i>
+                    </div>
+                    <div className="text-left">
+                      <p className="text-[10px] font-black text-[#EAB308] uppercase tracking-widest">Potenzia il tuo servizio</p>
+                      <p className="text-lg font-black text-slate-800 uppercase">Aggiungi TRANSFORMER</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="bg-[#EAB308] text-black px-4 py-2 rounded-full font-black text-sm">+17€ / +27€</span>
+                    <i className=${`fa-solid fa-chevron-down text-[#EAB308] transition-transform duration-300 ${showTransformerVegana ? 'rotate-180' : ''}`}></i>
+                  </div>
+                </button>
+                
+                ${showTransformerVegana && html`
+                  <div className="mt-4 bg-white border-2 border-[#EAB308] rounded-[2rem] p-6 md:p-8 animate-fade-in shadow-lg">
+                    <div className="flex flex-col md:flex-row items-start gap-6">
+                      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl shrink-0 shadow-inner">
+                        <i className="fa-solid fa-arrows-rotate"></i>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-black text-black uppercase mb-1">TRANSFORMER</h3>
+                        <div className="text-[#EAB308] font-black text-lg mb-4">DA 17€ A 27€</div>
+                        <p className="text-slate-600 leading-relaxed">
+                          Trasformiamo il tuo colore in una vera e propria ricostruzione dello stelo. Abbiamo la soluzione per te! Un concentrato naturale di aminoacidi che mentre colorano, lucidano e ravvivano i riflessi, proteggono profondamente e riparano la struttura rendendoli sani e splendenti.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                `}
               </div>
             </section>
 
@@ -2049,7 +2131,7 @@ main.overflow-y-auto {
                    </div>
                    <div className="bg-white/5 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-10 flex flex-col items-center justify-center text-center border border-white/10 backdrop-blur-sm">
                       <p className="text-[#EAB308] text-lg font-black italic leading-relaxed normal-case">
-                        "Un momento di pausa, silenzio e bellezza per ritrovare l’equilibrio,
+                        "Un momento di pausa, silenzio e bellezza per ritrovare l'equilibrio,
                         dentro e fuori."
                       </p>
                       <p className="text-[10px] text-white mt-8 font-black uppercase tracking-[0.4em] opacity-80 leading-relaxed">
@@ -2062,6 +2144,7 @@ main.overflow-y-auto {
           </div>
         </div>
       `;
+      }
 
       const SchiaritureList = () => html`
         <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
