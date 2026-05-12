@@ -2537,7 +2537,7 @@ main.overflow-y-auto {
       `;
 
          // --- COMPONENTE NOVITÀ: UN GIOCO GOLOSO ---
-        const NovitaList = () => {
+        const NovitaList = ({ gender }) => {
         const [isSpinning, setIsSpinning] = useState(false);
         const [rotation, setRotation] = useState(0);
         const [prize, setPrize] = useState(null);
@@ -2962,6 +2962,7 @@ main.overflow-y-auto {
               <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tighter uppercase leading-[1.1] mb-4">Le ultime novità per te</h1>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
+            ${gender !== 'uomo' && html`
               <button onClick=${() => { setSurveyStep(0); setSurveyDone(false); setSurveyNo(false); setView('oleazioni'); }}
                 className="flex-1 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border shadow-lg transition-all hover:scale-[1.01] active:scale-95 text-left"
                 style=${{ background:'linear-gradient(160deg,#fffbe6 0%,#fff5c0 100%)', borderColor:'rgba(234,179,10,0.3)' }}>
@@ -2974,6 +2975,7 @@ main.overflow-y-auto {
                   <div style=${{ marginTop:'1.25rem', display:'inline-flex', alignItems:'center', gap:'0.5rem', background:'#1A1A1A', color:'#EAB308', padding:'0.5rem 1.25rem', borderRadius:'999px', fontSize:'0.8rem', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.08em' }}>Scopri →</div>
                 </div>
               </button>
+              `}
               <button onClick=${() => setView('goloso')}
                 className="flex-1 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-lg transition-all hover:scale-[1.01] active:scale-95 text-left"
                 style=${{ background:'linear-gradient(160deg,#2C1810 0%,#4A2C1A 100%)', border:'1px solid rgba(234,179,8,0.3)' }}>
@@ -3887,7 +3889,7 @@ main.overflow-y-auto {
             if (section === 'novita') {
                 return html`
                 <div className="relative animate-fade-in">
-                    <${NovitaList} />
+                   <${NovitaList} gender=${gender} />
                 </div>
                 `;
             }
