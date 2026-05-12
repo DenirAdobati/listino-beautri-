@@ -2614,11 +2614,17 @@ main.overflow-y-auto {
       `;
 
          // --- COMPONENTE NOVITÀ: UN GIOCO GOLOSO ---
-      const NovitaList = () => {
+        const NovitaList = () => {
         const [isSpinning, setIsSpinning] = useState(false);
         const [rotation, setRotation] = useState(0);
         const [prize, setPrize] = useState(null);
         const [showModal, setShowModal] = useState(false);
+        const [view, setView] = useState(null);
+        const [surveyStep, setSurveyStep] = useState(0);
+        const [slider1, setSlider1] = useState(7);
+        const [slider3, setSlider3] = useState(8);
+        const [surveyDone, setSurveyDone] = useState(false);
+        const [surveyNo, setSurveyNo] = useState(false);
  
         const prizes = [
           { name: 'Lindor', color: '#C41E3A' },
@@ -2633,17 +2639,13 @@ main.overflow-y-auto {
           if (isSpinning) return;
           setIsSpinning(true);
           setPrize(null);
- 
           const prizeIndex = Math.floor(Math.random() * prizes.length);
           const selectedPrize = prizes[prizeIndex];
- 
           const segmentSize = 360 / prizes.length;
           const targetAngle = 360 - (prizeIndex * segmentSize + segmentSize / 2);
           const spins = 5 + Math.floor(Math.random() * 4);
           const newRotation = rotation + (spins * 360) + targetAngle - (rotation % 360);
- 
           setRotation(newRotation);
- 
           setTimeout(() => {
             setPrize(selectedPrize);
             setShowModal(true);
@@ -2651,20 +2653,253 @@ main.overflow-y-auto {
           }, 5200);
         };
  
-        return html`
+        // === VIEW: OLEAZIONI ===
+        if (view === 'oleazioni') {
+ 
+          // Sondaggio step 0: intro
+          if (!surveyDone && !surveyNo && surveyStep === 0) return html`
+            <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-lg max-w-lg mx-auto text-center">
+                <div style=${{ display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', marginBottom:'2rem' }}>
+                  ${[0,1,2,3].map(i => html`<span key=${i} style=${{ width: i===0?'2rem':'0.5rem', height:'0.5rem', borderRadius:'999px', background: i===0?'#EAB308':'#e5e7eb', transition:'all 0.3s' }}></span>`)}
+                </div>
+                <div style=${{ fontSize:'4rem', marginBottom:'1.25rem' }}>🛟</div>
+                <h1 style=${{ fontSize:'clamp(1.5rem,5vw,2.2rem)', fontWeight:900, color:'#1A1A1A', letterSpacing:'-0.03em', lineHeight:1.15, margin:'0 0 1rem' }}>
+                  Sei pronta ad affrontare<br/>quest'estate con i capelli<br/><span style=${{ color:'#EAB308' }}>che hai sempre sognato?</span>
+                </h1>
+                <p style=${{ color:'#9ca3af', fontSize:'0.9rem', fontWeight:500, margin:'0 0 2rem', lineHeight:1.6 }}>
+                  Rispondi a 3 domande rapide.<br/>Abbiamo qualcosa di speciale per te.
+                </p>
+                <button onClick=${() => setSurveyStep(1)} style=${{ background:'#1A1A1A', color:'#EAB308', border:'none', borderRadius:'999px', padding:'1rem 2.5rem', fontWeight:900, fontSize:'1rem', cursor:'pointer', letterSpacing:'0.05em', textTransform:'uppercase' }}>Inizia →</button>
+              </div>
+            </div>
+          `;
+ 
+          // Sondaggio step 1: slider lunghezze
+          if (!surveyDone && !surveyNo && surveyStep === 1) return html`
+            <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-lg max-w-lg mx-auto text-center">
+                <div style=${{ display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', marginBottom:'2rem' }}>
+                  ${[0,1,2,3].map(i => html`<span key=${i} style=${{ width: i===1?'2rem':'0.5rem', height:'0.5rem', borderRadius:'999px', background: i<=1?'#EAB308':'#e5e7eb', transition:'all 0.3s' }}></span>`)}
+                </div>
+                <div style=${{ fontSize:'3rem', marginBottom:'1rem' }}>${slider1 >= 8 ? '😍' : slider1 >= 5 ? '😊' : '😐'}</div>
+                <h2 style=${{ fontSize:'clamp(1.2rem,4vw,1.6rem)', fontWeight:900, color:'#1A1A1A', letterSpacing:'-0.02em', margin:'0 0 0.5rem', lineHeight:1.25 }}>
+                  Quanto tieni alle tue lunghezze?
+                </h2>
+                <p style=${{ color:'#9ca3af', fontSize:'0.85rem', fontWeight:500, margin:'0 0 2rem' }}>Scorri per scegliere il tuo voto</p>
+                <div style=${{ background:'#F8F6F1', borderRadius:'1.5rem', padding:'1.5rem 1.5rem 1rem', marginBottom:'2rem' }}>
+                  <div style=${{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'1rem' }}>
+                    <span style=${{ fontSize:'0.75rem', fontWeight:700, color:'#9ca3af' }}>Per niente</span>
+                    <div style=${{ background:'#EAB308', color:'#1A1A1A', fontWeight:900, fontSize:'1.6rem', width:'3rem', height:'3rem', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>${slider1}</div>
+                    <span style=${{ fontSize:'0.75rem', fontWeight:700, color:'#9ca3af' }}>Moltissimo</span>
+                  </div>
+                  <input type="range" min="1" max="10" value=${slider1}
+                    onInput=${e => setSlider1(parseInt(e.target.value))}
+                    style=${{ WebkitAppearance:'none', appearance:'none', width:'100%', height:'8px', borderRadius:'4px', background:`linear-gradient(to right, #EAB308 ${(slider1-1)/9*100}%, #e5e7eb ${(slider1-1)/9*100}%)`, outline:'none', cursor:'pointer' }}
+                  />
+                  <div style=${{ display:'flex', justifyContent:'space-between', marginTop:'0.5rem' }}>
+                    <span style=${{ fontSize:'0.7rem', color:'#d1d5db', fontWeight:600 }}>1</span>
+                    <span style=${{ fontSize:'0.7rem', color:'#d1d5db', fontWeight:600 }}>10</span>
+                  </div>
+                </div>
+                <button onClick=${() => setSurveyStep(2)} style=${{ background:'#1A1A1A', color:'#EAB308', border:'none', borderRadius:'999px', padding:'1rem 2.5rem', fontWeight:900, fontSize:'1rem', cursor:'pointer', letterSpacing:'0.05em', textTransform:'uppercase' }}>Avanti →</button>
+              </div>
+            </div>
+          `;
+ 
+          // Sondaggio step 2: sì/no proteggere
+          if (!surveyDone && !surveyNo && surveyStep === 2) return html`
+            <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-lg max-w-lg mx-auto text-center">
+                <div style=${{ display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', marginBottom:'2rem' }}>
+                  ${[0,1,2,3].map(i => html`<span key=${i} style=${{ width: i===2?'2rem':'0.5rem', height:'0.5rem', borderRadius:'999px', background: i<=2?'#EAB308':'#e5e7eb', transition:'all 0.3s' }}></span>`)}
+                </div>
+                <div style=${{ fontSize:'3.5rem', marginBottom:'1.25rem' }}>☀️</div>
+                <h2 style=${{ fontSize:'clamp(1.2rem,4vw,1.6rem)', fontWeight:900, color:'#1A1A1A', letterSpacing:'-0.02em', margin:'0 0 0.5rem', lineHeight:1.25 }}>
+                  Ti piacerebbe proteggere<br/>i tuoi capelli durante l'estate?
+                </h2>
+                <p style=${{ color:'#9ca3af', fontSize:'0.85rem', fontWeight:500, margin:'0 0 2rem', lineHeight:1.6 }}>Mantenerli belli, forti e luminosi anche sotto il sole.</p>
+                <div style=${{ display:'flex', gap:'1rem' }}>
+                  <button onClick=${() => setSurveyStep(3)} style=${{ flex:1, padding:'1.1rem 1rem', borderRadius:'1.25rem', border:'none', fontWeight:800, fontSize:'1rem', cursor:'pointer', background:'#EAB308', color:'#1A1A1A', letterSpacing:'0.04em' }}>Sì, voglio!</button>
+                  <button onClick=${() => setSurveyNo(true)} style=${{ flex:1, padding:'1.1rem 1rem', borderRadius:'1.25rem', border:'2px solid #e5e7eb', fontWeight:800, fontSize:'1rem', cursor:'pointer', background:'white', color:'#6b7280', letterSpacing:'0.04em' }}>No, per ora no</button>
+                </div>
+              </div>
+            </div>
+          `;
+ 
+          // Sondaggio step 3: slider settembre
+          if (!surveyDone && !surveyNo && surveyStep === 3) return html`
+            <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-lg max-w-lg mx-auto text-center">
+                <div style=${{ display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', marginBottom:'2rem' }}>
+                  ${[0,1,2,3].map(i => html`<span key=${i} style=${{ width: i===3?'2rem':'0.5rem', height:'0.5rem', borderRadius:'999px', background:'#EAB308', transition:'all 0.3s' }}></span>`)}
+                </div>
+                <div style=${{ fontSize:'3rem', marginBottom:'1rem' }}>${slider3 >= 8 ? '🌟' : slider3 >= 5 ? '✨' : '💫'}</div>
+                <h2 style=${{ fontSize:'clamp(1.1rem,3.5vw,1.5rem)', fontWeight:900, color:'#1A1A1A', letterSpacing:'-0.02em', margin:'0 0 0.5rem', lineHeight:1.25 }}>
+                  Quanto vorresti arrivare<br/>a settembre con capelli sani, forti e luminosi?
+                </h2>
+                <p style=${{ color:'#9ca3af', fontSize:'0.85rem', fontWeight:500, margin:'0 0 2rem' }}>Da 1 a 10.</p>
+                <div style=${{ background:'#F8F6F1', borderRadius:'1.5rem', padding:'1.5rem 1.5rem 1rem', marginBottom:'2rem' }}>
+                  <div style=${{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'1rem' }}>
+                    <span style=${{ fontSize:'0.75rem', fontWeight:700, color:'#9ca3af' }}>Per niente</span>
+                    <div style=${{ background:'#EAB308', color:'#1A1A1A', fontWeight:900, fontSize:'1.6rem', width:'3rem', height:'3rem', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>${slider3}</div>
+                    <span style=${{ fontSize:'0.75rem', fontWeight:700, color:'#9ca3af' }}>Moltissimo</span>
+                  </div>
+                  <input type="range" min="1" max="10" value=${slider3}
+                    onInput=${e => setSlider3(parseInt(e.target.value))}
+                    style=${{ WebkitAppearance:'none', appearance:'none', width:'100%', height:'8px', borderRadius:'4px', background:`linear-gradient(to right, #EAB308 ${(slider3-1)/9*100}%, #e5e7eb ${(slider3-1)/9*100}%)`, outline:'none', cursor:'pointer' }}
+                  />
+                  <div style=${{ display:'flex', justifyContent:'space-between', marginTop:'0.5rem' }}>
+                    <span style=${{ fontSize:'0.7rem', color:'#d1d5db', fontWeight:600 }}>1</span>
+                    <span style=${{ fontSize:'0.7rem', color:'#d1d5db', fontWeight:600 }}>10</span>
+                  </div>
+                </div>
+                <button onClick=${() => setSurveyDone(true)} style=${{ background:'#1A1A1A', color:'#EAB308', border:'none', borderRadius:'999px', padding:'1rem 2.5rem', fontWeight:900, fontSize:'1rem', cursor:'pointer', letterSpacing:'0.05em', textTransform:'uppercase' }}>Scopri il risultato →</button>
+              </div>
+            </div>
+          `;
+ 
+          // Risposta NO
+          if (surveyNo) return html`
+            <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-lg max-w-lg mx-auto text-center">
+                <div style=${{ fontSize:'3.5rem', marginBottom:'1.5rem' }}>😊</div>
+                <h2 style=${{ fontSize:'1.4rem', fontWeight:900, color:'#1A1A1A', letterSpacing:'-0.02em', margin:'0 0 1rem', lineHeight:1.3 }}>Nessun problema!</h2>
+                <p style=${{ color:'#6b7280', fontSize:'1rem', fontWeight:500, lineHeight:1.7, margin:0 }}>
+                  Se durante l'estate cambi idea,<br/>sai dove trovarci.<br/><br/>
+                  <span style=${{ color:'#EAB308', fontWeight:800 }}>Beautrì è qui per te.</span>
+                </p>
+              </div>
+            </div>
+          `;
+ 
+          // Risultato + contenuto oleazioni
+          return html`
+            <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+ 
+              <!-- RISULTATO SONDAGGIO -->
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-10 mb-8 shadow-lg max-w-lg mx-auto text-center">
+                <div style=${{ fontSize:'3.5rem', marginBottom:'1.25rem' }}>🎉</div>
+                <div style=${{ display:'inline-block', background:'#EAB308', color:'#1A1A1A', fontWeight:900, fontSize:'0.7rem', letterSpacing:'0.18em', textTransform:'uppercase', padding:'6px 18px', borderRadius:'999px', marginBottom:'1.25rem' }}>Risultato personalizzato</div>
+                <h2 style=${{ fontSize:'clamp(1.2rem,4vw,1.7rem)', fontWeight:900, color:'#1A1A1A', letterSpacing:'-0.02em', margin:'0 0 1rem', lineHeight:1.25 }}>Abbiamo tutto quello che ci serve. 🛟</h2>
+                <p style=${{ color:'#6b7280', fontSize:'0.95rem', fontWeight:500, lineHeight:1.7, margin:'0 0 1.5rem' }}>
+                  Come emerso dal sondaggio, tieni alle tue lunghezze <strong style=${{ color:'#1A1A1A' }}>${slider1}/10</strong> e vorresti arrivare a settembre con capelli sani, forti e luminosi <strong style=${{ color:'#1A1A1A' }}>${slider3}/10</strong>.<br/><br/>
+                  Questo ci dice che ci tieni davvero — e per questo abbiamo pensato a qualcosa di speciale.<br/><br/>
+                  <span style=${{ color:'#EAB308', fontWeight:800 }}>Le Oleazioni sono il salvagente per non far "affondare" i tuoi capelli durante l'estate. A settembre i tuoi capelli ti diranno Grazie 🛟</span>
+                </p>
+              </div>
+ 
+              <!-- CONTENUTO OLEAZIONI -->
+              <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden border mb-6 shadow-xl relative" style=${{ background:'linear-gradient(160deg,#fffbe6 0%,#fff5c0 100%)', borderColor:'rgba(234,179,10,0.3)' }}>
+                <div style=${{ position:'absolute', top:'1.5rem', left:'1.5rem', fontSize:'4rem', opacity:0.12, pointerEvents:'none' }}>☀️</div>
+                <div style=${{ position:'absolute', top:'1.5rem', right:'1.5rem', fontSize:'4rem', opacity:0.12, pointerEvents:'none' }}>🕶️</div>
+                <div className="p-8 md:p-14 relative" style=${{ zIndex:1, textAlign:'center' }}>
+                  <div style=${{ fontSize:'5rem', marginBottom:'1.25rem' }}>🛟</div>
+                  <h1 className="font-black text-black uppercase" style=${{ fontSize:'clamp(2rem,6vw,3.5rem)', letterSpacing:'-0.03em', lineHeight:1.05, marginBottom:'1.25rem' }}>Il salvagente<br/><span style=${{ color:'#EAB308' }}>dei tuoi capelli</span></h1>
+                  <p style=${{ fontSize:'1.05rem', fontStyle:'italic', fontWeight:500, color:'#57534e', textAlign:'center', maxWidth:'36rem', margin:'0 auto 1.5rem', lineHeight:1.7 }}>Ogni estate i tuoi capelli affrontano una battaglia silenziosa.<br/><span style=${{ color:'#ef4444', fontWeight:700 }}>Le Oleazioni sono la tua armatura.</span> ☀️🛟</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-[2rem] p-6 md:p-10 mb-6 shadow-sm">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Il viaggio</span>
+                <h2 className="font-black text-black uppercase mt-1 mb-6" style=${{ fontSize:'clamp(1.4rem,3.5vw,2rem)', letterSpacing:'-0.02em' }}>Conosci questa storia?</h2>
+                <div style=${{ display:'flex', gap:'0.4rem', flexWrap:'wrap', marginBottom:'0.75rem' }}>
+                  ${['Settembre 🌿','Ottobre 🍂','Novembre 🌧️','Dicembre ❄️','Gennaio ✨','Febbraio 💆','Marzo 🌱','Aprile 🌸','Maggio 💛'].map(m => html`<span key=${m} style=${{ padding:'0.35rem 0.7rem', borderRadius:'999px', fontSize:'0.7rem', fontWeight:800, textTransform:'uppercase', background:'rgba(234,179,10,0.15)', color:'#92400e', border:'1px solid rgba(234,179,10,0.3)' }}>${m}</span>`)}
+                </div>
+                <div style=${{ background:'rgba(239,68,68,0.07)', border:'1.5px solid rgba(239,68,68,0.35)', borderRadius:'1.25rem', padding:'0.85rem 1.1rem', marginBottom:'1.5rem', display:'flex', alignItems:'center', gap:'0.85rem', flexWrap:'wrap' }}>
+                  <div style=${{ display:'flex', alignItems:'center', gap:'0.4rem' }}>⚠️ <span style=${{ fontSize:'0.65rem', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.12em', color:'#991b1b' }}>Attenzione</span></div>
+                  <div style=${{ display:'flex', gap:'0.4rem', flexWrap:'wrap' }}>
+                    ${['Giugno ☀️','Luglio 🔥','Agosto 😰'].map(m => html`<span key=${m} style=${{ padding:'0.35rem 0.7rem', borderRadius:'999px', fontSize:'0.7rem', fontWeight:800, textTransform:'uppercase', background:'rgba(239,68,68,0.1)', color:'#991b1b', border:'1px solid rgba(239,68,68,0.2)' }}>${m}</span>`)}
+                  </div>
+                  <p style=${{ fontSize:'0.75rem', fontWeight:600, color:'#991b1b', margin:0, lineHeight:1.4, width:'100%' }}>In questi mesi il calore, il sole e la salsedine attaccano le lunghezze ogni giorno. Senza protezione, i danni si accumulano in silenzio.</p>
+                </div>
+                <p style=${{ color:'#374151', fontSize:'1.05rem', fontWeight:500, lineHeight:1.85, marginBottom:'1.25rem' }}>Il sole rovina le lunghezze. La salsedine le inaridisce. 🌊 Le eccessive sudorazioni le disidratano. Il phon e le piastre le stressano. L'estate fa il suo lavoro — silenzioso, implacabile — e ad agosto ti ritrovi a guardare capelli che non riconosci più.</p>
+                <div style=${{ borderLeft:'3px solid #EAB308', paddingLeft:'1.25rem' }}>
+                  <p style=${{ color:'#1A1A1A', fontSize:'1.05rem', fontWeight:800, lineHeight:1.65, margin:0 }}>Non è colpa tua. È quello che succede a chi affronta l'estate senza proteggere le lunghezze.</p>
+                </div>
+              </div>
+              <div className="rounded-[2rem] p-6 md:p-10 mb-6 shadow-xl relative overflow-hidden" style=${{ background:'#1A1A1A' }}>
+                <div style=${{ position:'relative', zIndex:1 }}>
+                  <div style=${{ display:'flex', alignItems:'center', gap:'0.75rem', marginBottom:'1.5rem' }}>
+                    <span style=${{ fontSize:'1.5rem' }}>⚠️</span>
+                    <span style=${{ fontSize:'10px', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.2em', color:'#6b7280' }}>I segni che l'estate lascia</span>
+                  </div>
+                  <div style=${{ display:'flex', flexWrap:'wrap', gap:'0.75rem', marginBottom:'1.5rem' }}>
+                    ${['💔 Doppie punte','✂️ Capelli spezzati','🔥 Struttura bruciata','🌧️ Lucentezza sparita','😰 Capelli decheratinizzati','😰 Eccessiva caduta','😰 Lavori tecnici con risultati scadenti'].map(t => html`<span key=${t} style=${{ background:'rgba(239,68,68,0.1)', border:'1px solid rgba(239,68,68,0.2)', borderRadius:'999px', padding:'0.4rem 0.9rem', fontSize:'0.8rem', fontWeight:700, color:'#fca5a5' }}>${t}</span>`)}
+                  </div>
+                  <div style=${{ background:'rgba(239,68,68,0.06)', border:'1px solid rgba(239,68,68,0.2)', borderRadius:'1.5rem', padding:'1.75rem', textAlign:'center', marginBottom:'1.5rem' }}>
+                    <p style=${{ fontSize:'clamp(1.4rem,4vw,2.2rem)', color:'#ef4444', fontWeight:900, letterSpacing:'-0.02em', lineHeight:1.3, margin:0 }}>Una perdita di tempo.<br/>Una perdita di soldi.<br/>Un settembre da ricominciare da zero.</p>
+                  </div>
+                  <div style=${{ background:'rgba(234,179,10,0.06)', border:'1px solid rgba(234,179,10,0.2)', borderRadius:'1.5rem', padding:'1.25rem 1.5rem' }}>
+                    <p style=${{ color:'#d1d5db', fontSize:'1rem', fontWeight:600, lineHeight:1.75, margin:0 }}>Per questo, da quest'anno, abbiamo deciso di introdurre le <span style=${{ color:'#EAB308', fontWeight:900 }}>Oleazioni</span> come percorso estivo dedicato.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-[2rem] p-6 md:p-10 mb-6 shadow-sm">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">La soluzione</span>
+                <h2 className="font-black text-black uppercase mt-1 mb-2" style=${{ fontSize:'clamp(1.4rem,3.5vw,2rem)', letterSpacing:'-0.02em' }}>Cosa sono le Oleazioni</h2>
+                <p style=${{ color:'#9ca3af', fontSize:'0.9rem', fontWeight:500, margin:'0 0 1.5rem' }}>Non un trattamento estetico. Una barriera attiva.</p>
+                <p style=${{ color:'#374151', fontSize:'1.05rem', fontWeight:500, lineHeight:1.85, marginBottom:'1.25rem' }}>L'olio penetra nella fibra capillare e ripristina dall'interno quello che sole ☀️, mare 🌊, salsedine, eccessive sudorazioni e calore tolgono giorno dopo giorno. Ripristina le riserve lipidiche. Rinforza la cheratina. Sigilla le cuticole. Protegge le lunghezze dalle aggressioni esterne.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                  ${[{icon:'💧',title:'Nutre e idrata in profondità',text:'Ripristina le riserve lipidiche che il calore estivo distrugge giorno dopo giorno.'},{icon:'🛡️',title:'Protegge come uno scudo ☀️',text:'Barriera attiva contro sole, salsedine 🌊, umidità, phon e piastre.'},{icon:'⚡',title:'Rinforza la struttura',text:"Rafforza la cheratina dall'interno. Meno rotture, meno doppie punte, più elasticità."},{icon:'✨',title:'Restituisce lucentezza',text:'Rinsalda le cuticole. I capelli tornano a brillare, anche dopo il mare. 🌊'},{icon:'💎',title:'Garantisce il 100% dei servizi tecnici',text:'Una struttura sana mantiene inalterato il colore e i suoi riflessi.'}].map(c => html`
+                    <div key=${c.title} style=${{ background:'#F8F6F1', borderRadius:'1.5rem', padding:'1.25rem' }}>
+                      <div style=${{ width:'2.25rem', height:'2.25rem', background:'#EAB308', borderRadius:'0.75rem', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'0.75rem', fontSize:'1rem' }}>${c.icon}</div>
+                      <h4 style=${{ fontWeight:900, color:'#1A1A1A', fontSize:'0.7rem', textTransform:'uppercase', letterSpacing:'0.12em', margin:'0 0 0.4rem' }}>${c.title}</h4>
+                      <p style=${{ color:'#6b7280', fontSize:'0.8rem', lineHeight:1.6, margin:0 }}>${c.text}</p>
+                    </div>`)}
+                </div>
+              </div>
+              <div className="bg-white rounded-[2rem] p-6 md:p-10 mb-6 shadow-sm">
+                <div style=${{ textAlign:'center', marginBottom:'1.5rem' }}>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Il percorso</span>
+                  <h2 className="font-black text-black uppercase mt-1" style=${{ fontSize:'clamp(1.4rem,3.5vw,2rem)', letterSpacing:'-0.02em' }}>3 sedute. Un'estate al sicuro. 🛟</h2>
+                </div>
+                ${[{n:1,dotBg:'#EAB308',dotColor:'#1A1A1A',bg:'#F8F6F1',label:'Prima seduta · Giorno 1',title:'Oleazione intensiva ☀️',text:"Si sceglie l'olio migliore per le tue lunghezze. Si applica con un massaggio e si distribuisce. Penetra tramite le cuticole portando nutrimento e grassi per creare una barriera protettiva. 🛟",tags:['Nutrimento profondo','Contrasta i radicali liberi','Protezione contro stress ossidativo'],timing:'Dopo 1 settimana'},{n:2,dotBg:'#EAB308',dotColor:'#1A1A1A',bg:'#F8F6F1',label:'Seconda seduta · Giorno 7',title:'Oleazione di rinforzo 🌊',text:'La barriera ha tenuto. Ora si consolida. Rinforza la struttura, riduce lo stress meccanico e ossidativo da UVB/UVA. I capelli rispondono: più forti, più elastici, più vivi.',tags:['Rinforza la struttura','Previene le rotture','Lucentezza visibile ✨','Morbidezza al tatto'],timing:'Dopo 3 settimane'},{n:3,dotBg:'#1A1A1A',dotColor:'#EAB308',bg:'#fffbe6',label:'Terza seduta · Giorno 28',title:'Oleazione di mantenimento 🌸',text:'Mantiene la struttura equilibrata, idrata, previene le doppie punte. A settembre capelli migliori di quelli lasciati a maggio.',tags:['Mantenimento','NO doppie punte','Struttura in equilibrio','Facile gestione'],timing:null}].map(s => html`
+                  <div key=${s.n} style=${{ display:'flex', alignItems:'flex-start', gap:'1rem' }}>
+                    <div style=${{ display:'flex', flexDirection:'column', alignItems:'center', flexShrink:0, width:'2.5rem' }}>
+                      <div style=${{ width:'2.5rem', height:'2.5rem', borderRadius:'50%', background:s.dotBg, color:s.dotColor, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:900, fontSize:'1rem' }}>${s.n}</div>
+                      ${s.timing && html`<div style=${{ width:'2px', minHeight:'1.5rem', background:'linear-gradient(to bottom,#EAB308,rgba(234,179,10,0.15))', marginTop:'4px', flex:1 }}></div>`}
+                    </div>
+                    <div style=${{ flex:1, minWidth:0, paddingBottom:'0.75rem' }}>
+                      <div style=${{ background:s.bg, borderRadius:'1.5rem', padding:'1.25rem', border:'1px solid rgba(234,179,10,0.25)' }}>
+                        <div style=${{ fontSize:'10px', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.15em', color:'#EAB308', marginBottom:'0.2rem' }}>${s.label}</div>
+                        <h3 style=${{ fontWeight:900, color:'#1A1A1A', textTransform:'uppercase', fontSize:'1rem', margin:'0 0 0.75rem' }}>${s.title}</h3>
+                        <p style=${{ color:'#6b7280', fontSize:'0.875rem', fontWeight:500, lineHeight:1.7, margin:'0 0 1rem' }}>${s.text}</p>
+                        <div style=${{ display:'flex', flexWrap:'wrap', gap:'0.5rem' }}>
+                          ${s.tags.map(t => html`<span key=${t} style=${{ background:'#1A1A1A', color:'#EAB308', padding:'0.25rem 0.75rem', borderRadius:'999px', fontSize:'0.75rem', fontWeight:700 }}>${t}</span>`)}
+                        </div>
+                      </div>
+                      ${s.timing && html`<div style=${{ padding:'0.5rem 0' }}><div style=${{ display:'inline-flex', alignItems:'center', gap:'0.5rem', padding:'0.4rem 1rem', borderRadius:'999px', background:'rgba(234,179,10,0.1)' }}><span>⏱</span><span style=${{ fontSize:'10px', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.12em', color:'#92400e' }}>${s.timing}</span></div></div>`}
+                    </div>
+                  </div>`)}
+              </div>
+              <div style=${{ background:'#1A1A1A', borderRadius:'2rem', padding:'2.5rem 1.5rem', boxShadow:'0 8px 40px rgba(0,0,0,0.2)' }}>
+                <div style=${{ textAlign:'center' }}>
+                  <span style=${{ fontSize:'10px', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.2em', color:'#6b7280' }}>Il tuo investimento</span>
+                  <div style=${{ fontSize:'clamp(4rem,10vw,6rem)', fontWeight:900, color:'#EAB308', letterSpacing:'-0.04em', lineHeight:1, margin:'1rem 0' }}>79€</div>
+                  <p style=${{ fontSize:'11px', fontWeight:700, textTransform:'uppercase', letterSpacing:'0.15em', color:'#6b7280', marginBottom:'1.5rem' }}>per seduta · 3 sedute totali</p>
+                  <div style=${{ background:'rgba(234,179,10,0.07)', border:'1px solid rgba(234,179,10,0.2)', borderRadius:'1.5rem', padding:'1.5rem', maxWidth:'480px', margin:'0 auto' }}>
+                    <div style=${{ display:'flex', alignItems:'flex-start', gap:'1rem' }}>
+                      <div style=${{ fontSize:'2rem', lineHeight:1, flexShrink:0 }}>🥰</div>
+                      <div style=${{ textAlign:'left' }}>
+                        <div style=${{ fontSize:'10px', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.18em', color:'#EAB308', marginBottom:'0.5rem' }}>Una cosa sola da sapere</div>
+                        <p style=${{ color:'#d1d5db', fontSize:'0.9rem', fontWeight:500, margin:0, lineHeight:1.8 }}>Alla prima seduta pagherai anche la seconda — <span style=${{ color:'#EAB308', fontWeight:700 }}>158€ in totale</span>. La terza seduta è già inclusa nel percorso. 🛟</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+ 
+        // === VIEW: GOLOSO (senza tasto indietro) ===
+        if (view === 'goloso') return html`
           <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
-            
             <div className="rounded-[2rem] sm:rounded-[3rem] shadow-2xl overflow-hidden mb-10 relative">
-              
-              <!-- HEADER CON CIOCCOLATO CHE COLA -->
               <div className="bg-gradient-to-b from-[#2C1810] via-[#3D2317] to-[#4A2C1A] relative overflow-hidden">
-                
-                <!-- Cioccolato che cola - immagine reale -->
                 <div className="absolute top-0 left-0 w-full z-10">
                   <img src="https://i.ibb.co/t9FjwZB/definitivo.png" alt="Cioccolato" className="w-full object-contain"/>
                 </div>
- 
-                <!-- Contenuto header -->
                 <div className="relative z-20 pt-24 pb-12 px-6 text-center">
                   <div className="inline-block bg-gradient-to-r from-[#EAB308] via-[#F59E0B] to-[#EAB308] text-[#2C1810] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest mb-6 shadow-lg border-2 border-white/20">
                     🍫 Novità Esclusiva 🍫
@@ -2676,17 +2911,12 @@ main.overflow-y-auto {
                     La tua opinione vale cioccolato... scopri quale ti aspetta!
                   </p>
                 </div>
- 
                 <div className="absolute top-36 left-10 text-2xl opacity-30">✨</div>
                 <div className="absolute top-40 right-16 text-xl opacity-25">✨</div>
                 <div className="absolute bottom-8 left-1/4 text-xl opacity-20">🍫</div>
                 <div className="absolute bottom-6 right-1/4 text-xl opacity-20">🍫</div>
               </div>
- 
-              <!-- CONTENUTO PRINCIPALE -->
               <div className="bg-gradient-to-b from-[#FDF6E3] to-[#FFF8DC] p-6 md:p-10 lg:p-14 relative">
-                
-                <!-- Come funziona -->
                 <div className="bg-gradient-to-br from-[#4A2C17] to-[#2C1810] rounded-[2rem] p-6 md:p-8 mb-10 shadow-xl border-4 border-[#EAB308]/30 relative z-10">
                   <h2 className="text-xl md:text-2xl font-black text-[#EAB308] uppercase text-center mb-6 tracking-wide">
                     <i className="fa-solid fa-gift mr-3"></i>Come Funziona
@@ -2696,11 +2926,7 @@ main.overflow-y-auto {
                       <div className="w-12 h-12 bg-[#EAB308] text-[#2C1810] rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 shadow-lg">1</div>
                       <div className="flex items-center justify-center gap-1 mb-3">
                         <div className="flex text-[#EAB308] text-base">
-                          <i className="fa-solid fa-star"></i>
-                          <i className="fa-solid fa-star"></i>
-                          <i className="fa-solid fa-star"></i>
-                          <i className="fa-solid fa-star"></i>
-                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i>
                         </div>
                       </div>
                       <h3 className="text-white font-bold text-sm uppercase mb-2">Lascia una Recensione</h3>
@@ -2720,8 +2946,6 @@ main.overflow-y-auto {
                     </div>
                   </div>
                 </div>
- 
-                <!-- QR CODE -->
                 <div className="bg-white rounded-[2rem] p-6 md:p-8 mb-10 shadow-lg border-2 border-[#EAB308]/20 relative z-10">
                   <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                     <div className="relative">
@@ -2736,137 +2960,114 @@ main.overflow-y-auto {
                       <h3 className="text-xl md:text-2xl font-black text-[#4A2C17] uppercase mb-2">
                         <i className="fa-solid fa-qrcode mr-2 text-[#EAB308]"></i>Lascia qui la tua recensione
                       </h3>
-                      <p className="text-[#5D3A1A] text-sm md:text-base max-w-xs">
-                        Inquadra con il tuo telefono e lascia una recensione sulla tua esperienza da Beautrì
-                      </p>
+                      <p className="text-[#5D3A1A] text-sm md:text-base max-w-xs">Inquadra con il tuo telefono e lascia una recensione sulla tua esperienza da Beautrì</p>
                       <div className="flex items-center justify-center md:justify-start gap-1 mt-3 text-[#EAB308]">
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i><i className="fa-solid fa-star"></i>
                       </div>
                     </div>
                   </div>
                 </div>
- 
-                <!-- TENTA LA FORTUNA -->
                 <div className="text-center mb-12">
                   <h3 className="text-2xl md:text-3xl font-black text-[#4A2C17] uppercase">🎰 Tenta la Fortuna! 🎰</h3>
                 </div>
- 
                 <div className="flex flex-col items-center mb-10 relative z-10">
-                  
                   <div className="relative w-72 h-72 md:w-96 md:h-96 mb-8">
-                    
                     <div className="absolute -inset-5 rounded-full bg-gradient-to-br from-[#EAB308] via-[#D4A574] to-[#EAB308] shadow-2xl" style=${{ boxShadow: '0 0 50px rgba(234, 179, 8, 0.5)' }}></div>
                     <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-[#4A2C17] to-[#2C1810]"></div>
-                    
                     <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-30">
                       <div className="w-0 h-0 border-l-[22px] border-r-[22px] border-t-[40px] border-l-transparent border-r-transparent border-t-[#EAB308]" style=${{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }}></div>
                     </div>
- 
-                    <svg 
-                      className="absolute inset-0 w-full h-full" 
-                      viewBox="0 0 400 400"
-                      style=${{ transform: 'rotate(' + rotation + 'deg)', transition: isSpinning ? 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none' }}
-                    >
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" style=${{ transform: 'rotate(' + rotation + 'deg)', transition: isSpinning ? 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none' }}>
                       <defs>
-                        <linearGradient id="lindorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style=${{ stopColor: '#C41E3A' }}/>
-                          <stop offset="100%" style=${{ stopColor: '#8B0000' }}/>
-                        </linearGradient>
-                        <linearGradient id="creminoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style=${{ stopColor: '#D4A574' }}/>
-                          <stop offset="100%" style=${{ stopColor: '#8B7355' }}/>
-                        </linearGradient>
-                        <linearGradient id="bacioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style=${{ stopColor: '#1E3A5F' }}/>
-                          <stop offset="100%" style=${{ stopColor: '#0D1B2A' }}/>
-                        </linearGradient>
+                        <linearGradient id="lindorGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style=${{ stopColor: '#C41E3A' }}/><stop offset="100%" style=${{ stopColor: '#8B0000' }}/></linearGradient>
+                        <linearGradient id="creminoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style=${{ stopColor: '#D4A574' }}/><stop offset="100%" style=${{ stopColor: '#8B7355' }}/></linearGradient>
+                        <linearGradient id="bacioGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style=${{ stopColor: '#1E3A5F' }}/><stop offset="100%" style=${{ stopColor: '#0D1B2A' }}/></linearGradient>
                       </defs>
-                      
                       <path d="M200,200 L200,0 A200,200 0 0,1 373.2,100 Z" fill="url(#lindorGrad)"/>
                       <path d="M200,200 L373.2,100 A200,200 0 0,1 373.2,300 Z" fill="url(#creminoGrad)"/>
                       <path d="M200,200 L373.2,300 A200,200 0 0,1 200,400 Z" fill="url(#bacioGrad)"/>
                       <path d="M200,200 L200,400 A200,200 0 0,1 26.8,300 Z" fill="url(#lindorGrad)"/>
                       <path d="M200,200 L26.8,300 A200,200 0 0,1 26.8,100 Z" fill="url(#creminoGrad)"/>
                       <path d="M200,200 L26.8,100 A200,200 0 0,1 200,0 Z" fill="url(#bacioGrad)"/>
-                      
                       <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(30, 200, 200) translate(0, -130)">LINDOR</text>
                       <text x="200" y="200" fill="white" font-size="14" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(90, 200, 200) translate(0, -130)">CREMINO</text>
                       <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(150, 200, 200) translate(0, -130)">BACIO</text>
                       <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(210, 200, 200) translate(0, -130)">LINDOR</text>
                       <text x="200" y="200" fill="white" font-size="14" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(270, 200, 200) translate(0, -130)">CREMINO</text>
                       <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(330, 200, 200) translate(0, -130)">BACIO</text>
-                      
                       <circle cx="200" cy="200" r="45" fill="#4A2C17" stroke="#EAB308" stroke-width="6"/>
                       <text x="200" y="210" text-anchor="middle" font-size="35">🍫</text>
                     </svg>
                   </div>
- 
-                  <button 
-                    onClick=${spinWheel}
-                    disabled=${isSpinning}
-                    className="bg-gradient-to-r from-[#EAB308] via-[#F59E0B] to-[#EAB308] text-[#2C1810] px-12 py-5 rounded-full text-xl md:text-2xl font-black uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all border-4 border-white/30 disabled:opacity-50 disabled:cursor-not-allowed"
-                    style=${{ boxShadow: '0 10px 40px rgba(234, 179, 8, 0.5)' }}
-                  >
+                  <button onClick=${spinWheel} disabled=${isSpinning} className="bg-gradient-to-r from-[#EAB308] via-[#F59E0B] to-[#EAB308] text-[#2C1810] px-12 py-5 rounded-full text-xl md:text-2xl font-black uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all border-4 border-white/30 disabled:opacity-50 disabled:cursor-not-allowed" style=${{ boxShadow: '0 10px 40px rgba(234, 179, 8, 0.5)' }}>
                     ${isSpinning ? '🎰 Girando...' : '🎰 Gira la Ruota!'}
                   </button>
                 </div>
- 
-                <!-- BOX P.S. -->
                 <div className="bg-gradient-to-br from-[#4A2C17] to-[#2C1810] rounded-[2rem] p-6 md:p-8 text-center border-4 border-[#EAB308]/30 shadow-xl relative z-10">
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <span className="bg-[#EAB308] text-[#2C1810] px-4 py-1 rounded-full text-sm font-black uppercase">P.S.</span>
                   </div>
-                  <h3 className="text-[#EAB308] font-black text-xl md:text-2xl uppercase mb-3">
-                    ⭐ Hai già lasciato una recensione? ⭐
-                  </h3>
-                  <p className="text-[#D4A574] font-medium text-lg md:text-xl">
-                    Fantastico! Gira la ruota e goditi il tuo cioccolatino! 🍫
-                  </p>
+                  <h3 className="text-[#EAB308] font-black text-xl md:text-2xl uppercase mb-3">⭐ Hai già lasciato una recensione? ⭐</h3>
+                  <p className="text-[#D4A574] font-medium text-lg md:text-xl">Fantastico! Gira la ruota e goditi il tuo cioccolatino! 🍫</p>
                 </div>
- 
               </div>
             </div>
- 
-            <!-- MODAL PREMIO -->
             ${showModal && prize && html`
-              <div 
-                className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-                onClick=${() => setShowModal(false)}
-              >
-                <div 
-                  className="bg-gradient-to-b from-[#FDF6E3] to-[#FFF8DC] rounded-[2rem] p-8 md:p-12 max-w-md w-full text-center shadow-2xl border-4 border-[#EAB308] animate-zoom-in"
-                  onClick=${(e) => e.stopPropagation()}
-                >
+              <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick=${() => setShowModal(false)}>
+                <div className="bg-gradient-to-b from-[#FDF6E3] to-[#FFF8DC] rounded-[2rem] p-8 md:p-12 max-w-md w-full text-center shadow-2xl border-4 border-[#EAB308] animate-zoom-in" onClick=${(e) => e.stopPropagation()}>
                   <div className="text-6xl mb-6">🎉</div>
                   <h2 className="text-3xl font-black text-[#2C1810] uppercase mb-2">Complimenti!</h2>
                   <p className="text-[#5D3A1A] font-medium mb-6 text-lg">Hai vinto un delizioso</p>
-                  <div 
-                    className="text-3xl font-black uppercase mb-6 py-4 px-8 rounded-full inline-block text-white shadow-xl"
-                    style=${{ background: 'linear-gradient(135deg, ' + prize.color + ', ' + prize.color + 'dd)' }}
-                  >
+                  <div className="text-3xl font-black uppercase mb-6 py-4 px-8 rounded-full inline-block text-white shadow-xl" style=${{ background: 'linear-gradient(135deg, ' + prize.color + ', ' + prize.color + 'dd)' }}>
                     ${prize.name}
                   </div>
-                  <p className="text-[#8B7355] text-base mb-8">
-                    Mostra questo schermo al nostro team<br/>e ritira il tuo premio! 🍫
-                  </p>
-                  <button 
-                    onClick=${() => setShowModal(false)}
-                    className="bg-gradient-to-r from-[#4A2C17] to-[#2C1810] text-white px-10 py-4 rounded-full font-bold uppercase tracking-wide hover:scale-105 transition-all shadow-xl text-lg"
-                  >
+                  <p className="text-[#8B7355] text-base mb-8">Mostra questo schermo al nostro team<br/>e ritira il tuo premio! 🍫</p>
+                  <button onClick=${() => setShowModal(false)} className="bg-gradient-to-r from-[#4A2C17] to-[#2C1810] text-white px-10 py-4 rounded-full font-bold uppercase tracking-wide hover:scale-105 transition-all shadow-xl text-lg">
                     🏆 Ritira il Premio 🏆
                   </button>
                 </div>
               </div>
             `}
+          </div>
+        `;
  
+        // === HOME: due bottoni ===
+        return html`
+          <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 bg-[#EAB308] text-black px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-[0.18em] mb-6 shadow-sm">✨ Le nostre Novità</div>
+              <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tighter uppercase leading-[1.1] mb-4">Cosa c'è di nuovo</h1>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button onClick=${() => { setSurveyStep(0); setSurveyDone(false); setSurveyNo(false); setView('oleazioni'); }}
+                className="flex-1 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border shadow-lg transition-all hover:scale-[1.01] active:scale-95 text-left"
+                style=${{ background:'linear-gradient(160deg,#fffbe6 0%,#fff5c0 100%)', borderColor:'rgba(234,179,10,0.3)' }}>
+                <div className="p-6 md:p-8 relative overflow-hidden">
+                  <div style=${{ position:'absolute', top:'0.75rem', right:'0.75rem', fontSize:'3rem', opacity:0.15 }}>🕶️</div>
+                  <div style=${{ fontSize:'3rem', marginBottom:'0.75rem' }}>🛟</div>
+                  <div style=${{ fontSize:'10px', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.18em', color:'#EAB308', marginBottom:'0.4rem' }}>Pacchetto Estate</div>
+                  <h2 className="font-black text-black uppercase tracking-tighter" style=${{ fontSize:'clamp(1.2rem,3vw,1.7rem)', lineHeight:1.1, marginBottom:'0.5rem' }}>Novità per le tue<br/>lunghezze questa estate</h2>
+                  <p className="text-slate-500 font-medium text-sm mt-2">Il salvagente dei tuoi capelli per quest'estate.</p>
+                  <div style=${{ marginTop:'1.25rem', display:'inline-flex', alignItems:'center', gap:'0.5rem', background:'#1A1A1A', color:'#EAB308', padding:'0.5rem 1.25rem', borderRadius:'999px', fontSize:'0.8rem', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.08em' }}>Scopri →</div>
+                </div>
+              </button>
+              <button onClick=${() => setView('goloso')}
+                className="flex-1 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-lg transition-all hover:scale-[1.01] active:scale-95 text-left"
+                style=${{ background:'linear-gradient(160deg,#2C1810 0%,#4A2C1A 100%)', border:'1px solid rgba(234,179,8,0.3)' }}>
+                <div className="p-6 md:p-8 relative overflow-hidden">
+                  <div style=${{ position:'absolute', top:'0.75rem', right:'0.75rem', fontSize:'3rem', opacity:0.2 }}>🍫</div>
+                  <div style=${{ fontSize:'3rem', marginBottom:'0.75rem' }}>🎰</div>
+                  <div style=${{ fontSize:'10px', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.18em', color:'#EAB308', marginBottom:'0.4rem' }}>Novità Esclusiva</div>
+                  <h2 className="font-black text-white uppercase tracking-tighter" style=${{ fontSize:'clamp(1.2rem,3vw,1.7rem)', lineHeight:1.1, marginBottom:'0.5rem' }}>Un Gioco<br/>Goloso</h2>
+                  <p style=${{ color:'#D4A574', fontWeight:500, fontSize:'0.875rem' }}>La tua opinione vale cioccolato... scopri quale ti aspetta!</p>
+                  <div style=${{ marginTop:'1.25rem', display:'inline-flex', alignItems:'center', gap:'0.5rem', background:'#EAB308', color:'#2C1810', padding:'0.5rem 1.25rem', borderRadius:'999px', fontSize:'0.8rem', fontWeight:900, textTransform:'uppercase', letterSpacing:'0.08em' }}>Gioca →</div>
+                </div>
+              </button>
+            </div>
           </div>
         `;
       };
-      
+ 
       
       const BabyCheckList = () => html`
           <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
