@@ -410,6 +410,18 @@ main.overflow-y-auto {
     scroll-behavior: smooth;
     overscroll-behavior-y: contain;
 }
+    /* === FIX: Card sezioni menu donna/uomo — altezza ridotta su smartphone === */
+@media screen and (max-width: 767px) {
+    button[class*="min-h-\[220px\]"] {
+        min-height: 130px !important;
+        padding: 1.25rem !important;
+    }
+    button[class*="min-h-\[220px\]"] div[class*="w-14"] {
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+}
 </style>
 <script type="importmap">
 {
