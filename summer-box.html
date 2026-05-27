@@ -20,21 +20,32 @@
 </head>
 <body>
  
-<!-- TASTO INDIETRO -->
-<button onclick="history.back()" style="position:fixed;top:1.5rem;right:1.5rem;z-index:9999;width:3.5rem;height:3.5rem;background:white;border:none;border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;">←</button>
+<!-- TASTO INDIETRO stile menu -->
+<button onclick="history.back()" style="position:fixed;top:1.5rem;right:1.5rem;z-index:9999;width:3.5rem;height:3.5rem;background:white;border:1px solid rgba(255,255,255,0.8);border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,0.10);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.15s;">
+  <i class="fa-solid fa-arrow-left" style="font-size:1rem;color:#1A1A1A;"></i>
+</button>
  
 <div class="max-w-5xl mx-auto animate-zoom-in pb-16">
  
   <!-- WIDGET DISPONIBILITÀ TOP -->
-  <div style="background:#DC2626;border-radius:1.25rem;padding:0.85rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:0.85rem;flex-wrap:wrap;">
-    <div style="display:flex;align-items:center;gap:0.5rem;">
-      <span style="width:10px;height:10px;border-radius:50%;background:#fff;display:inline-block;animation:blink 1.2s ease-in-out infinite;flex-shrink:0;"></span>
-      <span style="color:#fff;font-weight:900;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">⚠️ Disponibilità limitata</span>
-    </div>
-    <span style="color:rgba(255,255,255,0.5);font-size:0.75rem;">|</span>
-    <span style="color:#fff;font-size:0.82rem;font-weight:700;">Sono disponibili solo <strong style="color:#FCA5A5;font-size:1rem;">100 box</strong> — una volta esaurite non sarà più disponibile.</span>
-  </div>
   <style>@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }</style>
+  <div style="background:#DC2626;border-radius:1.25rem;padding:1rem 1.25rem;margin-bottom:1rem;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:0.85rem;flex-wrap:wrap;margin-bottom:0.75rem;">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#fff;display:inline-block;animation:blink 1.2s ease-in-out infinite;flex-shrink:0;"></span>
+        <span style="color:#fff;font-weight:900;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">⚠️ Disponibilità limitata</span>
+      </div>
+      <span style="color:rgba(255,255,255,0.5);font-size:0.75rem;">|</span>
+      <span style="color:#fff;font-size:0.82rem;font-weight:700;">Rimangono solo <strong style="color:#FCA5A5;font-size:1rem;">89 box</strong> su 100 — una volta esaurite non sarà più disponibile.</span>
+    </div>
+    <div style="background:rgba(0,0,0,0.25);border-radius:999px;height:8px;overflow:hidden;margin-bottom:0.4rem;">
+      <div style="width:11%;height:100%;background:#FCA5A5;border-radius:999px;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <span style="color:rgba(255,255,255,0.7);font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">11 box già richieste</span>
+      <span style="color:rgba(255,255,255,0.7);font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">89 disponibili</span>
+    </div>
+  </div>
  
   <!-- HERO -->
   <div class="rounded-[2.5rem] overflow-hidden shadow-xl mb-10 relative" style="background: linear-gradient(160deg, #0e7bb0 0%, #1a9fd4 40%, #4ec4e0 100%);">
