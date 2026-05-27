@@ -19,6 +19,23 @@
 </style>
 </head>
 <body>
+ 
+<!-- TASTO INDIETRO stile menu -->
+<button onclick="history.back()" style="position:fixed;top:1.5rem;right:1.5rem;z-index:9999;width:3.5rem;height:3.5rem;background:white;border:1px solid rgba(255,255,255,0.8);border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,0.10);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.15s;">
+  <i class="fa-solid fa-arrow-left" style="font-size:1rem;color:#1A1A1A;"></i>
+</button>
+ 
+<style>
+@media screen and (max-width: 600px) {
+  .borraccia-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .borraccia-grid > div:last-child {
+    aspect-ratio: 4/3 !important;
+    max-height: 260px;
+  }
+}
+</style>
 <div class="max-w-5xl mx-auto animate-zoom-in pb-16">
  
   <!-- WIDGET DISPONIBILITÀ TOP -->
@@ -337,7 +354,7 @@
     <div style="display:inline-block;background:#EAB308;color:#1A1A1A;font-weight:900;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;padding:5px 16px;border-radius:999px;margin-bottom:1rem;">In omaggio con la box</div>
     <h2 class="font-black text-black uppercase tracking-tighter mb-3" style="font-size:clamp(1.5rem,4vw,2.2rem);">🎁 La tua borraccia Beautrì</h2>
  
-    <div style="display:grid;grid-template-columns:1fr 200px;gap:1.5rem;align-items:center;">
+    <div style="display:grid;grid-template-columns:1fr 200px;gap:1.5rem;align-items:center;" class="borraccia-grid">
       <!-- COLONNA SINISTRA: testo + box -->
       <div style="display:flex;flex-direction:column;gap:1rem;">
         <p style="color:#92400e;font-size:0.95rem;font-weight:600;margin:0;line-height:1.7;">Con ogni Beautrì Summer Box ricevi in regalo la borraccia Beautrì — il tuo compagno d'estate. Perché idratarsi è il primo gesto di cura per cute e capelli.</p>
@@ -364,14 +381,14 @@
     <div style="width:100%;margin-top:0.75rem;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
         <span style="color:#9ca3af;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Box disponibili</span>
-        <span style="color:#FCA5A5;font-size:0.75rem;font-weight:900;">🔥 11 già richieste!</span>
+        <span style="color:#FCA5A5;font-size:0.75rem;font-weight:900;">Appena lanciate!</span>
       </div>
       <div style="background:rgba(255,255,255,0.1);border-radius:999px;height:8px;overflow:hidden;">
-        <div style="background:linear-gradient(90deg,#DC2626,#EF4444);height:100%;width:11%;border-radius:999px;"></div>
+        <div style="background:linear-gradient(90deg,#DC2626,#EF4444);height:100%;width:2%;border-radius:999px;"></div>
       </div>
       <div style="display:flex;justify-content:space-between;margin-top:0.35rem;">
-        <span style="color:#6b7280;font-size:0.65rem;font-weight:600;">11 richieste</span>
-        <span style="color:#FCA5A5;font-size:0.65rem;font-weight:900;">89 rimaste su 100</span>
+        <span style="color:#6b7280;font-size:0.65rem;font-weight:600;">0</span>
+        <span style="color:#FCA5A5;font-size:0.65rem;font-weight:900;">98 rimaste su 100</span>
       </div>
     </div>
   </div>
