@@ -15,7 +15,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>BEAUTRÍ PARRUCCHIERI - Menu Digitale</title>
-    <link rel="icon" type="image/png" href="https://beautri.it/wp-content/uploads/2020/02/cropped-favicon_beautri-270x270.png">
+    <link rel="icon" type="image/x-icon" href="https://beautri.it/favicon.ico">
 <link rel="apple-touch-icon" href="https://beautri.it/wp-content/uploads/2020/02/cropped-favicon_beautri-270x270.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -4025,7 +4025,7 @@ main.overflow-y-auto {
             <button onClick=${() => setIsOpen(true)} className="fixed top-4 left-4 sm:top-8 sm:left-8 z-40 w-16 h-16 sm:w-14 sm:h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-black border border-white active:scale-95 transition-transform">
               <i className="fa-solid fa-bars-staggered text-xl"></i>
             </button>
-            
+
             ${activeTab !== 'home' && html`
                 <${FixedBackButton} onClick=${() => setActiveTab('home')} />
             `}
