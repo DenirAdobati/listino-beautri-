@@ -3400,6 +3400,9 @@ main.overflow-y-auto {
             setGender('uomo');
           } else if (hash === 'percorsi') {
             setGender('percorsi');
+          } else if (hash === 'prodotti') {
+            setGender('percorsi');
+            setSection('prodotti-overview');
           }
         }, []);
 
@@ -3411,15 +3414,15 @@ main.overflow-y-auto {
           } else if (gender === 'uomo') {
             newHash = 'menu-uomo';
           } else if (gender === 'percorsi') {
-            newHash = 'percorsi';
+            newHash = section === 'prodotti-overview' || (subSection && subSection.startsWith('prodotti-')) ? 'prodotti' : 'percorsi';
           }
-          
+
           if (newHash) {
             history.replaceState(null, '', '#' + newHash);
           } else {
             history.replaceState(null, '', window.location.pathname);
           }
-        }, [gender]);
+        }, [gender, section, subSection]);
 
         // Scroll in cima ad ogni cambio di vista
         useEffect(() => {
@@ -3493,21 +3496,75 @@ main.overflow-y-auto {
                         </div>
                     </button>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 w-full">
-                        <button id="percorsi" onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
+                        <button id="percorsi" onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 md:p-10 text-center relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
                         <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
                             <i className="fa-solid fa-route text-4xl text-[#EAB308] mb-6"></i>
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter">PERCORSI</h2>
                         </div>
                         </button>
-                        <button id="percorsi-mantenimento" onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                        <button id="percorsi-mantenimento" onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 md:p-10 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
                         <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
                             <i className="fa-solid fa-shield-heart text-4xl text-black mb-6"></i>
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter">MANTENIMENTO</h2>
                         </div>
                         </button>
+                        <button id="nostri-prodotti" onClick=${() => setSection('prodotti-overview')} className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 md:p-10 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                        <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter">PRODOTTI</h2>
+                        </div>
+                        </button>
                     </div>
                 </div>
+                </div>
+            `;
+            }
+
+            if (gender === 'percorsi' && section === 'prodotti-overview' && !subSection) {
+            return html`
+                <div className="relative animate-fade-in">
+                <header className="flex items-center justify-center mb-10">
+                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">I NOSTRI PRODOTTI</span>
+                    </div>
+                </header>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto w-full">
+                    <button onClick=${() => setSubSection('prodotti-shampoo')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
+                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
+                            <i className="fa-solid fa-pump-soap"></i>
+                        </div>
+                        <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">SHAMPOO</div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                    </button>
+                    <button onClick=${() => setSubSection('prodotti-lozioni')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
+                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
+                            <i className="fa-solid fa-droplet"></i>
+                        </div>
+                        <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">LOZIONI</div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                    </button>
+                    <button onClick=${() => setSubSection('prodotti-emulsioni')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
+                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
+                            <i className="fa-solid fa-flask"></i>
+                        </div>
+                        <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">EMULSIONI</div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                    </button>
+                    <button onClick=${() => setSubSection('prodotti-lunghezze')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
+                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
+                            <i className="fa-solid fa-wand-sparkles"></i>
+                        </div>
+                        <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">PRODOTTI PER LE LUNGHEZZE</div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                    </button>
+                </div>
+                </div>
+            `;
+            }
+
+            if (gender === 'percorsi' && section === 'prodotti-overview' && subSection && subSection.startsWith('prodotti-')) {
+            return html`
+                <div className="flex flex-col animate-fade-in">
                 </div>
             `;
             }
