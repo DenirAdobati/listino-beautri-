@@ -3465,7 +3465,7 @@ main.overflow-y-auto {
                 <div className="max-w-4xl mx-auto w-full">
                     <button id="nostri-percorsi" onClick=${() => setGender('percorsi')} className="w-full bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.01] active:scale-95">
                     <div className="relative z-10 flex items-center justify-center gap-4 sm:gap-6 md:gap-8">
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tighter uppercase leading-tight">I NOSTRI PERCORSI</h2>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tighter uppercase leading-tight">PERCORSI & PRODOTTI</h2>
                         <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-[#EAB308] text-2xl shadow-lg shrink-0">
                         <i className="fa-solid fa-route"></i>
                         </div>
@@ -3481,10 +3481,10 @@ main.overflow-y-auto {
                 <div className="relative animate-fade-in">
                 <header className="flex items-center justify-center mb-10">
                     <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                    <span className="text-[#EAB308]">I NOSTRI PERCORSI</span>
+                    <span className="text-[#EAB308]">PERCORSI & PRODOTTI</span>
                     </div>
                 </header>
-                
+
                 <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto w-full">
                     <!-- NEW BUTTON: Come funzionano -->
                     <button onClick=${() => setSection('how-it-works')} className="w-full bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-8 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.01] active:scale-95 border border-slate-100">
@@ -3531,32 +3531,24 @@ main.overflow-y-auto {
                 </header>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto w-full">
                     <button onClick=${() => setSubSection('prodotti-shampoo')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
-                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
-                            <i className="fa-solid fa-pump-soap"></i>
-                        </div>
+                        <img src="foto-prodotti/shampoo%20nutriente.png" alt="Shampoo" className="h-24 w-auto object-contain mb-0" />
                         <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">SHAMPOO</div>
-                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-1"></div>
                     </button>
                     <button onClick=${() => setSubSection('prodotti-lozioni')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
-                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
-                            <i className="fa-solid fa-droplet"></i>
-                        </div>
+                        <img src="foto-prodotti/Lozione%20pro.png" alt="Lozioni" className="h-24 w-auto object-contain mb-0" />
                         <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">LOZIONI</div>
-                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-1"></div>
                     </button>
                     <button onClick=${() => setSubSection('prodotti-emulsioni')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
-                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
-                            <i className="fa-solid fa-flask"></i>
-                        </div>
+                        <img src="foto-prodotti/Emulsione%20avvolgente.png" alt="Emulsioni" className="h-24 w-auto object-contain mb-0" />
                         <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">EMULSIONI</div>
-                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-1"></div>
                     </button>
                     <button onClick=${() => setSubSection('prodotti-lunghezze')} className="bg-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-sm hover:border-[#EAB308]/30 transition-all group flex flex-col items-center justify-center min-h-[200px] text-center">
-                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-[#EAB308] text-3xl mb-6 shadow-sm group-hover:bg-black group-hover:text-[#EAB308] transition-colors">
-                            <i className="fa-solid fa-wand-sparkles"></i>
-                        </div>
+                        <img src="foto-prodotti/Maschera%20rigenerante.png" alt="Prodotti per le lunghezze" className="h-24 w-auto object-contain mb-0" />
                         <div className="text-xl font-black text-black uppercase tracking-tight group-hover:scale-105 transition-transform">PRODOTTI PER LE LUNGHEZZE</div>
-                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
+                        <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-1"></div>
                     </button>
                 </div>
                 </div>
@@ -3611,9 +3603,9 @@ main.overflow-y-auto {
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-lozioni') {
             const LOZIONI_PRODUCTS = [
-                { name: 'Lozione SOFT', price: '41€' },
-                { name: 'Lozione ACTIVE', price: '45€' },
-                { name: 'Lozione PRO', price: '49€' }
+                { name: 'Lozione SOFT', price: '41€', photo: 'foto-prodotti/Lozione%20soft.png' },
+                { name: 'Lozione ACTIVE', price: '45€', photo: 'foto-prodotti/Lozione%20active.png' },
+                { name: 'Lozione PRO', price: '49€', photo: 'foto-prodotti/Lozione%20pro.png' }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
@@ -3626,10 +3618,16 @@ main.overflow-y-auto {
                     ${LOZIONI_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                         <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
+                            ${item.photo ? html`
+                            <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
+                                <img src=${item.photo} alt=${item.name} className="w-full h-full object-contain" />
+                            </div>
+                            ` : html`
                             <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
                                 <i className="fa-solid fa-image text-3xl"></i>
                                 <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
                             </div>
+                            `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
                                 <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
