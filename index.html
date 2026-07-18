@@ -3499,18 +3499,19 @@ main.overflow-y-auto {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
                         <button id="percorsi" onClick=${() => setSection('percorsi-main')} className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 md:p-10 text-center relative overflow-hidden group shadow-2xl transition-all hover:scale-[1.02] active:scale-95 h-64">
                         <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
-                            <i className="fa-solid fa-route text-4xl text-[#EAB308] mb-6"></i>
+                            <i className="fa-solid fa-route text-5xl text-[#EAB308] mb-8"></i>
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter">PERCORSI</h2>
                         </div>
                         </button>
                         <button id="percorsi-mantenimento" onClick=${() => setSection('percorsi-mantenimento')} className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 md:p-10 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
                         <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
-                            <i className="fa-solid fa-shield-heart text-4xl text-black mb-6"></i>
+                            <i className="fa-solid fa-shield-heart text-5xl text-black mb-8"></i>
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter">MANTENIMENTO</h2>
                         </div>
                         </button>
-                        <button id="nostri-prodotti" onClick=${() => setSection('prodotti-overview')} className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 md:p-10 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
-                        <div className="relative z-10 flex flex-col h-full items-center justify-center uppercase">
+                        <button id="nostri-prodotti" onClick=${() => setSection('prodotti-overview')} className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-5 md:p-6 text-center relative overflow-hidden group shadow-xl transition-all hover:scale-[1.02] active:scale-95 h-64">
+                        <div className="relative z-10 flex flex-col h-full items-center justify-start uppercase">
+                            <img src="foto-prodotti/Prodotti.png" alt="Prodotti" className="h-32 w-auto object-contain mb-3" />
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter">PRODOTTI</h2>
                         </div>
                         </button>
@@ -3564,14 +3565,14 @@ main.overflow-y-auto {
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-shampoo') {
             const SHAMPOO_PRODUCTS = [
-                { name: 'Shampoo Nutriente', price: '29€' },
-                { name: 'Shampoo Caduta Gold', price: '29€' },
-                { name: 'Shampoo Caduta Silver', price: '29€' },
-                { name: 'Shampoo Caduta Platinum', price: '29€' },
-                { name: 'Shampoo Purificante', price: '29€' },
-                { name: 'Shampoo Equilibrante', price: '29€' },
-                { name: 'Shampoo Forfora', price: '29€' },
-                { name: 'Shampoo Delicato', price: '26€' }
+                { name: 'Shampoo Nutriente', price: '29€', photo: 'foto-prodotti/shampoo%20nutriente.png' },
+                { name: 'Shampoo Caduta Gold', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20gold.png' },
+                { name: 'Shampoo Caduta Silver', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20silver.png' },
+                { name: 'Shampoo Caduta Platinum', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20platino.png' },
+                { name: 'Shampoo Purificante', price: '29€', photo: 'foto-prodotti/shampoo%20purificante.png' },
+                { name: 'Shampoo Equilibrante', price: '29€', photo: 'foto-prodotti/shampoo%20equilibrante.png' },
+                { name: 'Shampoo Forfora', price: '29€', photo: 'foto-prodotti/shampoo%20forfora.png' },
+                { name: 'Shampoo Delicato', price: '26€', photo: 'foto-prodotti/shampoo%20delicato.png' }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
@@ -3584,11 +3585,16 @@ main.overflow-y-auto {
                     ${SHAMPOO_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                         <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
-                            <!-- Placeholder foto prodotto: sostituire con <img src="..." alt="${item.name}" className="w-full h-full object-contain" /> -->
+                            ${item.photo ? html`
+                            <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
+                                <img src=${item.photo} alt=${item.name} className="w-full h-full object-contain" />
+                            </div>
+                            ` : html`
                             <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
                                 <i className="fa-solid fa-image text-3xl"></i>
                                 <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
                             </div>
+                            `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
                                 <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
@@ -3640,8 +3646,8 @@ main.overflow-y-auto {
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-emulsioni') {
             const EMULSIONI_PRODUCTS = [
-                { name: 'Emulsione Lenitiva', price: '58€' },
-                { name: 'Emulsione Avvolgente', price: '28€' }
+                { name: 'Emulsione Lenitiva', price: '58€', photo: 'foto-prodotti/Emulsione%20lenitiva.png' },
+                { name: 'Emulsione Avvolgente', price: '28€', photo: 'foto-prodotti/Emulsione%20avvolgente.png' }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
@@ -3654,10 +3660,16 @@ main.overflow-y-auto {
                     ${EMULSIONI_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                         <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
+                            ${item.photo ? html`
+                            <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
+                                <img src=${item.photo} alt=${item.name} className="w-full h-full object-contain" />
+                            </div>
+                            ` : html`
                             <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
                                 <i className="fa-solid fa-image text-3xl"></i>
                                 <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
                             </div>
+                            `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
                                 <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
@@ -3674,9 +3686,9 @@ main.overflow-y-auto {
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-lunghezze') {
             const LUNGHEZZE_PRODUCTS = [
-                { name: 'Maschera Rigenerante', price: '37€' },
-                { name: 'Maschera Nutriente', price: '37€' },
-                { name: 'Conditioner Idratante', price: '29€' }
+                { name: 'Maschera Rigenerante', price: '37€', photo: 'foto-prodotti/Maschera%20rigenerante.png' },
+                { name: 'Maschera Nutriente', price: '37€', photo: 'foto-prodotti/Maschera%20nutriente.png' },
+                { name: 'Conditioner Idratante', price: '29€', photo: 'foto-prodotti/Conditioner%20idratante.png' }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
@@ -3689,10 +3701,16 @@ main.overflow-y-auto {
                     ${LUNGHEZZE_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                         <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
+                            ${item.photo ? html`
+                            <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
+                                <img src=${item.photo} alt=${item.name} className="w-full h-full object-contain" />
+                            </div>
+                            ` : html`
                             <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
                                 <i className="fa-solid fa-image text-3xl"></i>
                                 <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
                             </div>
+                            `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
                                 <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
