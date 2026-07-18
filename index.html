@@ -3562,6 +3562,151 @@ main.overflow-y-auto {
             `;
             }
 
+            if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-shampoo') {
+            const SHAMPOO_PRODUCTS = [
+                { name: 'Shampoo Nutriente', price: '29€' },
+                { name: 'Shampoo Caduta Gold', price: '29€' },
+                { name: 'Shampoo Caduta Silver', price: '29€' },
+                { name: 'Shampoo Caduta Platinum', price: '29€' },
+                { name: 'Shampoo Purificante', price: '29€' },
+                { name: 'Shampoo Equilibrante', price: '29€' },
+                { name: 'Shampoo Forfora', price: '29€' },
+                { name: 'Shampoo Delicato', price: '26€' }
+            ];
+            return html`
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">SHAMPOO</span>
+                    </div>
+                </header>
+                <div className="space-y-6 md:space-y-8">
+                    ${SHAMPOO_PRODUCTS.map((item, idx) => html`
+                    <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                        <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
+                            <!-- Placeholder foto prodotto: sostituire con <img src="..." alt="${item.name}" className="w-full h-full object-contain" /> -->
+                            <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
+                                <i className="fa-solid fa-image text-3xl"></i>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
+                            </div>
+                            <div className="flex-1 w-full text-center md:text-left">
+                                <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
+                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
+                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
+                            </div>
+                        </div>
+                    </div>
+                    `)}
+                </div>
+                </div>
+            `;
+            }
+
+            if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-lozioni') {
+            const LOZIONI_PRODUCTS = [
+                { name: 'Lozione SOFT', price: '41€' },
+                { name: 'Lozione ACTIVE', price: '45€' },
+                { name: 'Lozione PRO', price: '49€' }
+            ];
+            return html`
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">LOZIONI</span>
+                    </div>
+                </header>
+                <div className="space-y-6 md:space-y-8">
+                    ${LOZIONI_PRODUCTS.map((item, idx) => html`
+                    <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                        <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
+                            <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
+                                <i className="fa-solid fa-image text-3xl"></i>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
+                            </div>
+                            <div className="flex-1 w-full text-center md:text-left">
+                                <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
+                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
+                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
+                            </div>
+                        </div>
+                    </div>
+                    `)}
+                </div>
+                </div>
+            `;
+            }
+
+            if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-emulsioni') {
+            const EMULSIONI_PRODUCTS = [
+                { name: 'Emulsione Lenitiva', price: '58€' },
+                { name: 'Emulsione Avvolgente', price: '28€' }
+            ];
+            return html`
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">EMULSIONI</span>
+                    </div>
+                </header>
+                <div className="space-y-6 md:space-y-8">
+                    ${EMULSIONI_PRODUCTS.map((item, idx) => html`
+                    <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                        <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
+                            <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
+                                <i className="fa-solid fa-image text-3xl"></i>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
+                            </div>
+                            <div className="flex-1 w-full text-center md:text-left">
+                                <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
+                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
+                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
+                            </div>
+                        </div>
+                    </div>
+                    `)}
+                </div>
+                </div>
+            `;
+            }
+
+            if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-lunghezze') {
+            const LUNGHEZZE_PRODUCTS = [
+                { name: 'Maschera Rigenerante', price: '37€' },
+                { name: 'Maschera Nutriente', price: '37€' },
+                { name: 'Conditioner Idratante', price: '29€' }
+            ];
+            return html`
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <header className="flex items-center justify-center mb-10">
+                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
+                    <span className="text-[#EAB308]">PRODOTTI PER LE LUNGHEZZE</span>
+                    </div>
+                </header>
+                <div className="space-y-6 md:space-y-8">
+                    ${LUNGHEZZE_PRODUCTS.map((item, idx) => html`
+                    <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                        <div className=${`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}>
+                            <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
+                                <i className="fa-solid fa-image text-3xl"></i>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
+                            </div>
+                            <div className="flex-1 w-full text-center md:text-left">
+                                <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
+                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
+                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
+                            </div>
+                        </div>
+                    </div>
+                    `)}
+                </div>
+                </div>
+            `;
+            }
+
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection && subSection.startsWith('prodotti-')) {
             return html`
                 <div className="flex flex-col animate-fade-in">
