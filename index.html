@@ -3588,11 +3588,8 @@ main.overflow-y-auto {
                     ${SHAMPOO_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
                     <div className="space-y-4 mt-2">
                         ${SHAMPOO_INTRO.items.map(it => html`
-                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
-                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
-                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
-                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
-                            </p>
+                        <div key=${it.title}>
+                            <p className="font-bold text-[15px] md:text-base leading-snug mb-1"><span className="text-black">${it.title.split(' (')[0]}</span>${it.title.includes(' (') ? html` <span className="text-[#EAB308]">(${it.title.split(' (')[1]}</span>` : ''}</p>
                             <p className="text-black text-sm leading-relaxed">${it.text}</p>
                         </div>
                         `)}
@@ -3684,11 +3681,8 @@ main.overflow-y-auto {
                     ${LOZIONI_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
                     <div className="space-y-4 mt-2">
                         ${LOZIONI_INTRO.items.map(it => html`
-                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
-                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
-                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
-                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
-                            </p>
+                        <div key=${it.title}>
+                            <p className="font-bold text-[15px] md:text-base leading-snug mb-1"><span className="text-black">${it.title.split(' (')[0]}</span>${it.title.includes(' (') ? html` <span className="text-[#EAB308]">(${it.title.split(' (')[1]}</span>` : ''}</p>
                             <p className="text-black text-sm leading-relaxed">${it.text}</p>
                         </div>
                         `)}
@@ -3770,11 +3764,8 @@ main.overflow-y-auto {
                     ${EMULSIONI_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
                     <div className="space-y-4 mt-2">
                         ${EMULSIONI_INTRO.items.map(it => html`
-                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
-                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
-                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
-                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
-                            </p>
+                        <div key=${it.title}>
+                            <p className="font-bold text-[15px] md:text-base leading-snug mb-1"><span className="text-black">${it.title.split(' (')[0]}</span>${it.title.includes(' (') ? html` <span className="text-[#EAB308]">(${it.title.split(' (')[1]}</span>` : ''}</p>
                             <p className="text-black text-sm leading-relaxed">${it.text}</p>
                         </div>
                         `)}
@@ -3847,11 +3838,8 @@ main.overflow-y-auto {
                     ${LUNGHEZZE_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
                     <div className="space-y-4 mt-2">
                         ${LUNGHEZZE_INTRO.items.map(it => html`
-                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
-                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
-                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
-                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
-                            </p>
+                        <div key=${it.title}>
+                            <p className="font-bold text-[15px] md:text-base leading-snug mb-1"><span className="text-black">${it.title.split(' (')[0]}</span>${it.title.includes(' (') ? html` <span className="text-[#EAB308]">(${it.title.split(' (')[1]}</span>` : ''}</p>
                             <p className="text-black text-sm leading-relaxed">${it.text}</p>
                         </div>
                         `)}
@@ -3892,13 +3880,12 @@ main.overflow-y-auto {
                     </div>
                     `)}
                 </div>
-                <div className="mt-10 md:mt-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
-                    <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
-                        <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
-                            <i className="fa-solid fa-image text-3xl"></i>
-                            <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
+                <div className="mt-10 md:mt-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] shadow-lg overflow-hidden">
+                    <div className="flex flex-col md:flex-row items-stretch">
+                        <div className="w-full md:w-48 h-48 md:h-auto shrink-0">
+                            <img src="foto-prodotti/prodotti%20per%20le%20lunghezze.png" alt="La Chiusura del Percorso Beautrì" className="w-full h-full object-cover block" />
                         </div>
-                        <div className="flex-1 w-full text-center md:text-left">
+                        <div className="flex-1 w-full flex flex-col justify-center text-center md:text-left p-6 md:p-8">
                             <p className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${LUNGHEZZE_OUTRO.title}</p>
                             <p className="text-black text-sm leading-relaxed">${LUNGHEZZE_OUTRO.text}</p>
                         </div>
