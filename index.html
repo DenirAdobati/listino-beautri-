@@ -3556,23 +3556,48 @@ main.overflow-y-auto {
             }
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-shampoo') {
+            const SHAMPOO_INTRO = {
+                paragraphs: [
+                    "La detersione per Beautrì non è un semplice gesto igienico, ma il primo vero trattamento curativo della routine. Per questo non parliamo di semplici shampoo, ma di veri e propri Complessi Lavanti: formulazioni avanzate a base di oli essenziali naturali e attivi funzionali, progettate per rispettare il cuoio capelluto e prepararlo a ricevere i benefici successivi.",
+                    "La nostra gamma si suddivide in tre grandi aree d'azione, nate per rispondere in modo mirato a ogni specifica esigenza:"
+                ],
+                items: [
+                    { title: "Specifici per la Caduta (Gold, Silver, Platinum)", text: "Trattamenti d'avanguardia coadiuvanti nella prevenzione della caduta dei capelli. Agiscono su più fronti per stimolare la circolazione sanguigna, rinforzare il capello fin dalla radice e ripristinare le normali condizioni fisiologiche della cute, creando l'ambiente ideale per la crescita." },
+                    { title: "Trattamenti per Cuti Anomale (Purificante, Equilibrante, Forfora, Delicato)", text: "Soluzioni mirate per risolvere i disagi del cuoio capelluto. Che si tratti di eliminare tossine e residui, regolare l'eccesso di sebo e sudore, contrastare la desquamazione forforacea o lenire le cuti più sensibili, questi complessi igienizzano a fondo senza alterare il mantello idrolipidico cutaneo." },
+                    { title: "Ristrutturanti e Nutrienti (Nutriente)", text: "Formule dedicate alle lunghezze disidratate, sfibrate o sfruttate da trattamenti chimici e agenti naturali. Riparano la struttura del capello, restituendo immediata morbidezza, lucentezza e vitalità." }
+                ]
+            };
+            const SHAMPOO_OUTRO = {
+                title: "🎯 La Massima Personalizzazione",
+                text: "Quasi tutti i nostri Complessi Lavanti sono progettati per essere miscelati e potenziati con i Potenziatori SH. direttamente a casa. Questo ci permette di cucire il trattamento su misura sulle reali ed evolutive esigenze di cute e capello."
+            };
             const SHAMPOO_PRODUCTS = [
-                { name: 'Shampoo Nutriente', price: '29€', photo: 'foto-prodotti/shampoo%20nutriente.png' },
-                { name: 'Shampoo Caduta Gold', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20gold.png' },
-                { name: 'Shampoo Caduta Silver', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20silver.png' },
-                { name: 'Shampoo Caduta Platinum', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20platino.png' },
-                { name: 'Shampoo Purificante', price: '29€', photo: 'foto-prodotti/shampoo%20purificante.png' },
-                { name: 'Shampoo Equilibrante', price: '29€', photo: 'foto-prodotti/shampoo%20equilibrante.png' },
-                { name: 'Shampoo Forfora', price: '29€', photo: 'foto-prodotti/shampoo%20forfora.png' },
-                { name: 'Shampoo Delicato', price: '26€', photo: 'foto-prodotti/shampoo%20delicato.png' }
+                { name: 'Shampoo Nutriente', price: '29€', photo: 'foto-prodotti/shampoo%20nutriente.png', title: "Ristruttura capelli sfibrati e opachi, restituendo morbidezza e lucentezza.", desc: "Complesso lavante ristrutturante, indicato per capelli disidratati, sfruttati chimicamente e naturalmente, sfibrati, opachi e secchi, che hanno bisogno di nutrimento e di riparare la struttura. Oltre a ridare vita al capello, dona morbidezza e lucentezza, accentuando i riflessi naturali.", checklist: ["Ristruttura in profondità", "Accentua i riflessi naturali"], closing: "Potenziabile con i Potenziatori SH. in base alle esigenze.", badges: ['Oli nutrienti', 'PH 4.5'] },
+                { name: 'Shampoo Caduta Gold', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20gold.png', title: "Contrasta la caduta agendo su più fronti, per ristabilire le condizioni ottimali della cute.", desc: "Complesso lavante contenente un innovativo mix di attivi funzionali che contrastano la caduta dei capelli, agendo su più fronti e ristabilendo le condizioni ottimali della cute.", checklist: ["Agisce su più fronti contro la caduta"], closing: "Potenziabile con i Potenziatori SH. in base alle esigenze.", badges: ['Attivi funzionali', 'Mix anticaduta', 'PH 4.5'] },
+                { name: 'Shampoo Caduta Silver', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20silver.png', title: "Azione anticaduta decisa, ideale per capelli sottili grazie alla sua formula più duttile.", desc: "Complesso lavante coadiuvante nella prevenzione della caduta dei capelli. La sua azione è decisa e potente grazie agli oli essenziali presenti. L'aggiunta di elementi nutritivi lo rende più duttile e ideale su capelli sottili.", checklist: ["Azione decisa grazie agli oli essenziali", "Ideale per capelli sottili"], closing: "Potenziabile con i Potenziatori SH. in base alle esigenze.", badges: ['Oli essenziali', 'Elementi nutritivi', 'PH 4.5'] },
+                { name: 'Shampoo Caduta Platinum', price: '29€', photo: 'foto-prodotti/shampoo%20caduta%20platino.png', title: "Favorisce il ripristino delle condizioni fisiologiche della cute per prevenire la caduta.", desc: "Complesso lavante coadiuvante nella prevenzione della caduta dei capelli, a base di oli essenziali naturali. La sua azione favorisce il ripristino delle normali condizioni fisiologiche della cute, necessarie per ristabilire le condizioni ottimali.", checklist: ["A base di oli essenziali naturali"], closing: "Potenziabile con i Potenziatori SH. in base alle esigenze.", badges: ['Oli essenziali naturali', 'PH 4.5'] },
+                { name: 'Shampoo Purificante', price: '29€', photo: 'foto-prodotti/shampoo%20purificante.png', title: "Elimina residui e tossine in profondità, senza alterare l'equilibrio naturale della cute.", desc: "Complesso lavante con ottime proprietà igienizzanti e purificanti. Elimina efficacemente residui e tossine da cute e capelli, senza alterare il cuoio capelluto, creando un ambiente ottimale per la salute dei capelli.", checklist: ["Elimina residui e tossine", "Rispetta il mantello idrolipidico cutaneo"], closing: "Potenziabile con i Potenziatori SH. in base alle esigenze.", badges: ['Azione purificante', 'PH 4.5'] },
+                { name: 'Shampoo Equilibrante', price: '29€', photo: 'foto-prodotti/shampoo%20equilibrante.png', title: "Riporta la cute alle condizioni ottimali, ideale per capelli grassi e sudati.", desc: "Complesso lavante indicato per cuti pure e per il lavaggio di capelli sudati e grassi. Il suo uso costante riporta la cute alle condizioni igieniche ottimali, restituendo ai capelli morbidezza e lucentezza.", checklist: ["Ideale per capelli sudati e grassi"], closing: "Potenziabile con i Potenziatori SH. in base alle esigenze.", badges: ['Complesso equilibrante', 'PH 4.5'] },
+                { name: 'Shampoo Forfora', price: '29€', photo: 'foto-prodotti/shampoo%20forfora.png', title: "Riduce la desquamazione forforacea con un'azione d'urto mirata sulla cute.", desc: "Complesso lavante specifico per cute desquamata e con forfora accentuata. La sua azione d'urto allontana e riduce la desquamazione forforacea, ristabilendo le condizioni igieniche ottimali della cute.", checklist: ["Azione d'urto contro la forfora"], closing: "Potenziabile con i Potenziatori SH. in base alle esigenze.", badges: ['Azione antiforfora', 'PH 4.5'] },
+                { name: 'Shampoo Delicato', price: '26€', photo: 'foto-prodotti/shampoo%20delicato.png', title: "Formula duttile e bilanciata, indicata anche per bambini da 0 a 9 anni e per chi affronta percorsi di chemioterapia.", desc: "Complesso lavante indicato per cuti sensibili e delicate: duttile e bilanciato, permette di mantenere inalterati gli equilibri di cute e capelli. Il mantello idrolipidico riceve il giusto apporto e i capelli acquistano massima morbidezza e lucentezza.", checklist: ["Mantiene inalterati gli equilibri di cute e capelli", "Indicato per bambini da 0 a 9 anni", "Indicato per chi sta attraversando un percorso di chemioterapia"], badges: ['Formula delicata', 'Adatto a cuti sensibili', 'PH 4.5'] }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
-                <header className="flex items-center justify-center mb-10">
-                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                    <span className="text-[#EAB308]">SHAMPOO</span>
+                <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                    <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">I NOSTRI SHAMPOO</p>
+                    ${SHAMPOO_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
+                    <div className="space-y-4 mt-2">
+                        ${SHAMPOO_INTRO.items.map(it => html`
+                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
+                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
+                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
+                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
+                            </p>
+                            <p className="text-black text-sm leading-relaxed">${it.text}</p>
+                        </div>
+                        `)}
                     </div>
-                </header>
+                </div>
                 <div className="space-y-6 md:space-y-8">
                     ${SHAMPOO_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
@@ -3589,31 +3614,86 @@ main.overflow-y-auto {
                             `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
-                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
-                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                ${item.title ? html`<p className="text-black font-bold text-[15px] md:text-base leading-snug mb-2">${item.title}</p>` : ''}
+                                ${item.desc ? html`<p className="text-slate-500 text-sm leading-relaxed mb-2">${item.desc}</p>` : ''}
+                                ${item.checklist ? html`
+                                <ul className=${`text-slate-700 text-sm space-y-1 text-left ${item.closing ? 'mb-2' : 'mb-4'}`}>
+                                    ${item.checklist.map(c => html`<li key=${c} className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>${c}</span></li>`)}
+                                </ul>
+                                ` : ''}
+                                ${item.closing ? html`<p className="text-base font-semibold italic text-[#EAB308] mb-4">${item.closing}</p>` : ''}
+                                ${(item.badges && item.badges.length) || item.specialBadge ? html`
+                                <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+                                    ${(item.badges || []).map(b => html`<span key=${b} className="bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">${b}</span>`)}
+                                    ${item.specialBadge ? html`
+                                    <span className="inline-flex items-center gap-1.5 bg-black text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full">
+                                        <i className="fa-solid fa-shield-heart text-[#EAB308]"></i>${item.specialBadge}
+                                    </span>
+                                    ` : ''}
+                                </div>
+                                ` : ''}
                                 <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
                             </div>
                         </div>
                     </div>
                     `)}
                 </div>
+                <div className="relative mt-10 md:mt-12">
+                    <span className="absolute -top-3 right-6 bg-[#E63946] text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase z-10">PERSONALIZZATO PER TE</span>
+                    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] shadow-lg overflow-hidden">
+                        <div className="flex flex-col md:flex-row items-stretch">
+                            <div className="w-full md:w-64 h-56 md:h-auto shrink-0">
+                                <img src="foto-prodotti/Personalizzazione%20Shampoo.png" alt="La Massima Personalizzazione Beautrì" className="w-full h-full object-cover block" />
+                            </div>
+                            <div className="flex-1 w-full flex flex-col justify-center text-center md:text-left p-6 md:p-8">
+                                <p className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${SHAMPOO_OUTRO.title}</p>
+                                <p className="text-black text-sm leading-relaxed">${SHAMPOO_OUTRO.text}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             `;
             }
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-lozioni') {
+            const LOZIONI_INTRO = {
+                paragraphs: [
+                    "Se il complesso lavante prepara il terreno, le Lozioni Beautrì rappresentano il cuore del trattamento quotidiano. Si tratta di formulazioni idroalcoliche o fluide concentrate a base di oli essenziali, progettate per un utilizzo giornaliero. La loro funzione è penetrare in profondità per nutrire il bulbo pilifero, riequilibrare la cute e agire direttamente sugli inestetismi o sulle anomalie del cuoio capelluto.",
+                    "La nostra gamma di lozioni si articola in tre soluzioni mirate, per rispondere a ogni livello di necessità:"
+                ],
+                items: [
+                    { title: "Riequilibrante e Lenitiva (Lozione Soft)", text: "Una lozione quotidiana multitasking, ideale per ripristinare le normali condizioni fisiologiche del cuoio capelluto. Nutre il bulbo, lenisce i rossori e riduce il prurito, donando immediato comfort alla cute." },
+                    { title: "Rigenerante e Densificante (Lozione Active)", text: "Il trattamento quotidiano specifico per i casi di scarsa qualità e quantità di capelli. Agisce per risvegliare la vitalità della cute e migliorare visibilmente la densità e la salute della chioma." },
+                    { title: "Fortificante e Anticaduta (Lozione Pro)", text: "Una lozione mirata che contrasta la caduta dei capelli, agendo direttamente sul bulbo pilifero per ripristinare il suo equilibrio ideale. Il risultato è un capello visibilmente più robusto, corposo e resistente." }
+                ]
+            };
+            const LOZIONI_OUTRO = {
+                title: "🔗 La Personalizzazione Sinergica",
+                text: "Esattamente come per la detersione, la vera forza delle nostre lozioni risiede nella modularità. Le formule Soft e Active sono progettate per essere miscelate e potenziate con i rispettivi Potenziatori (SOFT e ACTIVE). Questo ci consente di creare un trattamento giornaliero unico, calibrato al millimetro sulle esigenze specifiche della cute e dei capelli di ciascun cliente."
+            };
             const LOZIONI_PRODUCTS = [
-                { name: 'Lozione SOFT', price: '41€', photo: 'foto-prodotti/Lozione%20soft.png' },
-                { name: 'Lozione ACTIVE', price: '45€', photo: 'foto-prodotti/Lozione%20active.png' },
-                { name: 'Lozione PRO', price: '49€', photo: 'foto-prodotti/Lozione%20pro.png' }
+                { name: 'Lozione SOFT', price: '41€', photo: 'foto-prodotti/Lozione%20soft.png', title: "Ripristina l'equilibrio del cuoio capelluto, lenendo rossori e prurito per un comfort immediato.", desc: "Lozione giornaliera dalle innumerevoli funzioni. Favorisce il ripristino delle normali condizioni fisiologiche del cuoio capelluto, nutre il bulbo, lenisce i rossori e riduce il prurito.", checklist: ["Nutre il bulbo pilifero", "Lenisce rossori e riduce il prurito"], closing: "Potenziabile con i Potenziatori SOFT in base alle esigenze.", badges: ['NO COLORANTI · NO PARABENI', 'FORMULATO CON OLI ESSENZIALI 100% NATURALI'] },
+                { name: 'Lozione ACTIVE', price: '45€', photo: 'foto-prodotti/Lozione%20active.png', title: "Risveglia la vitalità della cute, migliorando visibilmente densità e salute della chioma.", desc: "Lozione giornaliera indicata per scarsa qualità e quantità di capelli. Agisce sulle specifiche necessità della cute e dei capelli, ristabilendo le condizioni ottimali.", checklist: ["Migliora densità e salute della chioma"], closing: "Potenziabile con i Potenziatori ACTIVE in base alle esigenze.", badges: ['NO COLORANTI · NO PARABENI'] },
+                { name: 'Lozione PRO', price: '49€', photo: 'foto-prodotti/Lozione%20pro.png', title: "Azione anticaduta mirata sul bulbo, per un capello più robusto, corposo e resistente.", desc: "Lozione giornaliera anticaduta: favorisce il ripristino delle normali condizioni fisiologiche del bulbo, attribuendo maggiore robustezza e corposità al capello.", checklist: ["Azione anticaduta mirata sul bulbo", "Capello più robusto e corposo"], badges: ['Formula fortificante', 'NO COLORANTI · NO PARABENI', 'FORMULATO CON OLI ESSENZIALI 100% NATURALI'] }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
-                <header className="flex items-center justify-center mb-10">
-                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                    <span className="text-[#EAB308]">LOZIONI</span>
+                <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                    <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">LE NOSTRE LOZIONI</p>
+                    ${LOZIONI_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
+                    <div className="space-y-4 mt-2">
+                        ${LOZIONI_INTRO.items.map(it => html`
+                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
+                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
+                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
+                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
+                            </p>
+                            <p className="text-black text-sm leading-relaxed">${it.text}</p>
+                        </div>
+                        `)}
                     </div>
-                </header>
+                </div>
                 <div className="space-y-6 md:space-y-8">
                     ${LOZIONI_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
@@ -3630,30 +3710,76 @@ main.overflow-y-auto {
                             `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
-                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
-                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                ${item.title ? html`<p className="text-black font-bold text-[15px] md:text-base leading-snug mb-2">${item.title}</p>` : ''}
+                                ${item.desc ? html`<p className="text-slate-500 text-sm leading-relaxed mb-2">${item.desc}</p>` : ''}
+                                ${item.checklist ? html`
+                                <ul className=${`text-slate-700 text-sm space-y-1 text-left ${item.closing ? 'mb-2' : 'mb-4'}`}>
+                                    ${item.checklist.map(c => html`<li key=${c} className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>${c}</span></li>`)}
+                                </ul>
+                                ` : ''}
+                                ${item.closing ? html`<p className="text-base font-semibold italic text-[#EAB308] mb-4">${item.closing}</p>` : ''}
+                                ${(item.badges && item.badges.length) ? html`
+                                <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+                                    ${item.badges.map(b => html`<span key=${b} className="bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">${b}</span>`)}
+                                </div>
+                                ` : ''}
                                 <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
                             </div>
                         </div>
                     </div>
                     `)}
                 </div>
+                <div className="relative mt-10 md:mt-12">
+                    <span className="absolute -top-3 right-6 bg-[#E63946] text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase z-10">PERSONALIZZATO PER TE</span>
+                    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] shadow-lg overflow-hidden">
+                        <div className="flex flex-col md:flex-row items-stretch">
+                            <div className="w-full md:w-64 h-56 md:h-auto shrink-0">
+                                <img src="foto-prodotti/Personalizzazione%20Lozioni.png" alt="La Personalizzazione Sinergica Beautrì" className="w-full h-full object-cover block" />
+                            </div>
+                            <div className="flex-1 w-full flex flex-col justify-center text-center md:text-left p-6 md:p-8">
+                                <p className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${LOZIONI_OUTRO.title}</p>
+                                <p className="text-black text-sm leading-relaxed">${LOZIONI_OUTRO.text}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             `;
             }
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-emulsioni') {
+            const EMULSIONI_INTRO = {
+                paragraphs: [
+                    "La grande novità della linea Beautrì è rappresentata dalle Emulsioni: formule cremose, fluide e ultra-funzionali, nate per offrire una protezione e un condizionamento profondo.",
+                    "Per rispondere in modo completo alle esigenze di benessere della persona, abbiamo creato due prodotti specifici che agiscono su due fronti completamente diversi, separando la cura del cuoio capelluto dal trattamento dello stelo.",
+                    "Con l'inserimento delle emulsioni, la personalizzazione Beautrì fa un passo avanti: permette di trattare contemporaneamente e in modo mirato le anomalie della cute (con l'azione Lenitiva) e le necessità di idratazione o styling delle lunghezze (con l'azione Avvolgente), garantendo un risultato a 360 gradi."
+                ],
+                items: [
+                    { title: "Focus Cute: Protezione e Comfort (Emulsione Lenitiva)", text: "Un vero e proprio scudo protettivo per il cuoio capelluto. Agisce direttamente sulla pelle per prevenire i danni tissutali causati da fattori ambientali o stress. È il trattamento ideale per le cuti arrossate, tese o irritate, grazie a una spiccata azione emolliente, lenitiva e antibatterica che dona immediato sollievo." },
+                    { title: "Focus Capello: Protezione e Definizione (Emulsione Avvolgente)", text: "Un trattamento di styling e cura dedicato esclusivamente alle lunghezze. Avvolge e riveste la fibra capillare con un film invisibile che protegge il capello dalla disidratazione. È studiata appositamente per definire la forma naturale di onde e ricci, lasciandoli incredibilmente morbidi, elastici e setosi." }
+                ]
+            };
             const EMULSIONI_PRODUCTS = [
-                { name: 'Emulsione Lenitiva', price: '58€', photo: 'foto-prodotti/Emulsione%20lenitiva.png' },
-                { name: 'Emulsione Avvolgente', price: '28€', photo: 'foto-prodotti/Emulsione%20avvolgente.png' }
+                { name: 'Emulsione Lenitiva', price: '58€', photo: 'foto-prodotti/Emulsione%20lenitiva.png', title: "Scudo protettivo per il cuoio capelluto: lenisce rossori, tensione e irritazioni.", desc: "Un vero e proprio scudo protettivo per il cuoio capelluto. Agisce direttamente sulla pelle per prevenire i danni tissutali causati da fattori ambientali o stress. È il prodotto ideale per le cuti arrossate, tese o irritate, grazie a una spiccata azione emolliente, lenitiva e antibatterica.", checklist: ["Azione emolliente, lenitiva e antibatterica", "Ideale per cuti arrossate o irritate"], badges: ['Azione emolliente', 'Azione antibatterica'] },
+                { name: 'Emulsione Avvolgente', price: '28€', photo: 'foto-prodotti/Emulsione%20avvolgente.png', title: "Protegge e definisce le lunghezze, per onde e ricci morbidi, elastici e setosi.", desc: "Un prodotto di styling e cura dedicato esclusivamente alle lunghezze. Avvolge e riveste la fibra capillare con un film invisibile che protegge il capello dalla disidratazione. È studiata per definire la forma naturale di onde e ricci.", checklist: ["Protegge dalla disidratazione", "Definisce onde e ricci naturali"], badges: ['Film protettivo', 'Anti-disidratazione'] }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
-                <header className="flex items-center justify-center mb-10">
-                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                    <span className="text-[#EAB308]">EMULSIONI</span>
+                <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                    <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">LE NOSTRE EMULSIONI</p>
+                    ${EMULSIONI_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
+                    <div className="space-y-4 mt-2">
+                        ${EMULSIONI_INTRO.items.map(it => html`
+                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
+                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
+                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
+                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
+                            </p>
+                            <p className="text-black text-sm leading-relaxed">${it.text}</p>
+                        </div>
+                        `)}
                     </div>
-                </header>
+                </div>
                 <div className="space-y-6 md:space-y-8">
                     ${EMULSIONI_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
@@ -3670,8 +3796,19 @@ main.overflow-y-auto {
                             `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
-                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
-                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                ${item.title ? html`<p className="text-black font-bold text-[15px] md:text-base leading-snug mb-2">${item.title}</p>` : ''}
+                                ${item.desc ? html`<p className="text-slate-500 text-sm leading-relaxed mb-2">${item.desc}</p>` : ''}
+                                ${item.checklist ? html`
+                                <ul className=${`text-slate-700 text-sm space-y-1 text-left ${item.closing ? 'mb-2' : 'mb-4'}`}>
+                                    ${item.checklist.map(c => html`<li key=${c} className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>${c}</span></li>`)}
+                                </ul>
+                                ` : ''}
+                                ${item.closing ? html`<p className="text-base font-semibold italic text-[#EAB308] mb-4">${item.closing}</p>` : ''}
+                                ${(item.badges && item.badges.length) ? html`
+                                <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+                                    ${item.badges.map(b => html`<span key=${b} className="bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">${b}</span>`)}
+                                </div>
+                                ` : ''}
                                 <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
                             </div>
                         </div>
@@ -3683,18 +3820,43 @@ main.overflow-y-auto {
             }
 
             if (gender === 'percorsi' && section === 'prodotti-overview' && subSection === 'prodotti-lunghezze') {
+            const LUNGHEZZE_INTRO = {
+                paragraphs: [
+                    "Se la detersione prepara la cute e le lozioni la attivano, la fase finale della routine Beautrì si concentra sulla bellezza, la protezione e la ristrutturazione profonda della fibra capillare. Attraverso formule mirate e ricche di attivi botanici, questa linea di condizionanti permette di levigare le cuticole, contrastare la fragilità e restituire immediata elasticità e lucentezza alla chioma.",
+                    "Per rispondere in modo preciso alle diverse esigenze di tempo e struttura, la gamma si articola in trattamenti a tempo di posa differenziato:"
+                ],
+                items: [
+                    { title: "Idratazione Rapida e Protezione (Conditioner Idratante)", text: "Il perfetto alleato quotidiano per capelli trattati e disidratati. Questo balsamo in crema a rapido assorbimento sfrutta gli estratti di Malva e Aloe Vera per ripristinare il livello idrico ottimale del capello. Leviga la cuticola e regala una chioma visibilmente morbida, setosa e facile da districare già dal primo utilizzo, senza appesantire." },
+                    { title: "Nutrimento e Morbidezza Estrema (Maschera Nutriente)", text: "Un trattamento intensivo ad azione profonda per lunghezze disidratate, aride e opache. Grazie a un ricco complesso di burri e oli vegetali (Karité, Macadamia, Cocco e Ricino) combinati con le proteine del grano e l'olio essenziale di Ylang Ylang, nutre intensamente lo stelo, elimina il crespo e restituisce una setosità assoluta." },
+                    { title: "Ricostruzione e Forza Strutturale (Maschera Rigenerante)", text: "La soluzione d'urto per capelli profondamente danneggiati, sfibrati e privi di tono. Sfrutta il potere riparatore della Cheratina idrolizzata e del Pantenolo per ricostruire i legami interni del capello, mentre gli oli essenziali di Menta, Rosmarino e Petit Grain infondono vitalità e ne aumentano la resistenza alla rottura." }
+                ]
+            };
+            const LUNGHEZZE_OUTRO = {
+                title: "🏁 La Chiusura del Percorso",
+                text: "Che si scelga l'idratazione agile del Conditioner o la ricostruzione profonda delle Maschere, questo step completa l'esperienza di personalizzazione Beautrì. Sigilla i benefici dei trattamenti precedenti e garantisce una fibra capillare visibilmente sana, forte e protetta, sia in salone che a casa."
+            };
             const LUNGHEZZE_PRODUCTS = [
-                { name: 'Maschera Rigenerante', price: '37€', photo: 'foto-prodotti/Maschera%20rigenerante.png' },
-                { name: 'Maschera Nutriente', price: '37€', photo: 'foto-prodotti/Maschera%20nutriente.png' },
-                { name: 'Conditioner Idratante', price: '29€', photo: 'foto-prodotti/Conditioner%20idratante.png' }
+                { name: 'Maschera Rigenerante', price: '37€', photo: 'foto-prodotti/Maschera%20rigenerante.png', title: "Ricostruisce i legami interni del capello danneggiato, aumentando forza e resistenza.", desc: "Maschera ad azione profonda per capelli danneggiati, sottili, fragili e opachi. La combinazione di Cheratina idrolizzata, Proteine del Grano e Pantenolo contrasta la fragilità del capello, aumentando forza e resistenza strutturale.", checklist: ["Ricostruisce i legami interni del capello", "Aumenta forza e resistenza strutturale"], closing: "Con oli essenziali di Menta, Rosmarino e Petit Grain Bigarade.", badges: ['Cheratina idrolizzata', 'Pantenolo', 'Oli essenziali'] },
+                { name: 'Maschera Nutriente', price: '37€', photo: 'foto-prodotti/Maschera%20nutriente.png', title: "Nutre intensamente lo stelo, elimina il crespo e restituisce setosità assoluta.", desc: "Maschera ad azione profonda per capelli grossi, danneggiati, fragili e secchi. La sinergia tra Proteine del Grano e Olio Essenziale di Ylang Ylang contrasta la fragilità capillare, aumentando forza e resistenza dello stelo.", checklist: ["Nutre intensamente lo stelo", "Elimina il crespo"], closing: "Con Burro di Karité, Macadamia, Cocco e Ricino.", badges: ['Burro di Karité', 'Macadamia, Cocco, Ricino'] },
+                { name: 'Conditioner Idratante', price: '29€', photo: 'foto-prodotti/Conditioner%20idratante.png', title: "Idratazione rapida e ristrutturante, per capelli morbidi e setosi già dal primo utilizzo.", desc: "Il perfetto alleato quotidiano. Balsamo in crema ideale per capelli trattati, disidratati e indeboliti. Grazie alla sinergia di Cheratina idrolizzata e Pantenolo, svolge un'azione rinforzante e ristrutturante immediata.", checklist: ["Idratazione rapida e ristrutturante", "Morbidi e setosi già dal primo utilizzo"], closing: "Con estratti di Malva e Aloe Vera.", badges: ['Cheratina idrolizzata', 'Malva e Aloe Vera'] }
             ];
             return html`
                 <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
-                <header className="flex items-center justify-center mb-10">
-                    <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
-                    <span className="text-[#EAB308]">PRODOTTI PER LE LUNGHEZZE</span>
+                <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                    <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">I NOSTRI PRODOTTI PER LE LUNGHEZZE</p>
+                    ${LUNGHEZZE_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
+                    <div className="space-y-4 mt-2">
+                        ${LUNGHEZZE_INTRO.items.map(it => html`
+                        <div key=${it.title} className="bg-[#F5F5F5] rounded-2xl p-4 md:p-5">
+                            <p className="flex items-center gap-2 text-black font-bold text-[15px] md:text-base leading-snug mb-1">
+                                <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
+                                <span className="bg-[#EAB308] px-1.5 py-0.5 rounded">${it.title}</span>
+                            </p>
+                            <p className="text-black text-sm leading-relaxed">${it.text}</p>
+                        </div>
+                        `)}
                     </div>
-                </header>
+                </div>
                 <div className="space-y-6 md:space-y-8">
                     ${LUNGHEZZE_PRODUCTS.map((item, idx) => html`
                     <div key=${item.name} className="bg-white border-2 border-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
@@ -3711,13 +3873,36 @@ main.overflow-y-auto {
                             `}
                             <div className="flex-1 w-full text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${item.name}</h3>
-                                <p className="text-slate-400 text-sm italic mb-4">Descrizione in arrivo</p>
-                                <!-- Spazio per altre informazioni future: checklist benefici, badge "novità", ecc. -->
+                                ${item.title ? html`<p className="text-black font-bold text-[15px] md:text-base leading-snug mb-2">${item.title}</p>` : ''}
+                                ${item.desc ? html`<p className="text-slate-500 text-sm leading-relaxed mb-2">${item.desc}</p>` : ''}
+                                ${item.checklist ? html`
+                                <ul className=${`text-slate-700 text-sm space-y-1 text-left ${item.closing ? 'mb-2' : 'mb-4'}`}>
+                                    ${item.checklist.map(c => html`<li key=${c} className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>${c}</span></li>`)}
+                                </ul>
+                                ` : ''}
+                                ${item.closing ? html`<p className="text-base font-semibold italic text-[#EAB308] mb-4">${item.closing}</p>` : ''}
+                                ${(item.badges && item.badges.length) ? html`
+                                <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+                                    ${item.badges.map(b => html`<span key=${b} className="bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">${b}</span>`)}
+                                </div>
+                                ` : ''}
                                 <div className="text-xl font-black text-[#EAB308] tracking-widest">${item.price}</div>
                             </div>
                         </div>
                     </div>
                     `)}
+                </div>
+                <div className="mt-10 md:mt-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
+                    <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+                        <div className="w-full md:w-56 h-56 shrink-0 flex flex-col items-center justify-center gap-2 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-300">
+                            <i className="fa-solid fa-image text-3xl"></i>
+                            <span className="text-[10px] font-bold uppercase tracking-widest">Foto in arrivo</span>
+                        </div>
+                        <div className="flex-1 w-full text-center md:text-left">
+                            <p className="text-xl md:text-2xl font-black text-black uppercase tracking-tight mb-2">${LUNGHEZZE_OUTRO.title}</p>
+                            <p className="text-black text-sm leading-relaxed">${LUNGHEZZE_OUTRO.text}</p>
+                        </div>
+                    </div>
                 </div>
                 </div>
             `;
