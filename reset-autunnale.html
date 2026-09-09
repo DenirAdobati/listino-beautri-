@@ -4,7 +4,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="shortcut icon" href="favicon.ico">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Beautrì Reset Autunnale — Preview</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,12 +18,23 @@
   }
   .animate-zoom-in { animation: zoomIn 0.5s ease-out; }
   @keyframes zoomIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+
+  /* === FIX RESPONSIVE MOBILE (solo smartphone, non tocca desktop/iPad) === */
+  html, body {
+    overflow-x: hidden;
+  }
+  @media screen and (max-width: 767px) {
+    .beautri-back-btn {
+      top: calc(1.5rem + env(safe-area-inset-top)) !important;
+      right: calc(1.5rem + env(safe-area-inset-right)) !important;
+    }
+  }
 </style>
 </head>
 <body>
 
 <!-- TASTO INDIETRO stile menu -->
-<button onclick="history.back()" style="position:fixed;top:1.5rem;right:1.5rem;z-index:9999;width:3.5rem;height:3.5rem;background:white;border:1px solid rgba(255,255,255,0.8);border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,0.10);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.15s;">
+<button class="beautri-back-btn" onclick="history.back()" style="position:fixed;top:1.5rem;right:1.5rem;z-index:9999;width:3.5rem;height:3.5rem;background:white;border:1px solid rgba(255,255,255,0.8);border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,0.10);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.15s;">
   <i class="fa-solid fa-arrow-left" style="font-size:1rem;color:#1A1A1A;"></i>
 </button>
 
