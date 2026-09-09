@@ -415,11 +415,67 @@ main.overflow-y-auto {
     button[class*="min-h-\[220px\]"] {
         min-height: 155px !important;
         padding: 1.25rem !important;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1) !important;
+    }
+    button[class*="min-h-\[220px\]"]:not([class*="border-2"]) {
+        border-color: #f1f5f9 !important;
     }
     button[class*="min-h-\[220px\]"] div[class*="w-14"] {
-        width: 2.75rem !important;
-        height: 2.75rem !important;
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+        font-size: 1.5rem !important;
         margin-bottom: 0.5rem !important;
+    }
+    button[class*="min-h-\[220px\]"] div[class*="w-14"]:not([class*="bg-\[#EAB308\]"]) {
+        background-color: rgba(234, 179, 8, 0.1) !important;
+    }
+    button[class*="min-h-\[220px\]"] h3 {
+        font-size: 14px !important;
+        letter-spacing: 0.02em !important;
+    }
+}
+
+/* === FIX: Pill titolo più compatto su mobile (Variante 2 validata su mockup) === */
+@media screen and (max-width: 767px) {
+    [class*="bg-white"][class*="px-8"][class*="py-3"][class*="rounded-full"] {
+        padding: 0.4rem 1rem !important;
+        font-size: 11px !important;
+        letter-spacing: 0.05em !important;
+    }
+}
+
+/* === FIX: Home mobile — hamburger nascosto solo sulla vera home === */
+@media screen and (max-width: 767px) {
+    body:has(#menu-donna) #hamburger-btn {
+        display: none !important;
+    }
+}
+
+/* === FIX: Home mobile — header più compatto solo sulla vera home === */
+@media screen and (max-width: 767px) {
+    body:has(#menu-donna) header {
+        margin-bottom: 1.5rem !important;
+    }
+    body:has(#menu-donna) div[class*="max-w-\[1200px\]"] {
+        padding-top: 48px !important;
+    }
+}
+
+/* === FIX: Cerchio decorativo UOMO in tono oro (calibrato su mockup) === */
+@media screen and (max-width: 767px) {
+    #menu-uomo div[class*="bg-slate-200"] {
+        background-color: #EAB308 !important;
+        opacity: 0.18 !important;
+    }
+}
+
+/* === FIX: Titolo DONNA/UOMO centrato verticalmente nella card === */
+@media screen and (max-width: 767px) {
+    button[id^="menu-"] div[class*="h-full"] {
+        justify-content: center !important;
+    }
+    button[id^="menu-"] h2[class*="mt-auto"] {
+        margin-top: 0 !important;
     }
 }
 </style>
@@ -4467,7 +4523,7 @@ main.overflow-y-auto {
 
         return html`
           <div className="flex flex-col overflow-hidden relative" style=${{ height: 'var(--app-height, 100vh)' }}>
-            <button onClick=${() => setIsOpen(true)} className="fixed top-4 left-4 sm:top-8 sm:left-8 z-40 w-16 h-16 sm:w-14 sm:h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-black border border-white active:scale-95 transition-transform">
+            <button id="hamburger-btn" onClick=${() => setIsOpen(true)} className="fixed top-4 left-4 sm:top-8 sm:left-8 z-40 w-16 h-16 sm:w-14 sm:h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-black border border-white active:scale-95 transition-transform">
               <i className="fa-solid fa-bars-staggered text-xl"></i>
             </button>
 
