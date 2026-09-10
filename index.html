@@ -3377,26 +3377,24 @@ main.overflow-y-auto {
           </div>
         `;
 
+      // Deep link: legge l'hash dall'URL in modo sincrono, prima del primo render
+      // (evita un doppio render "home poi sezione" che causava il flash dell'hamburger)
+      const getInitialGenderFromHash = () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'menu-donna') return 'donna';
+        if (hash === 'menu-uomo') return 'uomo';
+        if (hash === 'percorsi' || hash === 'prodotti') return 'percorsi';
+        return null;
+      };
+      const getInitialSectionFromHash = () => {
+        return window.location.hash.replace('#', '') === 'prodotti' ? 'prodotti-overview' : null;
+      };
+
       const DigitalMenu = ({ scrollToTop }) => {
-        const [gender, setGender] = useState(null);
-        const [section, setSection] = useState(null);
+        const [gender, setGender] = useState(getInitialGenderFromHash);
+        const [section, setSection] = useState(getInitialSectionFromHash);
         const [subSection, setSubSection] = useState(null);
         const [selectedPath, setSelectedPath] = useState(null);
-
-        // Deep link: legge l'hash dall'URL al caricamento
-        useEffect(() => {
-          const hash = window.location.hash.replace('#', '');
-          if (hash === 'menu-donna') {
-            setGender('donna');
-          } else if (hash === 'menu-uomo') {
-            setGender('uomo');
-          } else if (hash === 'percorsi') {
-            setGender('percorsi');
-          } else if (hash === 'prodotti') {
-            setGender('percorsi');
-            setSection('prodotti-overview');
-          }
-        }, []);
 
         // Aggiorna l'URL hash quando cambia la navigazione
         useEffect(() => {
