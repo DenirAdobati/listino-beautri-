@@ -537,6 +537,21 @@ main.overflow-y-auto {
       const { useState, useEffect, useRef, useCallback } = React;
       const html = htm.bind(React.createElement);
 
+      // --- GA4 TRACKING (analytics only, nessun impatto visivo) ---
+      // Distingue iPad/tablet touch da desktop: sotto i 768px è sempre "phone"
+      // (media query già usata dal resto del sito); da 768px in su, la presenza
+      // di touch points indica un iPad/tablet anche se lo user-agent si spaccia per desktop.
+      const getDeviceFormFactor = () => {
+        const isPhoneWidth = window.matchMedia('(max-width: 767px)').matches;
+        if (isPhoneWidth) return 'phone';
+        const hasTouch = (navigator.maxTouchPoints || 0) > 0;
+        return hasTouch ? 'tablet_touch' : 'desktop';
+      };
+
+      // Stato condiviso (non-React) per il tracking dello scroll depth della sezione corrente,
+      // aggiornato dagli useEffect di section_view e letto dal listener di scroll in App.
+      const sectionScrollState = { sectionId: null, seen90: false };
+
       // --- DATI ---
       const SECTIONS = [
         { id: 'visione', label: 'VISIONE', icon: 'fa-eye' },
@@ -3437,6 +3452,26 @@ main.overflow-y-auto {
           }
         }, [gender, section, subSection]);
 
+        // GA4: section_view ad ogni cambio effettivo di sezione dentro il menu digitale
+        useEffect(() => {
+          if (typeof gtag !== 'function') return;
+          let sectionType = 'home';
+          if (gender === 'donna') sectionType = 'menu-donna';
+          else if (gender === 'uomo') sectionType = 'menu-uomo';
+          else if (gender === 'percorsi') sectionType = 'percorsi-prodotti';
+          const sectionId = subSection || section || sectionType;
+
+          gtag('event', 'section_view', {
+            section_type: sectionType,
+            section_id: sectionId,
+            gender: gender || null,
+            device_form_factor: getDeviceFormFactor()
+          });
+
+          sectionScrollState.sectionId = sectionId;
+          sectionScrollState.seen90 = false;
+        }, [gender, section, subSection]);
+
         // Scroll in cima ad ogni cambio di vista
         useEffect(() => {
           if (scrollToTop) scrollToTop();
@@ -4550,6 +4585,52 @@ main.overflow-y-auto {
           scrollToTop();
         }, [activeTab]);
 
+        // GA4: section_view per le tab gestite da App (Home è già tracciata dentro DigitalMenu)
+        useEffect(() => {
+          if (typeof gtag !== 'function') return;
+          if (activeTab === 'home') return;
+
+          gtag('event', 'section_view', {
+            section_type: activeTab,
+            section_id: activeTab,
+            gender: null,
+            device_form_factor: getDeviceFormFactor()
+          });
+
+          sectionScrollState.sectionId = activeTab;
+          sectionScrollState.seen90 = false;
+        }, [activeTab]);
+
+        // GA4: section_scroll — soglia unica al 90% (semplificazione concordata), solo su smartphone
+        useEffect(() => {
+          const el = mainRef.current;
+          if (!el || typeof gtag !== 'function') return;
+          if (getDeviceFormFactor() !== 'phone') return;
+
+          let ticking = false;
+          const handleScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+              ticking = false;
+              const scrollable = el.scrollHeight - el.clientHeight;
+              if (scrollable <= 0 || sectionScrollState.seen90) return;
+              const percent = (el.scrollTop / scrollable) * 100;
+              if (percent >= 90) {
+                sectionScrollState.seen90 = true;
+                gtag('event', 'section_scroll', {
+                  section_id: sectionScrollState.sectionId,
+                  depth_percent: 90,
+                  device_form_factor: getDeviceFormFactor()
+                });
+              }
+            });
+          };
+
+          el.addEventListener('scroll', handleScroll, { passive: true });
+          return () => el.removeEventListener('scroll', handleScroll);
+        }, []);
+
         return html`
           <div className="flex flex-col overflow-hidden relative" style=${{ height: 'var(--app-height, 100vh)' }}>
             <button id="hamburger-btn" onClick=${() => setIsOpen(true)} className="fixed top-4 left-4 sm:top-8 sm:left-8 z-40 w-16 h-16 sm:w-14 sm:h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-black border border-white active:scale-95 transition-transform">
@@ -4729,6 +4810,15 @@ main.overflow-y-auto {
   // Solo mobile: se lo schermo è da tablet/desktop in su, non fare nulla
   if (window.matchMedia('(min-width: 768px)').matches) return;
 
+  // GA4: stessa logica di device_form_factor usata nello script React (duplicata qui
+  // per non dipendere dall'ordine di esecuzione tra <script type="module"> e questo script).
+  function getDeviceFormFactor() {
+    var isPhoneWidth = window.matchMedia('(max-width: 767px)').matches;
+    if (isPhoneWidth) return 'phone';
+    var hasTouch = (navigator.maxTouchPoints || 0) > 0;
+    return hasTouch ? 'tablet_touch' : 'desktop';
+  }
+
   var STORAGE_KEY = 'bcpPopupShown';
   if (sessionStorage.getItem(STORAGE_KEY)) return;
 
@@ -4739,17 +4829,31 @@ main.overflow-y-auto {
   var btnNo = document.getElementById('bcp-btn-no');
   var btnClose = document.getElementById('bcp-overlay-close');
 
+  var responded = false;
+  var skipFired = false;
+
   setTimeout(function() {
     popup.classList.add('visible');
     sessionStorage.setItem(STORAGE_KEY, '1');
+    if (typeof gtag === 'function') {
+      gtag('event', 'bcp_popup_shown', { device_form_factor: getDeviceFormFactor() });
+    }
   }, 5000);
 
   btnYes.addEventListener('click', function() {
     popup.classList.remove('visible');
+    responded = true;
+    if (typeof gtag === 'function') {
+      gtag('event', 'bcp_popup_response', { answer: 'yes', device_form_factor: getDeviceFormFactor() });
+    }
   });
 
   btnNo.addEventListener('click', function() {
     popup.classList.remove('visible');
+    responded = true;
+    if (typeof gtag === 'function') {
+      gtag('event', 'bcp_popup_response', { answer: 'no', device_form_factor: getDeviceFormFactor() });
+    }
     if (!iframe.src) {
       iframe.src = 'https://form.typeform.com/to/vG1WTera';
     }
@@ -4758,6 +4862,20 @@ main.overflow-y-auto {
 
   btnClose.addEventListener('click', function() {
     overlay.classList.remove('visible');
+  });
+
+  // GA4: bcp_popup_skip — l'utente lascia/mette in background la pagina col popup
+  // ancora visibile e senza aver risposto. Usa visibilitychange (più affidabile di
+  // beforeunload su mobile Safari, dove il popup è l'unico target) invece di beforeunload.
+  document.addEventListener('visibilitychange', function() {
+    if (skipFired || responded) return;
+    if (document.visibilityState !== 'hidden') return;
+    if (!popup.classList.contains('visible')) return;
+
+    skipFired = true;
+    if (typeof gtag === 'function') {
+      gtag('event', 'bcp_popup_skip', { device_form_factor: getDeviceFormFactor() });
+    }
   });
 })();
 </script>
