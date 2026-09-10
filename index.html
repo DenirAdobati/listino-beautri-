@@ -1954,6 +1954,20 @@ main.overflow-y-auto {
                       </div>
                   </div>
                 `}
+
+                ${['p1', 'p2', 'p3', 'p4'].includes(path.id) && html`
+                  <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mt-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center text-lg shrink-0">
+                        <i className="fa-solid fa-calendar-check"></i>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-2">Numero di sedute</h4>
+                        <p className="text-slate-700 text-sm md:text-base font-medium leading-relaxed normal-case">Il numero esatto di sedute (${path.sessions.replace(' sedute', '')}) verrà stabilito da <strong className="text-black">Daniela</strong>, la nostra tecnica tricologa, durante la tua consulenza <strong className="text-black">Beautrìco</strong>, in base alle esigenze specifiche della tua cute.</p>
+                      </div>
+                    </div>
+                  </div>
+                `}
               </div>
             </div>
           </div>
