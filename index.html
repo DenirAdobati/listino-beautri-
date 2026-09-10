@@ -461,6 +461,17 @@ main.overflow-y-auto {
     }
 }
 
+/* === FIX: Home mobile — header BEAUTRÍ rinforzato, in stile coi tasti sottostanti (solo vera home) === */
+@media screen and (max-width: 767px) {
+    body:has(#menu-donna) header h1 {
+        font-size: 30px !important; /* = text-3xl, come MENU DONNA/UOMO e PERCORSI & PRODOTTI */
+        letter-spacing: -0.05em !important; /* = tracking-tighter */
+    }
+    body:has(#menu-donna) header p {
+        letter-spacing: 0.12em !important; /* era tracking-[0.3em] (0.3em) */
+    }
+}
+
 /* === FIX: Home mobile — tasti MENU DONNA/MENU UOMO in stile "Percorsi & Prodotti" (solo vera home) === */
 @media screen and (max-width: 767px) {
     #menu-donna .home-gender-desktop,
