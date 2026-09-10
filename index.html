@@ -4596,28 +4596,38 @@ main.overflow-y-auto {
 <style>
 @media screen and (max-width: 767px) {
 
-  /* Popup "Sei cliente di Beautrì?" */
+  /* Popup "Sei cliente di Beautrì?" — overlay centrato con backdrop */
   #bcp-popup {
     position: fixed;
-    left: 16px;
-    right: 16px;
-    bottom: 24px;
+    inset: 0;
     z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  #bcp-popup.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  #bcp-popup-card {
+    width: 100%;
+    max-width: 360px;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.18);
     padding: 18px 20px;
     border-left: 4px solid #EAB308;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
     font-family: 'Inter', sans-serif;
+    transform: scale(0.95);
+    transition: transform 0.4s ease;
   }
-  #bcp-popup.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
+  #bcp-popup.visible #bcp-popup-card {
+    transform: scale(1);
   }
   #bcp-text {
     color: #1A1A1A;
@@ -4699,10 +4709,12 @@ main.overflow-y-auto {
 
 <!-- POPUP "SEI CLIENTE DI BEAUTRÌ?" -->
 <div id="bcp-popup" role="dialog" aria-label="Sei cliente di Beautrì?">
-  <p id="bcp-text">Sei cliente di Beautrì?</p>
-  <div id="bcp-actions">
-    <button id="bcp-btn-yes" type="button">Sì</button>
-    <button id="bcp-btn-no" type="button">No</button>
+  <div id="bcp-popup-card">
+    <p id="bcp-text">Ciao! 👋<br>Domanda veloce: sei già cliente di Beautrì?</p>
+    <div id="bcp-actions">
+      <button id="bcp-btn-yes" type="button">Sì</button>
+      <button id="bcp-btn-no" type="button">No</button>
+    </div>
   </div>
 </div>
 
