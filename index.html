@@ -2802,10 +2802,10 @@ main.overflow-y-auto {
         const prizes = [
           { name: 'Lotus', color: '#C41E3A' },
           { name: 'Loacker', color: '#B8860B' },
-          { name: 'Lotus', color: '#1E3A5F' },
-          { name: 'Loacker', color: '#C41E3A' },
-          { name: 'Lotus', color: '#B8860B' },
-          { name: 'Loacker', color: '#1E3A5F' }
+          { name: 'Lotus', color: '#C41E3A' },
+          { name: 'Loacker', color: '#B8860B' },
+          { name: 'Lotus', color: '#C41E3A' },
+          { name: 'Loacker', color: '#B8860B' }
         ];
  
         const spinWheel = () => {
@@ -3154,15 +3154,15 @@ main.overflow-y-auto {
                     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" style=${{ transform: 'rotate(' + rotation + 'deg)', transition: isSpinning ? 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none' }}>
                       <defs>
                         <linearGradient id="lindorGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style=${{ stopColor: '#C41E3A' }}/><stop offset="100%" style=${{ stopColor: '#8B0000' }}/></linearGradient>
-                        <linearGradient id="creminoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style=${{ stopColor: '#D4A574' }}/><stop offset="100%" style=${{ stopColor: '#8B7355' }}/></linearGradient>
+                        <linearGradient id="creminoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style=${{ stopColor: '#B8860B' }}/><stop offset="100%" style=${{ stopColor: '#7A5C0A' }}/></linearGradient>
                         <linearGradient id="bacioGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style=${{ stopColor: '#1E3A5F' }}/><stop offset="100%" style=${{ stopColor: '#0D1B2A' }}/></linearGradient>
                       </defs>
                       <path d="M200,200 L200,0 A200,200 0 0,1 373.2,100 Z" fill="url(#lindorGrad)"/>
                       <path d="M200,200 L373.2,100 A200,200 0 0,1 373.2,300 Z" fill="url(#creminoGrad)"/>
-                      <path d="M200,200 L373.2,300 A200,200 0 0,1 200,400 Z" fill="url(#bacioGrad)"/>
-                      <path d="M200,200 L200,400 A200,200 0 0,1 26.8,300 Z" fill="url(#lindorGrad)"/>
-                      <path d="M200,200 L26.8,300 A200,200 0 0,1 26.8,100 Z" fill="url(#creminoGrad)"/>
-                      <path d="M200,200 L26.8,100 A200,200 0 0,1 200,0 Z" fill="url(#bacioGrad)"/>
+                      <path d="M200,200 L373.2,300 A200,200 0 0,1 200,400 Z" fill="url(#lindorGrad)"/>
+                      <path d="M200,200 L200,400 A200,200 0 0,1 26.8,300 Z" fill="url(#creminoGrad)"/>
+                      <path d="M200,200 L26.8,300 A200,200 0 0,1 26.8,100 Z" fill="url(#lindorGrad)"/>
+                      <path d="M200,200 L26.8,100 A200,200 0 0,1 200,0 Z" fill="url(#creminoGrad)"/>
                       <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(30, 200, 200) translate(0, -130)">LOTUS</text>
                       <text x="200" y="200" fill="white" font-size="14" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(90, 200, 200) translate(0, -130)">LOACKER</text>
                       <text x="200" y="200" fill="white" font-size="16" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(150, 200, 200) translate(0, -130)">LOTUS</text>
