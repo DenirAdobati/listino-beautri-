@@ -3441,27 +3441,16 @@ main.overflow-y-auto {
         { value: '200€', variant: 'gold' },
       ];
 
-      const RB_MENU_TILES = [
-        { name: 'Trattamenti Tricologici', icon: 'fa-microscope' },
-        { name: 'Percorsi', icon: 'fa-route' },
-        { name: 'Spa', icon: 'fa-water' },
-        { name: 'Colorazioni e Schiariture', icon: 'fa-palette' },
-        { name: 'Forma', icon: 'fa-wand-magic-sparkles' },
-        { name: 'Stilistico', icon: 'fa-scissors' },
-        { name: 'Migliori Proposte', icon: 'fa-star' },
-        { name: 'Prodotti', icon: 'fa-pump-soap' },
-      ];
-
       const RegalaBeautriList = () => html`
           <div className="relative animate-zoom-in max-w-6xl mx-auto pb-12">
 
-            <!-- Stile dedicato esclusivamente a questa sezione: la griglia delle icone menu deve
-                 restare a 2 colonne anche sotto i 768px. Una regola globale preesistente forza a 1
+            <!-- Stile dedicato esclusivamente a questa sezione: i 2 widget "Prodotti"/"Servizi" devono
+                 stare affiancati da 768px in su e impilati sotto. Una regola globale preesistente forza a 1
                  colonna qualsiasi .grid la cui classe contenga "grid-cols-2"/"grid-cols-3", quindi qui
                  evitiamo quelle utility Tailwind e usiamo una classe rb- dedicata con media query propria. -->
             <style>
-              .rb-menu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-              @media (min-width: 1024px) { .rb-menu-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+              .rb-widgets-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+              @media (min-width: 768px) { .rb-widgets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
             </style>
 
             <!-- 1. HERO -->
@@ -3536,15 +3525,17 @@ main.overflow-y-auto {
                         </p>
                     </div>
 
-                    <div className="rb-menu-grid">
-                        ${RB_MENU_TILES.map(tile => html`
-                            <div className="bg-white/5 border border-white/10 p-6 rounded-[2rem] hover:bg-white/10 transition-all flex flex-col items-center text-center">
-                                <div className="w-10 h-10 bg-[#EAB308] text-black rounded-xl flex items-center justify-center text-lg mb-3 shadow-md">
-                                    <i className=${`fa-solid ${tile.icon}`}></i>
-                                </div>
-                                <h3 className="font-black text-xs sm:text-sm uppercase leading-tight">${tile.name}</h3>
+                    <div className="rb-widgets-grid">
+                        <div className="cursor-default bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-12 flex flex-col items-center justify-center text-center min-h-[260px]">
+                            <img src="foto-prodotti/Prodotti.png" alt="Prodotti" className="h-32 w-auto object-contain mb-6" />
+                            <h3 className="font-black text-sm md:text-base uppercase leading-tight text-white">Puoi scegliere tra i nostri prodotti</h3>
+                        </div>
+                        <div className="cursor-default bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-12 flex flex-col items-center justify-center text-center min-h-[260px]">
+                            <div className="w-32 h-32 bg-[#EAB308] rounded-full flex items-center justify-center mb-6">
+                                <i className="fa-solid fa-route text-black text-5xl"></i>
                             </div>
-                        `)}
+                            <h3 className="font-black text-sm md:text-base uppercase leading-tight text-white">I nostri servizi</h3>
+                        </div>
                     </div>
                 </div>
             </div>
