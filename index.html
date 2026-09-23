@@ -3435,8 +3435,55 @@ main.overflow-y-auto {
         `;
 
       const RegalaBeautriList = () => html`
-          <!-- TODO: contenuto della sezione "Regala Beautrì" da definire -->
-          <div className="min-h-[70vh] bg-white"></div>
+          <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+
+            <!-- Header -->
+            <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
+                <div className="bg-black p-6 md:p-12 text-center text-white relative uppercase">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter">REGALA BEAUTRÌ</h1>
+                    <div className="w-16 h-1 bg-[#EAB308] mx-auto mt-6"></div>
+                </div>
+                <div className="p-6 md:p-10 lg:p-16 text-center">
+                    <p className="text-slate-600 text-lg leading-relaxed font-medium italic max-w-3xl mx-auto mb-6">
+                        Il regalo più bello? Prendersi cura di chi ami.
+                    </p>
+                    <p className="text-slate-600 text-base leading-relaxed max-w-3xl mx-auto">
+                        Regala un momento tutto per sé: un'esperienza di benessere per cute e capelli, pensata su misura nel nostro studio. Perfetta per un compleanno, un anniversario, una festa o semplicemente per dire grazie.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Cosa include: ben in evidenza tramite box con accento oro, grassetto (non evidenziazione gialla) -->
+            <div className="bg-slate-50 p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-l-4 border-[#EAB308] mb-10">
+                <p className="text-slate-700 text-base md:text-lg leading-relaxed font-medium">
+                    Con la Gift Card Beautrì, chi la riceve potrà acquistare e usufruire di <strong className="text-black">qualsiasi prodotto</strong> e <strong className="text-black">qualsiasi servizio</strong> presente nel nostro menu. Sceglie lei, sceglie lui: tu regali la libertà di prendersi cura di sé.
+                </p>
+            </div>
+
+            <!-- Gift card: 100€ chiara, 150€ scura, 200€ oro (stessa progressione cromatica delle card DONNA/UOMO/PERCORSI & PRODOTTI della Home) -->
+            <!-- TODO: definire azione al click sulle gift card (acquisto/contatto) -->
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-6">
+                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-center relative overflow-hidden shadow-sm border border-slate-100 h-64 flex flex-col items-center justify-center">
+                    <span className="text-slate-400 text-[10px] font-bold tracking-[0.4em] mb-3 uppercase underline decoration-black decoration-2 underline-offset-8">GIFT CARD</span>
+                    <h3 className="text-xl font-black text-black uppercase tracking-tighter mb-4">Beautrì</h3>
+                    <div className="text-4xl sm:text-5xl font-black text-black tracking-tighter">100€</div>
+                </div>
+                <div className="bg-[#1A1A1A] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-center relative overflow-hidden shadow-2xl h-64 flex flex-col items-center justify-center">
+                    <span className="text-white/40 text-[10px] font-bold tracking-[0.4em] mb-3 uppercase underline decoration-[#EAB308] decoration-2 underline-offset-8">GIFT CARD</span>
+                    <h3 className="text-xl font-black text-white uppercase tracking-tighter mb-4">Beautrì</h3>
+                    <div className="text-4xl sm:text-5xl font-black text-[#EAB308] tracking-tighter">150€</div>
+                </div>
+                <div className="bg-[#EAB308] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-center relative overflow-hidden shadow-xl h-64 flex flex-col items-center justify-center">
+                    <span className="text-black/50 text-[10px] font-bold tracking-[0.4em] mb-3 uppercase underline decoration-black decoration-2 underline-offset-8">GIFT CARD</span>
+                    <h3 className="text-xl font-black text-black uppercase tracking-tighter mb-4">Beautrì</h3>
+                    <div className="text-4xl sm:text-5xl font-black text-black tracking-tighter">200€</div>
+                </div>
+            </div>
+
+            <!-- TODO: copy da confermare -->
+            <p className="text-center text-slate-400 text-xs font-medium">Chiedi in studio per acquistare la tua Gift Card.</p>
+
+          </div>
         `;
 
       // Deep link: legge l'hash dall'URL in modo sincrono, prima del primo render
