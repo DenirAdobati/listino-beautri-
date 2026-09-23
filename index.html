@@ -3435,11 +3435,7 @@ main.overflow-y-auto {
         `;
 
       // --- Regala Beautrì: elementi dedicati, usati SOLO in questa sezione ---
-      const RB_GIFT_CARDS = [
-        { value: '100€', variant: 'silver' },
-        { value: '150€', variant: 'gold' },
-        { value: '200€', variant: 'platinum' },
-      ];
+      const RB_AMOUNTS = ['100€', '150€', '200€'];
 
       const RegalaBeautriList = () => html`
           <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
@@ -3475,41 +3471,29 @@ main.overflow-y-auto {
                 </p>
             </div>
 
-            <!-- Gift card: 100€ argento, 150€ oro, 200€ platino -->
-            <!-- TODO: definire azione al click sulle gift card (acquisto/contatto) -->
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-10">
-                ${RB_GIFT_CARDS.map(card => {
-                  const isSilver = card.variant === 'silver';
-                  const isGold = card.variant === 'gold';
-                  const isPlatinum = card.variant === 'platinum';
-                  const shellBg = isSilver ? 'bg-gradient-to-br from-[#F2F3F5] to-[#C9CCD1] border border-black/5'
-                    : isGold ? 'bg-gradient-to-br from-[#F6D667] via-[#EAB308] to-[#A6790A]'
-                    : 'bg-gradient-to-br from-[#5B5F66] to-[#2B2D31]';
-                  const ribbonStripBg = isPlatinum ? 'bg-[#EAB308]' : 'bg-[#1A1A1A]';
-                  const labelColor = isPlatinum ? 'text-white/50' : 'text-black/50';
-                  const nameColor = isPlatinum ? 'text-white/90' : 'text-black';
-                  const valueColor = isPlatinum ? 'text-[#EAB308]' : 'text-black';
-                  // Sulla card argento e oro il logo originale (oro) non sarebbe leggibile: va mostrato in nero.
-                  // Sulla card platino resta nel suo oro originale.
-                  const logoStyle = isPlatinum ? {} : { filter: 'brightness(0)' };
-                  return html`
-                    <div className=${`rb-card-shell shadow-lg ${shellBg}`}>
-                        <div className="rb-card-corner">
-                            <div className=${`rb-card-corner-strip ${ribbonStripBg}`}></div>
-                        </div>
-                        <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 pr-14 sm:pr-16">
-                            <div className="flex items-center gap-2">
-                                <img src="favicon.png" alt="" className="w-9 h-9 md:w-10 md:h-10 object-contain shrink-0" style=${logoStyle} />
-                                <span className=${`text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase ${labelColor}`}>Gift Card</span>
-                            </div>
-                            <div>
-                                <div className=${`text-xs md:text-sm font-black uppercase tracking-wide mb-1 ${nameColor}`}>Beautrì</div>
-                                <div className=${`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${valueColor}`}>${card.value}</div>
-                            </div>
-                        </div>
+            <!-- Gift card unica, colori brand -->
+            <div className="max-w-[480px] w-full mx-auto mb-10">
+                <div className="rb-card-shell shadow-lg bg-gradient-to-br from-[#1A1A1A] to-black">
+                    <div className="rb-card-corner">
+                        <div className="rb-card-corner-strip bg-[#EAB308]"></div>
                     </div>
-                  `;
-                })}
+                    <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8 pr-14 sm:pr-16">
+                        <div className="flex items-center gap-2">
+                            <img src="favicon.png" alt="" className="w-9 h-9 md:w-10 md:h-10 object-contain shrink-0" />
+                            <span className="text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase text-[#EAB308]">Gift Card</span>
+                        </div>
+                        <div className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter text-white">BEAUTRÌ</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Importi selezionabili -->
+            <p className="text-slate-600 text-base md:text-lg font-medium text-center mb-5">Scegli l'importo che preferisci</p>
+            <!-- TODO: eventuale azione sui pulsanti importo -->
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-10">
+                ${RB_AMOUNTS.map(amount => html`
+                    <span className="cursor-default select-none bg-white border border-[#EAB308] rounded-full px-6 py-3 md:px-8 md:py-3 shadow-sm text-black font-bold text-sm md:text-base">${amount}</span>
+                `)}
             </div>
 
             <!-- TODO: copy da confermare -->
