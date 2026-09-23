@@ -3436,9 +3436,9 @@ main.overflow-y-auto {
 
       // --- Regala Beautrì: elementi dedicati, usati SOLO in questa sezione ---
       const RB_GIFT_CARDS = [
-        { value: '100€', variant: 'white' },
-        { value: '150€', variant: 'black' },
-        { value: '200€', variant: 'gold' },
+        { value: '100€', variant: 'black' },
+        { value: '150€', variant: 'gold' },
+        { value: '200€', variant: 'white' },
       ];
 
       const RegalaBeautriList = () => html`
@@ -3486,15 +3486,14 @@ main.overflow-y-auto {
             <!-- TODO: azione al click sulle gift card -->
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-12">
                 ${RB_GIFT_CARDS.map(card => {
-                  const isWhite = card.variant === 'white';
                   const isBlack = card.variant === 'black';
-                  const shellBg = isWhite ? 'bg-white border border-slate-100'
-                    : isBlack ? 'bg-black'
-                    : 'bg-[#EAB308]';
-                  const labelColor = isBlack ? 'text-white/40' : 'text-black/50';
-                  const nameColor = isBlack ? 'text-white' : 'text-black';
-                  const valueColor = isBlack ? 'text-[#EAB308]' : 'text-black';
-                  const logoStyle = card.variant === 'gold' ? { filter: 'brightness(0)' } : {};
+                  const isGold = card.variant === 'gold';
+                  const shellBg = isBlack ? 'bg-black'
+                    : isGold ? 'bg-gradient-to-br from-[#EAB308] to-[#C99A06]'
+                    : 'bg-white border border-slate-100';
+                  const accentColor = isBlack ? 'text-[#EAB308]' : isGold ? 'text-white' : 'text-[#1A1A1A]';
+                  const logoStyle = isBlack ? {} : isGold ? { filter: 'brightness(0) invert(1)' } : { filter: 'brightness(0)' };
+                  const textShadowStyle = isGold ? { textShadow: '0 1px 3px rgba(0,0,0,0.25)' } : {};
                   return html`
                     <div>
                         <div className=${`relative overflow-hidden aspect-[1.586/1] rounded-[1.5rem] sm:rounded-[2rem] shadow-lg ${shellBg}`}>
@@ -3504,11 +3503,11 @@ main.overflow-y-auto {
                             <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
                                 <div className="flex items-center gap-2">
                                     <img src="favicon.png" alt="" className="w-9 h-9 md:w-10 md:h-10 object-contain shrink-0" style=${logoStyle} />
-                                    <span className=${`text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase ${labelColor}`}>Gift Card</span>
+                                    <span className=${`text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase ${accentColor}`} style=${textShadowStyle}>Gift Card</span>
                                 </div>
                                 <div>
-                                    <div className=${`text-xs md:text-sm font-black uppercase tracking-wide mb-1 ${nameColor}`}>Valore</div>
-                                    <div className=${`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${valueColor}`}>${card.value}</div>
+                                    <div className=${`text-xs md:text-sm font-black uppercase tracking-wide mb-1 ${accentColor}`} style=${textShadowStyle}>Valore</div>
+                                    <div className=${`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${accentColor}`} style=${textShadowStyle}>${card.value}</div>
                                 </div>
                             </div>
                         </div>
