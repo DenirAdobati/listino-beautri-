@@ -3434,28 +3434,51 @@ main.overflow-y-auto {
           </div>
         `;
 
-      // --- Regala Beautrì: icone dedicate (goccia logo + fiocco), usate SOLO in questa sezione ---
-      // Goccia ricreata fedelmente in SVG inline dal logo brand (in questo repo è presente solo
-      // favicon.png/.ico a bassa risoluzione: 270x270 e 32x32).
-      const GiftDropletIcon = ({ className }) => html`
-        <svg viewBox="0 0 100 130" className=${className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M50 6 C 63 30 90 70 90 93 C 90 114 72 130 50 130 C 28 130 10 114 10 93 C 10 70 37 30 50 6 Z" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
-          <g fill="currentColor">
-            ${[0, 60, 120, 180, 240, 300].map(angle => html`
-              <path transform=${`rotate(${angle} 50 90)`} d="M50 90 C 45.5 80 45.5 67 50 58 C 54.5 67 54.5 80 50 90 Z" />
-            `)}
-            <circle cx="50" cy="90" r="5.5" />
-          </g>
-        </svg>
-      `;
-
-      const RibbonBow = ({ className, colorClass }) => html`
-        <svg viewBox="0 0 120 90" className=${`${className} ${colorClass}`} fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M60 46 L40 86 L52 77 L60 88 L68 77 L80 86 Z" />
-          <path d="M60 40 C 34 8 -6 14 14 44 C 27 60 48 54 60 40 Z" />
-          <path d="M60 40 C 86 8 126 14 106 44 C 93 60 72 54 60 40 Z" />
-          <circle cx="60" cy="40" r="10" />
-        </svg>
+      // --- Regala Beautrì: elementi dedicati, usati SOLO in questa sezione ---
+      // Illustrazione fissa di pacchi regalo ancorata al bordo inferiore dello schermo.
+      // SVG inline, stile piatto, colori brand (nero/oro/avorio). Nessuna animazione.
+      const GiftBoxesBackdrop = () => html`
+        <div className="fixed inset-x-0 bottom-0 -z-10 pointer-events-none flex items-end justify-between px-3 sm:px-6 md:px-10" aria-hidden="true">
+            <svg viewBox="0 0 240 190" className="w-24 h-[76px] sm:w-32 sm:h-[101px] md:w-40 md:h-[127px]" xmlns="http://www.w3.org/2000/svg">
+                <!-- pacco nero (retro) -->
+                <rect x="64" y="34" width="126" height="16" rx="4" fill="#1A1A1A" />
+                <rect x="70" y="50" width="114" height="140" rx="6" fill="#1A1A1A" />
+                <rect x="121" y="34" width="12" height="156" fill="#EAB308" />
+                <path d="M127 30 l-16 -11 l4 11 l-4 11 Z" fill="#EAB308" />
+                <path d="M127 30 l16 -11 l-4 11 l4 11 Z" fill="#EAB308" />
+                <circle cx="127" cy="30" r="7" fill="#EAB308" />
+                <!-- pacco oro (davanti sinistra) -->
+                <rect x="-4" y="66" width="100" height="15" rx="4" fill="#EAB308" />
+                <rect x="0" y="81" width="92" height="109" rx="6" fill="#EAB308" />
+                <rect x="41" y="66" width="10" height="124" fill="#1A1A1A" />
+                <path d="M46 62 l-14 -10 l3.5 10 l-3.5 10 Z" fill="#1A1A1A" />
+                <path d="M46 62 l14 -10 l-3.5 10 l3.5 10 Z" fill="#1A1A1A" />
+                <circle cx="46" cy="62" r="6" fill="#1A1A1A" />
+                <!-- pacco avorio (davanti destra) -->
+                <rect x="146" y="96" width="84" height="14" rx="4" fill="#F8F6F2" stroke="#DED7C6" stroke-width="1.5" />
+                <rect x="150" y="110" width="76" height="80" rx="6" fill="#F8F6F2" stroke="#DED7C6" stroke-width="1.5" />
+                <rect x="184" y="96" width="9" height="94" fill="#EAB308" />
+                <path d="M188 92 l-12 -9 l3 9 l-3 9 Z" fill="#EAB308" />
+                <path d="M188 92 l12 -9 l-3 9 l3 9 Z" fill="#EAB308" />
+                <circle cx="188" cy="92" r="5.5" fill="#EAB308" />
+            </svg>
+            <svg viewBox="0 0 200 170" className="w-20 h-[68px] sm:w-28 sm:h-[95px] md:w-36 md:h-[122px]" xmlns="http://www.w3.org/2000/svg">
+                <!-- pacco oro (retro) -->
+                <rect x="54" y="20" width="114" height="15" rx="4" fill="#EAB308" />
+                <rect x="60" y="35" width="102" height="135" rx="6" fill="#EAB308" />
+                <rect x="106" y="20" width="10" height="150" fill="#1A1A1A" />
+                <path d="M111 16 l-14 -10 l3.5 10 l-3.5 10 Z" fill="#1A1A1A" />
+                <path d="M111 16 l14 -10 l-3.5 10 l3.5 10 Z" fill="#1A1A1A" />
+                <circle cx="111" cy="16" r="6.5" fill="#1A1A1A" />
+                <!-- pacco nero (davanti) -->
+                <rect x="-6" y="55" width="98" height="14" rx="4" fill="#1A1A1A" />
+                <rect x="0" y="69" width="90" height="101" rx="6" fill="#1A1A1A" />
+                <rect x="40" y="55" width="9" height="115" fill="#EAB308" />
+                <path d="M44 51 l-13 -9 l3.2 9 l-3.2 9 Z" fill="#EAB308" />
+                <path d="M44 51 l13 -9 l-3.2 9 l3.2 9 Z" fill="#EAB308" />
+                <circle cx="44" cy="51" r="6" fill="#EAB308" />
+            </svg>
+        </div>
       `;
 
       const RB_GIFT_CARDS = [
@@ -3465,7 +3488,9 @@ main.overflow-y-auto {
       ];
 
       const RegalaBeautriList = () => html`
-          <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+          <div className="relative animate-zoom-in max-w-5xl mx-auto pb-40 sm:pb-44 md:pb-48">
+
+            <${GiftBoxesBackdrop} />
 
             <!-- Stili dedicati esclusivamente alla sezione "Regala Beautrì" (prefisso rb-) -->
             <style>
@@ -3476,7 +3501,6 @@ main.overflow-y-auto {
 
               .rb-card-corner { position: absolute; top: 10px; right: -28px; width: 104px; transform: rotate(45deg); text-align: center; }
               .rb-card-corner-strip { height: 18px; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
-              .rb-card-corner-bow { width: 30px; height: 22px; margin: 1px auto 0; filter: drop-shadow(0 2px 3px rgba(0,0,0,.3)); }
             </style>
 
             <!-- Header: banner titolo, stesso stile usato nelle altre sezioni del menu -->
@@ -3509,20 +3533,19 @@ main.overflow-y-auto {
                     : isDark ? 'bg-[#1A1A1A]'
                     : 'bg-[#EAB308]';
                   const ribbonStripBg = isDark || isLight ? 'bg-[#EAB308]' : 'bg-[#1A1A1A]';
-                  const ribbonIconColor = isDark || isLight ? 'text-[#EAB308]' : 'text-[#1A1A1A]';
-                  const dropletColor = isLight ? 'text-[#EAB308]' : isDark ? 'text-[#EAB308]' : 'text-[#1A1A1A]';
                   const labelColor = isLight ? 'text-slate-400' : isDark ? 'text-white/50' : 'text-black/50';
                   const nameColor = isLight ? 'text-black' : isDark ? 'text-white/90' : 'text-black';
                   const valueColor = isLight ? 'text-black' : isDark ? 'text-[#EAB308]' : 'text-black';
+                  // Sulla card oro il logo originale (oro) non sarebbe leggibile: qui va mostrato in nero.
+                  const logoStyle = !isLight && !isDark ? { filter: 'brightness(0)' } : {};
                   return html`
                     <div className=${`rb-card-shell shadow-lg ${shellBg}`}>
                         <div className="rb-card-corner">
                             <div className=${`rb-card-corner-strip ${ribbonStripBg}`}></div>
-                            <${RibbonBow} className="rb-card-corner-bow" colorClass=${ribbonIconColor} />
                         </div>
                         <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 pr-14 sm:pr-16">
                             <div className="flex items-center gap-2">
-                                <${GiftDropletIcon} className=${`w-6 h-8 md:w-7 md:h-9 shrink-0 ${dropletColor}`} />
+                                <img src="favicon.png" alt="" className="w-9 h-9 md:w-10 md:h-10 object-contain shrink-0" style=${logoStyle} />
                                 <span className=${`text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase ${labelColor}`}>Gift Card</span>
                             </div>
                             <div>
