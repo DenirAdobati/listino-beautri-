@@ -734,6 +734,11 @@ main.overflow-y-auto {
                 <span className="font-bold text-[11px] tracking-[0.2em] uppercase">Baby check</span>
               </button>
 
+              <button id="regala-beautri" onClick=${() => { setActiveTab('regala-beautri'); onClose(); }} className=${`w-full py-4 rounded-2xl flex items-center gap-4 px-6 transition-all ${activeTab === 'regala-beautri' ? 'bg-black text-[#EAB308] shadow-lg' : 'text-slate-400 hover:bg-slate-50 hover:text-black'}`}>
+                <i className="fa-solid fa-gift text-sm"></i>
+                <span className="font-bold text-[11px] tracking-[0.2em] uppercase">Regala Beautrì</span>
+              </button>
+
             </nav>
             <div className="flex-1 flex flex-col min-h-0">
             </div>
@@ -3429,6 +3434,11 @@ main.overflow-y-auto {
           </div>
         `;
 
+      const RegalaBeautriList = () => html`
+          <!-- TODO: contenuto della sezione "Regala Beautrì" da definire -->
+          <div className="min-h-[70vh] bg-white"></div>
+        `;
+
       // Deep link: legge l'hash dall'URL in modo sincrono, prima del primo render
       // (evita un doppio render "home poi sezione" che causava il flash dell'hamburger)
       const getInitialGenderFromHash = () => {
@@ -4661,8 +4671,9 @@ main.overflow-y-auto {
             </div>
             <main ref=${mainRef} className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6">
               <div className="max-w-[1200px] mx-auto pt-16 sm:pt-20 pb-8">
-                ${activeTab === 'home' ? html`<${DigitalMenu} scrollToTop=${scrollToTop} />` : 
-                  activeTab === 'baby-check' ? html`<${BabyCheckList} />` : 
+                ${activeTab === 'home' ? html`<${DigitalMenu} scrollToTop=${scrollToTop} />` :
+                  activeTab === 'baby-check' ? html`<${BabyCheckList} />` :
+                  activeTab === 'regala-beautri' ? html`<${RegalaBeautriList} />` :
                   html`
                   <div className="flex flex-col items-center justify-center animate-zoom-in py-20">
                     <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] p-12 shadow-sm w-full max-w-2xl text-center uppercase tracking-widest">
