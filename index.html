@@ -653,9 +653,9 @@ main.overflow-y-auto {
       ];
 
       const MOCK_MAINTENANCE_PATHS = [
-        { id: 'm1', name: 'MANTENIMENTO BASE', description: 'Percorso di mantenimento post-trattamento urto per stabilizzare i risultati ottenuti.', sessions: '4 incontri', tools: 'Microcamera HD, Lozioni specifiche', price: 'Lui 52€  Lei 74/78€', icon: 'fa-shield' },
-        { id: 'm2', name: 'MANTENIMENTO INTERMEDIO', description: 'Prevenzione stagionale e rinforzo periodico della struttura capillare.', sessions: '3 incontri', tools: 'Ossigeno, Maschere nutrienti', price: 'Lui 67€  Lei 89/93€', icon: 'fa-shield-halved' },
-        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: 'Protezione continua del cuoio capelluto sensibile.', sessions: '2 incontri', tools: 'Vapozono, Oli lenitivi', price: 'Lui 76€  Lei 96/104€', icon: 'fa-shield-heart' }
+        { id: 'm1', name: 'MANTENIMENTO BASE', description: '12 sedute in 12 mesi: 6 di igienizzazione e 6 lenitive.', sessions: '12 sedute', tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', price: 'Lui 52€  Lei 74/78€', icon: 'fa-shield' },
+        { id: 'm2', name: 'MANTENIMENTO INTERMEDIO', description: '12 sedute di mantenimento in 12 mesi.', sessions: '12 sedute', tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica, Vacuum terapia, Alta frequenza, Cascata, Ossigenoterapia', price: 'Lui 67€  Lei 89/93€', icon: 'fa-shield-halved' },
+        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: '12 sedute in 12 mesi: 8 laser a fotobiomodulazione e 4 di potenziamento.', sessions: '12 sedute', tools: 'Laser a fotobiomodulazione, Nebulizzazione, Ultrasuoni, Corrente galvanica, Vacuum terapia, Alta frequenza, Cascata, Ossigenoterapia', price: 'Lui 76€  Lei 96/104€', icon: 'fa-shield-heart' }
       ];
       
       const TRICOLOGICI_TREATMENTS = [
@@ -1013,6 +1013,24 @@ main.overflow-y-auto {
                           </div>
                         </div>
                       `);
+
+        // Banner "RICORDA!" con i 3 motivi, condiviso da Mantenimento Base, Intermedio e Avanzato
+        const renderRemember = (extra, reasons) => html`
+          <div className="bg-black text-white p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-4 border-[#EAB308] shadow-xl text-center">
+            <h3 className="text-3xl md:text-4xl font-black text-[#EAB308] uppercase tracking-tight mb-3"><i className="fa-solid fa-circle-exclamation mr-2"></i>Ricorda!</h3>
+            <!-- TODO copy da validare -->
+            <p className="text-lg md:text-2xl font-bold leading-snug max-w-2xl mx-auto">Questa è la fase più importante e delicata: non sottovalutarla.</p>
+            ${extra ? html`<!-- TODO copy da validare --><p className="text-slate-300 md:text-lg leading-snug max-w-2xl mx-auto mt-3">${extra}</p>` : null}
+            <div className="flex flex-col gap-3 mt-6 md:mt-8 max-w-md mx-auto text-left">
+              ${reasons.map((r, i) => html`
+                <div key=${r} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-4 py-3">
+                  <span className="w-10 h-10 shrink-0 rounded-full bg-white/10 text-[#EAB308] flex items-center justify-center text-lg"><i className=${`fa-solid ${['fa-shield-halved', 'fa-arrow-trend-up', 'fa-user-check'][i]}`}></i></span>
+                  <span className="font-bold text-sm md:text-base leading-snug md:whitespace-nowrap">${r}</span>
+                </div>
+              `)}
+            </div>
+          </div>
+        `;
 
         // Separatore tratteggiato oro (come il footer di beautri.it: 2px dashed), margini uguali sopra e sotto
         const renderGoldDivider = () => html`<hr className="border-0 border-t-2 border-dashed border-[#EAB308] !my-10" aria-hidden="true" />`;
@@ -1454,36 +1472,9 @@ main.overflow-y-auto {
                             </div>
                           </div>
 
-                          <!-- 2. RICORDA! -->
-                          <div className="bg-black text-white p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-4 border-[#EAB308] shadow-xl text-center">
-                            <h3 className="text-3xl md:text-4xl font-black text-[#EAB308] uppercase tracking-tight mb-3"><i className="fa-solid fa-circle-exclamation mr-2"></i>Ricorda!</h3>
-                            <!-- TODO copy da validare -->
-                            <p className="text-lg md:text-2xl font-bold leading-snug max-w-2xl mx-auto">Questa è la fase più importante e delicata: non sottovalutarla.</p>
-                          </div>
-
-                          <!-- 3. I TRE MOTIVI -->
-                          <div>
-                            <!-- TODO copy da validare -->
-                            <p className="text-center text-sm font-black uppercase tracking-widest text-slate-500 mb-6">3 motivi per cui ti consigliamo il mantenimento</p>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">01</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-solid fa-shield-halved"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Mantieni i risultati raggiunti</h4>
-                              </div>
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">02</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-solid fa-arrow-trend-up"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Potenzia i risultati già ottenuti</h4>
-                              </div>
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">03</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-brands fa-whatsapp"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Un anno intero con Daniela</h4>
-                                <!-- TODO copy da validare --><p className="text-slate-600 text-sm mt-2 leading-snug">Contatto diretto via telefono o WhatsApp per qualsiasi dubbio</p>
-                              </div>
-                            </div>
-                          </div>
+                          <!-- 2. RICORDA! + 3 MOTIVI (componente condiviso) -->
+                          <!-- TODO copy da validare: motivi accorpati nel banner -->
+                          ${renderRemember(null, ['Mantieni i risultati raggiunti', 'Potenzia i risultati già ottenuti', 'Un anno intero con Daniela'])}
 
                           <!-- 4. PUÒ SEMBRARTI IMPEGNATIVO -->
                           <div className="relative overflow-hidden bg-[#EAB308] text-black p-8 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-lg">
@@ -1774,36 +1765,9 @@ main.overflow-y-auto {
                             </div>
                           </div>
 
-                          <!-- 2. RICORDA! -->
-                          <div className="bg-black text-white p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-4 border-[#EAB308] shadow-xl text-center">
-                            <h3 className="text-3xl md:text-4xl font-black text-[#EAB308] uppercase tracking-tight mb-3"><i className="fa-solid fa-circle-exclamation mr-2"></i>Ricorda!</h3>
-                            <!-- TODO copy da validare -->
-                            <p className="text-lg md:text-2xl font-bold leading-snug max-w-2xl mx-auto">Questa è la fase più importante e delicata: non sottovalutarla.</p>
-                          </div>
-
-                          <!-- 3. I TRE MOTIVI -->
-                          <div>
-                            <!-- TODO copy da validare -->
-                            <p className="text-center text-sm font-black uppercase tracking-widest text-slate-500 mb-6">3 motivi per cui ti consigliamo il mantenimento</p>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">01</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-solid fa-shield-halved"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Mantieni i risultati raggiunti</h4>
-                              </div>
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">02</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-solid fa-arrow-trend-up"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Potenzia i risultati già ottenuti</h4>
-                              </div>
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">03</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-brands fa-whatsapp"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Un anno intero con Daniela</h4>
-                                <!-- TODO copy da validare --><p className="text-slate-600 text-sm mt-2 leading-snug">Contatto diretto via telefono o WhatsApp per qualsiasi dubbio</p>
-                              </div>
-                            </div>
-                          </div>
+                          <!-- 2. RICORDA! + 3 MOTIVI (componente condiviso) -->
+                          <!-- TODO copy da validare: motivi accorpati nel banner -->
+                          ${renderRemember(null, ['Mantieni i risultati raggiunti', 'Potenzia i risultati già ottenuti', 'Un anno intero con Daniela'])}
 
                           <!-- 4. PUÒ SEMBRARE IMPEGNATIVO -->
                           <div className="relative overflow-hidden bg-[#EAB308] text-black p-8 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-lg">
@@ -2100,58 +2064,9 @@ main.overflow-y-auto {
                             </div>
                           </div>
 
-                          <!-- 2. RICORDA! -->
-                          <div className="bg-black text-white p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-4 border-[#EAB308] shadow-xl text-center">
-                            <h3 className="text-3xl md:text-4xl font-black text-[#EAB308] uppercase tracking-tight mb-3"><i className="fa-solid fa-circle-exclamation mr-2"></i>Ricorda!</h3>
-                            <!-- TODO copy da validare -->
-                            <p className="text-lg md:text-2xl font-bold leading-snug max-w-2xl mx-auto">Questa è la fase più importante e delicata: non sottovalutarla.</p>
-                          </div>
-
-                          <!-- 2b. COSA HA FATTO IL LASER -->
-                          <div>
-                            <!-- TODO copy da validare -->
-                            <p className="text-center text-sm font-black uppercase tracking-widest text-slate-500 mb-6">Cosa ha fatto il laser</p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-                              <div className="h-full flex items-start gap-4 bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="w-14 h-14 shrink-0 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-xl"><i className="fa-solid fa-spa"></i></span>
-                                <div>
-                                  <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Cute lenita, capelli più sani e irrobustiti</h4>
-                                  <!-- TODO copy da validare --><p className="text-slate-600 text-sm mt-2 leading-snug">Meno rossori, dermatiti e psoriasi. Stimolato l'ATP, l'energia del capello: il diradamento ha lasciato il posto a capelli sani.</p>
-                                </div>
-                              </div>
-                              <div className="h-full flex items-start gap-4 bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="w-14 h-14 shrink-0 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-xl"><i className="fa-solid fa-dumbbell"></i></span>
-                                <div>
-                                  <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Il laser è come un allenamento</h4>
-                                  <!-- TODO copy da validare --><p className="text-slate-600 text-sm mt-2 leading-snug">Mantiene l'equilibrio cutaneo anche a riposo: monitoraggio e costanza sono essenziali per mantenere i progressi raggiunti.</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <!-- 3. I TRE MOTIVI -->
-                          <div>
-                            <!-- TODO copy da validare -->
-                            <p className="text-center text-sm font-black uppercase tracking-widest text-slate-500 mb-6">3 motivi per cui ti consigliamo il mantenimento</p>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">01</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-solid fa-shield-halved"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Mantieni i risultati ottenuti</h4>
-                              </div>
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">02</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-solid fa-arrow-trend-up"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Potenzia i benefici raggiunti</h4>
-                              </div>
-                              <div className="h-full flex flex-col items-center text-center bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 shadow-sm">
-                                <span className="text-[11px] font-black text-slate-400 tracking-widest mb-3">03</span>
-                                <span className="w-16 h-16 rounded-full bg-black text-[#EAB308] flex items-center justify-center text-2xl mb-4"><i className="fa-solid fa-user-check"></i></span>
-                                <!-- TODO copy da validare --><h4 className="font-black text-black text-lg leading-tight">Seguito/a per un anno da Daniela</h4>
-                                <!-- TODO copy da validare --><p className="text-slate-600 text-sm mt-2 leading-snug">Sempre a disposizione per eventuali modifiche e supporto</p>
-                              </div>
-                            </div>
-                          </div>
+                          <!-- 2. RICORDA! + 3 MOTIVI (componente condiviso) -->
+                          <!-- TODO copy da validare: motivi accorpati nel banner -->
+                          ${renderRemember("Il laser è come un allenamento: mantiene l'equilibrio cutaneo anche a riposo.", ['Mantieni i risultati ottenuti', 'Potenzia i benefici raggiunti', 'Seguito/a per un anno da Daniela'])}
 
                           <!-- 4. PUÒ SEMBRARE IMPEGNATIVO -->
                           <div className="relative overflow-hidden bg-[#EAB308] text-black p-8 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-lg">
