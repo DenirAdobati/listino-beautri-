@@ -1014,6 +1014,39 @@ main.overflow-y-auto {
                         </div>
                       `);
 
+        // Separatore tratteggiato oro (come il footer di beautri.it: 2px dashed), margini uguali sopra e sotto
+        const renderGoldDivider = () => html`<hr className="border-0 border-t-2 border-dashed border-[#EAB308] !my-10" aria-hidden="true" />`;
+
+        // Card "prodotti per casa" condivisa da Mantenimento Base, Intermedio e Avanzato (stile delle card di #prodotti)
+        const renderHomeProducts = () => html`
+          <div>
+            <div className="text-center mb-4">
+              <h4 className="font-black text-black uppercase text-base lg:text-lg leading-tight">Prodotti personalizzati per la tua routine giornaliera</h4>
+              <p className="text-slate-600 text-sm mt-1">Personalizzati su misura per te.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+              ${[
+                { name: 'Shampoo', photo: 'foto-prodotti/shampoo%20delicato.png', scale: 'scale-125', text: 'Complesso lavante che rispetta il cuoio capelluto e lo prepara a ricevere i benefici successivi.', badges: ['Oli essenziali naturali', 'PH 4.5'] },
+                { name: 'Lozione', photo: 'foto-prodotti/Lozione%20soft.png', scale: 'scale-150', text: 'Il cuore del trattamento quotidiano: nutre il bulbo pilifero e riequilibra la cute.', badges: ['No coloranti · No parabeni', 'A base di oli essenziali'] },
+              ].map(item => html`
+                <div key=${item.name} className="h-full flex items-center gap-4 bg-white border-2 border-[#EAB308] rounded-[1.25rem] sm:rounded-[1.5rem] p-4 shadow-md">
+                  <div className="w-16 h-20 shrink-0 flex items-center justify-center">
+                    <img src=${item.photo} alt=${item.name} loading="lazy" className=${`w-full h-full object-contain ${item.scale}`} />
+                  </div>
+                  <div className="flex-1 min-w-0 text-left">
+                    <h3 className="text-base font-black text-black uppercase tracking-tight leading-tight">${item.name}</h3>
+                    <!-- TODO copy da validare: frase ricavata dal testo introduttivo di #prodotti -->
+                    <p className="text-slate-600 text-xs md:text-[13px] leading-snug mt-1">${item.text}</p>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      ${item.badges.map(b => html`<span key=${b} className="bg-slate-100 text-slate-600 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full">${b}</span>`)}
+                    </div>
+                  </div>
+                </div>
+              `)}
+            </div>
+          </div>
+        `;
+
         if (isRiparare) {
             return html`
                 <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
@@ -1534,23 +1567,10 @@ main.overflow-y-auto {
                               <p className="text-center text-slate-600 text-sm leading-relaxed mt-5 max-w-2xl mx-auto">Sedute alternate ogni mese, per coprire le esigenze di ogni stagione e mantenere e potenziare i risultati raggiunti.</p>
                             </div>
 
-                            <!-- 6. PRODOTTI DI MANTENIMENTO -->
-                            <div className="bg-slate-50 border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                              <div className="flex-1">
-                                <!-- TODO copy da validare --><h4 className="font-black text-black uppercase text-lg md:text-xl leading-tight"><i className="fa-solid fa-house text-[#EAB308] mr-2"></i>Prodotti per casa su misura</h4>
-                                <!-- TODO copy da validare --><p className="text-slate-600 mt-2">Personalizzati su misura per ogni persona.</p>
-                              </div>
-                              <div className="flex gap-4 shrink-0">
-                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
-                                  <img src="foto-prodotti/Lozione%20soft.png" alt="Lozione" loading="lazy" className="h-16 w-16 object-contain scale-[1.85]" />
-                                  <span className="text-xs font-black uppercase tracking-wider text-black">Lozione</span>
-                                </div>
-                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
-                                  <img src="foto-prodotti/shampoo%20delicato.png" alt="Shampoo" loading="lazy" className="h-16 w-16 object-contain scale-150" />
-                                  <span className="text-xs font-black uppercase tracking-wider text-black">Shampoo</span>
-                                </div>
-                              </div>
-                            </div>
+                            <!-- 6. PRODOTTI DI MANTENIMENTO (componente condiviso) -->
+                            ${renderGoldDivider()}
+                            ${renderHomeProducts()}
+                            ${renderGoldDivider()}
                           </div>
                           
                           <!-- PREZZO E DISCLAIMER AGGIUNTO -->
@@ -1870,23 +1890,10 @@ main.overflow-y-auto {
                               <p className="text-center text-slate-600 text-sm leading-relaxed mt-5 max-w-2xl mx-auto">Trattamenti alternati con cadenza mensile, per coprire le esigenze di ogni persona in tutte le stagionalità e mantenere e potenziare i risultati raggiunti.</p>
                             </div>
 
-                            <!-- 6. PRODOTTI DI MANTENIMENTO -->
-                            <div className="bg-slate-50 border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                              <div className="flex-1">
-                                <!-- TODO copy da validare --><h4 className="font-black text-black uppercase text-lg md:text-xl leading-tight"><i className="fa-solid fa-house text-[#EAB308] mr-2"></i>Prodotti per casa su misura</h4>
-                                <!-- TODO copy da validare --><p className="text-slate-600 mt-2">Personalizzati su misura per ogni persona.</p>
-                              </div>
-                              <div className="flex gap-4 shrink-0">
-                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
-                                  <img src="foto-prodotti/Lozione%20soft.png" alt="Lozione" loading="lazy" className="h-16 w-16 object-contain scale-[1.85]" />
-                                  <span className="text-xs font-black uppercase tracking-wider text-black">Lozione</span>
-                                </div>
-                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
-                                  <img src="foto-prodotti/shampoo%20delicato.png" alt="Shampoo" loading="lazy" className="h-16 w-16 object-contain scale-150" />
-                                  <span className="text-xs font-black uppercase tracking-wider text-black">Shampoo</span>
-                                </div>
-                              </div>
-                            </div>
+                            <!-- 6. PRODOTTI DI MANTENIMENTO (componente condiviso) -->
+                            ${renderGoldDivider()}
+                            ${renderHomeProducts()}
+                            ${renderGoldDivider()}
                           </div>
                           
                           <!-- PREZZO E DISCLAIMER AGGIUNTO -->
@@ -2245,23 +2252,10 @@ main.overflow-y-auto {
                               <p className="text-center text-slate-600 text-sm leading-relaxed mt-5 max-w-2xl mx-auto">Schema indicativo: Daniela lo adatta alle tue esigenze.</p>
                             </div>
 
-                            <!-- 6. PRODOTTI DI MANTENIMENTO -->
-                            <div className="bg-slate-50 border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                              <div className="flex-1">
-                                <!-- TODO copy da validare --><h4 className="font-black text-black uppercase text-lg md:text-xl leading-tight"><i className="fa-solid fa-house text-[#EAB308] mr-2"></i>Prodotti per casa su misura</h4>
-                                <!-- TODO copy da validare --><p className="text-slate-600 mt-2">Shampoo e lozione personalizzati, da utilizzare a casa.</p>
-                              </div>
-                              <div className="flex gap-4 shrink-0">
-                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
-                                  <img src="foto-prodotti/Lozione%20soft.png" alt="Lozione" loading="lazy" className="h-16 w-16 object-contain scale-[1.85]" />
-                                  <span className="text-xs font-black uppercase tracking-wider text-black">Lozione</span>
-                                </div>
-                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
-                                  <img src="foto-prodotti/shampoo%20delicato.png" alt="Shampoo" loading="lazy" className="h-16 w-16 object-contain scale-150" />
-                                  <span className="text-xs font-black uppercase tracking-wider text-black">Shampoo</span>
-                                </div>
-                              </div>
-                            </div>
+                            <!-- 6. PRODOTTI DI MANTENIMENTO (componente condiviso) -->
+                            ${renderGoldDivider()}
+                            ${renderHomeProducts()}
+                            ${renderGoldDivider()}
                           </div>
                           
                           <!-- PREZZO E DISCLAIMER AGGIUNTO -->
