@@ -655,7 +655,7 @@ main.overflow-y-auto {
       const MOCK_MAINTENANCE_PATHS = [
         { id: 'm1', name: 'MANTENIMENTO BASE', description: '12 sedute in 12 mesi: 6 di igienizzazione e 6 lenitive.', sessions: '12 sedute', tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica', price: 'Lui 52€  Lei 74/78€', icon: 'fa-shield' },
         { id: 'm2', name: 'MANTENIMENTO INTERMEDIO', description: '12 sedute di mantenimento in 12 mesi.', sessions: '12 sedute', tools: 'Nebulizzazione, Ultrasuoni, Corrente galvanica, Vacuum terapia, Alta frequenza, Cascata, Ossigenoterapia', price: 'Lui 67€  Lei 89/93€', icon: 'fa-shield-halved' },
-        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: '12 sedute in 12 mesi: 8 laser a fotobiomodulazione e 4 di potenziamento.', sessions: '12 sedute', tools: 'Laser a fotobiomodulazione, Nebulizzazione, Ultrasuoni, Corrente galvanica, Vacuum terapia, Alta frequenza, Cascata, Ossigenoterapia', price: 'Lui 76€  Lei 96/104€', icon: 'fa-shield-heart' }
+        { id: 'm3', name: 'MANTENIMENTO AVANZATO', description: '12 sedute in 12 mesi: 8 laser a fotobiostimolazione e 4 di potenziamento.', sessions: '12 sedute', tools: 'Laser a fotobiostimolazione, Nebulizzazione, Ultrasuoni, Corrente galvanica, Vacuum terapia, Alta frequenza, Cascata, Ossigenoterapia', price: 'Lui 76€  Lei 96/104€', icon: 'fa-shield-heart' }
       ];
       
       const TRICOLOGICI_TREATMENTS = [
@@ -1986,7 +1986,6 @@ main.overflow-y-auto {
                    <div className="p-6 md:p-10 lg:p-16 normal-case space-y-10">
                       <div className="space-y-6">
                         <h3 className="text-2xl font-black text-[#EAB308] uppercase">Complimenti!</h3>
-                        <!-- TODO verificare nome laser con Daniela ("fotobiostimolazione" qui, "fotobiomodulazione" nel percorso) -->
                         <p className="text-slate-600 text-lg leading-relaxed">
                           Se Daniela ti sta presentando la fase di mantenimento è perché hai terminato il tuo Percorso di laser a fotobiostimolazione.
                         </p>
@@ -2093,7 +2092,7 @@ main.overflow-y-auto {
                                    <span className="text-6xl md:text-7xl font-black text-[#EAB308] leading-none">8</span>
                                    <div>
                                      <i className="fa-solid fa-sun text-[#EAB308] mb-1"></i>
-                                     <!-- TODO verificare nome laser con Daniela --><p className="text-lg font-black leading-tight">Sedute laser a fotobiomodulazione</p>
+                                     <p className="text-lg font-black leading-tight">Sedute laser a fotobiostimolazione</p>
                                    </div>
                                  </div>
                                  <div className="flex items-center gap-5 bg-white/5 border border-white/10 rounded-[1.5rem] p-5 md:p-6">
