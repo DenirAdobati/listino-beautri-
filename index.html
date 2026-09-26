@@ -65,6 +65,8 @@
       .animate-fade-in { animation: fadeIn 0.7s ease-out; }
       .animate-zoom-in { animation: zoomIn 0.5s ease-out; }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      .animate-reveal-up { animation: revealUp 0.35s ease-out both; }
+      @keyframes revealUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
     
@@ -962,10 +964,24 @@ main.overflow-y-auto {
         
         const [step1Answer, setStep1Answer] = useState(null);
         const [step2Answer, setStep2Answer] = useState(null);
+        const [ratings, setRatings] = useState({});
+        const [unlocked, setUnlocked] = useState(1);
+
+        // Mantenimento Base: scroll dolce fino al blocco appena aperto
+        useEffect(() => {
+          if (unlocked < 2) return;
+          const t = setTimeout(() => {
+            const el = document.getElementById(`base-step-${unlocked}`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: unlocked === 4 ? 'start' : 'center' });
+          }, 60);
+          return () => clearTimeout(t);
+        }, [unlocked]);
 
         useEffect(() => {
           setStep1Answer(null);
           setStep2Answer(null);
+          setRatings({});
+          setUnlocked(1);
         }, [path]);
 
         if (isRiparare) {
@@ -1304,31 +1320,46 @@ main.overflow-y-auto {
                         <p className="text-slate-600 text-lg leading-relaxed">
                           Se Daniela ti sta presentando la fase di mantenimento è perché hai terminato il tuo Percorso di Igienizzazione/Purificazione e stai per intraprendere il percorso di mantenimento.
                         </p>
-                        <p className="text-xl font-bold text-black">Quanto sei soddisfatto/a dei risultati raggiunti?</p>
-                        
-                        <div className="flex gap-4">
-                            <button onClick=${() => setStep1Answer('yes')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step1Answer === 'yes' ? 'bg-green-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-green-600 hover:bg-green-50'}`}>SÌ</button>
-                            <button onClick=${() => setStep1Answer('no')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step1Answer === 'no' ? 'bg-red-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-red-600 hover:bg-red-50'}`}>NO</button>
-                        </div>
                       </div>
 
-                      ${step1Answer && html`
-                        <div className="space-y-6 animate-fade-in border-l-4 border-[#EAB308] pl-6 py-2">
-                           <p className="text-slate-700 text-lg font-medium italic">
-                             "La cute grigiastra piena di scorie, la desquamazione sugli abiti, il prurito insistente sono solo un cattivo ricordo."
-                           </p>
-                           <p className="text-xl font-bold text-black pt-4">
-                             Ti piacerebbe mantenere questi risultati, poterli potenziare ulteriormente ed essere accompagnato da Daniela e tutto il team di Beautrì parrucchieri per un anno intero?
-                           </p>
-                           <div className="flex gap-4">
-                              <button onClick=${() => setStep2Answer('yes')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step2Answer === 'yes' ? 'bg-green-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-green-600 hover:bg-green-50'}`}>SÌ</button>
-                              <button onClick=${() => setStep2Answer('no')} className=${`px-8 py-4 rounded-2xl font-black uppercase transition-all ${step2Answer === 'no' ? 'bg-red-600 text-white scale-105 shadow-lg' : 'bg-slate-100 text-red-600 hover:bg-red-50'}`}>NO</button>
-                           </div>
+                      <!-- AUTOVALUTAZIONE 1-10: apertura progressiva, solo visiva (nessun salvataggio) -->
+                      ${[
+                        { q: 'Quanto sei soddisfatto/a oggi della situazione dei tuoi capelli e della tua cute?', max: 'Del tutto', todo: true },
+                        { q: 'Quanto senti che il tuo problema è sotto controllo oggi?', max: 'Completamente' },
+                        { q: 'Quanto ti senti a tuo agio con i tuoi capelli quando sei in mezzo agli altri?', max: 'Completamente' },
+                      ].map((d, i) => i < unlocked && html`
+                        <div id=${`base-step-${i + 1}`} className=${`scroll-mt-6 bg-white border border-slate-100 rounded-[1.5rem] sm:rounded-[2rem] shadow-lg p-5 sm:p-6 md:p-8 ${i > 0 ? 'animate-reveal-up' : ''}`}>
+                          <div className="flex items-center justify-between gap-4 mb-4">
+                            <span className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#EAB308]">
+                              Domanda ${i + 1} di 3
+                              ${ratings[i] ? html`<span className="w-5 h-5 rounded-full bg-green-600 text-white flex items-center justify-center text-[10px] animate-reveal-up" aria-label="Risposta data"><i className="fa-solid fa-check"></i></span>` : null}
+                            </span>
+                            <span className="flex gap-1.5" aria-hidden="true">
+                              ${[0, 1, 2].map(k => html`<span className=${`h-1.5 w-6 md:w-8 rounded-full ${k <= i ? 'bg-[#EAB308]' : 'bg-slate-200'}`}></span>`)}
+                            </span>
+                          </div>
+                          ${d.todo ? html`<!-- TODO copy da validare ("soddisfatto/a" al posto di "soddisfatta") -->` : null}
+                          <p className="text-xl md:text-2xl font-bold text-black leading-snug mb-6">${d.q}</p>
+                          <div className="grid grid-cols-5 md:grid-cols-10 gap-x-2 gap-y-8 md:gap-y-2 pb-6">
+                            ${[1,2,3,4,5,6,7,8,9,10].map(n => html`
+                              <div className="relative">
+                                <button type="button" aria-pressed=${ratings[i] === n} onClick=${() => { const sel = ratings[i] === n ? null : n; setRatings(r => ({ ...r, [i]: sel })); if (sel !== null) setUnlocked(u => Math.max(u, i + 2)); }} className=${`w-full h-12 lg:h-14 !p-0 rounded-xl border text-base md:text-lg font-black transition-all active:scale-95 ${ratings[i] === n ? 'bg-black text-[#EAB308] border-black shadow-lg' : 'bg-white text-slate-800 border-slate-200 hover:border-slate-400 hover:bg-slate-100'}`}>${n}</button>
+                                ${n === 1 ? html`<span className="absolute top-full left-0 mt-1.5 text-[11px] font-bold text-slate-400 whitespace-nowrap">Per niente</span>` : null}
+                                ${n === 10 ? html`<span className="absolute top-full right-0 mt-1.5 text-[11px] font-bold text-slate-400 whitespace-nowrap">${d.max}</span>` : null}
+                              </div>
+                            `)}
+                          </div>
                         </div>
-                      `}
+                      `)}
 
-                      ${step2Answer && html`
-                        <div className="space-y-8 animate-fade-in pt-8 border-t border-slate-100">
+                      ${unlocked >= 4 && html`
+                      <div id="base-step-4" className="scroll-mt-28 space-y-10 animate-reveal-up">
+                      <div className="border-l-4 border-[#EAB308] pl-6 py-2">
+                        <p className="text-slate-700 text-lg font-medium italic">
+                          "La cute grigiastra piena di scorie, la desquamazione sugli abiti, il prurito insistente sono solo un cattivo ricordo."
+                        </p>
+                      </div>
+                        <div className="space-y-8 pt-8 border-t border-slate-100">
                           
                           <!-- 1. AVVERTIMENTO: NON COMMETTERE QUESTO ERRORE -->
                           <div className="bg-red-50 border-l-8 border-red-600 p-6 md:p-8 rounded-l-lg rounded-r-[1.5rem] sm:rounded-r-[2rem] shadow-sm">
@@ -1421,7 +1452,7 @@ main.overflow-y-auto {
                           <!-- 4. PUÒ SEMBRARTI IMPEGNATIVO -->
                           <div className="relative overflow-hidden bg-[#EAB308] text-black p-8 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-lg">
                              <i className="fa-solid fa-quote-left absolute top-6 left-6 md:left-10 text-5xl md:text-6xl text-black/20 pointer-events-none"></i>
-                             <div className="relative pt-12 md:pt-14">
+                             <div className="relative pt-12 md:pt-14 pb-12 md:pb-10 text-center">
                                <h4 className="text-xl md:text-2xl font-black uppercase mb-5">Può sembrarti impegnativo, ma non lo è!</h4>
                                <!-- TODO copy da validare -->
                                <p className="text-lg leading-relaxed">Immagina quando amici e familiari ti chiederanno: <strong className="font-black">«Che cosa hai fatto per avere capelli così belli?»</strong></p>
@@ -1430,81 +1461,180 @@ main.overflow-y-auto {
                              <i className="fa-solid fa-quote-right absolute bottom-6 right-6 md:right-10 text-5xl md:text-6xl text-black/20 pointer-events-none"></i>
                           </div>
 
-                          <div>
-                            <div className="bg-black text-white p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6">
-                               <h3 className="text-[#EAB308] font-black uppercase text-lg mb-4">Il percorso di mantenimento (12 mesi) comprende:</h3>
-                               <ul className="space-y-4 text-sm">
-                                 <li className="flex items-start gap-4">
-                                   <i className="fa-solid fa-calendar-check text-[#EAB308] mt-1"></i>
+                          <div className="space-y-6">
+                            <!-- 1-3. INTESTAZIONE, SEDUTE, TECNOLOGIA -->
+                            <div className="bg-black text-white p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] shadow-xl">
+                               <div className="text-center mb-8">
+                                 <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Il percorso di mantenimento</h3>
+                                 <span className="inline-flex items-center gap-2 mt-4 bg-[#EAB308] text-black font-black uppercase tracking-widest text-sm px-5 py-2 rounded-full"><i className="fa-solid fa-calendar-check"></i>12 mesi</span>
+                               </div>
+
+                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                 <div className="flex items-center gap-5 bg-white/5 border border-white/10 rounded-[1.5rem] p-5 md:p-6">
+                                   <span className="text-6xl md:text-7xl font-black text-[#EAB308] leading-none">6</span>
                                    <div>
-                                     <strong className="block text-lg">6 Sedute di igienizzazione</strong>
-                                     <strong className="block text-lg">6 Sedute di lenire</strong>
-                                     <span className="text-slate-400">Dove POTENZIAMO L’EFFICACIA DI ARGILLE E PEELING NATURALI CON STRUMENTI TECNOLOGICI ALL’AVANGUARDIA, COME:</span>
-                                     <div className="flex flex-wrap gap-2 mt-2">
-                                        <span className="bg-white/10 px-3 py-1 rounded-full text-xs">NEBULIZZAZIONE</span>
-                                        <span className="bg-white/10 px-3 py-1 rounded-full text-xs">ULTRASUONI</span>
-                                        <span className="bg-white/10 px-3 py-1 rounded-full text-xs">CORRENTE GALVANICA</span>
-                                     </div>
+                                     <i className="fa-solid fa-spray-can-sparkles text-[#EAB308] mb-1"></i>
+                                     <p className="text-lg font-black leading-tight">Sedute di igienizzazione</p>
                                    </div>
-                                 </li>
-                                 <li className="flex items-center gap-4">
-                                   <i className="fa-solid fa-gift text-[#EAB308]"></i>
-                                   <span className="font-bold">2 Beautrì check in omaggio (valore totale 94 €)</span>
-                                 </li>
-                                 <li className="flex items-center gap-4">
-                                   <i className="fa-brands fa-whatsapp text-[#EAB308]"></i>
-                                   <span className="font-bold">Supporto via whatsapp 5 giorni su 7</span>
-                                 </li>
-                               </ul>
+                                 </div>
+                                 <div className="flex items-center gap-5 bg-white/5 border border-white/10 rounded-[1.5rem] p-5 md:p-6">
+                                   <span className="text-6xl md:text-7xl font-black text-[#EAB308] leading-none">6</span>
+                                   <div>
+                                     <i className="fa-solid fa-leaf text-[#EAB308] mb-1"></i>
+                                     <!-- TODO copy da validare --><p className="text-lg font-black leading-tight">Sedute lenitive</p>
+                                   </div>
+                                 </div>
+                               </div>
+                               <!-- TODO copy da validare -->
+                               <p className="text-center mt-5 text-lg md:text-xl"><span className="font-black text-[#EAB308]">12 sedute</span> <span className="font-bold">in 12 mesi</span></p>
+
+                               <div className="border-t border-white/10 mt-8 pt-8">
+                                 <p className="text-[#EAB308] font-black uppercase tracking-widest text-xs text-center mb-3"><i className="fa-solid fa-microchip mr-2"></i>Tecnologia all'avanguardia</p>
+                                 <!-- TODO copy da validare -->
+                                 <p className="text-center text-slate-300 md:text-lg max-w-2xl mx-auto mb-6">Potenziamo l'efficacia di argille e peeling naturali con strumenti tecnologici all'avanguardia.</p>
+                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                   <div className="flex md:flex-col items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 md:text-center">
+                                     <span className="w-11 h-11 shrink-0 rounded-full bg-[#EAB308] text-black flex items-center justify-center text-lg"><i className="fa-solid fa-wind"></i></span>
+                                     <span className="font-bold text-sm">Nebulizzazione</span>
+                                   </div>
+                                   <div className="flex md:flex-col items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 md:text-center">
+                                     <span className="w-11 h-11 shrink-0 rounded-full bg-[#EAB308] text-black flex items-center justify-center text-lg"><i className="fa-solid fa-wave-square"></i></span>
+                                     <span className="font-bold text-sm">Ultrasuoni</span>
+                                   </div>
+                                   <div className="flex md:flex-col items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 md:text-center">
+                                     <span className="w-11 h-11 shrink-0 rounded-full bg-[#EAB308] text-black flex items-center justify-center text-lg"><i className="fa-solid fa-bolt"></i></span>
+                                     <span className="font-bold text-sm">Corrente galvanica</span>
+                                   </div>
+                                 </div>
+                               </div>
                             </div>
-                            <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
-                              Tutto il percorso è strutturato in maniera tale da coprire le esigenze di ogni persona per tutte le stagionalità, alternando le varie sedute con cadenza mensile. Questo ci permette di fare un ottimo lavoro e mantenere e potenziare i risultati già raggiunti.
-                            </p>
-                            <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl">
-                               <h4 className="font-black text-black uppercase text-xs mb-2">Prodotti di mantenimento</h4>
-                               <p className="text-slate-600 text-sm">
-                                 In abbinamento (lozione e shampoo) per casa verranno personalizzati su misura per ogni persona.
-                               </p>
+
+                            <!-- 4. CADENZA MENSILE (timeline indicativa dell'alternanza, non legata ai mesi del calendario) -->
+                            <div className="bg-white border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-sm">
+                              <p className="text-black font-black uppercase tracking-widest text-xs text-center mb-6"><i className="fa-regular fa-calendar text-[#EAB308] mr-2"></i>Cadenza mensile</p>
+                              <div className="relative">
+                                <div className="hidden lg:block absolute left-5 right-5 top-5 h-0.5 bg-slate-200"></div>
+                                <div className="relative grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-y-5 gap-x-1 justify-items-center">
+                                  ${['Primo','Secondo','Terzo','Quarto','Quinto','Sesto','Settimo','Ottavo','Nono','Decimo','Undicesimo','Dodicesimo'].map((ordinale, i) => { const n = i + 1; return html`
+                                    <div className="flex flex-col items-center gap-1.5">
+                                      <span className=${`w-10 h-10 rounded-full flex items-center justify-center text-sm ${n % 2 ? 'bg-black text-[#EAB308]' : 'bg-[#EAB308] text-black'}`}><i className=${`fa-solid ${n % 2 ? 'fa-spray-can-sparkles' : 'fa-leaf'}`}></i></span>
+                                      <span className="text-[10px] font-black lg:font-bold lg:tracking-tighter text-slate-500 text-center leading-tight whitespace-nowrap">${ordinale}<br />mese</span>
+                                    </div>
+                                  `; })}
+                                </div>
+                              </div>
+                              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-6 text-xs font-bold text-slate-700">
+                                <span className="flex items-center gap-2"><span className="w-4 h-4 rounded-full bg-black"></span>Igienizzazione</span>
+                                <!-- TODO copy da validare --><span className="flex items-center gap-2"><span className="w-4 h-4 rounded-full bg-[#EAB308]"></span>Seduta lenitiva</span>
+                              </div>
+                              <!-- TODO copy da validare -->
+                              <p className="text-center text-slate-600 text-sm leading-relaxed mt-5 max-w-2xl mx-auto">Sedute alternate ogni mese, per coprire le esigenze di ogni stagione e mantenere e potenziare i risultati raggiunti.</p>
+                            </div>
+
+                            <!-- 6. PRODOTTI DI MANTENIMENTO -->
+                            <div className="bg-slate-50 border border-slate-200 rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+                              <div className="flex-1">
+                                <!-- TODO copy da validare --><h4 className="font-black text-black uppercase text-lg md:text-xl leading-tight"><i className="fa-solid fa-house text-[#EAB308] mr-2"></i>Prodotti per casa su misura</h4>
+                                <!-- TODO copy da validare --><p className="text-slate-600 mt-2">Personalizzati su misura per ogni persona.</p>
+                              </div>
+                              <div className="flex gap-4 shrink-0">
+                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
+                                  <img src="foto-prodotti/Lozione%20soft.png" alt="Lozione" loading="lazy" className="h-16 w-16 object-contain scale-[1.85]" />
+                                  <span className="text-xs font-black uppercase tracking-wider text-black">Lozione</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-5 bg-white border border-slate-200 rounded-2xl w-28 pt-6 pb-4">
+                                  <img src="foto-prodotti/shampoo%20delicato.png" alt="Shampoo" loading="lazy" className="h-16 w-16 object-contain scale-150" />
+                                  <span className="text-xs font-black uppercase tracking-wider text-black">Shampoo</span>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           
                           <!-- PREZZO E DISCLAIMER AGGIUNTO -->
                           
-                          <!-- NUOVO: UNICA SOLUZIONE -->
-                          <div className="bg-[#EAB308] p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-6 text-center shadow-lg relative overflow-hidden text-black border-4 border-white transform hover:scale-[1.02] transition-transform">
-                              <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase animate-pulse shadow-md">Il più richiesto</div>
-                              <h4 className="text-black font-black uppercase text-sm tracking-widest mb-2">Pagamento in unica soluzione</h4>
-                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-6">Lui 572€ Lei 814/858€</div>
-                              
-                              <div className="bg-white/20 rounded-2xl p-6 text-left inline-block w-full border border-black/5">
-                                 <p className="font-black text-xs uppercase mb-4 text-center tracking-widest">In omaggio per te:</p>
-                                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                                    <ul className="space-y-3 text-sm font-bold flex-1">
-                                        <li className="flex items-start gap-3"><div className="w-5 flex justify-center shrink-0"><i className="fa-solid fa-check mt-1 text-green-600"></i></div><span>1 seduta in omaggio</span></li>
-                                        <li className="flex items-start gap-3"><div className="w-5 flex justify-center shrink-0"><i className="fa-solid fa-check mt-1 text-green-600"></i></div><span>1 prodotto in omaggio, selezionato in base alle tue esigenze</span></li>
-                                        <li className="flex items-start gap-3"><div className="w-5 flex justify-center shrink-0"><i className="fa-solid fa-check mt-1 text-green-600"></i></div><span>2 Beautrì Check in omaggio (valore totale 94 €)</span></li>
-                                    </ul>
-                                    <div className="bg-black text-[#EAB308] p-4 rounded-xl text-center shadow-lg transform rotate-2 shrink-0">
-                                        <p className="text-[10px] uppercase font-bold tracking-widest mb-1 text-white">Risparmi ben</p>
-                                        <p className="text-2xl font-black">200/230€</p>
-                                    </div>
-                                 </div>
-                              </div>
-                          </div>
+                          <!-- OPZIONI DI PAGAMENTO -->
+                          <div className="space-y-6">
+                            <div className="text-center">
+                              <!-- TODO copy da validare --><h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-black">Scegli come iniziare il tuo percorso</h3>
+                              <!-- TODO copy da validare --><p className="text-sm font-black uppercase tracking-widest text-slate-500 mt-2">2 opzioni di pagamento</p>
+                            </div>
 
-                          <!-- VECCHIO: A SEDUTA -->
-                          <div className="bg-white border-2 border-slate-200 p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] mb-8 text-center shadow-lg relative overflow-hidden group">
-                              <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Pagamento seduta per seduta</h4>
-                              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tighter mb-4">${path.price}</div>
-                              
-                              <!-- LISTA AGGIUNTA -->
-                              <div className="mt-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                                <ul className="space-y-3 text-sm font-bold">
-                                    <li className="flex items-start gap-3 text-slate-400 line-through decoration-slate-400"><div className="w-5 flex justify-center shrink-0"><i className="fa-solid fa-xmark mt-1 text-red-500"></i></div><span>1 seduta in omaggio</span></li>
-                                    <li className="flex items-start gap-3 text-slate-400 line-through decoration-slate-400"><div className="w-5 flex justify-center shrink-0"><i className="fa-solid fa-xmark mt-1 text-red-500"></i></div><span>1 prodotto in omaggio, selezionato in base alle tue esigenze</span></li>
-                                    <li className="flex items-start gap-3 text-black"><div className="w-5 flex justify-center shrink-0"><i className="fa-solid fa-check mt-1 text-green-600"></i></div><span>2 Beautrì Check in omaggio (valore totale 94 €)</span></li>
-                                </ul>
-                              </div>
+                            <!-- UNICA SOLUZIONE (protagonista) -->
+                            <div className="relative bg-[#EAB308] text-black text-center p-6 sm:p-8 md:p-12 pt-12 sm:pt-12 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-4 border-white shadow-2xl ring-4 ring-[#EAB308]/40 transform hover:scale-[1.01] transition-transform">
+                                <!-- TODO copy da validare --><span className="absolute -top-5 -right-2 md:-right-4 rotate-[10deg] bg-[#EFE3CC] border border-[#DCCBA8] text-stone-800 text-[10px] md:text-xs font-black uppercase tracking-widest px-4 py-2 rounded-lg shadow-lg">Il più acquistato</span>
+                                <h4 className="text-black font-black uppercase text-sm md:text-base tracking-widest mb-6">Pagamento in unica soluzione</h4>
+
+                                <!-- TODO copy da validare: prezzi barrati = 12 sedute singole (12 × 52€, 12 × 74/78€) -->
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-0 md:divide-x divide-black/15 max-w-xl mx-auto mb-8">
+                                  <div className="md:px-4">
+                                    <p className="text-xs font-black uppercase tracking-widest text-black/60">Lui</p>
+                                    <p className="text-lg font-bold text-black/45 line-through mt-1">624€</p>
+                                    <p className="text-5xl lg:text-6xl font-black tracking-tighter leading-none mt-1">572€</p>
+                                  </div>
+                                  <div className="md:px-4">
+                                    <p className="text-xs font-black uppercase tracking-widest text-black/60">Lei</p>
+                                    <p className="text-lg font-bold text-black/45 line-through mt-1">888/936€</p>
+                                    <p className="text-5xl lg:text-6xl font-black tracking-tighter leading-none mt-1">814/858€</p>
+                                  </div>
+                                </div>
+
+                                <div className="bg-white/25 rounded-2xl p-5 md:p-6 text-left border border-black/5">
+                                   <p className="font-black text-xs uppercase mb-5 text-center tracking-widest">In omaggio per te:</p>
+                                   <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-6">
+                                      <ul className="space-y-3 text-sm font-bold flex-1 w-full">
+                                          <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-green-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-check"></i></span><span>2 Beautrì Check in omaggio (valore totale 94 €)</span></li>
+                                          <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-green-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-check"></i></span><span>Supporto WhatsApp 5 giorni su 7</span></li>
+                                          <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-green-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-check"></i></span><span>1 seduta in omaggio</span></li>
+                                          <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-green-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-check"></i></span><span>1 prodotto in omaggio, selezionato in base alle tue esigenze</span></li>
+                                          <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-green-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-check"></i></span><span className="font-black">Risparmi 200/230€</span></li>
+                                      </ul>
+                                      <div className="bg-black text-[#EAB308] px-6 py-5 md:px-7 md:py-6 rounded-2xl text-center shadow-2xl transform rotate-2 shrink-0 border-2 border-[#EAB308]">
+                                          <p className="text-xs uppercase font-black tracking-widest mb-1 text-white">Risparmi ben</p>
+                                          <p className="text-4xl md:text-5xl font-black tracking-tight">200/230€</p>
+                                      </div>
+                                   </div>
+                                </div>
+                            </div>
+
+                            <!-- SEDUTA PER SEDUTA (secondaria) -->
+                            <div className="bg-slate-50 border border-slate-200 p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] text-center max-w-3xl mx-auto w-full">
+                                <h4 className="text-slate-400 font-black uppercase text-xs tracking-[0.3em] mb-4">Pagamento seduta per seduta</h4>
+                                <div className="flex divide-x divide-slate-200 max-w-sm mx-auto mb-5">
+                                  <div className="flex-1 px-3">
+                                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Lui</p>
+                                    <p className="text-3xl md:text-4xl font-black tracking-tighter text-slate-700 mt-1">52€</p>
+                                  </div>
+                                  <div className="flex-1 px-3">
+                                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Lei</p>
+                                    <p className="text-3xl md:text-4xl font-black tracking-tighter text-slate-700 mt-1">74/78€</p>
+                                  </div>
+                                </div>
+                                <div className="text-left bg-white p-5 md:p-6 rounded-2xl border border-slate-100 flex flex-col md:flex-row items-center gap-8 md:gap-6">
+                                  <ul className="space-y-3 text-sm font-bold flex-1 w-full">
+                                      <li className="flex items-center gap-3 text-black"><span className="w-9 h-9 shrink-0 rounded-full bg-green-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-check"></i></span><span>2 Beautrì Check in omaggio (valore totale 94 €)</span></li>
+                                      <li className="flex items-center gap-3 text-black"><span className="w-9 h-9 shrink-0 rounded-full bg-green-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-check"></i></span><span>Supporto WhatsApp 5 giorni su 7</span></li>
+                                      <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-xmark"></i></span><span className="text-slate-400 line-through decoration-slate-400">1 seduta in omaggio</span></li>
+                                      <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-xmark"></i></span><span className="text-slate-400 line-through decoration-slate-400">1 prodotto in omaggio, selezionato in base alle tue esigenze</span></li>
+                                      <li className="flex items-center gap-3"><span className="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white flex items-center justify-center text-sm"><i className="fa-solid fa-xmark"></i></span><span className="text-slate-400 line-through decoration-slate-400">Risparmi 200/230€</span></li>
+                                  </ul>
+                                  <div className="relative shrink-0 md:mr-2">
+                                    <div className="bg-black text-[#EAB308] px-5 py-3 rounded-xl text-center shadow-md transform rotate-2 opacity-80">
+                                      <p className="text-[10px] uppercase font-black tracking-widest mb-0.5 text-white">Risparmi ben</p>
+                                      <!-- TODO copy da validare --><p className="text-3xl font-black tracking-tight">0€</p>
+                                    </div>
+                                    <span className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                                      <span className="absolute left-1/2 top-1/2 w-[125%] h-1.5 bg-red-600 rounded-full shadow -translate-x-1/2 -translate-y-1/2 rotate-[28deg]"></span>
+                                      <span className="absolute left-1/2 top-1/2 w-[125%] h-1.5 bg-red-600 rounded-full shadow -translate-x-1/2 -translate-y-1/2 -rotate-[28deg]"></span>
+                                    </span>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <!-- TODO copy da validare: "Con il pagamento in un'unica soluzione ti premiamo." -->
+                            <p className="text-center font-black text-black text-lg md:text-xl"><i className="fa-solid fa-gift text-[#EAB308] mr-2"></i>Con il pagamento in un'unica soluzione ti premiamo.</p>
+
+                            <!-- SEPARATORE: stacca il blocco pagamenti da pill e box finali -->
+                            <hr className="border-0 border-t-2 border-dashed border-slate-200 !mt-10 mb-10" />
                           </div>
 
                           <div className="mb-8 text-center">
@@ -1522,6 +1652,7 @@ main.overflow-y-auto {
                           </div>
 
                        </div>
+                      </div>
                       `}
                    </div>
                 </div>
