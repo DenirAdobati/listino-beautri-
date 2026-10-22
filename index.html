@@ -39,7 +39,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&family=Caveat:wght@700&display=swap');
       body {
         font-family: 'Inter', sans-serif;
         -webkit-tap-highlight-color: transparent;
@@ -519,6 +519,71 @@ main.overflow-y-auto {
     button[id^="menu-"] h2[class*="mt-auto"] {
         margin-top: 0 !important;
     }
+}
+
+/* === RESTYLING HOME MOBILE in stile beautri.it (solo < 768px) === */
+.bt-home-mobile, .bt-notice-wrap { display: none; }
+@media screen and (max-width: 767px) {
+    .bt-home-desktop { display: none !important; }
+    .bt-home-mobile { display: block; color: #0A0A0A; }
+    .bt-notice-wrap { display: block; }
+
+    /* fondo bianco a quadretti come beautri.it, solo sulla home */
+    body:has(.bt-home-mobile), body:has(.bt-home-mobile) main {
+        background-color: #fff;
+        background-image: linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-attachment: local;
+    }
+    body:has(.bt-home-mobile) div[class*="max-w-\[1200px\]"] { padding-top: 12px !important; }
+
+    .bth-hero { text-align: center; padding: 0 4px; }
+    .bth-eyebrow { font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px; color: #0A0A0A; letter-spacing: .02em; }
+    .bth-eyebrow::before, .bth-eyebrow::after { content: "•"; color: #F5C200; margin: 0 8px; }
+    .bth-photo-wrap { position: relative; width: 100%; max-width: 360px; margin: 0 auto; }
+    .bth-photo { display: block; width: 224px; height: 272px; margin: 6px auto 0; object-fit: cover; object-position: center top; mix-blend-mode: multiply; -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
+    .bth-sign { position: absolute; right: -8px; top: 6px; width: 118px; white-space: nowrap; text-align: left; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; line-height: 1.05; color: #0A0A0A; transform: rotate(-5deg); pointer-events: none; }
+    .bth-sign-arrow { display: block; width: 32px; height: 40px; margin-top: 2px; transform: rotate(195deg); }
+    .bth-sign-arrow path { fill: none; stroke: #0A0A0A; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+    a.bth-reviews { position: absolute; left: 10px; top: 172px; z-index: 2; min-height: 0; min-width: 0; transform: rotate(-6deg); background: #fff; border-radius: 16px; padding: 8px 12px; box-shadow: 0 12px 28px rgba(0,0,0,.18); text-decoration: none; display: flex; flex-direction: column; align-items: center; }
+    .bth-reviews-top { display: flex; align-items: center; gap: 5px; }
+    .bth-g { width: 16px; height: 16px; }
+    .bth-reviews-top b { font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px; color: #0A0A0A; line-height: 1; }
+    .bth-stars { color: #FBBC05; font-size: 11px; letter-spacing: 1px; }
+    .bth-reviews-sub { font-family: Poppins, sans-serif; font-weight: 700; font-size: 11px; color: #0A0A0A; white-space: nowrap; margin-top: 2px; }
+    .bth-h1 { position: relative; margin: -16px 0 0; font-family: Poppins, sans-serif; font-weight: 900; font-size: 36px !important; line-height: 1.02; letter-spacing: -0.045em; color: #0A0A0A; }
+    .bth-hl { background: linear-gradient(transparent 60%, rgba(245,194,0,.6) 60%); padding: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+    .bth-lead { font-size: 15px; color: #3a3a3a; letter-spacing: .04em; margin: 10px 0 0; }
+    .bth-lead b { color: #0A0A0A; font-weight: 600; }
+    a.bth-cta { display: flex; align-items: center; justify-content: center; text-align: center; margin: 18px 4px 0; padding: 16px 18px; border-radius: 999px; background: #F5C200; color: #0A0A0A; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; line-height: 1.3; text-decoration: none; box-shadow: 0 0 20px rgba(245,194,0,.35); }
+    a.bth-cta-bottom { margin: 20px 0 0; }
+    .bth-sub { text-align: center; font-size: 14px; color: #2a2a2a; line-height: 1.5; margin: 8px 0 0; }
+    .bth-note { text-align: center; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; margin-top: 10px; }
+
+    .bth-letter { margin: 26px 2px 24px; background: #fff; border-radius: 8px; padding: 26px 20px 22px; box-shadow: 0 2px 0 #eee, 0 24px 56px rgba(0,0,0,.13); }
+    .bth-hello { font-family: Caveat, cursive; font-weight: 700; font-size: 30px; color: #8A6A00; margin-bottom: 14px; }
+    .bth-step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px dashed #ddd; }
+    .bth-num { font-family: Caveat, cursive; font-weight: 700; font-size: 34px; line-height: 1; width: 20px; flex-shrink: 0; }
+    .bth-pill { display: inline-block; margin-bottom: 8px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; background: #0A0A0A; color: #F5C200; border: 1px solid #F5C200; border-radius: 20px; padding: 4px 11px; }
+    .bth-step-title { font-family: Poppins, sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.03em; line-height: 1.1; margin: 0; }
+    .bth-step-text { font-size: 14px; color: #555; line-height: 1.55; letter-spacing: .03em; margin: 6px 0 12px; }
+    button.bth-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; background: #0A0A0A; color: #fff; font-family: Poppins, sans-serif; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 11px 20px; border: 0; }
+    button.bth-btn-gold { background: #F5C200; color: #0A0A0A; }
+    .bth-ps { margin-top: 6px; padding-top: 16px; display: flex; align-items: baseline; gap: 10px; }
+    .bth-ps-label { font-family: Caveat, cursive; font-weight: 700; font-size: 30px; color: #444; }
+    .bth-ps-text { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #E5383B; line-height: 1.15; }
+    .bth-signature { text-align: right; font-family: Caveat, cursive; font-weight: 700; font-size: 30px; color: #444; margin-top: 6px; }
+
+    /* avviso dentro Menu Donna/Uomo */
+    .bt-notice-wrap { margin: -12px 0 22px; }
+    .bt-notice { position: relative; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 18px; padding: 18px 18px 16px; box-shadow: 0 18px 40px rgba(0,0,0,.08); }
+    button.bt-notice-close { position: absolute; top: 4px; right: 4px; min-height: 40px; min-width: 40px; background: none; border: 0; color: #8a8a8a; font-size: 16px; }
+    .bt-notice-row { display: flex; gap: 12px; align-items: flex-start; }
+    .bt-notice-ic { width: 38px; height: 38px; border-radius: 50%; background: #F5C200; color: #0A0A0A; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+    .bt-notice-title { font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -0.02em; line-height: 1.2; padding-right: 22px; margin: 0; }
+    .bt-notice-text { font-size: 13.5px; color: #555; line-height: 1.55; letter-spacing: .03em; margin: 6px 0 0; }
+    a.bt-notice-link { display: inline-flex; align-items: center; gap: 6px; min-height: 0; margin-top: 12px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px; color: #0A0A0A; text-decoration: none; border-bottom: 2px solid #F5C200; }
+    .bt-notice-already { text-align: center; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; margin-top: 16px; transform: rotate(-2deg); }
 }
 </style>
 <script type="importmap">
@@ -4051,6 +4116,44 @@ main.overflow-y-auto {
         return window.location.hash.replace('#', '') === 'prodotti' ? 'prodotti-overview' : null;
       };
 
+      // --- HOME MOBILE (restyling in stile beautri.it) ---
+      const CONSULENZA_FORM_URL = 'https://form.typeform.com/to/QUzap8so#pagina=menu&ingresso=menu&utm_source=menu';
+      const GOOGLE_REVIEWS_URL = 'https://maps.app.goo.gl/uFvEHabNHYLfwrmG6';
+      const trackHomeClick = (target) => {
+        if (typeof gtag === 'function') {
+          gtag('event', 'home_click', { target, device_form_factor: getDeviceFormFactor() });
+        }
+      };
+
+      // Avviso in cima a Menu Donna/Uomo (solo mobile): chiudibile, la scelta resta salvata sul telefono
+      const NOTICE_KEY = 'btConsulenzaNoticeClosed';
+      const ConsulenzaNotice = () => {
+        const [closed, setClosed] = useState(() => {
+          try { return localStorage.getItem(NOTICE_KEY) === '1'; } catch (e) { return false; }
+        });
+        if (closed) return null;
+        const close = () => {
+          setClosed(true);
+          try { localStorage.setItem(NOTICE_KEY, '1'); } catch (e) {}
+        };
+        return html`
+          <div className="bt-notice-wrap">
+            <div className="bt-notice">
+              <button type="button" className="bt-notice-close" aria-label="Chiudi avviso" onClick=${close}><i className="fa-solid fa-xmark"></i></button>
+              <div className="bt-notice-row">
+                <div className="bt-notice-ic"><i className="fa-solid fa-info"></i></div>
+                <div>
+                  <h3 className="bt-notice-title">Prima volta da Beautrì?</h3>
+                  <p className="bt-notice-text">Partiamo sempre dalla Consulenza Beautrìco: 90 minuti per conoscerti e analizzare cute e capelli, così ogni servizio è pensato per te.</p>
+                </div>
+              </div>
+              <a className="bt-notice-link" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_listino')}>Candidati per la Consulenza Beautrìco <i className="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div className="bt-notice-already">Sei già in percorso? Il listino è qui sotto ↓</div>
+          </div>
+        `;
+      };
+
       const DigitalMenu = ({ scrollToTop }) => {
         const [gender, setGender] = useState(getInitialGenderFromHash);
         const [section, setSection] = useState(getInitialSectionFromHash);
@@ -4110,7 +4213,64 @@ main.overflow-y-auto {
         const renderView = () => {
             if (!gender) {
             return html`
-                <div className="flex flex-col animate-fade-in">
+                <div>
+                <div className="bt-home-mobile animate-fade-in">
+                <section className="bth-hero">
+                    <div className="bth-eyebrow">Il menu</div>
+                    <div className="bth-photo-wrap">
+                        <img className="bth-photo" src="foto-team/daniela-menu.jpg" alt="Daniela Modina, tecnica tricologa" />
+                        <a className="bth-reviews" href=${GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('recensioni_google')}>
+                            <span className="bth-reviews-top"><svg className="bth-g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.7 6c4.5-4.2 6.9-10.3 6.9-17.7z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.7-6c-2.2 1.5-5 2.3-8.2 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg><b>4,9</b><span className="bth-stars">★★★★★</span></span>
+                            <span className="bth-reviews-sub">249 recensioni Google</span>
+                        </a>
+                        <div className="bth-sign" aria-hidden="true">
+                            <span>Daniela Modina,<br />tecnica tricologa</span>
+                            <svg className="bth-sign-arrow" viewBox="0 0 34 40"><path d="M4 37 C 14 33, 22 22, 24 5"/><path d="M17 11 L 24 3 L 30 12"/></svg>
+                        </div>
+                    </div>
+                    <h1 className="bth-h1">Percorsi di <span className="bth-hl">salute</span><br />per i tuoi capelli.</h1>
+                    <p className="bth-lead">Prima ascoltiamo te.<br /><b>Poi pensiamo ai capelli.</b></p>
+                    <a className="bth-cta" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_alto')}>Candidati per la Consulenza Beautrìco</a>
+                    <p className="bth-sub">7 domande veloci.<br />Compilare il modulo è gratis e non ti impegna.</p>
+                </section>
+                <div className="bth-letter">
+                    <div className="bth-hello">Scegli il tuo menu,</div>
+                    <div className="bth-step">
+                        <div className="bth-num">1</div>
+                        <div>
+                            <span className="bth-pill">Il cuore del metodo</span>
+                            <h2 className="bth-step-title"><span className="bth-hl">Percorsi & Prodotti</span></h2>
+                            <p className="bth-step-text">Costruiti su di te, dopo la Consulenza Beautrìco.</p>
+                            <button type="button" className="bth-btn bth-btn-gold" onClick=${() => setGender('percorsi')}>Scopri <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <div className="bth-step">
+                        <div className="bth-num">2</div>
+                        <div>
+                            <h2 className="bth-step-title">Menu Donna</h2>
+                            <p className="bth-step-text">Tutti i servizi presenti sono riservati a chi sta effettuando un percorso con noi.</p>
+                            <button type="button" className="bth-btn" onClick=${() => setGender('donna')}>Scopri <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <div className="bth-step">
+                        <div className="bth-num">3</div>
+                        <div>
+                            <h2 className="bth-step-title">Menu Uomo</h2>
+                            <p className="bth-step-text">Tutti i servizi presenti sono riservati a chi sta effettuando un percorso con noi.</p>
+                            <button type="button" className="bth-btn" onClick=${() => setGender('uomo')}>Scopri <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <div className="bth-ps">
+                        <span className="bth-ps-label">P.S.</span>
+                        <span className="bth-ps-text">Sei qui per la prima volta? Prima di toccare i tuoi capelli voglio conoscerti: si parte sempre dalla Consulenza Beautrìco.</span>
+                    </div>
+                    <div className="bth-signature">— Daniela</div>
+                    <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_basso')}>Candidati per la Consulenza Beautrìco</a>
+                    <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+                    <p className="bth-sub">7 domande veloci.<br />Compilare il modulo è gratis e non ti impegna. Il costo della consulenza te lo dice Daniela quando ti chiama, prima di fissare l'appuntamento.</p>
+                </div>
+                </div>
+                <div className="bt-home-desktop flex flex-col animate-fade-in">
                 <header className="mb-10 text-center">
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tight mb-2 uppercase">BEAUTRÍ</h1>
                     <p className="text-slate-400 font-bold uppercase tracking-[0.3em] text-[10px]">Percorsi di salute per i tuoi capelli</p>
@@ -4150,6 +4310,7 @@ main.overflow-y-auto {
                         </div>
                     </div>
                     </button>
+                </div>
                 </div>
                 </div>
             `;
@@ -4621,6 +4782,7 @@ main.overflow-y-auto {
                 <header className="flex items-center justify-center mb-10 uppercase font-black text-[11px] tracking-widest">
                     <div className="bg-white px-8 py-3 rounded-full shadow-sm border border-white">MENU <span className="text-[#EAB308]">${gender}</span></div>
                 </header>
+                <${ConsulenzaNotice} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                     ${SECTIONS.filter(s => {
                         if (gender === 'uomo' && (s.id === 'colorazioni' || s.id === 'forma')) return false;
