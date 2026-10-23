@@ -615,9 +615,10 @@ main.overflow-y-auto {
     .btps-title { font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -0.04em; color: #0A0A0A; margin: 28px 0 0; }
     .btps .btp-lb { font-size: 21px; margin-top: 2px; }
     .btps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
-    button.btps-seduta { display: flex; flex-direction: column; background: #fff; border: 0; border-radius: 18px; overflow: hidden; padding: 0; text-align: left; color: #0A0A0A; box-shadow: 0 1px 0 #eee, 0 14px 30px rgba(0,0,0,.1); }
+    button.btps-seduta { display: flex; flex-direction: column; background: #fff; border: 0; border-radius: 18px; overflow: hidden; padding: 0 !important; text-align: left; color: #0A0A0A; box-shadow: 0 1px 0 #eee, 0 14px 30px rgba(0,0,0,.1); }
     button.btps-seduta.btps-wide { grid-column: span 2; }
-    .btps-photo { display: block; position: relative; height: 104px; background: #EFEAE0 center/cover no-repeat; }
+    .btps-photo { display: block; position: relative; height: 104px; margin: 6px 6px 0; border-radius: 14px; background: #EFEAE0 center/cover no-repeat; }
+    .btps .btps-ps { margin-top: 4px; padding-top: 10px; border-top: 0; }
     .btps-wide .btps-photo { height: 120px; }
     .btps-tag { position: absolute; left: 8px; bottom: 8px; background: rgba(255,255,255,.92); border-radius: 999px; padding: 3px 9px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
     .btps-tx { display: block; padding: 10px 12px 12px; }
@@ -627,7 +628,7 @@ main.overflow-y-auto {
     .btps-sep { display: flex; align-items: center; gap: 10px; margin: 26px 0 0; }
     .btps-sep::before, .btps-sep::after { content: ""; flex: 1; border-top: 1px dashed #cfc8b8; }
     .btps-sep span { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; }
-    button.btps-special { display: flex; gap: 12px; align-items: center; width: 100%; margin-top: 12px; padding: 16px; border: 0; border-radius: 18px; text-align: left; color: #fff; background-color: #0A0A0A; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 40px 40px; }
+    button.btps-special { display: flex; gap: 12px; align-items: center; width: 100%; margin-top: 12px; padding: 16px !important; border: 0; border-radius: 18px; text-align: left; color: #fff; background-color: #0A0A0A; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 40px 40px; }
     .btps-sp-ic { width: 44px; height: 44px; border-radius: 14px; background: rgba(245,194,0,.18); color: #F5C200; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
     .btps-sp-tx { display: block; flex: 1; min-width: 0; }
     .btps-sp-kick { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; color: #F5C200; line-height: 1; }
@@ -4896,6 +4897,10 @@ main.overflow-y-auto {
                         <div className="btps-ex"><span>3 sedute di Igienizzazione</span><i className="fa-solid fa-plus"></i><span>5 sedute di Detossinazione</span></div>
                         <div className="btps-ex-label btps-or">oppure</div>
                         <div className="btps-ex"><span>3 sedute di Lenire</span><i className="fa-solid fa-plus"></i><span>5 sedute di Nutrire</span></div>
+                    </div>
+                    <div className="bth-ps btps-ps">
+                        <span className="bth-ps-label">P.S.</span>
+                        <span className="bth-ps-text">Paghi seduta per seduta.</span>
                     </div>
                     <div className="btps-who">
                         <p><b>Le sedute giuste per te le sceglie Daniela</b> durante la Consulenza Beautrìco.</p>
