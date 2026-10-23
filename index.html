@@ -674,6 +674,32 @@ main.overflow-y-auto {
     .btsd-trow h4 { margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: -0.02em; line-height: 1.2; }
     .btsd-trow small { display: block; font-size: 12px; color: #8b857a; margin-top: 1px; }
     .btsd-trow b { font-family: Poppins, sans-serif; font-weight: 900; font-size: 17px; letter-spacing: -0.03em; white-space: nowrap; }
+    /* pagina Riparare: indicazioni, prezzo in box giallo, regalo, tappe delle oleazioni */
+    .btsd-ind { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .btsd-ind span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #F6F4EF; border-radius: 999px; padding: 5px 10px; }
+    .btsd-ind i { color: #1E9E5A; font-size: 10px; }
+    .btsd-pk { margin-top: 12px; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 14px; padding: 10px 12px; }
+    .btsd-pk-k { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; line-height: 1; color: #8A6A00; }
+    .btsd-pk .btsd-list div { padding: 2px 0 0; }
+    .btsd-pk .btsd-list b { font-size: 22px; }
+    .btsd-pk small { display: block; font-size: 12px; color: #6b6b6b; margin-top: 4px; }
+    .btsd-gift { margin-top: 14px; background: #FFF1F1; border: 1.5px dashed rgba(229,56,59,.55); border-radius: 16px; padding: 12px; }
+    .btsd-gift-h { display: flex; align-items: center; gap: 8px; }
+    .btsd-gift-h i { width: 32px; height: 32px; border-radius: 50%; background: #E5383B; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(229,56,59,.35); }
+    .btsd-gift-h span { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: #E5383B; line-height: 1; }
+    .btsd-gift-p { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; margin-top: 10px; }
+    .btsd-gift-p div { min-width: 0; text-align: center; background: #fff; border-radius: 12px; padding: 6px 4px 8px; box-shadow: 0 4px 12px rgba(229,56,59,.1); }
+    .btsd-gift-p img { display: block; width: 100%; height: 58px; object-fit: contain; }
+    .btsd-gift-p b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: -0.02em; line-height: 1.15; margin-top: 2px; }
+    .btsd-gift-p small { display: block; font-size: 11px; color: #8b857a; }
+    .btsd-tl { margin-top: 10px; }
+    .btsd-mt { display: flex; gap: 10px; position: relative; padding-bottom: 10px; }
+    .btsd-mt:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 30px; bottom: 0; border-left: 2px dashed #d9cfa8; }
+    .btsd-mt > span { width: 28px; height: 28px; border-radius: 50%; background: #F5C200; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .btsd-mt > span.k { background: #0A0A0A; color: #F5C200; }
+    .btsd-mt small { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 18px; color: #8A6A00; line-height: 1; padding-top: 2px; }
+    .btsd-mt b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: -0.02em; line-height: 1.2; }
+    .btsd-mt em { display: block; font-style: normal; font-size: 12.5px; color: #666; line-height: 1.35; margin-top: 1px; }
 
     /* avviso dentro Menu Donna/Uomo */
     .bt-notice-wrap { margin: -12px 0 22px; }
@@ -1286,8 +1312,69 @@ main.overflow-y-auto {
         `;
 
         if (isRiparare) {
+            const lb = (t) => html`<div className="btp-lb"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M3 11 L 9 17 L 21 3"/></svg>${t}</div>`;
             return html`
-                <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+                <div>
+                <div className="bt-home-mobile btp btsd animate-fade-in">
+                  <section className="bth-hero">
+                    <div className="bth-eyebrow">Percorso dedicato</div>
+                    <h1 className="bth-h1 btp-h1"><span className="bth-hl">Riparare</span><br />le lunghezze.</h1>
+                    <p className="bth-lead">Per ridare vita, forza e splendore<br /><b>ai tuoi capelli.</b></p>
+                  </section>
+                  <span className="btsd-photo" style=${{ backgroundImage: 'url(https://i.ibb.co/C3wK2rNs/fotoringiovaniemto-1.jpg)' }} role="img" aria-label="Fotoringiovanimento"></span>
+                  <div className="bth-letter">
+                    <div className="bth-hello">Ecco i due percorsi,</div>
+                    <div className="bth-step">
+                      <div className="bth-num">1</div>
+                      <div className="btp-body">
+                        <h2 className="bth-step-title">Fotoringio${'\u00AD'}vanimento</h2>
+                        ${lb('col laser, per riparare')}
+                        <p className="bth-step-text">Per capelli <b>spenti, rovinati, sfibrati</b> da piastre, colori e decolorazioni. Il laser stimola la rigenerazione, ristruttura le rotture e reintegra aminoacidi e cistina.</p>
+                        <div className="btsd-ind">${['Capelli decheratinizzati', 'Doppie punte', 'Disidratazione', 'Capelli che si spezzano'].map(t => html`<span key=${t}><i className="fa-solid fa-check"></i>${t}</span>`)}</div>
+                        <div className="btsd-pk">
+                          <div className="btsd-pk-k">prezzo del pacchetto completo</div>
+                          <div className="btsd-list"><div><span>Donna</span><i></i><b>447/487 €</b></div></div>
+                          <small>4 sedute · 1 a settimana · tutto incluso</small>
+                        </div>
+                        <div className="btsd-gift">
+                          <div className="btsd-gift-h"><i className="fa-solid fa-gift"></i><span>in regalo con il pacchetto</span></div>
+                          <div className="btsd-gift-p">
+                            <div><img src="foto-prodotti/shampoo%20nutriente.png" alt="Shampoo" loading="lazy" /><b>Shampoo</b><small>per la cute</small></div>
+                            <div><img src="foto-prodotti/Conditioner%20idratante.png" alt="Conditioner" loading="lazy" /><b>Conditioner</b><small>per lo stelo</small></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bth-step">
+                      <div className="bth-num">2</div>
+                      <div className="btp-body">
+                        <h2 className="bth-step-title">Oleazioni</h2>
+                        ${lb('per nutrire e proteggere')}
+                        <p className="bth-step-text">I capelli <b>perdono lipidi ogni giorno</b>: sole, phon, piastre e trattamenti tecnici. L'olio nutre la fibra in profondità e crea una <b>barriera protettiva</b>.</p>
+                        <div className="btsd-tl">
+                          ${[
+                            { n: 1, day: 'giorno 1', title: 'Oleazione intensiva', text: 'Nutre e crea la prima barriera.' },
+                            { n: 2, day: 'giorno 7', title: 'Oleazione di rinforzo', text: 'Rinforza la struttura.' },
+                            { n: 3, day: 'giorno 28', title: 'Oleazione di mantenimento', text: 'Mantiene il risultato nel tempo.' },
+                          ].map(t => html`<div key=${t.n} className="btsd-mt"><span className=${t.n === 3 ? 'k' : ''}>${t.n}</span><div><small>${t.day}</small><b>${t.title}</b><em>${t.text}</em></div></div>`)}
+                        </div>
+                        <div className="btsd-pk">
+                          <div className="btsd-pk-k">prezzo a seduta</div>
+                          <div className="btsd-list"><div><span>Oleazione</span><i></i><b>79 €</b></div></div>
+                          <small>3 sedute · paghi seduta per seduta</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bth-ps">
+                      <span className="bth-ps-label">P.S.</span>
+                      <span className="bth-ps-text">Ogni seduta è compresa di piega.</span>
+                    </div>
+                    <div className="bth-signature">— Daniela</div>
+                  </div>
+                  <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick(`candidati_seduta_${path.id}`)}>Candidati per la Consulenza Beautrìco</a>
+                  <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+                </div>
+                <div className="bt-home-desktop relative animate-zoom-in max-w-5xl mx-auto pb-12">
                     <!-- Header -->
                     <header className="flex items-center justify-center mb-10">
                         <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO RIPARARE</h2>
@@ -1489,6 +1576,7 @@ main.overflow-y-auto {
                         </section>
 
                     </div>
+                </div>
                 </div>
             `;
         }
