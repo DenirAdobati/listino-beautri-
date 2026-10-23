@@ -763,6 +763,54 @@ main.overflow-y-auto {
     .btpr .bth-step-text { margin-bottom: 14px; }
     .btpr .bth-ps { border-top: 1px dashed #ddd; }
 
+    /* pagine delle famiglie di prodotti: Shampoo, Lozioni, Emulsioni, Lunghezze */
+    .btfm .bth-hero { padding-top: 8px; }
+    .btfm-hero { position: relative; max-width: 340px; height: 220px; margin: 6px auto 0; display: flex; justify-content: center; align-items: flex-end; }
+    .btfm-hero::after { content: ""; position: absolute; left: 25%; right: 25%; bottom: -4px; height: 16px; border-radius: 50%; background: radial-gradient(rgba(0,0,0,.2), transparent 70%); }
+    .btfm-hero img { position: relative; width: 70px; height: 160px; object-fit: contain; object-position: center bottom; margin: 0 -2px; filter: drop-shadow(0 10px 12px rgba(0,0,0,.18)); }
+    .btfm-hero img:nth-child(2) { width: 84px; height: 196px; z-index: 1; }
+    .btfm-hero.btfm-one img { width: 200px; height: 216px; }
+    .btfm-note { position: absolute; right: -6px; top: 92px; width: 70px; text-align: left; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; line-height: 1.05; color: #0A0A0A; transform: rotate(-6deg); z-index: 2; pointer-events: none; }
+    .btfm-note.btfm-note-left { right: auto; left: 4px; top: 104px; width: 86px; color: #8A6A00; transform: rotate(5deg); }
+    .btfm .bth-h1.btfm-h1 { margin: 16px 0 0; }
+    .btfm .bth-letter { margin-top: 22px; }
+    .btfm-intro { font-size: 14px; color: #555; line-height: 1.55; letter-spacing: .03em; margin: 6px 0 0; }
+    .btfm-intro b { color: #0A0A0A; }
+    .btfm-sep { display: flex; align-items: center; gap: 10px; margin: 30px -4px 6px; }
+    .btfm-sep::before, .btfm-sep::after { content: ""; flex: 1; border-top: 2px solid #E9DFC4; }
+    .btfm-sep span { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: #8A6A00; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 999px; padding: 2px 14px 4px; }
+    .btfm-step { display: flex; gap: 14px; padding: 22px 0; border-bottom: 1.5px dashed #cfc8b8; }
+    .btfm-step.btfm-first { padding-top: 14px; }
+    .btfm-step.btfm-last { border-bottom: 0; }
+    .btfm-ph { width: 50px; flex-shrink: 0; display: flex; justify-content: center; padding-top: 6px; }
+    .btfm-ph img { width: 40px; height: auto; max-height: 124px; object-fit: contain; filter: drop-shadow(0 10px 12px rgba(0,0,0,.18)); }
+    .btfm-ph.btfm-wide { width: 62px; }
+    .btfm-ph.btfm-wide img { width: 62px; }
+    .btfm-body { flex: 1; min-width: 0; }
+    .btfm-chip { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 6px; font-size: 11.5px; font-weight: 600; background: #F6F4EF; border-radius: 999px; padding: 4px 10px; color: #3a3a3a; }
+    .btfm-chip i { color: #8A6A00; font-size: 10px; }
+    .btfm-body h3 { margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 19px !important; letter-spacing: -0.03em; line-height: 1.1; color: #0A0A0A; }
+    .btfm-body .btp-lb { font-size: 21px; }
+    .btfm-body p { font-size: 14px; color: #555; line-height: 1.55; letter-spacing: .03em; margin: 6px 0 0; }
+    .btfm-price { display: flex; align-items: baseline; gap: 6px; margin-top: 10px; }
+    .btfm-price span { font-family: Poppins, sans-serif; font-weight: 700; font-size: 14px; }
+    .btfm-price i { flex: 1; border-bottom: 2px dotted #cfc8b8; transform: translateY(-4px); }
+    .btfm-price b { font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px; letter-spacing: -0.03em; }
+    .btfm-box { margin: 26px -6px 0; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 18px; padding: 14px; }
+    .btfm-box-k { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; line-height: 1; }
+    .btfm-box h3 { margin: 2px 0 0; font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px !important; letter-spacing: -0.04em; line-height: 1.1; color: #0A0A0A; }
+    .btfm-box-ph { position: relative; margin-top: 12px; height: 170px; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 22px rgba(0,0,0,.15); }
+    .btfm-box-ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .btfm-box-ph em { position: absolute; left: 10px; bottom: 10px; font-style: normal; background: rgba(255,255,255,.92); border-radius: 999px; padding: 4px 10px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: #0A0A0A; }
+    .btfm-box p { font-size: 13.5px; color: #3a3a3a; line-height: 1.5; margin: 12px 0 0; }
+    .btfm-box p b { color: #0A0A0A; }
+    .btfm-box ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+    .btfm-box li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #0A0A0A; }
+    .btfm-box li b { width: 28px; height: 28px; border-radius: 9px; background: #F5C200; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: Poppins, sans-serif; font-weight: 900; font-size: 13px; }
+    .btfm-box small { display: flex; gap: 6px; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(138,106,0,.35); font-size: 12px; color: #6b6b6b; }
+    .btfm-box small i { color: #8A6A00; }
+    .btfm .bth-ps { border-top: 1px dashed #ddd; margin-top: 22px; }
+
     /* pagina della singola seduta (lettera con listino) */
     .btsd-photo { display: block; position: relative; height: 210px; margin-top: 22px; border-radius: 18px; background: #EFEAE0 center/cover no-repeat; box-shadow: 0 1px 0 #eee, 0 18px 40px rgba(0,0,0,.14); }
     .btsd .bth-letter { margin-top: 24px; }
@@ -4823,6 +4871,87 @@ main.overflow-y-auto {
         }
       };
 
+      // Pagine mobile delle famiglie di prodotti: testi con **grassetto**, [evidenziato] e " / " per andare a capo
+      const richText = (s) => s.split(' / ').map((line, i) => [i ? html`<br />` : null, ...line.split(/(\*\*.+?\*\*|\[.+?\])/).filter(Boolean).map(t => t.startsWith('**') ? html`<b>${t.slice(2, -2)}</b>` : t.startsWith('[') ? html`<span className="bth-hl">${t.slice(1, -1)}</span>` : t)]);
+      const FAMIGLIE_MOBILE = {
+        'prodotti-shampoo': {
+          eyebrow: 'Shampoo', hero: ['menu-sh-gold', 'menu-sh-delicato', 'menu-sh-nutriente'], noteRight: 'con oli essenziali naturali', noteLeft: 'pH 4.5 in tutti',
+          title: 'Lo shampoo / è già un / [trattamento].', lead: 'Lava rispettando la cute / **e la prepara a ciò che viene dopo.**',
+          hello: 'Ti presento i miei shampoo,', intro: 'Li chiamo Complessi Lavanti perché per me lavare è già il primo trattamento. Sono otto, in tre gruppi: **ognuno ha il suo compito.**',
+          groups: [
+            { id: 'caduta', name: 'Caduta', label: 'per rinforzare', icon: 'fa-arrow-trend-down' },
+            { id: 'cute', name: 'Cute anomala', label: 'per riequilibrare', icon: 'fa-droplet' },
+            { id: 'lung', name: 'Lunghezze', label: 'per nutrire', icon: 'fa-scissors' }
+          ],
+          products: [
+            { name: 'Shampoo Caduta Gold', price: '29€', photo: 'menu-sh-gold', group: 'caduta', who: 'per chi perde capelli', text: 'Un mix di attivi funzionali contro la caduta: agisce su più fronti e riequilibra la cute.' },
+            { name: 'Shampoo Caduta Silver', price: '29€', photo: 'menu-sh-silver', group: 'caduta', who: 'per capelli sottili che cadono', text: "Oli essenziali per un'azione decisa, elementi nutritivi che lo rendono adatto ai capelli sottili." },
+            { name: 'Shampoo Caduta Platinum', price: '29€', photo: 'menu-sh-platinum', group: 'caduta', who: 'per una cute da riequilibrare', text: 'A base di oli essenziali naturali, aiuta la cute a tornare alle sue condizioni normali.' },
+            { name: 'Shampoo Purificante', price: '29€', photo: 'menu-sh-purificante', group: 'cute', who: 'per una cute da pulire a fondo', text: 'Elimina residui e tossine da cute e capelli, senza alterare il cuoio capelluto.' },
+            { name: 'Shampoo Equilibrante', price: '29€', photo: 'menu-sh-equilibrante', group: 'cute', who: 'per capelli grassi e sudati', text: 'Usato con costanza riporta la cute in equilibrio e ridà ai capelli morbidezza e lucentezza.' },
+            { name: 'Shampoo Forfora', price: '29€', photo: 'menu-sh-forfora', group: 'cute', who: 'per la forfora accentuata', text: "Un'azione d'urto che allontana e riduce la desquamazione e riporta la cute in ordine." },
+            { name: 'Shampoo Delicato', price: '26€', photo: 'menu-sh-delicato', group: 'cute', who: 'per cuti sensibili e bambini', text: "Rispetta l'equilibrio di cute e capelli. Indicato anche da 0 a 9 anni e durante la chemioterapia." },
+            { name: 'Shampoo Nutriente', price: '29€', photo: 'menu-sh-nutriente', group: 'lung', who: 'per capelli secchi e sfibrati', text: 'Ripara la struttura del capello, ridà morbidezza e lucentezza e accentua i riflessi naturali.' }
+          ],
+          box: { kicker: 'e in più,', title: 'Il tuo shampoo,', highlight: 'su misura', photo: 'menu-potenziatori-sh', photoTag: 'Potenziatori SH.', text: 'Quasi tutti i miei shampoo si miscelano con i **Potenziatori SH.**, direttamente a casa. **Così il trattamento è cucito sulla tua cute e cambia quando cambia lei.**', steps: ['Parti dal tuo shampoo', 'Aggiungi il Potenziatore SH. a casa', 'Il trattamento segue la tua cute'], note: "Unica eccezione: il Delicato si usa così com'è." },
+          ps: 'Non sai quale scegliere? Non serve: in Consulenza Beautrìco guardo la tua cute e scegliamo insieme shampoo e Potenziatori.',
+          track: 'candidati_shampoo'
+        }
+      };
+      const FamigliaMobile = ({ f }) => html`
+        <div className="bt-home-mobile btp btfm animate-fade-in">
+        <section className="bth-hero">
+            <div className="bth-eyebrow">${f.eyebrow}</div>
+            <div className=${`btfm-hero ${f.hero.length === 1 ? 'btfm-one' : ''}`}>
+                ${f.hero.map(k => html`<img key=${k} src=${`foto-prodotti/${k}.webp`} alt="" />`)}
+                ${f.noteRight && html`<div className="btfm-note">${f.noteRight}</div>`}
+                ${f.noteLeft && html`<div className="btfm-note btfm-note-left">${f.noteLeft}</div>`}
+            </div>
+            <h1 className="bth-h1 btfm-h1">${richText(f.title)}</h1>
+            <p className="bth-lead">${richText(f.lead)}</p>
+        </section>
+        <div className="bth-letter">
+            <div className="bth-hello">${f.hello}</div>
+            <p className="btfm-intro">${richText(f.intro)}</p>
+            ${f.groups.map(g => {
+              const items = f.products.filter(p => p.group === g.id);
+              return html`
+              <div key=${g.id}>
+                <div className="btfm-sep"><span>${g.label}</span></div>
+                ${items.map((p, i) => html`
+                <div key=${p.name} className=${`btfm-step ${i === 0 ? 'btfm-first' : ''} ${i === items.length - 1 ? 'btfm-last' : ''}`}>
+                    <div className=${`btfm-ph ${p.wide ? 'btfm-wide' : ''}`}><img src=${`foto-prodotti/${p.photo}.webp`} alt=${p.name} loading="lazy" /></div>
+                    <div className="btfm-body">
+                        <span className="btfm-chip"><i className=${`fa-solid ${g.icon}`}></i>${g.name}</span>
+                        <h3>${p.name}</h3>
+                        <div className="btp-lb"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M3 11 L 9 17 L 21 3"/></svg>${p.who}</div>
+                        <p>${p.text}</p>
+                        <div className="btfm-price"><span>Prezzo</span><i></i><b>${p.price}</b></div>
+                    </div>
+                </div>
+                `)}
+              </div>`;
+            })}
+            ${f.box && html`
+            <div className="btfm-box">
+                <span className="btfm-box-k">${f.box.kicker}</span>
+                <h3>${f.box.title} <span className="bth-hl">${f.box.highlight}</span></h3>
+                ${f.box.photo && html`<div className="btfm-box-ph"><img src=${`foto-prodotti/${f.box.photo}.webp`} alt=${f.box.photoTag} loading="lazy" />${f.box.photoTag && html`<em>${f.box.photoTag}</em>`}</div>`}
+                <p>${richText(f.box.text)}</p>
+                <ol>${f.box.steps.map((t, i) => html`<li key=${t}><b>${i + 1}</b>${t}</li>`)}</ol>
+                ${f.box.note && html`<small><i className="fa-solid fa-circle-info"></i>${f.box.note}</small>`}
+            </div>`}
+            <div className="bth-ps">
+                <span className="bth-ps-label">P.S.</span>
+                <span className="bth-ps-text">${f.ps}</span>
+            </div>
+            <div className="bth-signature">— Daniela</div>
+        </div>
+        <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick(f.track)}>Candidati per la Consulenza Beautrìco</a>
+        <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+        </div>
+      `;
+
       // Avviso in cima a Menu Donna/Uomo (solo mobile): chiudibile, la scelta resta salvata sul telefono
       const NOTICE_KEY = 'btConsulenzaNoticeClosed';
       const ConsulenzaNotice = () => {
@@ -5210,7 +5339,8 @@ main.overflow-y-auto {
                 { name: 'Shampoo Delicato', price: '26€', photo: 'foto-prodotti/shampoo%20delicato.png', title: "Formula duttile e bilanciata, indicata anche per bambini da 0 a 9 anni e per chi affronta percorsi di chemioterapia.", desc: "Complesso lavante indicato per cuti sensibili e delicate: duttile e bilanciato, permette di mantenere inalterati gli equilibri di cute e capelli. Il mantello idrolipidico riceve il giusto apporto e i capelli acquistano massima morbidezza e lucentezza.", checklist: ["Mantiene inalterati gli equilibri di cute e capelli", "Indicato per bambini da 0 a 9 anni", "Indicato per chi sta attraversando un percorso di chemioterapia"], badges: ['Formula delicata', 'Adatto a cuti sensibili', 'PH 4.5'] }
             ];
             return html`
-                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <${FamigliaMobile} f=${FAMIGLIE_MOBILE['prodotti-shampoo']} />
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12 bt-home-desktop">
                 <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                     <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">I NOSTRI SHAMPOO</p>
                     ${SHAMPOO_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
