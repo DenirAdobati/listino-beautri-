@@ -756,7 +756,10 @@ main.overflow-y-auto {
     .btpr-step:has(+ .bth-ps) { border-bottom: 0; }
     .btpr-side { width: 64px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
     .btpr-side .bth-num { width: auto; }
-    .btpr-side img { width: 76px; height: 104px; object-fit: contain; transform: scale(1.5); margin-top: 10px; filter: drop-shadow(0 10px 12px rgba(0,0,0,.18)); }
+    button.btpr-ph { display: flex; align-items: flex-end; justify-content: center; width: 64px; height: 100px; min-height: 0; margin-top: 10px; padding: 0 !important; background: none; border: 0; }
+    .btpr-ph img { display: block; max-width: 64px; max-height: 100px; object-fit: contain; filter: drop-shadow(0 10px 12px rgba(0,0,0,.18)); }
+    button.btpr-title { min-height: 0; padding: 0 !important; background: none; border: 0; font-family: inherit !important; font-weight: inherit !important; font-size: inherit !important; line-height: inherit; color: inherit; letter-spacing: inherit; text-align: left; }
+    .btpr-hint { font-family: Caveat, cursive; font-weight: 700; font-size: 19px; color: #8A6A00; margin: -2px 0 0; transform: rotate(-2deg); }
     .btpr .bth-step-text { margin-bottom: 14px; }
     .btpr .bth-ps { border-top: 1px dashed #ddd; }
 
@@ -4808,10 +4811,10 @@ main.overflow-y-auto {
         { id: 'm3', title: 'Avanzato', btn: "Scopri l'Avanzato", before: 'Per chi ha finito il percorso di ', bold: 'laser a fotobiostimolazione', after: '.', comp: [[8, 'sedute laser'], [4, 'sedute di potenziamento']] }
       ];
       const PRODOTTI_MOBILE = [
-        { id: 'prodotti-shampoo', title: 'Shampoo', label: 'per preparare', photo: 'foto-prodotti/shampoo%20caduta%20gold.png', before: 'Complessi Lavanti con oli essenziali naturali e pH 4.5: ', bold: 'la detersione è il primo vero trattamento.', btn: 'Scopri gli shampoo' },
-        { id: 'prodotti-lozioni', title: 'Lozioni', label: 'per attivare', photo: 'foto-prodotti/Lozione%20pro.png', before: 'Si usano ogni giorno: ', bold: 'nutrono il bulbo e riequilibrano la cute.', btn: 'Scopri le lozioni' },
-        { id: 'prodotti-emulsioni', title: 'Emulsioni', label: 'per proteggere', photo: 'foto-prodotti/Emulsione%20avvolgente.png', before: 'La novità della linea: ', bold: 'uno scudo per la cute, una cura per le lunghezze.', btn: 'Scopri le emulsioni' },
-        { id: 'prodotti-lunghezze', title: 'Lunghezze', label: 'per chiudere', photo: 'foto-prodotti/Conditioner%20idratante.png', before: "L'ultimo passo della routine: ", bold: 'sigillano i benefici e proteggono la fibra.', btn: 'Scopri le lunghezze' }
+        { id: 'prodotti-shampoo', title: 'Shampoo', label: 'per preparare', photo: 'foto-prodotti/menu-shampoo.webp', text: [['Non semplici shampoo: '], ['la detersione è il primo vero trattamento.', true]], btn: 'Scopri gli shampoo' },
+        { id: 'prodotti-lozioni', title: 'Lozioni', label: 'per attivare', photo: 'foto-prodotti/menu-lozioni.webp', text: [['Si usano ogni giorno: '], ['nutrono il bulbo e riequilibrano la cute.', true]], btn: 'Scopri le lozioni' },
+        { id: 'prodotti-emulsioni', title: 'Emulsioni', label: 'per proteggere', photo: 'foto-prodotti/menu-emulsioni.webp', text: [['Lenitiva per la cute', true], [' irritata, '], ['Avvolgente per onde e ricci.', true]], btn: 'Scopri le emulsioni' },
+        { id: 'prodotti-lunghezze', title: 'Lunghezze', label: 'per chiudere', photo: 'foto-prodotti/menu-lunghezze.webp', text: [["L'ultimo passo della routine: "], ['sigillano i benefici e proteggono la fibra.', true]], btn: 'Scopri i prodotti' }
       ];
       const GOOGLE_REVIEWS_URL = 'https://maps.app.goo.gl/uFvEHabNHYLfwrmG6';
       const trackHomeClick = (target) => {
@@ -5118,22 +5121,23 @@ main.overflow-y-auto {
                 <section className="bth-hero">
                     <div className="bth-eyebrow">Prodotti</div>
                     <div className="btpr-photo-wrap">
-                        <img className="btpr-photo" src="foto-prodotti/Prodotti.png" alt="Prodotti Beautrì" />
+                        <img className="btpr-photo" src="foto-prodotti/menu-prodotti.webp" alt="Prodotti Beautrì" />
                         <div className="btpr-note">formulati con oli essenziali</div>
                         <div className="btpr-note btpr-note-left">creati per te da Daniela</div>
                     </div>
                     <h1 className="bth-h1 btpr-h1">Il percorso<br /><span className="bth-hl">non si ferma</span><br />in studio.</h1>
-                    <p className="bth-lead">Ogni giorno a casa,<br /><b>in sinergia con lo studio.</b></p>
+                    <p className="bth-lead">Ogni giorno a casa,<br /><b>con i prodotti giusti per te.</b></p>
                 </section>
                 <div className="bth-letter">
-                    <div className="bth-hello">Ecco cosa trovi,</div>
+                    <div className="bth-hello">Ecco la tua routine,</div>
+                    <div className="btpr-hint">ognuno ha il suo compito ↓</div>
                     ${PRODOTTI_MOBILE.map((p, i) => html`
                     <div key=${p.id} className="btpr-step">
-                        <div className="btpr-side"><div className="bth-num">${i + 1}</div><img src=${p.photo} alt="" loading="lazy" /></div>
+                        <div className="btpr-side"><div className="bth-num">${i + 1}</div><button type="button" className="btpr-ph" aria-label=${p.btn} onClick=${() => setSubSection(p.id)}><img src=${p.photo} alt="" loading="lazy" /></button></div>
                         <div className="btp-body">
-                            <h2 className="bth-step-title">${i === 0 ? html`<span className="bth-hl">${p.title}</span>` : p.title}</h2>
+                            <h2 className="bth-step-title"><button type="button" className="btpr-title" onClick=${() => setSubSection(p.id)}>${i === 0 ? html`<span className="bth-hl">${p.title}</span>` : p.title}</button></h2>
                             <div className="btp-lb"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M3 11 L 9 17 L 21 3"/></svg>${p.label}</div>
-                            <p className="bth-step-text">${p.before}<b>${p.bold}</b></p>
+                            <p className="bth-step-text">${p.text.map(([t, b]) => b ? html`<b>${t}</b>` : t)}</p>
                             <button type="button" className=${`bth-btn ${i === 0 ? 'bth-btn-gold' : ''}`} onClick=${() => setSubSection(p.id)}>${p.btn} <i className="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </div>
