@@ -4918,7 +4918,6 @@ main.overflow-y-auto {
         uomo: {
           h1: html`Prima la <span className="bth-hl">cute</span>.<br />Poi il taglio.`,
           lead: html`Ogni servizio è pensato<br /><b>per far stare bene la tua cute.</b>`,
-          special: { section: 'migliori-proposte', season: 'da non perdere ↓', kick: 'la più scelta', icon: 'fa-brain', title: 'Cute No Stress', text: 'Toglie le infiammazioni e distende la cute stressata da tensioni e ritmi frenetici.' },
           groups: [
             { label: 'prima di tutto, la cute', rows: [
               { id: 'trattamenti-tricologici', icon: 'fa-microscope', title: 'Trattamenti tricologici', text: 'Sedute singole e laser per sebo, forfora, prurito e diradamento.' },
@@ -5935,6 +5934,7 @@ main.overflow-y-auto {
                 <${ConsulenzaNotice} />
                 <div className="bth-letter">
                     <div className="bth-hello">Scegli cosa ti serve,</div>
+                    ${M.special && html`
                     <div className="btmn-season">${M.special.season}</div>
                     <button type="button" className="btps-special" onClick=${() => M.special.href ? window.open(M.special.href, '_self') : setSection(M.special.section)}>
                         <span className="btps-sp-ic"><i className=${`fa-solid ${M.special.icon}`}></i></span>
@@ -5946,6 +5946,7 @@ main.overflow-y-auto {
                         </span>
                         <span className="btps-sp-go"><i className="fa-solid fa-arrow-right"></i></span>
                     </button>
+                    `}
                     ${M.groups.map(g => html`
                     <div key=${g.label}>
                         <div className="btps-sep"><span>${g.label}</span></div>
