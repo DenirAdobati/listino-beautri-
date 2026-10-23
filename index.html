@@ -665,6 +665,7 @@ main.overflow-y-auto {
     .btmd .bth-step:first-of-type { margin-top: 6px; }
     .btmd .bth-step.btmd-last { border-bottom: 1px dashed #ddd; }
     .btmd .bth-step-text { margin-bottom: 0; }
+    .btmd .btmd-s3tech { margin-top: 10px; }
     .btmd-chain { margin-top: 12px; background: #F6F4EF; border-radius: 14px; padding: 10px 12px; }
     .btmd-chain small { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8b857a; }
     .btmd-chain ol { list-style: none; margin: 6px 0 0; padding: 0; }
@@ -1304,6 +1305,51 @@ main.overflow-y-auto {
             uomo: { was: '624 €', now: '572 €', seat: '52 €' }
           },
           save: 'da 200 a 230 €'
+        },
+        m2: {
+          id: 'intermedio', title: 'Intermedio',
+          complimenti: html`Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso iniziale</b>.`,
+          quote: "Ricordi com'era all'inizio? La cute pesante, i capelli spenti e già sporchi dopo un giorno. Il lavoro fatto insieme serviva a questo.",
+          s1: 'Il lavoro fatto si può perdere in fretta.',
+          chains: [
+            { label: 'Dieta', icon: 'fa-burger', items: ['Risultato raggiunto', 'Torni al cibo spazzatura', 'Risultato perso in pochissimo tempo'] },
+            { label: 'Capelli', icon: 'fa-flask', items: ['Cute leggera, che respira', 'Prodotti scadenti e fai da te', 'In poche settimane: cute pesante e capelli spenti'] }
+          ],
+          warn: 'Sarebbe un peccato sprecare tempo e soldi.',
+          s2text: 'Ed è la più delicata: la cute ha imparato a respirare, ora deve restare così.',
+          why: ['Mantieni i risultati raggiunti', 'La cute resta pulita e leggera', 'Un anno intero con me'],
+          boost: html`Immagina di toccarti i capelli a fine giornata e sentirli ancora leggeri. E quando qualcuno ti chiederà <b>«Che cosa hai fatto ai capelli?»</b>, sarà bello rispondere.`,
+          comp: [[12, 'sedute di mantenimento', '']],
+          s3text: 'Ogni mese una seduta diversa, per dare alla cute quello che le serve in ogni stagione. Argille, peeling naturali e prodotti detossinanti, resi più efficaci da:',
+          tech: [['fa-wind', 'Nebulizzazione'], ['fa-wave-square', 'Ultrasuoni'], ['fa-bolt', 'Corrente galvanica'], ['fa-arrows-to-circle', 'Vacuum terapia'], ['fa-tower-broadcast', 'Alta frequenza'], ['fa-water', 'Cascata'], ['fa-atom', 'Ossigenoterapia']],
+          prices: {
+            donna: { was: '1068/1116 €', now: '979/1023 €', seat: '89/93 €' },
+            uomo: { was: '804 €', now: '737 €', seat: '67 €' }
+          },
+          save: 'da 210 a 240 €'
+        },
+        m3: {
+          id: 'avanzato', title: 'Avanzato',
+          complimenti: html`Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso di laser a fotobiostimolazione</b>.`,
+          quote: "Ricordi com'era all'inizio? La cute arrossata e tesa, i capelli che cadevano più del solito. Il lavoro fatto insieme serviva a questo.",
+          s1: 'Il lavoro fatto si può perdere in fretta.',
+          chains: [
+            { label: 'Dieta', icon: 'fa-burger', items: ['Risultato raggiunto', 'Torni al cibo spazzatura', 'Risultato perso in pochissimo tempo'] },
+            { label: 'Capelli', icon: 'fa-pause', items: ['Cute calma, capelli più forti', 'Stop al laser e fai da te', 'In pochi mesi: rossore, fastidio e capelli più deboli'] }
+          ],
+          warn: 'Sarebbe un peccato sprecare tempo e soldi.',
+          s2text: 'Ed è la più delicata. Il laser è come un allenamento: tiene la cute in equilibrio anche a riposo.',
+          why: ['Mantieni i risultati raggiunti', 'Rinforzi i benefici del laser', 'Un anno intero con me'],
+          boost: html`Immagina amici e familiari che notano i tuoi capelli più pieni e ti chiedono come hai fatto. E sarà bello rispondere.`,
+          comp: [[8, 'sedute laser', 'k'], [4, 'sedute di potenziamento', '']],
+          s3text: 'Ogni tre mesi: 2 sedute laser e 1 di potenziamento. Lo schema è indicativo: lo adatto io a quello che ti serve.',
+          s3tech: 'Nelle sedute di potenziamento, argille, peeling naturali e prodotti detossinanti diventano più efficaci grazie a:',
+          tech: [['fa-wind', 'Nebulizzazione'], ['fa-wave-square', 'Ultrasuoni'], ['fa-bolt', 'Corrente galvanica'], ['fa-arrows-to-circle', 'Vacuum terapia'], ['fa-tower-broadcast', 'Alta frequenza'], ['fa-water', 'Cascata'], ['fa-atom', 'Ossigenoterapia']],
+          prices: {
+            donna: { was: '1152/1248 €', now: '1056/1144 €', seat: '96/104 €' },
+            uomo: { was: '912 €', now: '836 €', seat: '76 €' }
+          },
+          save: 'da 220 a 250 €'
         }
       };
 
@@ -1511,6 +1557,7 @@ main.overflow-y-auto {
                     <h2 className="bth-step-title">12 mesi, 1 seduta al mese.</h2>
                     <div className="btmd-comp">${L.comp.map(([n, t, k]) => html`<span key=${t}><b className=${k}>${n}</b>${t}</span>`)}</div>
                     <p className="bth-step-text">${L.s3text}</p>
+                    ${L.s3tech ? html`<p className="bth-step-text btmd-s3tech">${L.s3tech}</p>` : null}
                     <div className="btmd-tech">${L.tech.map(([ic, t]) => html`<span key=${t}><i className=${`fa-solid ${ic}`}></i>${t}</span>`)}</div>
                   </div>
                 </div>
@@ -2306,7 +2353,9 @@ main.overflow-y-auto {
         
         if (isIntermediateMaintenance) {
             return html`
-              <div className="relative animate-zoom-in max-w-4xl mx-auto pb-12">
+              <div>
+              ${renderMaintMobile(MANT_LETTERE.m2)}
+              <div className="bt-home-desktop relative animate-zoom-in max-w-4xl mx-auto pb-12">
                 <header className="flex items-center justify-center mb-10">
                     <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO INTERMEDIO</h2>
                 </header>
@@ -2597,12 +2646,15 @@ main.overflow-y-auto {
                    </div>
                 </div>
               </div>
+              </div>
             `;
         }
         
         if (isAdvancedMaintenance) {
             return html`
-              <div className="relative animate-zoom-in max-w-4xl mx-auto pb-12">
+              <div>
+              ${renderMaintMobile(MANT_LETTERE.m3)}
+              <div className="bt-home-desktop relative animate-zoom-in max-w-4xl mx-auto pb-12">
                 <header className="flex items-center justify-center mb-10">
                     <h2 className="text-sm font-black text-black uppercase tracking-widest bg-white px-8 py-3 rounded-full shadow-sm">PERCORSO AVANZATO</h2>
                 </header>
@@ -2907,6 +2959,7 @@ main.overflow-y-auto {
                       `}
                    </div>
                 </div>
+              </div>
               </div>
             `;
         }
