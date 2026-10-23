@@ -619,6 +619,13 @@ main.overflow-y-auto {
     button.btps-seduta.btps-wide { grid-column: span 2; }
     .btps-photo { display: block; position: relative; height: 104px; margin: 6px 6px 0; border-radius: 14px; background: #EFEAE0 center/cover no-repeat; }
     .btps .btps-ps { margin-top: 4px; padding-top: 10px; border-top: 0; }
+    .btps-inc-k { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: #8A6A00; line-height: 1; margin-top: 14px; }
+    .btps-inc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+    .btps-inc div { background: #F6F4EF; border-radius: 14px; padding: 10px 6px; text-align: center; }
+    .btps-inc i { width: 34px; height: 34px; margin: 0 auto; border-radius: 50%; background: #fff; color: #8A6A00; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 3px 8px rgba(0,0,0,.06); }
+    .btps-inc i.btps-wa { color: #25A35A; font-size: 19px; }
+    .btps-inc b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 12px; letter-spacing: -0.02em; line-height: 1.2; margin-top: 6px; }
+    .btps-inc small { display: block; font-size: 10.5px; color: #8b857a; line-height: 1.25; margin-top: 2px; }
     .btps-wide .btps-photo { height: 120px; }
     .btps-tag { position: absolute; left: 8px; bottom: 8px; background: rgba(255,255,255,.92); border-radius: 999px; padding: 3px 9px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
     .btps-tx { display: block; padding: 10px 12px 12px; }
@@ -5807,6 +5814,12 @@ main.overflow-y-auto {
                         <div className="btps-ex"><span>3 sedute di Igienizzazione</span><i className="fa-solid fa-plus"></i><span>5 sedute di Detossinazione</span></div>
                         <div className="btps-ex-label btps-or">oppure</div>
                         <div className="btps-ex"><span>3 sedute di Lenire</span><i className="fa-solid fa-plus"></i><span>5 sedute di Nutrire</span></div>
+                    </div>
+                    <div className="btps-inc-k">ogni percorso include</div>
+                    <div className="btps-inc">
+                        <div><i className="fa-solid fa-gift"></i><b>1 Beautrì Check</b><small>omaggio, valore 47 €</small></div>
+                        <div><i className="fa-solid fa-couch"></i><b>Comfort Room</b><small>su richiesta</small></div>
+                        <div><i className="fa-brands fa-whatsapp btps-wa"></i><b>WhatsApp</b><small>supporto 5 giorni su 7</small></div>
                     </div>
                     <div className="bth-ps btps-ps">
                         <span className="bth-ps-label">P.S.</span>
