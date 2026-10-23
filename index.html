@@ -574,6 +574,28 @@ main.overflow-y-auto {
     .bth-ps-text { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #E5383B; line-height: 1.15; }
     .bth-signature { text-align: right; font-family: Caveat, cursive; font-weight: 700; font-size: 30px; color: #444; margin-top: 6px; }
 
+    /* pagina Percorsi & Prodotti (stessa lettera della home) */
+    .btp .bth-hero { padding-top: 8px; }
+    .btp .bth-h1.btp-h1 { margin: 22px 0 0; }
+    .btp .bth-step { padding: 18px 0; }
+    .btp .bth-step.btp-no-line { border-bottom: 0; }
+    .btp .bth-step.btp-line-top { border-top: 1px dashed #ddd; }
+    .btp-body { flex: 1; min-width: 0; }
+    .btp-lb { display: inline-flex; align-items: center; gap: 4px; margin: 4px 0 0 -2px; font-family: Caveat, cursive; font-weight: 700; font-size: 23px; line-height: 1; color: #1E9E5A; }
+    .btp-lb svg { width: 22px; height: 18px; flex-shrink: 0; }
+    .btp-lb path { fill: none; stroke: #1E9E5A; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .btp-facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+    .btp-facts span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; background: #F6F4EF; border-radius: 999px; padding: 5px 10px; }
+    .btp-facts i { color: #8A6A00; font-size: 11px; }
+    .btp-how-note { font-family: Caveat, cursive; font-weight: 700; font-size: 19px; color: #8A6A00; margin: 0 0 6px 36px; transform: rotate(-2deg); }
+    button.btp-how { display: flex; align-items: center; gap: 12px; width: calc(100% - 36px); margin: 0 0 18px 36px; padding: 13px 14px; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 16px; text-align: left; color: #0A0A0A; }
+    .btp-how-ic { width: 36px; height: 36px; border-radius: 50%; background: #F5C200; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .btp-how b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -0.02em; line-height: 1.2; }
+    .btp-how small { display: block; font-size: 12.5px; color: #555; margin-top: 2px; line-height: 1.35; }
+    .btp-how-go { margin-left: auto; color: #8A6A00; }
+    .btp-prod-img { display: block; width: 100%; max-width: 230px; height: 150px; object-fit: contain; margin: 2px 0 10px; }
+    .btp .bth-ps { border-top: 1px dashed #ddd; }
+
     /* avviso dentro Menu Donna/Uomo */
     .bt-notice-wrap { margin: -12px 0 22px; }
     .bt-notice { position: relative; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 18px; padding: 18px 18px 16px; box-shadow: 0 18px 40px rgba(0,0,0,.08); }
@@ -4318,7 +4340,62 @@ main.overflow-y-auto {
 
             if (gender === 'percorsi' && !section) {
             return html`
-                <div className="relative animate-fade-in">
+                <div>
+                <div className="bt-home-mobile btp animate-fade-in">
+                <section className="bth-hero">
+                    <div className="bth-eyebrow">Percorsi & Prodotti</div>
+                    <h1 className="bth-h1 btp-h1">Prima ritrovi<br />l'<span className="bth-hl">equilibrio</span>.<br />Poi lo mantieni.</h1>
+                    <p className="bth-lead">Tutto costruito su di te,<br /><b>dopo la Consulenza Beautrìco.</b></p>
+                </section>
+                <div className="bth-letter">
+                    <div className="bth-hello">Ecco come lavoriamo,</div>
+                    <div className="bth-step">
+                        <div className="bth-num">1</div>
+                        <div className="btp-body">
+                            <h2 className="bth-step-title"><span className="bth-hl">Percorsi</span></h2>
+                            <div className="btp-lb"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M3 11 L 9 17 L 21 3"/></svg>per risolvere</div>
+                            <p className="bth-step-text">Servono a <b>risolvere il problema</b> di cute e capelli e a riportarli in equilibrio.</p>
+                            <div className="btp-facts"><span><i className="fa-regular fa-calendar"></i>1 seduta a settimana</span><span><i className="fa-solid fa-magnifying-glass"></i>2 Check inclusi</span></div>
+                            <button type="button" className="bth-btn bth-btn-gold" onClick=${() => setSection('percorsi-main')}>Scopri i percorsi <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <div className="bth-step btp-no-line">
+                        <div className="bth-num">2</div>
+                        <div className="btp-body">
+                            <h2 className="bth-step-title">Percorsi di mantenimento</h2>
+                            <div className="btp-lb"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M3 11 L 9 17 L 21 3"/></svg>per mantenere</div>
+                            <p className="bth-step-text">Servono a <b>mantenere il risultato</b> ottenuto e a potenziarlo nel lungo periodo.</p>
+                            <div className="btp-facts"><span><i className="fa-regular fa-calendar"></i>1 seduta al mese</span><span><i className="fa-solid fa-hourglass-half"></i>12 mesi</span></div>
+                            <button type="button" className="bth-btn" onClick=${() => setSection('percorsi-mantenimento')}>Scopri il mantenimento <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <div className="btp-how-note">leggilo prima di iniziare ↓</div>
+                    <button type="button" className="btp-how" onClick=${() => setSection('how-it-works')}>
+                        <span className="btp-how-ic"><i className="fa-solid fa-circle-info"></i></span>
+                        <span><b>Come funzionano i nostri percorsi?</b><small>Sedute, Check, pagamenti e regole.</small></span>
+                        <i className="fa-solid fa-chevron-right btp-how-go"></i>
+                    </button>
+                    <div className="bth-step btp-line-top">
+                        <div className="bth-num">3</div>
+                        <div className="btp-body">
+                            <h2 className="bth-step-title">Prodotti</h2>
+                            <div className="btp-lb"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M3 11 L 9 17 L 21 3"/></svg>a casa, ogni giorno</div>
+                            <p className="bth-step-text">Per la tua <b>routine quotidiana</b>: lavorano in sinergia con il percorso che fai da noi.</p>
+                            <div className="btp-facts"><span><i className="fa-solid fa-pump-soap"></i>Shampoo</span><span><i className="fa-solid fa-eye-dropper"></i>Lozioni</span><span><i className="fa-solid fa-hand-holding-droplet"></i>Emulsioni</span><span><i className="fa-solid fa-wand-magic-sparkles"></i>Lunghezze</span></div>
+                            <img className="btp-prod-img" src="foto-prodotti/Prodotti.png" alt="Prodotti Beautrì" />
+                            <button type="button" className="bth-btn" onClick=${() => setSection('prodotti-overview')}>Scopri i prodotti <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <div className="bth-ps">
+                        <span className="bth-ps-label">P.S.</span>
+                        <span className="bth-ps-text">Non sai da quale percorso partire? Non devi saperlo tu: lo decidiamo insieme nella Consulenza Beautrìco.</span>
+                    </div>
+                    <div className="bth-signature">— Daniela</div>
+                    <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_percorsi')}>Candidati per la Consulenza Beautrìco</a>
+                    <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+                </div>
+                </div>
+                <div className="bt-home-desktop relative animate-fade-in">
                 <header className="flex items-center justify-center mb-10">
                     <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
                     <span className="text-[#EAB308]">PERCORSI & PRODOTTI</span>
@@ -4356,6 +4433,7 @@ main.overflow-y-auto {
                         </div>
                         </button>
                     </div>
+                </div>
                 </div>
                 </div>
             `;
