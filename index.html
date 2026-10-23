@@ -883,6 +883,35 @@ main.overflow-y-auto {
     .bt-notice-text { font-size: 13.5px; color: #555; line-height: 1.55; letter-spacing: .03em; margin: 6px 0 0; }
     a.bt-notice-link { display: inline-flex; align-items: center; gap: 6px; min-height: 0; margin-top: 12px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px; color: #0A0A0A; text-decoration: none; border-bottom: 2px solid #F5C200; }
     .bt-notice-already { text-align: center; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; margin-top: 16px; transform: rotate(-2deg); }
+
+    /* pagina Menu Donna / Menu Uomo: lettera con i servizi raggruppati per bisogno */
+    .btmn .bth-hero { padding-top: 8px; }
+    .btmn .bth-h1.btmn-h1 { margin: 22px 0 0; }
+    .btmn-only { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; padding: 7px 14px; border-radius: 999px; background: #0A0A0A; color: #fff; font-family: Poppins, sans-serif; font-weight: 700; font-size: 12px; }
+    .btmn-only i { color: #F5C200; font-size: 11px; }
+    .btmn .bt-notice-wrap { margin: 22px 0 0; }
+    .btmn .bth-letter { margin-top: 20px; }
+    .btmn .bth-hello { margin-bottom: 4px; }
+    .btmn-season { font-family: Caveat, cursive; font-weight: 700; font-size: 19px; color: #8A6A00; margin: 6px 0 6px 6px; transform: rotate(-2deg); }
+    .btmn button.btps-special { margin-top: 0; }
+    .btmn-sp-meta { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11.5px; font-weight: 600; white-space: nowrap; background: rgba(255,255,255,.1); border-radius: 999px; padding: 4px 10px; }
+    .btmn-sp-meta i { color: #F5C200; }
+    .btmn .btps-sep { margin: 22px 0 4px; }
+    .btmn .btps-sep span { white-space: nowrap; }
+    button.btmn-row { display: flex; align-items: flex-start; gap: 12px; width: 100%; min-height: 0; padding: 14px 0 !important; background: none; border: 0; border-bottom: 1px dashed #e4dfd3; border-radius: 0; text-align: left; color: #0A0A0A; font-size: inherit !important; }
+    button.btmn-row:last-child { border-bottom: 0; }
+    .btmn-ic { width: 42px; height: 42px; margin-top: 2px; border-radius: 50%; background: #F6F4EF; color: #8A6A00; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+    .btmn-ic.gold { background: #F5C200; color: #0A0A0A; }
+    .btmn-tx { display: block; flex: 1; min-width: 0; }
+    .btmn-tx b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.02em; line-height: 1.2; }
+    .btmn-tx small { display: block; font-size: 12.5px; color: #666; line-height: 1.4; margin-top: 2px; }
+    .btmn-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .btmn-chips span { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; background: #E3F5EA; color: #146B3D; border-radius: 999px; padding: 4px 9px; }
+    .btmn-chips span.y { background: #F6F4EF; color: #0A0A0A; }
+    .btmn-chips i { font-size: 10px; }
+    .btmn-go { align-self: center; color: #8A6A00; font-size: 13px; padding-left: 6px; }
+    .btmn button.btp-how { width: 100%; margin: 20px 0 0; }
+    .btmn .bth-ps { margin-top: 18px; border-top: 1px dashed #ddd; }
 }
 </style>
 <script type="importmap">
@@ -4864,6 +4893,44 @@ main.overflow-y-auto {
         { id: 'prodotti-emulsioni', title: 'Emulsioni', label: 'per proteggere', photo: 'foto-prodotti/menu-emulsioni.webp', text: [['Lenitiva per la cute', true], [' irritata, '], ['Avvolgente per onde e ricci.', true]], btn: 'Scopri le emulsioni' },
         { id: 'prodotti-lunghezze', title: 'Lunghezze', label: 'per chiudere', photo: 'foto-prodotti/menu-lunghezze.webp', text: [["L'ultimo passo della routine: "], ['sigillano i benefici e proteggono la fibra.', true]], btn: 'Scopri i prodotti' }
       ];
+      // Pagina Menu Donna / Menu Uomo mobile: servizi raggruppati per bisogno, Novità in fondo
+      const MENU_GENERE_MOBILE = {
+        donna: {
+          h1: html`Bellezza<br />che parte<br />dalla <span className="bth-hl">cute</span>.`,
+          lead: html`Colore, forma e piega<br /><b>pensati per rispettarla.</b>`,
+          special: { href: 'reset-autunnale.html', season: 'in questo periodo ↓', kick: "novità d'autunno", icon: 'fa-leaf', title: 'Reset Autunnale', text: "Togli gli accumuli dell'estate e rigeneri la fibra, in 3 passaggi.", meta: '3 sedute, ogni 20-25 gg' },
+          groups: [
+            { label: 'prima di tutto, la cute', rows: [
+              { id: 'trattamenti-tricologici', icon: 'fa-microscope', title: 'Trattamenti tricologici', text: 'Sedute singole e laser per sebo, forfora, prurito e psoriasi.' },
+              { id: 'spa', icon: 'fa-water', title: 'SPA', text: 'Vapore a 35°, non a 90° come quello classico: la cute respira, non si stressa.' }
+            ] },
+            { label: 'il colore, anche per te', rows: [
+              { id: 'colorazioni', icon: 'fa-palette', gold: true, title: 'Colorazioni e schiariture', text: 'Il colore che puoi fare anche se quello normale ti è vietato.', chips: ['psoriasi e dermatiti', 'allergie al colore', 'gravidanza'], chipNote: 'senza ammoniaca, PPD e nichel' },
+              { id: 'migliori-proposte', icon: 'fa-star', title: 'Migliori proposte', text: 'Ossigeno e oli essenziali da aggiungere al colore: pH in equilibrio, niente prurito.' }
+            ] },
+            { label: 'forma e stile, senza stress', rows: [
+              { id: 'forma', icon: 'fa-wand-magic-sparkles', title: 'Forma', text: 'Ricci, liscio o anti-crespo con attivi vegetali che rinforzano il capello.' },
+              { id: 'stilistico', icon: 'fa-scissors', title: 'Stilistico', text: 'Taglio e piega su misura, per chiudere la seduta come ti piace.' }
+            ] }
+          ],
+          novita: 'Il Reset Autunnale e un gioco goloso per te.'
+        },
+        uomo: {
+          h1: html`Prima la <span className="bth-hl">cute</span>.<br />Poi il taglio.`,
+          lead: html`Ogni servizio è pensato<br /><b>per far stare bene la tua cute.</b>`,
+          special: { section: 'migliori-proposte', season: 'da non perdere ↓', kick: 'la più scelta', icon: 'fa-brain', title: 'Cute No Stress', text: 'Toglie le infiammazioni e distende la cute stressata da tensioni e ritmi frenetici.' },
+          groups: [
+            { label: 'prima di tutto, la cute', rows: [
+              { id: 'trattamenti-tricologici', icon: 'fa-microscope', title: 'Trattamenti tricologici', text: 'Sedute singole e laser per sebo, forfora, prurito e diradamento.' },
+              { id: 'spa', icon: 'fa-water', title: 'SPA', text: 'Vapore a 35°, non a 90° come quello classico: la cute respira, non si stressa.' }
+            ] },
+            { label: 'lo stile, senza stress', rows: [
+              { id: 'stilistico', icon: 'fa-scissors', title: 'Stilistico', text: 'Beautrì Cut classico, olistico o energizzante, con il massaggio.' }
+            ] }
+          ],
+          novita: 'Un gioco goloso per te.'
+        }
+      };
       const GOOGLE_REVIEWS_URL = 'https://maps.app.goo.gl/uFvEHabNHYLfwrmG6';
       const trackHomeClick = (target) => {
         if (typeof gtag === 'function') {
@@ -5028,7 +5095,7 @@ main.overflow-y-auto {
               </div>
               <a className="bt-notice-link" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_listino')}>Candidati per la Consulenza Beautrìco <i className="fa-solid fa-arrow-right"></i></a>
             </div>
-            <div className="bt-notice-already">Sei già in percorso? Il listino è qui sotto ↓</div>
+            <div className="bt-notice-already">Sei già in percorso? Il tuo menu è qui sotto ↓</div>
           </div>
         `;
       };
@@ -5855,12 +5922,64 @@ main.overflow-y-auto {
             }
 
             if (!section) {
+            const M = MENU_GENERE_MOBILE[gender];
             return html`
-                <div className="relative animate-fade-in">
+                <div>
+                <div className="bt-home-mobile btmn animate-fade-in">
+                <section className="bth-hero">
+                    <div className="bth-eyebrow">Menu ${gender === 'donna' ? 'Donna' : 'Uomo'}</div>
+                    <h1 className="bth-h1 btmn-h1">${M.h1}</h1>
+                    <p className="bth-lead">${M.lead}</p>
+                    <div className="btmn-only"><i className="fa-solid fa-lock"></i>Riservato a chi è in percorso</div>
+                </section>
+                <${ConsulenzaNotice} />
+                <div className="bth-letter">
+                    <div className="bth-hello">Scegli cosa ti serve,</div>
+                    <div className="btmn-season">${M.special.season}</div>
+                    <button type="button" className="btps-special" onClick=${() => M.special.href ? window.open(M.special.href, '_self') : setSection(M.special.section)}>
+                        <span className="btps-sp-ic"><i className=${`fa-solid ${M.special.icon}`}></i></span>
+                        <span className="btps-sp-tx">
+                            <span className="btps-sp-kick">${M.special.kick}</span>
+                            <b>${M.special.title}</b>
+                            <small>${M.special.text}</small>
+                            ${M.special.meta && html`<span className="btmn-sp-meta"><i className="fa-regular fa-calendar"></i>${M.special.meta}</span>`}
+                        </span>
+                        <span className="btps-sp-go"><i className="fa-solid fa-arrow-right"></i></span>
+                    </button>
+                    ${M.groups.map(g => html`
+                    <div key=${g.label}>
+                        <div className="btps-sep"><span>${g.label}</span></div>
+                        ${g.rows.map(r => html`
+                        <button key=${r.id} type="button" className="btmn-row" onClick=${() => setSection(r.id)}>
+                            <span className=${`btmn-ic${r.gold ? ' gold' : ''}`}><i className=${`fa-solid ${r.icon}`}></i></span>
+                            <span className="btmn-tx">
+                                <b>${r.title}</b>
+                                <small>${r.text}</small>
+                                ${r.chips && html`<span className="btmn-chips">${r.chips.map(c => html`<span key=${c}><i className="fa-solid fa-check"></i>${c}</span>`)}<span className="y">${r.chipNote}</span></span>`}
+                            </span>
+                            <i className="fa-solid fa-chevron-right btmn-go"></i>
+                        </button>
+                        `)}
+                    </div>
+                    `)}
+                    <button type="button" className="btp-how" onClick=${() => setSection('novita')}>
+                        <span className="btp-how-ic"><i className="fa-solid fa-bell"></i></span>
+                        <span><b>Novità</b><small>${M.novita}</small></span>
+                        <i className="fa-solid fa-chevron-right btp-how-go"></i>
+                    </button>
+                    <div className="bth-ps">
+                        <span className="bth-ps-label">P.S.</span>
+                        <span className="bth-ps-text">Questi servizi sono per chi fa già un percorso con me. Se è la prima volta, si parte dalla Consulenza Beautrìco: prima voglio conoscerti.</span>
+                    </div>
+                    <div className="bth-signature">— Daniela</div>
+                    <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick(`candidati_menu_${gender}`)}>Candidati per la Consulenza Beautrìco</a>
+                    <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+                </div>
+                </div>
+                <div className="bt-home-desktop relative animate-fade-in">
                 <header className="flex items-center justify-center mb-10 uppercase font-black text-[11px] tracking-widest">
                     <div className="bg-white px-8 py-3 rounded-full shadow-sm border border-white">MENU <span className="text-[#EAB308]">${gender}</span></div>
                 </header>
-                <${ConsulenzaNotice} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                     ${SECTIONS.filter(s => {
                         if (gender === 'uomo' && (s.id === 'colorazioni' || s.id === 'forma')) return false;
@@ -5890,6 +6009,7 @@ main.overflow-y-auto {
                         </button>
                         `;
                     })}
+                </div>
                 </div>
                 </div>
             `;
