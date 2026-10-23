@@ -771,7 +771,7 @@ main.overflow-y-auto {
     .btfm-hero img:nth-child(2) { width: 84px; height: 196px; z-index: 1; }
     .btfm-hero.btfm-one img { width: 200px; height: 216px; }
     .btfm-note { position: absolute; right: -6px; top: 92px; width: 70px; text-align: left; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; line-height: 1.05; color: #0A0A0A; transform: rotate(-6deg); z-index: 2; pointer-events: none; }
-    .btfm-note.btfm-note-left { right: auto; left: 4px; top: 104px; width: 86px; color: #8A6A00; transform: rotate(5deg); }
+    .btfm-note.btfm-note-left { right: auto; left: -4px; top: 96px; width: 76px; color: #8A6A00; transform: rotate(5deg); }
     .btfm .bth-h1.btfm-h1 { margin: 16px 0 0; }
     .btfm .bth-letter { margin-top: 22px; }
     .btfm-intro { font-size: 14px; color: #555; line-height: 1.55; letter-spacing: .03em; margin: 6px 0 0; }
@@ -4896,6 +4896,58 @@ main.overflow-y-auto {
           box: { kicker: 'e in più,', title: 'Il tuo shampoo,', highlight: 'su misura', photo: 'menu-potenziatori-sh', photoTag: 'Potenziatori SH.', text: 'Quasi tutti i miei shampoo si miscelano con i **Potenziatori SH.**, direttamente a casa. **Così il trattamento è cucito sulla tua cute e cambia quando cambia lei.**', steps: ['Parti dal tuo shampoo', 'Aggiungi il Potenziatore SH. a casa', 'Il trattamento segue la tua cute'], note: "Unica eccezione: il Delicato si usa così com'è." },
           ps: 'Non sai quale scegliere? Non serve: in Consulenza Beautrìco guardo la tua cute e scegliamo insieme shampoo e Potenziatori.',
           track: 'candidati_shampoo'
+        },
+        'prodotti-lozioni': {
+          eyebrow: 'Lozioni', hero: ['menu-loz-soft', 'menu-loz-pro', 'menu-loz-active'], noteRight: 'da usare ogni giorno', noteLeft: 'senza coloranti né parabeni',
+          title: 'La lozione / è il [cuore] / del trattamento.', lead: 'Si usa ogni giorno sulla cute / **e lavora in profondità, fino al bulbo.**',
+          hello: 'Ti presento le mie lozioni,', intro: 'Lo shampoo prepara il terreno, la lozione fa il lavoro di ogni giorno. Sono tre, per tre livelli di necessità: **ognuna ha il suo compito.**',
+          groups: [
+            { id: 'equilibrio', name: 'Equilibrio', label: 'per lenire', icon: 'fa-feather' },
+            { id: 'densita', name: 'Densità', label: 'per rigenerare', icon: 'fa-seedling' },
+            { id: 'caduta', name: 'Caduta', label: 'per fortificare', icon: 'fa-shield-halved' }
+          ],
+          products: [
+            { name: 'Lozione Soft', price: '41€', photo: 'menu-loz-soft', group: 'equilibrio', who: 'per cute arrossata o che prude', text: 'Nutre il bulbo, lenisce i rossori e riduce il prurito. Comfort per la cute, ogni giorno.' },
+            { name: 'Lozione Active', price: '45€', photo: 'menu-loz-active', group: 'densita', who: 'per capelli radi e poco sani', text: 'Risveglia la vitalità della cute e migliora la densità e la salute della chioma.' },
+            { name: 'Lozione Pro', price: '49€', photo: 'menu-loz-pro', group: 'caduta', who: 'per capelli che cadono', text: 'Agisce sul bulbo contro la caduta: il capello diventa più robusto, corposo e resistente.' }
+          ],
+          box: { kicker: 'e in più,', title: 'La tua lozione,', highlight: 'su misura', photo: 'menu-potenziatori-loz', photoTag: 'Potenziatori Soft e Active', text: 'La Soft e la Active si miscelano con i loro **Potenziatori, SOFT e ACTIVE.** **Così il trattamento di ogni giorno è calibrato sulla tua cute e sui tuoi capelli.**', steps: ['Parti dalla tua lozione', 'Aggiungi il Potenziatore giusto', 'Il trattamento è calibrato su di te'], note: "Unica eccezione: la Pro si usa così com'è." },
+          ps: 'Non sai quale scegliere? Non serve: in Consulenza Beautrìco guardo la tua cute e scegliamo insieme lozione e Potenziatori.',
+          track: 'candidati_lozioni'
+        },
+        'prodotti-emulsioni': {
+          eyebrow: 'Emulsioni', hero: ['menu-emu-lenitiva', 'menu-emu-avvolgente'], noteRight: 'formule cremose e fluide', noteLeft: 'per proteggere a fondo',
+          title: 'Due emulsioni, / due [fronti] / diversi.', lead: 'Una si prende cura della cute, / **l\'altra delle lunghezze.**',
+          hello: 'Ti presento le mie emulsioni,', intro: 'Formule cremose che proteggono e condizionano in profondità. Sono due, e lavorano su fronti diversi: **una sulla cute, una sulle lunghezze.**',
+          groups: [
+            { id: 'cute', name: 'Cute', label: 'per lenire', icon: 'fa-spa' },
+            { id: 'lunghezze', name: 'Lunghezze', label: 'per definire', icon: 'fa-wind' }
+          ],
+          products: [
+            { name: 'Emulsione Lenitiva', price: '58€', photo: 'menu-emu-lenitiva', group: 'cute', who: 'per cute arrossata o irritata', text: 'Fa da scudo al cuoio capelluto contro ambiente e stress. Emolliente, lenitiva e antibatterica.' },
+            { name: 'Emulsione Avvolgente', price: '28€', photo: 'menu-emu-avvolgente', group: 'lunghezze', who: 'per lunghezze mosse o ricce', text: 'Un film invisibile le protegge dalla disidratazione e definisce onde e ricci, morbidi ed elastici.' }
+          ],
+          box: { kicker: 'e in più,', title: 'Cute e lunghezze,', highlight: 'insieme', text: 'Le due emulsioni lavorano su fronti diversi, **quindi puoi usarle nello stesso trattamento.** Così curi cute e lunghezze, ognuna con il suo prodotto.', steps: ['La Lenitiva si prende cura della cute', 'L\'Avvolgente protegge le lunghezze', 'Insieme, un trattamento completo'] },
+          ps: 'Non sai quale scegliere, o se ti servono tutte e due? In Consulenza Beautrìco guardo la tua cute e le tue lunghezze e scegliamo insieme.',
+          track: 'candidati_emulsioni'
+        },
+        'prodotti-lunghezze': {
+          eyebrow: 'Lunghezze', hero: ['menu-lun-gruppo'], noteRight: 'con attivi botanici', noteLeft: 'dedicati alla fibra capillare',
+          title: 'L\'ultimo passo / è per le / [lunghezze].', lead: 'Dopo la cute, la fibra capillare: / **bellezza, protezione e forza.**',
+          hello: 'Ti presento i miei prodotti per le lunghezze,', intro: 'Lo shampoo prepara la cute, la lozione la attiva: qui chiudiamo la routine sulle lunghezze. Sono tre, per tre esigenze diverse: **ognuno ha il suo compito.**',
+          groups: [
+            { id: 'idratazione', name: 'Idratazione', label: 'per ammorbidire', icon: 'fa-droplet' },
+            { id: 'nutrimento', name: 'Nutrimento', label: 'per nutrire', icon: 'fa-leaf' },
+            { id: 'ricostruzione', name: 'Ricostruzione', label: 'per ricostruire', icon: 'fa-hammer' }
+          ],
+          products: [
+            { name: 'Conditioner Idratante', price: '29€', photo: 'menu-lun-conditioner', group: 'idratazione', who: 'per capelli disidratati', text: 'Balsamo in crema che si assorbe in fretta: morbidi e setosi dal primo utilizzo, senza appesantire.' },
+            { name: 'Maschera Nutriente', price: '37€', photo: 'menu-lun-nutriente', wide: true, group: 'nutrimento', who: 'per capelli secchi e crespi', text: 'Burri, oli vegetali e proteine del grano nutrono a fondo ed eliminano il crespo.' },
+            { name: 'Maschera Rigenerante', price: '37€', photo: 'menu-lun-rigenerante', wide: true, group: 'ricostruzione', who: 'per capelli sfibrati e fragili', text: 'Cheratina e pantenolo ricostruiscono il capello dall\'interno, gli oli essenziali lo rendono più resistente.' }
+          ],
+          box: { kicker: 'e per finire,', title: 'La routine', highlight: 'si chiude qui', text: 'Conditioner o Maschera, questo passaggio **sigilla quello che hanno fatto shampoo e lozione.** Il risultato è una fibra capillare sana, forte e protetta, in salone e a casa.', steps: ['Lo shampoo prepara la cute', 'La lozione la attiva', 'Conditioner o Maschera chiudono la routine'] },
+          ps: 'Non sai se ti serve il Conditioner o una Maschera? In Consulenza Beautrìco guardo i tuoi capelli e scegliamo insieme come chiudere la tua routine.',
+          track: 'candidati_lunghezze'
         }
       };
       const FamigliaMobile = ({ f }) => html`
@@ -5433,7 +5485,8 @@ main.overflow-y-auto {
                 { name: 'Lozione PRO', price: '49€', photo: 'foto-prodotti/Lozione%20pro.png', title: "Azione anticaduta mirata sul bulbo, per un capello più robusto, corposo e resistente.", desc: "Lozione giornaliera anticaduta: favorisce il ripristino delle normali condizioni fisiologiche del bulbo, attribuendo maggiore robustezza e corposità al capello.", checklist: ["Azione anticaduta mirata sul bulbo", "Capello più robusto e corposo"], badges: ['Formula fortificante', 'NO COLORANTI · NO PARABENI', 'FORMULATO CON OLI ESSENZIALI 100% NATURALI'] }
             ];
             return html`
-                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <${FamigliaMobile} f=${FAMIGLIE_MOBILE['prodotti-lozioni']} />
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12 bt-home-desktop">
                 <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                     <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">LE NOSTRE LOZIONI</p>
                     ${LOZIONI_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
@@ -5516,7 +5569,8 @@ main.overflow-y-auto {
                 { name: 'Emulsione Avvolgente', price: '28€', photo: 'foto-prodotti/Emulsione%20avvolgente.png', title: "Protegge e definisce le lunghezze, per onde e ricci morbidi, elastici e setosi.", desc: "Un prodotto di styling e cura dedicato esclusivamente alle lunghezze. Avvolge e riveste la fibra capillare con un film invisibile che protegge il capello dalla disidratazione. È studiata per definire la forma naturale di onde e ricci.", checklist: ["Protegge dalla disidratazione", "Definisce onde e ricci naturali"], badges: ['Film protettivo', 'Anti-disidratazione'] }
             ];
             return html`
-                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <${FamigliaMobile} f=${FAMIGLIE_MOBILE['prodotti-emulsioni']} />
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12 bt-home-desktop">
                 <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                     <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">LE NOSTRE EMULSIONI</p>
                     ${EMULSIONI_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
@@ -5590,7 +5644,8 @@ main.overflow-y-auto {
                 { name: 'Conditioner Idratante', price: '29€', photo: 'foto-prodotti/Conditioner%20idratante.png', title: "Idratazione rapida e ristrutturante, per capelli morbidi e setosi già dal primo utilizzo.", desc: "Il perfetto alleato quotidiano. Balsamo in crema ideale per capelli trattati, disidratati e indeboliti. Grazie alla sinergia di Cheratina idrolizzata e Pantenolo, svolge un'azione rinforzante e ristrutturante immediata.", checklist: ["Idratazione rapida e ristrutturante", "Morbidi e setosi già dal primo utilizzo"], closing: "Con estratti di Malva e Aloe Vera.", badges: ['Cheratina idrolizzata', 'Malva e Aloe Vera'] }
             ];
             return html`
-                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12">
+                <${FamigliaMobile} f=${FAMIGLIE_MOBILE['prodotti-lunghezze']} />
+                <div className="relative animate-fade-in max-w-5xl mx-auto pb-12 bt-home-desktop">
                 <div className="mb-10 md:mb-12 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 md:p-8 shadow-lg">
                     <p className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight mb-4 text-center">I NOSTRI PRODOTTI PER LE LUNGHEZZE</p>
                     ${LUNGHEZZE_INTRO.paragraphs.map(p => html`<p className="text-black text-sm leading-relaxed mb-4 last:mb-0">${p}</p>`)}
