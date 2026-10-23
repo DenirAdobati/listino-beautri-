@@ -639,6 +639,18 @@ main.overflow-y-auto {
     .btps-sp-go { width: 32px; height: 32px; border-radius: 50%; background: #F5C200; color: #0A0A0A; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
     .btps a.bth-cta-bottom { margin-top: 24px; }
 
+    /* pagina Percorsi di mantenimento (lettera con i tre mantenimenti) */
+    .btm .btp-facts.btm-facts { margin: 12px 0 0; }
+    .btm-why { display: grid; gap: 6px; margin-top: 12px; }
+    .btm-why div { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #0A0A0A; }
+    .btm-why i { width: 30px; height: 30px; border-radius: 10px; background: #0A0A0A; color: #F5C200; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+    .btm .bth-letter { margin-top: 18px; }
+    .btm .bth-step-text { margin-bottom: 0; }
+    .btm-comp { display: grid; gap: 6px; margin: 12px 0 14px; }
+    .btm-comp span { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #3a3a3a; }
+    .btm-comp b { width: 32px; height: 32px; border-radius: 10px; background: #F5C200; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: Poppins, sans-serif; font-weight: 900; font-size: 15px; color: #0A0A0A; }
+    .btm .bth-ps { border-top: 0; }
+
     /* pagina della singola seduta (lettera con listino) */
     .btsd-photo { display: block; position: relative; height: 210px; margin-top: 22px; border-radius: 18px; background: #EFEAE0 center/cover no-repeat; box-shadow: 0 1px 0 #eee, 0 18px 40px rgba(0,0,0,.14); }
     .btsd .bth-letter { margin-top: 24px; }
@@ -4470,6 +4482,11 @@ main.overflow-y-auto {
         { id: 'p4', title: 'Nutrire', text: 'Nutrimento per cute e capelli.', photo: 'https://i.ibb.co/5Xvcq7Ts/nutrire-1.jpg' },
         { id: 'p6', title: 'Laser', text: 'Diradamenti, psoriasi e dermatiti.', photo: 'https://i.ibb.co/wrg9DJmq/DSF9006-1.jpg', pos: 'center 30%', wide: true }
       ];
+      const MANTENIMENTI_MOBILE = [
+        { id: 'm1', title: 'Base', btn: 'Scopri il Base', before: 'Per chi ha finito il percorso di ', bold: 'Igienizzazione e Purificazione', after: '.', comp: [[6, 'sedute igienizzanti'], [6, 'sedute lenitive']] },
+        { id: 'm2', title: 'Intermedio', btn: "Scopri l'Intermedio", before: 'Per chi ha finito il ', bold: 'percorso iniziale', after: '. Aggiunge Vacuum terapia, Alta frequenza, Cascata e Ossigenoterapia.', comp: [[12, 'sedute di mantenimento']] },
+        { id: 'm3', title: 'Avanzato', btn: "Scopri l'Avanzato", before: 'Per chi ha finito il percorso di ', bold: 'laser a fotobiostimolazione', after: '.', comp: [[8, 'sedute laser'], [4, 'sedute di potenziamento']] }
+      ];
       const GOOGLE_REVIEWS_URL = 'https://maps.app.goo.gl/uFvEHabNHYLfwrmG6';
       const trackHomeClick = (target) => {
         if (typeof gtag === 'function') {
@@ -5215,7 +5232,53 @@ main.overflow-y-auto {
                 <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
                 </div>
                 `}
-                <div className=${`relative animate-fade-in ${isMain ? 'bt-home-desktop' : ''}`}>
+                ${!isMain && html`
+                <div className="bt-home-mobile btp btps btm animate-fade-in">
+                <section className="bth-hero">
+                    <div className="bth-eyebrow">Mantenimento</div>
+                    <h1 className="bth-h1 btp-h1">Il risultato,<br /><span className="bth-hl">mese</span> dopo<br />mese.</h1>
+                    <p className="bth-lead">Per mantenere quello che hai ottenuto<br /><b>e potenziarlo nel tempo.</b></p>
+                </section>
+                <div className="btps-card">
+                    <div className="btps-hand-title">Come funziona il mantenimento?</div>
+                    <p className="btps-text">Lo inizi <b>quando hai finito il tuo percorso</b>. È la fase più importante: non sottovalutarla.</p>
+                    <div className="btp-facts btm-facts"><span><i className="fa-regular fa-calendar"></i>1 seduta al mese</span><span><i className="fa-solid fa-hourglass-half"></i>12 mesi</span><span><i className="fa-solid fa-magnifying-glass"></i>2 Check inclusi</span></div>
+                    <div className="btm-why">
+                        <div><i className="fa-solid fa-shield-halved"></i>Mantieni i risultati raggiunti</div>
+                        <div><i className="fa-solid fa-arrow-trend-up"></i>Potenzi i benefici</div>
+                        <div><i className="fa-solid fa-user-check"></i>Sei accompagnato per 1 anno</div>
+                    </div>
+                    <div className="btps-who">
+                        <p><b>Il mantenimento giusto per te lo sceglie Daniela</b> alla fine del percorso.</p>
+                        <img src="foto-team/daniela-menu.webp" alt="Daniela Modina, tecnica tricologa" />
+                    </div>
+                </div>
+                <div className="bth-letter">
+                    <div className="bth-hello">Ecco i tre mantenimenti,</div>
+                    ${MANTENIMENTI_MOBILE.map((m, i) => html`
+                    <div key=${m.id} className="bth-step">
+                        <div className="bth-num">${i + 1}</div>
+                        <div className="btp-body">
+                            <h2 className="bth-step-title">Mantenimento <span className="bth-hl">${m.title}</span></h2>
+                            <p className="bth-step-text">${m.before}<b>${m.bold}</b>${m.after}</p>
+                            <div className="btm-comp">
+                                ${m.comp.map(([n, t]) => html`<span key=${t}><b>${n}</b>${t}</span>`)}
+                            </div>
+                            <button type="button" className="bth-btn" onClick=${() => setSelectedPath(MOCK_MAINTENANCE_PATHS.find(p => p.id === m.id))}>${m.btn} <i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    `)}
+                    <div className="bth-ps">
+                        <span className="bth-ps-label">P.S.</span>
+                        <span className="bth-ps-text">Se lo paghi in unica soluzione, la 12ª seduta te la regalo io.</span>
+                    </div>
+                    <div className="bth-signature">— Daniela</div>
+                </div>
+                <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_mantenimento')}>Candidati per la Consulenza Beautrìco</a>
+                <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+                </div>
+                `}
+                <div className="relative animate-fade-in bt-home-desktop">
                 <header className="flex items-center justify-center mb-10">
                     <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
                     <span className="text-[#EAB308]">${section === 'percorsi-main' ? 'PERCORSI' : 'PERCORSI DI MANTENIMENTO'}</span>
