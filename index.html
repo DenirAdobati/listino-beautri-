@@ -596,6 +596,48 @@ main.overflow-y-auto {
     .btp-prod-img { display: block; width: 100%; max-width: 230px; height: 150px; object-fit: contain; margin: 2px 0 10px; }
     .btp .bth-ps { border-top: 1px dashed #ddd; }
 
+    /* pagina Percorsi (tipologie di seduta) */
+    .btps-card { position: relative; overflow: hidden; margin: 24px 2px 0; background: #fff; border-radius: 10px; padding: 20px 18px 0; box-shadow: 0 2px 0 #eee, 0 24px 56px rgba(0,0,0,.13); }
+    .btps-hand-title { font-family: Caveat, cursive; font-weight: 700; font-size: 32px; line-height: 1; color: #0A0A0A; }
+    .btps-text { font-size: 15px; color: #3a3a3a; line-height: 1.55; margin: 8px 0 0; }
+    .btps-text b { color: #0A0A0A; }
+    .btps-text span { color: #6b6b6b; }
+    .btps-example { margin-top: 12px; background: #F6F4EF; border-radius: 14px; padding: 10px 12px 12px; }
+    .btps-ex-label { font-family: Caveat, cursive; font-weight: 700; font-size: 19px; color: #8A6A00; line-height: 1; }
+    .btps-ex-label.btps-or { margin: 8px 0 0 2px; font-size: 18px; }
+    .btps-ex { margin-top: 6px; background: #fff; border-radius: 12px; padding: 8px 12px; text-align: center; box-shadow: 0 3px 8px rgba(0,0,0,.05); }
+    .btps-ex span { display: block; padding: 2px 0; font-family: Poppins, sans-serif; font-weight: 700; font-size: 13.5px; color: #0A0A0A; }
+    .btps-ex i { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; margin: 3px auto; border-radius: 50%; background: #F5C200; color: #0A0A0A; font-size: 9px; }
+    .btps-who { display: flex; align-items: flex-end; gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed #ddd; }
+    .btps-who p { flex: 1; margin: 0 0 18px; font-size: 14px; line-height: 1.45; color: #3a3a3a; }
+    .btps-who b { color: #0A0A0A; }
+    .btps-who img { display: block; width: 118px; height: 138px; object-fit: cover; object-position: center top; flex-shrink: 0; margin: -6px -10px 0 0; }
+    .btps-title { font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -0.04em; color: #0A0A0A; margin: 28px 0 0; }
+    .btps .btp-lb { font-size: 21px; margin-top: 2px; }
+    .btps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    button.btps-seduta { display: flex; flex-direction: column; background: #fff; border: 0; border-radius: 18px; overflow: hidden; padding: 0; text-align: left; color: #0A0A0A; box-shadow: 0 1px 0 #eee, 0 14px 30px rgba(0,0,0,.1); }
+    button.btps-seduta.btps-wide { grid-column: span 2; }
+    .btps-photo { display: block; position: relative; height: 104px; background: #EFEAE0 center/cover no-repeat; }
+    .btps-wide .btps-photo { height: 120px; }
+    .btps-tag { position: absolute; left: 8px; bottom: 8px; background: rgba(255,255,255,.92); border-radius: 999px; padding: 3px 9px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
+    .btps-tx { display: block; padding: 10px 12px 12px; }
+    .btps-tx b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15.5px; letter-spacing: -0.02em; line-height: 1.15; }
+    .btps-tx small { display: block; font-size: 12px; color: #666; line-height: 1.4; margin-top: 4px; }
+    .btps-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 12px; border-bottom: 2px solid #F5C200; }
+    .btps-sep { display: flex; align-items: center; gap: 10px; margin: 26px 0 0; }
+    .btps-sep::before, .btps-sep::after { content: ""; flex: 1; border-top: 1px dashed #cfc8b8; }
+    .btps-sep span { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; }
+    button.btps-special { display: flex; gap: 12px; align-items: center; width: 100%; margin-top: 12px; padding: 16px; border: 0; border-radius: 18px; text-align: left; color: #fff; background-color: #0A0A0A; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 40px 40px; }
+    .btps-sp-ic { width: 44px; height: 44px; border-radius: 14px; background: rgba(245,194,0,.18); color: #F5C200; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .btps-sp-tx { display: block; flex: 1; min-width: 0; }
+    .btps-sp-kick { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; color: #F5C200; line-height: 1; }
+    .btps-sp-tx b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; margin-top: 2px; }
+    .btps-sp-tx small { display: block; font-size: 13px; color: rgba(255,255,255,.72); line-height: 1.45; margin-top: 3px; }
+    .btps-sp-meta { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; font-weight: 600; background: rgba(255,255,255,.1); border-radius: 999px; padding: 4px 10px; }
+    .btps-sp-meta i { color: #F5C200; }
+    .btps-sp-go { width: 32px; height: 32px; border-radius: 50%; background: #F5C200; color: #0A0A0A; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+    .btps a.bth-cta-bottom { margin-top: 24px; }
+
     /* avviso dentro Menu Donna/Uomo */
     .bt-notice-wrap { margin: -12px 0 22px; }
     .bt-notice { position: relative; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 18px; padding: 18px 18px 16px; box-shadow: 0 18px 40px rgba(0,0,0,.08); }
@@ -4140,6 +4182,14 @@ main.overflow-y-auto {
 
       // --- HOME MOBILE (restyling in stile beautri.it) ---
       const CONSULENZA_FORM_URL = 'https://form.typeform.com/to/QUzap8so#pagina=menu&ingresso=menu&utm_source=menu';
+      // Pagina Percorsi mobile: le tipologie di seduta (Riparare resta un percorso a parte)
+      const SEDUTE_MOBILE = [
+        { id: 'p1', title: 'Igienizzare e purificare', text: 'Sebo, desquamazioni, prurito.', photo: 'https://i.ibb.co/bw1xkyB/Igenizzare-1.jpg' },
+        { id: 'p2', title: 'Lenire', text: 'Cuti da rigenerare e riequilibrare.', photo: 'https://i.ibb.co/Z643hyh1/lenire-1.jpg' },
+        { id: 'p3', title: 'Detossinare', text: 'Cuti asfittiche e intossinate.', photo: 'https://i.ibb.co/6Jtrp8Vg/detossinare-1.jpg' },
+        { id: 'p4', title: 'Nutrire', text: 'Nutrimento per cute e capelli.', photo: 'https://i.ibb.co/5Xvcq7Ts/nutrire-1.jpg' },
+        { id: 'p6', title: 'Laser', text: 'Diradamenti, psoriasi e dermatiti.', photo: 'https://i.ibb.co/wrg9DJmq/DSF9006-1.jpg', pos: 'center 30%', wide: true }
+      ];
       const GOOGLE_REVIEWS_URL = 'https://maps.app.goo.gl/uFvEHabNHYLfwrmG6';
       const trackHomeClick = (target) => {
         if (typeof gtag === 'function') {
@@ -4826,8 +4876,62 @@ main.overflow-y-auto {
 
             if ((section === 'percorsi-main' || section === 'percorsi-mantenimento') && !selectedPath) {
             const list = section === 'percorsi-main' ? MOCK_PATHS : MOCK_MAINTENANCE_PATHS;
+            const isMain = section === 'percorsi-main';
+            const pathById = (id) => MOCK_PATHS.find(p => p.id === id);
+            const riparare = pathById('p5');
             return html`
-                <div className="relative animate-fade-in">
+                <div>
+                ${isMain && html`
+                <div className="bt-home-mobile btp btps animate-fade-in">
+                <section className="bth-hero">
+                    <div className="bth-eyebrow">Percorsi</div>
+                    <h1 className="bth-h1 btp-h1">Il tuo percorso,<br /><span className="bth-hl">seduta</span> dopo<br />seduta.</h1>
+                    <p className="bth-lead">Per risolvere il problema<br /><b>e riportare cute e capelli in equilibrio.</b></p>
+                </section>
+                <div className="btps-card">
+                    <div className="btps-hand-title">Come è fatto un percorso?</div>
+                    <p className="btps-text">Un percorso è composto da <b>più sedute</b> <span>(anche di tipologie diverse)</span>.</p>
+                    <div className="btps-example">
+                        <div className="btps-ex-label">per esempio</div>
+                        <div className="btps-ex"><span>3 sedute di Igienizzazione</span><i className="fa-solid fa-plus"></i><span>5 sedute di Detossinazione</span></div>
+                        <div className="btps-ex-label btps-or">oppure</div>
+                        <div className="btps-ex"><span>3 sedute di Lenire</span><i className="fa-solid fa-plus"></i><span>5 sedute di Nutrire</span></div>
+                    </div>
+                    <div className="btps-who">
+                        <p><b>Le sedute giuste per te le sceglie Daniela</b> durante la Consulenza Beautrìco.</p>
+                        <img src="foto-team/daniela-menu.webp" alt="Daniela Modina, tecnica tricologa" />
+                    </div>
+                </div>
+                <h2 className="btps-title">Le nostre sedute</h2>
+                <div className="btp-lb"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M3 11 L 9 17 L 21 3"/></svg>clicca per vedere prezzi e dettagli</div>
+                <div className="btps-grid">
+                    ${SEDUTE_MOBILE.map(s => html`
+                    <button key=${s.id} type="button" className=${`btps-seduta ${s.wide ? 'btps-wide' : ''}`} onClick=${() => setSelectedPath(pathById(s.id))}>
+                        <span className="btps-photo" style=${{ backgroundImage: `url(${s.photo})`, backgroundPosition: s.pos || 'center' }}><span className="btps-tag">Seduta</span></span>
+                        <span className="btps-tx">
+                            <b>${s.title}</b>
+                            <small>${s.text}</small>
+                            <span className="btps-more">Scopri <i className="fa-solid fa-arrow-right"></i></span>
+                        </span>
+                    </button>
+                    `)}
+                </div>
+                <div className="btps-sep"><span>e per le lunghezze</span></div>
+                <button type="button" className="btps-special" onClick=${() => setSelectedPath(riparare)}>
+                    <span className="btps-sp-ic"><i className="fa-solid fa-screwdriver-wrench"></i></span>
+                    <span className="btps-sp-tx">
+                        <span className="btps-sp-kick">percorso dedicato</span>
+                        <b>Riparare</b>
+                        <small>Capelli decheratinizzati, doppie punte e danni meccanici.</small>
+                        <span className="btps-sp-meta"><i className="fa-regular fa-calendar"></i>${riparare.sessions}</span>
+                    </span>
+                    <span className="btps-sp-go"><i className="fa-solid fa-arrow-right"></i></span>
+                </button>
+                <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_sedute')}>Candidati per la Consulenza Beautrìco</a>
+                <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+                </div>
+                `}
+                <div className=${`relative animate-fade-in ${isMain ? 'bt-home-desktop' : ''}`}>
                 <header className="flex items-center justify-center mb-10">
                     <div className="text-center uppercase font-black text-black tracking-widest text-[11px] bg-white px-8 py-3 rounded-full shadow-sm border border-white">
                     <span className="text-[#EAB308]">${section === 'percorsi-main' ? 'PERCORSI' : 'PERCORSI DI MANTENIMENTO'}</span>
@@ -4845,6 +4949,7 @@ main.overflow-y-auto {
                         <div className="w-12 h-1 bg-[#EAB308] rounded-full mt-4"></div>
                     </button>
                     `)}
+                </div>
                 </div>
                 </div>
             `;
