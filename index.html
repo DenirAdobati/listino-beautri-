@@ -997,6 +997,47 @@ main.overflow-y-auto {
     .btcl .bth-ps { margin-top: 16px; }
     .btcl-client { text-align: center; margin-top: 12px; font-size: 13px; color: #555; }
     .btcl-client b { color: #0A0A0A; border-bottom: 2px solid #F5C200; }
+
+    /* pagina Trattamenti tricologici (Menu Donna): sedute a righe, laser con listino, mantenimento */
+    .bttr-row { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px dashed #e4dfd3; }
+    .bttr-row:last-child { border-bottom: 0; }
+    .bttr-ph { width: 76px; height: 92px; border-radius: 14px; background: #EFEAE0 center/cover no-repeat; flex-shrink: 0; }
+    .bttr-tx { flex: 1; min-width: 0; }
+    .bttr-need { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 18px; color: #1E9E5A; line-height: 1; margin-bottom: 2px; }
+    .bttr-tx b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -0.02em; line-height: 1.15; }
+    .bttr-tx small { display: block; font-size: 13px; color: #666; line-height: 1.4; margin-top: 3px; }
+    .bttr-price { display: flex; align-items: baseline; gap: 6px; margin-top: 8px; }
+    .bttr-price b { display: inline; font-size: 15px; font-weight: 900; }
+    .bttr-price span { font-size: 12px; color: #8a8a8a; font-weight: 600; }
+    .bttr-tools { margin-top: 14px; padding: 12px 14px; background: #F6F4EF; border-radius: 14px; }
+    .bttr-tools-k { font-family: Caveat, cursive; font-weight: 700; font-size: 19px; color: #8A6A00; line-height: 1; }
+    .bttr-tools .btcl-chips span { background: #fff; color: #0A0A0A; font-size: 12px; padding: 4px 9px; }
+    .bttr-tools .btcl-chips i { color: #8A6A00; }
+    .bttr-laser { margin-top: 14px; border-radius: 20px; background: #0A0A0A; color: #fff; padding: 18px 16px 16px; }
+    .bttr-laser-kick { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: #F5C200; line-height: 1.1; }
+    .bttr-laser h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -0.03em; line-height: 1.1; margin: 4px 0 0; color: #fff; }
+    .bttr-laser p { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.5; margin: 6px 0 0; }
+    .bttr-laser ul { list-style: none; margin: 10px 0 0; padding: 0; }
+    .bttr-laser li { display: flex; gap: 8px; font-size: 13px; line-height: 1.45; padding: 3px 0; color: rgba(255,255,255,.9); }
+    .bttr-laser li i { color: #F5C200; font-size: 11px; margin-top: 4px; }
+    .bttr-list { margin-top: 12px; background: #fff; color: #0A0A0A; border-radius: 14px; overflow: hidden; }
+    .bttr-lrow { display: grid; grid-template-columns: minmax(0, 1fr) 26px 44px 48px; align-items: center; gap: 5px; padding: 9px 10px; font-size: 12.5px; border-top: 1px solid #f0ece3; }
+    .bttr-lrow:first-child { border-top: 0; }
+    .bttr-lhead { background: #F6F4EF; font-family: Poppins, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: #555; }
+    .bttr-n { font-size: 12px; font-weight: 600; line-height: 1.25; -webkit-hyphens: auto; hyphens: auto; }
+    .bttr-d { color: #8a8a8a; font-size: 11.5px; text-align: center; }
+    .bttr-v { text-align: right; font-family: Poppins, sans-serif; font-weight: 800; }
+    .bttr-v.plus { color: #8A6A00; }
+    .bttr-lnote { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: rgba(255,255,255,.75); }
+    .bttr-lnote i { color: #F5C200; }
+    .bttr-keep { margin-top: 10px; padding: 14px; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 16px; }
+    .bttr-keep-h { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: #555; line-height: 1.4; }
+    .bttr-keep-h i { color: #8A6A00; }
+    .bttr-krow { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-top: 10px; margin-top: 10px; border-top: 1px dashed rgba(138,106,0,.25); }
+    .bttr-krow b { font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -0.02em; }
+    .bttr-krow small { display: block; font-size: 12.5px; color: #555; line-height: 1.4; margin-top: 2px; }
+    .bttr-pz { font-family: Poppins, sans-serif; font-weight: 900; font-size: 15px; white-space: nowrap; text-align: right; }
+    .bttr-pz span { display: block; font-family: Inter, sans-serif; font-size: 11px; font-weight: 600; color: #8a8a8a; }
 }
 </style>
 <script type="importmap">
@@ -5366,6 +5407,85 @@ main.overflow-y-auto {
         </div>
       `;
 
+      // Pagina Trattamenti tricologici mobile (Menu Donna): sedute a righe, laser con listino, mantenimento
+      const TRICOLOGICI_MOBILE_ROWS = [
+        { need: 'sebo, forfora, prurito', title: 'Igienizzare & Purificare', text: 'Argille e peeling naturali per la cute con eccesso di sebo e desquamazione.' },
+        { need: 'cute dolente, psoriasi', title: 'Lenire', text: 'Argille, peeling e impacchi naturali per purificare e rigenerare la cute.' },
+        { need: 'bulbo affaticato', title: 'Detossinare', text: 'Elimina le scorie e porta ossigeno e nutrimento al bulbo.' },
+        { need: 'cute e capelli spenti', title: 'Nutrire', text: 'Oli essenziali e prodotti nutritivi per il capello, la cute e il bulbo.' }
+      ];
+      const TRICOLOGICI_TOOLS = [['fa-wave-square', 'ultrasuoni'], ['fa-spray-can-sparkles', 'nebulizzazione'], ['fa-bolt', 'corrente galvanica'], ['fa-wind', 'ossigenoterapia'], ['fa-signal', 'alta frequenza']];
+      const TricologiciMobile = () => html`
+        <div className="bt-home-mobile btmn btcl animate-fade-in">
+        <section className="bth-hero">
+            <div className="bth-eyebrow">Trattamenti tricologici</div>
+            <h1 className="bth-h1 btmn-h1">${richText('La cura / parte dalla / [cute].')}</h1>
+            <p className="bth-lead">${richText('Sedute singole e laser, / **per la salute di cute e capelli.**')}</p>
+            <div className="btmn-only"><i className="fa-solid fa-lock"></i>Riservato a chi è in percorso</div>
+        </section>
+        <${ConsulenzaNotice} already="Sei già in percorso? Le sedute sono qui sotto ↓" />
+        <div className="bth-letter">
+            <div className="bth-hello">Scegli la tua seduta,</div>
+            <p className="btcl-p">Ogni seduta ha un compito preciso. In tutte potenziamo i prodotti naturali con <b>strumenti tecnologici</b>.</p>
+            <div className="btps-sep"><span>le sedute tricologiche</span></div>
+            ${TRICOLOGICI_TREATMENTS.map((t, i) => {
+              const r = TRICOLOGICI_MOBILE_ROWS[i];
+              return html`
+              <div key=${t.title} className="bttr-row">
+                <span className="bttr-ph" style=${{ backgroundImage: `url(${t.image})` }} role="img" aria-label=${r.title}></span>
+                <span className="bttr-tx">
+                  <span className="bttr-need">${r.need}</span>
+                  <b>${r.title}</b>
+                  <small>${r.text}</small>
+                  <span className="bttr-price"><b>${t.prices.donna.replace('€', ' €')}</b><span>a seduta</span></span>
+                </span>
+              </div>`;
+            })}
+            <div className="bttr-tools">
+                <div className="bttr-tools-k">con gli strumenti giusti</div>
+                <div className="btcl-chips">${TRICOLOGICI_TOOLS.map(([ic, t]) => html`<span key=${t} className="y"><i className=${`fa-solid ${ic}`}></i>${t}</span>`)}</div>
+            </div>
+            <div className="btps-sep"><span>il laser</span></div>
+            <div className="bttr-laser">
+                <div className="bttr-laser-kick">il primo salone in Italia</div>
+                <h3>Laser a fotobiostimolazione</h3>
+                <p>Lavora in profondità sul cuoio capelluto e stimola la rigenerazione cellulare.</p>
+                <ul>
+                    <li><i className="fa-solid fa-check"></i>Stimola la microcircolazione e la crescita del capello</li>
+                    <li><i className="fa-solid fa-check"></i>Aiuta a ridurre infiammazioni, prurito, rossori e desquamazioni</li>
+                    <li><i className="fa-solid fa-check"></i>Pensato anche per cute con psoriasi e dermatiti</li>
+                </ul>
+                <div className="bttr-list">
+                    <div className="bttr-lrow bttr-lhead"><span>Per</span><span className="bttr-d">Min</span><span className="bttr-v">Donna</span><span className="bttr-v plus">Donna+</span></div>
+                    ${LASER_TRICOLOGICI_DATA.map(row => html`
+                    <div key=${row.name} className="bttr-lrow">
+                        <span className="bttr-n">${row.name.charAt(0) + row.name.slice(1).toLowerCase().replace('/', ' / ')}</span>
+                        <span className="bttr-d">${row.duration}</span>
+                        <span className="bttr-v">${row.prices.donna} €</span>
+                        <span className="bttr-v plus">${row.prices.donnaPlus} €</span>
+                    </div>`)}
+                </div>
+                <div className="bttr-lnote"><i className="fa-solid fa-circle-check"></i>La piega è inclusa nel prezzo.</div>
+            </div>
+            <div className="btps-sep"><span>solo per il mantenimento</span></div>
+            <div className="bttr-keep">
+                <div className="bttr-keep-h"><i className="fa-solid fa-rotate"></i><span>Riservate a chi ha già completato il percorso correlato.</span></div>
+                <div className="bttr-krow"><div><b>Oleazioni</b><small>Nutre, idrata e protegge le lunghezze.</small></div><div className="bttr-pz">79 €<span>a seduta</span></div></div>
+                <div className="bttr-krow"><div><b>Fotoringiovanimento</b><small>Stimola la rigenerazione e ristruttura le rotture del capello.</small></div><div className="bttr-pz">120 €<span>a seduta</span></div></div>
+            </div>
+            <div className="btcl-lock"><i className="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>
+            <div className="bth-ps">
+                <span className="bth-ps-label">P.S.</span>
+                <span className="bth-ps-text">Quale seduta ti serve lo decidiamo insieme, guardando la tua cute.</span>
+            </div>
+            <div className="bth-signature">— Daniela</div>
+            <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_tricologici')}>Candidati per la Consulenza Beautrìco</a>
+            <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+            <div className="btcl-client">Sei già in percorso? <b>Chiedilo a Daniela in seduta</b></div>
+        </div>
+        </div>
+      `;
+
       // Avviso in cima a Menu Donna/Uomo (solo mobile): chiudibile, la scelta resta salvata sul telefono
       const NOTICE_KEY = 'btConsulenzaNoticeClosed';
       const ConsulenzaNotice = ({ text = 'Partiamo sempre dalla Consulenza Beautrìco: 90 minuti per conoscerti e analizzare cute e capelli, così ogni servizio è pensato per te.', already = 'Sei già in percorso? Il tuo menu è qui sotto ↓' }) => {
@@ -6840,8 +6960,11 @@ main.overflow-y-auto {
 
             if (section === 'trattamenti-tricologici') {
                 return html`
-                <div className="relative animate-fade-in">
+                <div>
+                ${gender === 'donna' && html`<${TricologiciMobile} />`}
+                <div className=${`relative animate-fade-in ${gender === 'donna' ? 'bt-home-desktop' : ''}`}>
                     <${TricologiciList} gender=${gender} />
+                </div>
                 </div>
                 `;
             }
