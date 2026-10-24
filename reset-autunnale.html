@@ -46,7 +46,84 @@
       right: calc(1.5rem + env(safe-area-inset-right)) !important;
     }
   }
+
+  /* === MOBILE: stessa lettera delle pagine del menu (sotto i 768px) === */
+  .rs-m { display: none; }
+  @media screen and (max-width: 767px) {
+    .rs-d { display: none !important; }
+    .rs-m { display: block; color: #0A0A0A; max-width: 480px; margin: 0 auto; padding-bottom: 32px; }
+    body { padding: 0 16px; background-color: #fff; background-image: linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px); background-size: 40px 40px; }
+    .rs-hero { text-align: center; padding-top: calc(28px + env(safe-area-inset-top)); }
+    .rs-eyebrow { font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px; }
+    .rs-eyebrow::before, .rs-eyebrow::after { content: "•"; color: #F5C200; margin: 0 8px; }
+    .rs-h1 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 34px; line-height: 1.04; letter-spacing: -0.045em; margin: 26px 0 0; }
+    .rs-hl { background: linear-gradient(transparent 60%, rgba(245,194,0,.6) 60%); padding: 0 2px; }
+    .rs-lead { font-size: 15px; color: #3a3a3a; letter-spacing: .03em; margin: 10px 0 0; line-height: 1.45; }
+    .rs-lead b { color: #0A0A0A; font-weight: 600; }
+    .rs-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 14px; }
+    .rs-pill { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 999px; background: #0A0A0A; color: #fff; font-family: Poppins, sans-serif; font-weight: 700; font-size: 12px; }
+    .rs-pill i { color: #F5C200; font-size: 11px; }
+    .rs-pill.autumn { background: #FBEEE0; color: #C2410C; border: 1px solid rgba(194,65,12,.3); }
+    .rs-pill.autumn i { color: #C2410C; }
+    .rs-notice { margin-top: 22px; background: #FFFBEA; border: 1px solid rgba(245,194,0,.6); border-radius: 18px; padding: 16px 16px 14px; box-shadow: 0 18px 40px rgba(0,0,0,.08); }
+    .rs-notice-row { display: flex; gap: 12px; align-items: flex-start; }
+    .rs-notice-ic { width: 36px; height: 36px; border-radius: 50%; background: #F5C200; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .rs-notice h3 { font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.02em; line-height: 1.2; margin: 0; }
+    .rs-notice p { font-size: 13px; color: #555; line-height: 1.5; margin: 4px 0 0; }
+    .rs-notice a { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px; color: #0A0A0A; text-decoration: none; border-bottom: 2px solid #F5C200; }
+    .rs-already { text-align: center; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; margin-top: 14px; transform: rotate(-2deg); }
+    .rs-letter { margin: 22px 2px 0; background: #fff; border-radius: 8px; padding: 24px 20px 22px; box-shadow: 0 2px 0 #eee, 0 24px 56px rgba(0,0,0,.13); }
+    .rs-hello { font-family: Caveat, cursive; font-weight: 700; font-size: 30px; line-height: 1.1; color: #8A6A00; margin-bottom: 4px; }
+    .rs-p { font-size: 14px; color: #555; line-height: 1.6; letter-spacing: .02em; margin: 8px 0 0; }
+    .rs-p b { color: #0A0A0A; }
+    .rs-sep { display: flex; align-items: center; gap: 10px; margin: 22px 0 4px; }
+    .rs-sep::before, .rs-sep::after { content: ""; flex: 1; border-top: 1px dashed #cfc8b8; }
+    .rs-sep span { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; white-space: nowrap; }
+    .rs-quote { margin-top: 12px; padding: 12px 14px; border-left: 3px solid #C2410C; background: #FBEEE0; border-radius: 0 12px 12px 0; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; line-height: 1.25; color: #5b4636; }
+    .rs-step { display: flex; gap: 12px; align-items: flex-start; position: relative; padding: 12px 0 2px; }
+    .rs-step:not(:last-child)::before { content: ""; position: absolute; left: 17px; top: 50px; bottom: -10px; border-left: 2px dotted #e8c9b0; }
+    .rs-n { width: 36px; height: 36px; border-radius: 50%; background: #C2410C; color: #fff; display: flex; align-items: center; justify-content: center; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+    .rs-kick { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 18px; color: #C2410C; line-height: 1; margin-bottom: 2px; }
+    .rs-step b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.02em; line-height: 1.2; }
+    .rs-step p { font-size: 13.5px; color: #555; line-height: 1.55; margin: 6px 0 0; }
+    .rs-step p strong { color: #0A0A0A; }
+    .rs-price { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; padding: 14px 16px; border-radius: 16px; border: 2px solid #0A0A0A; }
+    .rs-price-lbl { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: #8A6A00; line-height: 1; }
+    .rs-price-what { font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -0.02em; margin-top: 2px; }
+    .rs-price-amt { font-family: Poppins, sans-serif; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; white-space: nowrap; text-align: right; line-height: 1; }
+    .rs-price-amt small { display: block; font-family: Inter, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0; color: #666; margin-top: 3px; }
+    .rs-cycle { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; font-size: 13px; color: #444; line-height: 1.45; }
+    .rs-cycle i { color: #C2410C; margin-top: 3px; }
+    .rs-gift { position: relative; display: flex; gap: 12px; align-items: center; margin-top: 18px; padding: 24px 14px 14px 10px; border-radius: 16px; background: #FBEEE0; }
+    .rs-gift img { width: 56px; height: 66px; object-fit: contain; flex-shrink: 0; }
+    .rs-gift-badge { position: absolute; top: -9px; right: 14px; background: #E5383B; color: #fff; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px; }
+    .rs-gift b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: -0.02em; line-height: 1.25; }
+    .rs-gift small { display: block; font-size: 12.5px; color: #5b4636; line-height: 1.4; margin-top: 2px; }
+    .rs-gift .val { display: inline-block; margin-top: 4px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 12px; color: #C2410C; }
+    .rs-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .rs-chips span { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; background: #E3F5EA; color: #146B3D; border-radius: 999px; padding: 4px 10px; }
+    .rs-chips i { font-size: 10px; }
+    .rs-pay { margin-top: 10px; border-radius: 16px; background: #F6F4EF; padding: 4px 14px; }
+    .rs-pay-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #e0d8c8; }
+    .rs-pay-row:last-child { border-bottom: 0; }
+    .rs-pay-row .rs-n { width: 30px; height: 30px; font-size: 12px; }
+    .rs-pay-row > span:nth-child(2) { flex: 1; min-width: 0; }
+    .rs-pay-row b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; }
+    .rs-pay-row small { display: block; font-size: 12px; color: #666; line-height: 1.35; margin-top: 1px; }
+    .rs-pay-amt { font-family: Poppins, sans-serif; font-weight: 900; font-size: 17px; white-space: nowrap; }
+    .rs-pay-amt.zero { color: #1E9E5A; font-size: 13px; }
+    .rs-pay-note { font-family: Caveat, cursive; font-weight: 700; font-size: 18px; color: #8A6A00; text-align: center; margin-top: 8px; }
+    .rs-ps { margin-top: 16px; padding-top: 16px; border-top: 1px dashed #ddd; display: flex; align-items: baseline; gap: 10px; }
+    .rs-ps-label { font-family: Caveat, cursive; font-weight: 700; font-size: 30px; color: #444; }
+    .rs-ps-text { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #E5383B; line-height: 1.15; }
+    .rs-sign { text-align: right; font-family: Caveat, cursive; font-weight: 700; font-size: 30px; color: #444; margin-top: 6px; }
+    .rs-cta { display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 20px; padding: 16px 18px; border-radius: 999px; background: #F5C200; color: #0A0A0A; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; line-height: 1.3; text-decoration: none; box-shadow: 0 0 20px rgba(245,194,0,.35); }
+    .rs-note { font-family: Caveat, cursive; font-weight: 700; color: #8A6A00; font-size: 21px; text-align: center; margin-top: 10px; }
+    .rs-client { text-align: center; margin-top: 12px; font-size: 13px; color: #555; }
+    .rs-client b { color: #0A0A0A; border-bottom: 2px solid #F5C200; }
+  }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -55,7 +132,82 @@
   <i class="fa-solid fa-arrow-left" style="font-size:1rem;color:#1A1A1A;"></i>
 </button>
 
-<div class="max-w-5xl mx-auto animate-zoom-in pb-16">
+<!-- MOBILE: lettera come le altre pagine del menu -->
+<div class="rs-m animate-zoom-in">
+  <section class="rs-hero">
+    <div class="rs-eyebrow">Reset Autunnale</div>
+    <h1 class="rs-h1">Togli l'estate<br>dai tuoi<br><span class="rs-hl">capelli</span>.</h1>
+    <p class="rs-lead">Pulizia profonda e rigenerazione<br><b>in un'unica seduta.</b></p>
+    <div class="rs-pills">
+      <span class="rs-pill autumn"><i class="fa-solid fa-leaf"></i>Solo per quest'autunno</span>
+      <span class="rs-pill"><i class="fa-solid fa-lock"></i>Riservato a chi è in percorso</span>
+    </div>
+  </section>
+
+  <div class="rs-notice">
+    <div class="rs-notice-row">
+      <div class="rs-notice-ic"><i class="fa-solid fa-info"></i></div>
+      <div><h3>Prima volta da Beautrì?</h3><p>Partiamo sempre dalla Consulenza Beautrìco: 90 minuti per conoscerti e analizzare cute e capelli.</p></div>
+    </div>
+    <a href="https://form.typeform.com/to/QUzap8so#pagina=menu&ingresso=menu&utm_source=menu" target="_blank" rel="noopener">Candidati per la Consulenza Beautrìco <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="rs-already">Sei già in percorso? Il Reset è qui sotto ↓</div>
+
+  <div class="rs-letter">
+    <div class="rs-hello">Dopo l'estate il capello ha bisogno di respirare,</div>
+    <p class="rs-p">Resine, smog e accumuli di prodotto <b>soffocano la fibra</b>: i capelli diventano opachi, pesanti e non assorbono più i trattamenti. Con il Reset li liberiamo e li prepariamo alla nuova stagione.</p>
+    <div class="rs-quote">Una chioma leggera, pulita e pronta ad accogliere ogni trattamento.</div>
+
+    <div class="rs-sep"><span>3 passaggi, un'unica seduta</span></div>
+    <div class="rs-step">
+      <span class="rs-n">1</span>
+      <span><span class="rs-kick">purificazione</span><b>Detox della fibra</b>
+        <p>Un <strong>prodotto purificante specifico</strong> toglie con delicatezza resine, siliconi e impurità e "riapre" le cuticole.</p></span>
+    </div>
+    <div class="rs-step">
+      <span class="rs-n">2</span>
+      <span><span class="rs-kick">ricostruzione</span><b>Impacco rigenerante nebulizzato</b>
+        <p>A fibra pulita, la nebulizzazione <strong>porta i principi attivi nel cuore del capello</strong> per una ricostruzione profonda.</p></span>
+    </div>
+    <div class="rs-step">
+      <span class="rs-n">3</span>
+      <span><span class="rs-kick">sigillatura</span><b>Conditioner acido sigillante</b>
+        <p>"Chiude" le cuticole e <strong>trattiene il nutrimento dentro la fibra</strong>: capelli facili da pettinare e luminosi.</p></span>
+    </div>
+
+    <div class="rs-sep"><span>il prezzo</span></div>
+    <div class="rs-price">
+      <div><div class="rs-price-lbl">a seduta</div><div class="rs-price-what">Reset Autunnale</div></div>
+      <div class="rs-price-amt">119 €<small>a seduta</small></div>
+    </div>
+    <div class="rs-cycle"><i class="fa-solid fa-leaf"></i><span>Ti consiglio un ciclo di <b>3 sedute</b>, una ogni 20-25 giorni, per tenere il capello leggero e rigenerato per tutto il cambio di stagione.</span></div>
+    <div class="rs-gift">
+      <span class="rs-gift-badge">OMAGGIO</span>
+      <img src="foto-prodotti/menu-lun-conditioner.webp" alt="Conditioner Idratante Beautrì" loading="lazy">
+      <span><b>Il Conditioner Idratante, per casa</b><small>Mantiene morbidezza e lucentezza tra una seduta e l'altra.</small><span class="val">valore 29 €</span>
+        <div class="rs-chips"><span><i class="fa-solid fa-check"></i>no SLS e SLES</span><span><i class="fa-solid fa-check"></i>no parabeni</span><span><i class="fa-solid fa-check"></i>oli essenziali naturali</span></div></span>
+    </div>
+
+    <div class="rs-sep"><span>come paghi il ciclo</span></div>
+    <div class="rs-pay">
+      <div class="rs-pay-row"><span class="rs-n">1</span><span><b>1ª seduta</b><small>paghi la 1ª e la 2ª · Conditioner in omaggio</small></span><span class="rs-pay-amt">238 €</span></div>
+      <div class="rs-pay-row"><span class="rs-n">2</span><span><b>2ª seduta</b><small>paghi la 3ª in anticipo</small></span><span class="rs-pay-amt">119 €</span></div>
+      <div class="rs-pay-row"><span class="rs-n">3</span><span><b>3ª seduta</b><small>già saldata</small></span><span class="rs-pay-amt zero">nessun pagamento</span></div>
+    </div>
+    <div class="rs-pay-note">sempre una seduta avanti, mai tutto subito</div>
+
+    <div class="rs-ps">
+      <span class="rs-ps-label">P.S.</span>
+      <span class="rs-ps-text">Il Reset è solo per questo autunno: chiedimelo alla prossima seduta.</span>
+    </div>
+    <div class="rs-sign">— Daniela</div>
+    <a class="rs-cta" href="https://form.typeform.com/to/QUzap8so#pagina=menu&ingresso=menu&utm_source=menu" target="_blank" rel="noopener">Candidati per la Consulenza Beautrìco</a>
+    <div class="rs-note">Ti ricontattiamo noi entro 24 ore</div>
+    <div class="rs-client">Sei già in percorso? <b>Chiedilo a Daniela in seduta</b></div>
+  </div>
+</div>
+
+<div class="rs-d max-w-5xl mx-auto animate-zoom-in pb-16">
 
   <!-- HERO -->
   <div class="rounded-[2.5rem] overflow-hidden shadow-xl mb-10 relative" style="background: linear-gradient(160deg, #7C2D12 0%, #9A3412 45%, #C2410C 100%);">
