@@ -1023,6 +1023,7 @@ main.overflow-y-auto {
     .bttr-list { margin-top: 12px; background: #fff; color: #0A0A0A; border-radius: 14px; overflow: hidden; }
     .bttr-lrow { display: grid; grid-template-columns: minmax(0, 1fr) 26px 44px 48px; align-items: center; gap: 5px; padding: 9px 10px; font-size: 12.5px; border-top: 1px solid #f0ece3; }
     .bttr-lrow:first-child { border-top: 0; }
+    .bttr-list.solo .bttr-lrow { grid-template-columns: minmax(0, 1fr) 26px 48px; }
     .bttr-lhead { background: #F6F4EF; font-family: Poppins, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: #555; }
     .bttr-n { font-size: 12px; font-weight: 600; line-height: 1.25; -webkit-hyphens: auto; hyphens: auto; }
     .bttr-d { color: #8a8a8a; font-size: 11.5px; text-align: center; }
@@ -4920,7 +4921,8 @@ main.overflow-y-auto {
           groups: [
             { label: 'prima di tutto, la cute', rows: [
               { id: 'trattamenti-tricologici', icon: 'fa-microscope', title: 'Trattamenti tricologici', text: 'Sedute singole e laser per sebo, forfora, prurito e diradamento.' },
-              { id: 'spa', icon: 'fa-water', title: 'SPA', text: 'Vapore a 35°, non a 90° come quello classico: la cute respira, non si stressa.' }
+              { id: 'spa', icon: 'fa-water', title: 'SPA', text: 'Vapore a 35°, non a 90° come quello classico: la cute respira, non si stressa.' },
+              { id: 'migliori-proposte', icon: 'fa-star', title: 'Migliori proposte', text: 'Cute No Stress: un tocco in più al servizio, per distendere la cute.' }
             ] },
             { label: 'lo stile, senza stress', rows: [
               { id: 'stilistico', icon: 'fa-scissors', title: 'Stilistico', text: 'Beautrì Cut classico, olistico o energizzante, con il massaggio.' }
@@ -5333,7 +5335,7 @@ main.overflow-y-auto {
         </div>
       `;
 
-      // Pagina Trattamenti tricologici mobile (Menu Donna): sedute a righe, laser con listino, mantenimento
+      // Pagina Trattamenti tricologici mobile (Menu Donna e Uomo): sedute a righe, laser con listino, mantenimento (solo Donna)
       const TRICOLOGICI_MOBILE_ROWS = [
         { need: 'sebo, forfora, prurito', title: 'Igienizzare & Purificare', text: 'Argille e peeling naturali per la cute con eccesso di sebo e desquamazione.' },
         { need: 'cute dolente, psoriasi', title: 'Lenire', text: 'Argille, peeling e impacchi naturali per purificare e rigenerare la cute.' },
@@ -5341,7 +5343,7 @@ main.overflow-y-auto {
         { need: 'cute e capelli spenti', title: 'Nutrire', text: 'Oli essenziali e prodotti nutritivi per il capello, la cute e il bulbo.' }
       ];
       const TRICOLOGICI_TOOLS = [['fa-wave-square', 'ultrasuoni'], ['fa-spray-can-sparkles', 'nebulizzazione'], ['fa-bolt', 'corrente galvanica'], ['fa-wind', 'ossigenoterapia'], ['fa-signal', 'alta frequenza']];
-      const TricologiciMobile = () => html`
+      const TricologiciMobile = ({ gender }) => html`
         <div className="bt-home-mobile btmn btcl animate-fade-in">
         <section className="bth-hero">
             <div className="bth-eyebrow">Trattamenti tricologici</div>
@@ -5363,7 +5365,7 @@ main.overflow-y-auto {
                   <span className="bttr-need">${r.need}</span>
                   <b>${r.title}</b>
                   <small>${r.text}</small>
-                  <span className="bttr-price"><b>${t.prices.donna.replace('€', ' €')}</b><span>a seduta</span></span>
+                  <span className="bttr-price"><b>${t.prices[gender === 'uomo' ? 'uomo' : 'donna'].replace('€', ' €')}</b><span>a seduta</span></span>
                 </span>
               </div>`;
             })}
@@ -5381,24 +5383,26 @@ main.overflow-y-auto {
                     <li><i className="fa-solid fa-check"></i>Aiuta a ridurre infiammazioni, prurito, rossori e desquamazioni</li>
                     <li><i className="fa-solid fa-check"></i>Pensato anche per cute con psoriasi e dermatiti</li>
                 </ul>
-                <div className="bttr-list">
-                    <div className="bttr-lrow bttr-lhead"><span>Per</span><span className="bttr-d">Min</span><span className="bttr-v">Donna</span><span className="bttr-v plus">Donna+</span></div>
+                <div className=${`bttr-list${gender === 'uomo' ? ' solo' : ''}`}>
+                    <div className="bttr-lrow bttr-lhead"><span>Per</span><span className="bttr-d">Min</span>${gender === 'uomo' ? html`<span className="bttr-v">Uomo</span>` : html`<span className="bttr-v">Donna</span><span className="bttr-v plus">Donna+</span>`}</div>
                     ${LASER_TRICOLOGICI_DATA.map(row => html`
                     <div key=${row.name} className="bttr-lrow">
                         <span className="bttr-n">${row.name.charAt(0) + row.name.slice(1).toLowerCase().replace('/', ' / ')}</span>
                         <span className="bttr-d">${row.duration}</span>
-                        <span className="bttr-v">${row.prices.donna} €</span>
-                        <span className="bttr-v plus">${row.prices.donnaPlus} €</span>
+                        ${gender === 'uomo' ? html`<span className="bttr-v">${row.prices.uomo} €</span>` : html`<span className="bttr-v">${row.prices.donna} €</span>
+                        <span className="bttr-v plus">${row.prices.donnaPlus} €</span>`}
                     </div>`)}
                 </div>
                 <div className="bttr-lnote"><i className="fa-solid fa-circle-check"></i>La piega è inclusa nel prezzo.</div>
             </div>
+            ${gender !== 'uomo' && html`
             <div className="btps-sep"><span>solo per il mantenimento</span></div>
             <div className="bttr-keep">
                 <div className="bttr-keep-h"><i className="fa-solid fa-rotate"></i><span>Riservate a chi ha già completato il percorso correlato.</span></div>
                 <div className="bttr-krow"><div><b>Oleazioni</b><small>Nutre, idrata e protegge le lunghezze.</small></div><div className="bttr-pz">79 €<span>a seduta</span></div></div>
                 <div className="bttr-krow"><div><b>Fotoringiovanimento</b><small>Stimola la rigenerazione e ristruttura le rotture del capello.</small></div><div className="bttr-pz">120 €<span>a seduta</span></div></div>
             </div>
+            `}
             <div className="btcl-lock"><i className="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>
             <div className="bth-ps">
                 <span className="bth-ps-label">P.S.</span>
@@ -5597,7 +5601,7 @@ main.overflow-y-auto {
         </div>
       `;
 
-      // Chiusura comune delle lettere mobile del Menu Donna: P.S., firma e Consulenza
+      // Chiusura comune delle lettere mobile del Menu Donna e Uomo: P.S., firma e Consulenza
       const LetteraFirma = ({ ps, track }) => html`
             <div>
             <div className="bth-ps">
@@ -5726,6 +5730,88 @@ main.overflow-y-auto {
             <div className="btcl-lock"><i className="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>
             <div className="btst-respect">Ogni prodotto che uso in piega è <b>formulato da noi per rispettare cute e capelli</b>: il tuo percorso continua anche qui.</div>
             <${LetteraFirma} ps=${'Non faccio tagli o pieghe "e basta": sono il finale della tua cura, non il suo inizio.'} track="candidati_stilistico" />
+        </div>
+        </div>
+      `;
+
+      // Pagina Stilistico mobile (Menu Uomo): i tre momenti, poi i tre Beautrì Cut scelti per come ti vuoi sentire
+      const STILISTICO_UOMO = [
+        { icon: 'fa-tree', kick: 'calore e legno', title: 'Beautrì Cut', price: '39 €', when: html`Per te se vuoi <b>sciogliere le tensioni</b> e uscire rigenerato.`, text: html`Parte dal legno: la legnoterapia scalda i muscoli e scioglie le tensioni. Con il suono della cascata e un massaggio delicato, <b>ogni gesto del taglio diventa relax</b>.`, chips: ['legnoterapia', 'cascata', 'massaggio', 'taglio'] },
+        { icon: 'fa-spa', dark: true, kick: 'equilibrio e mente', title: 'Beautrì Cut Olistico', price: '39 €', when: html`Per te se lo stress di ogni giorno <b>ti pesa addosso</b>.`, text: html`Un taglio che ferma il tempo: terapie olistiche e tecnologie innovative sciolgono le tensioni, <b>per un look curato e un momento tutto per te</b>.`, chips: ['olistica', 'relax', 'taglio'] },
+        { icon: 'fa-bolt', kick: 'vitalità ed energia', title: 'Beautrì Cut Energizzante', price: '39 €', when: html`Per te se hai bisogno di <b>staccare la spina</b> e ricaricarti.`, text: html`Sfioramenti, pressioni, frizioni e percussioni su schiena, collo e testa: <b>ritmo e intensità per una vera sferzata di energia</b>.`, chips: ['massaggio', 'energia', 'taglio'] }
+      ];
+      const StilisticoUomoMobile = () => html`
+        <div className="bt-home-mobile btmn btcl btst btmp animate-fade-in">
+        <section className="bth-hero">
+            <div className="bth-eyebrow">Stilistico</div>
+            <h1 className="bth-h1 btmn-h1">${richText('Il taglio, / il finale / della tua [cura].')}</h1>
+            <p className="bth-lead">${richText('Un momento tutto per te, / **che rispetta il lavoro sulla cute.**')}</p>
+            <div className="btmn-only"><i className="fa-solid fa-lock"></i>Riservato a chi è in percorso</div>
+        </section>
+        <${ConsulenzaNotice} already="Sei già in percorso? I tagli sono qui sotto ↓" />
+        <div className="bth-letter">
+            <div className="bth-hello">Chiudiamo in bellezza,</div>
+            <p className="btcl-p">Il taglio è l'ultimo passo della tua seduta. L'ho pensato per farti uscire in ordine <b>senza disfare il lavoro fatto su cute e capelli</b>.</p>
+            <div className="btps-sep"><span>cosa ti aspetta</span></div>
+            <div className="btst-moments">
+                <div className="btst-mo"><span className="btst-mo-ic"><i className="fa-solid fa-hand-holding-heart"></i></span><span><b>Un'accoglienza calorosa</b><small>Tutto il team ti dà il benvenuto.</small></span></div>
+                <div className="btst-mo"><span className="btst-mo-ic"><i className="fa-solid fa-spa"></i></span><span><b>Massaggio in zona SPA</b><small>Tecniche rilassanti, con musica e luci soffuse.</small></span></div>
+                <div className="btst-mo"><span className="btst-mo-ic"><i className="fa-solid fa-mug-hot"></i></span><span style=${{ flex: 1 }}><b>Una coccola, mentre aspetti</b>
+                    <span className="btst-cozy">
+                        <span><i className="fa-solid fa-mug-hot"></i>tisana calda</span>
+                        <span><i className="fa-solid fa-cookie"></i>un dolcetto</span>
+                        <span><i className="fa-solid fa-rug"></i>un caldo plaid</span>
+                    </span></span></div>
+            </div>
+            <div className="btps-sep"><span>come ti vuoi sentire oggi?</span></div>
+            ${STILISTICO_UOMO.map(c => html`
+            <div key=${c.title} className=${`btst-card${c.dark ? ' dark' : ''}`}>
+                <div className="btst-card-top">
+                    <span className="btst-who"><span className="btmn-ic"><i className=${`fa-solid ${c.icon}`}></i></span><span><span className="btcl-kick">${c.kick}</span><b>${c.title}</b></span></span>
+                    <span className="btst-pill">${c.price}</span>
+                </div>
+                <div className="btmp-when"><i className="fa-solid fa-hand-point-right"></i><span>${c.when}</span></div>
+                <p>${c.text}</p>
+                ${checkChips(c.chips)}
+            </div>`)}
+            <div className="btcl-lock"><i className="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>
+            <div className="btst-respect">Ogni prodotto che uso sul tuo capello è <b>formulato da noi per rispettare cute e capelli</b>: il tuo percorso continua anche qui.</div>
+            <${LetteraFirma} ps=${'Non faccio tagli "e basta": sono il finale della tua cura, non il suo inizio.'} track="candidati_stilistico_uomo" />
+        </div>
+        </div>
+      `;
+
+      // Pagina Migliori proposte mobile (Menu Uomo): come funziona e Cute No Stress
+      const MiglioriProposteUomoMobile = () => html`
+        <div className="bt-home-mobile btmn btcl btmp animate-fade-in">
+        <section className="bth-hero">
+            <div className="bth-eyebrow">Migliori proposte</div>
+            <h1 className="bth-h1 btmn-h1">${richText('Un tocco in più / al tuo servizio, / la cute [respira].')}</h1>
+            <p className="bth-lead">${richText('Per la cute sotto stress, / **la differenza la senti subito.**')}</p>
+            <div className="btmn-only"><i className="fa-solid fa-lock"></i>Riservato a chi è in percorso</div>
+        </section>
+        <${ConsulenzaNotice} already="Sei già in percorso? La proposta è qui sotto ↓" />
+        <div className="bth-letter">
+            <div className="bth-hello">La mia migliore proposta,</div>
+            <p className="btcl-p">Tensioni, ritmi frenetici, ansia e sudorazione si fanno sentire anche sul cuoio capelluto. Per questo ho pensato a <b>un'aggiunta al tuo servizio che lo distende</b>.</p>
+            <div className="btmp-how">
+                <div><span className="btmp-n">1</span><b>Scegli</b><small>il tuo servizio</small></div>
+                <div><span className="btmp-n">2</span><b>Aggiungi</b><small>Cute No Stress</small></div>
+                <div><span className="btmp-n">3</span><b>Lo senti subito</b><small>già a fine servizio</small></div>
+            </div>
+            <div className="btps-sep"><span>per la tua cute</span></div>
+            <div className="btmp-prop">
+                <div className="btmp-prop-top">
+                    <span className="btmn-ic gold"><i className="fa-solid fa-brain"></i></span>
+                    <span><span className="btcl-kick">cute distesa</span><b>Cute No Stress</b></span>
+                    <span className="btmp-price">21-29 €<small>a servizio</small></span>
+                </div>
+                <div className="btmp-when"><i className="fa-solid fa-hand-point-right"></i><span>Per te se senti la cute <b>tesa, stressata o sudata</b>.</span></div>
+                <p>Distende il cuoio capelluto e <b>cala la tensione</b> che ritmi e stress di ogni giorno ci lasciano addosso. Adatta anche durante i percorsi di chemioterapia.</p>
+                ${checkChips(['tensioni', 'stress', 'sudorazione'])}
+            </div>
+            <div className="btcl-lock"><i className="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>
+            <${LetteraFirma} ps="Non sai se fa per te? Dimmi cosa senti sulla cute e lo capiamo insieme." track="candidati_migliori_proposte_uomo" />
         </div>
         </div>
       `;
@@ -6790,8 +6876,8 @@ main.overflow-y-auto {
             const props = gender === 'uomo' ? BEST_PROPOSALS_UOMO : BEST_PROPOSALS_DONNA;
             return html`
                 <div>
-                ${gender === 'donna' && html`<${MiglioriProposteMobile} onColorPass=${() => { setSection('colorazioni'); setSubSection('color-pass'); }} />`}
-                <div className=${`relative animate-zoom-in max-w-6xl mx-auto pb-12 ${gender === 'donna' ? 'bt-home-desktop' : ''}`}>
+                ${gender === 'donna' ? html`<${MiglioriProposteMobile} onColorPass=${() => { setSection('colorazioni'); setSubSection('color-pass'); }} />` : html`<${MiglioriProposteUomoMobile} />`}
+                <div className="relative animate-zoom-in max-w-6xl mx-auto pb-12 bt-home-desktop">
                 <div className="bg-black rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] p-6 md:p-12 mb-12 text-center text-white relative">
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter mb-4">MIGLIORI PROPOSTE</h1>
                     <p className="max-w-3xl mx-auto text-slate-400 text-sm uppercase font-medium">Create per trasformare e dare vita nuova allo stelo già visibile al momento del servizio.</p>
@@ -7253,8 +7339,8 @@ main.overflow-y-auto {
             if (section === 'stilistico') {
                 return html`
                 <div>
-                ${gender === 'donna' && html`<${StilisticoMobile} />`}
-                <div className=${`relative animate-fade-in ${gender === 'donna' ? 'bt-home-desktop' : ''}`}>
+                ${gender === 'donna' ? html`<${StilisticoMobile} />` : html`<${StilisticoUomoMobile} />`}
+                <div className="relative animate-fade-in bt-home-desktop">
                     <${StilisticoList} gender=${gender} />
                 </div>
                 </div>
@@ -7264,8 +7350,8 @@ main.overflow-y-auto {
             if (section === 'trattamenti-tricologici') {
                 return html`
                 <div>
-                ${gender === 'donna' && html`<${TricologiciMobile} />`}
-                <div className=${`relative animate-fade-in ${gender === 'donna' ? 'bt-home-desktop' : ''}`}>
+                <${TricologiciMobile} gender=${gender} />
+                <div className="relative animate-fade-in bt-home-desktop">
                     <${TricologiciList} gender=${gender} />
                 </div>
                 </div>
