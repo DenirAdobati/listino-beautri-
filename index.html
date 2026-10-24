@@ -1038,6 +1038,43 @@ main.overflow-y-auto {
     .bttr-krow small { display: block; font-size: 12.5px; color: #555; line-height: 1.4; margin-top: 2px; }
     .bttr-pz { font-family: Poppins, sans-serif; font-weight: 900; font-size: 15px; white-space: nowrap; text-align: right; }
     .bttr-pz span { display: block; font-family: Inter, sans-serif; font-size: 11px; font-weight: 600; color: #8a8a8a; }
+
+    /* pagina SPA (Menu Donna e Uomo): video in alto, tecnologie, rituale Soft Touch */
+    .btspa-video-k { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: #8A6A00; text-align: center; margin: 22px 0 8px; transform: rotate(-2deg); }
+    .btspa-video { position: relative; margin: 0 2px; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #111; box-shadow: 0 18px 40px rgba(0,0,0,.18); }
+    .btspa-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .btspa .bt-notice-wrap { margin-top: 22px; }
+    .btspa-exp { padding: 16px 0; border-bottom: 1px dashed #e4dfd3; }
+    .btspa-exp:last-of-type { border-bottom: 0; }
+    .btspa-exp-top { display: flex; gap: 12px; align-items: center; }
+    .btspa-exp-top b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -0.02em; line-height: 1.15; }
+    .btspa-exp p { font-size: 13.5px; color: #555; line-height: 1.55; margin: 8px 0 0; }
+    .btspa-exp p b { color: #0A0A0A; }
+    .btspa-photo { display: block; width: 100%; height: 170px; margin-top: 12px; border-radius: 14px; background: #EFEAE0 center/cover no-repeat; }
+    .btspa-temp { margin-top: 12px; padding: 12px 14px; background: #F6F4EF; border-radius: 14px; }
+    .btspa-t-row { display: grid; grid-template-columns: 124px 1fr 58px; align-items: center; gap: 8px; padding: 5px 0; font-size: 12.5px; }
+    .btspa-t-row > span:first-child { font-weight: 600; color: #444; line-height: 1.25; }
+    .btspa-face { font-style: normal; font-size: 18px; margin-right: 6px; vertical-align: -2px; }
+    .btspa-bar { height: 10px; border-radius: 999px; background: #e4dfd3; overflow: hidden; }
+    .btspa-bar i { display: block; height: 100%; border-radius: 999px; }
+    .btspa-t-row .v { white-space: nowrap; text-align: right; font-family: Poppins, sans-serif; font-weight: 800; }
+    .btspa-hot .btspa-bar i { width: 100%; background: linear-gradient(90deg, #F5A35C, #E5383B); }
+    .btspa-hot .v { color: #A4161A; }
+    .btspa-ok .btspa-bar i { width: 36%; background: linear-gradient(90deg, #7FD3A6, #1E9E5A); }
+    .btspa-ok .v { color: #146B3D; }
+    .btspa-quote { margin-top: 12px; padding: 12px 14px; border-left: 3px solid #F5C200; background: #FFFBEA; border-radius: 0 12px 12px 0; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; line-height: 1.25; color: #444; }
+    .btspa-ritual { margin-top: 14px; border-radius: 20px; background: #0A0A0A; color: #fff; padding: 18px 16px 16px; }
+    .btspa-r-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .btspa-r-kick { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: #F5C200; line-height: 1.1; }
+    .btspa-ritual h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; line-height: 1.05; margin: 2px 0 0; color: #fff; }
+    .btspa-r-price { flex-shrink: 0; background: #F5C200; color: #0A0A0A; font-family: Poppins, sans-serif; font-weight: 900; font-size: 18px; padding: 6px 12px; border-radius: 999px; }
+    .btspa-ritual p { font-size: 13px; color: rgba(255,255,255,.78); line-height: 1.5; margin: 8px 0 0; }
+    .btspa-ritual p b { color: #fff; }
+    .btspa-stones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 14px; }
+    .btspa-stone { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 10px 6px; text-align: center; }
+    .btspa-stone i { width: 32px; height: 32px; margin: 0 auto; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .btspa-stone b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 12px; margin-top: 6px; line-height: 1.15; }
+    .btspa-stone small { display: block; font-size: 10.5px; color: rgba(255,255,255,.65); line-height: 1.3; margin-top: 3px; }
 }
 </style>
 <script type="importmap">
@@ -5486,6 +5523,72 @@ main.overflow-y-auto {
         </div>
       `;
 
+      // Pagina SPA mobile (Menu Donna e Uomo): video in alto, tre tecnologie, rituale Soft Touch
+      const SPA_STONES = [
+        { icon: 'fa-gem', bg: '#CDEBD8', color: '#146B3D', name: 'Giada verde', text: 'per riequilibrare le emozioni' },
+        { icon: 'fa-gem', bg: '#F8D7DF', color: '#A23B5A', name: 'Quarzo rosa', text: 'per calmare stress e stanchezza' },
+        { icon: 'fa-leaf', bg: '#E8E3B8', color: '#6B6420', name: 'Bamboo', text: 'per sciogliere le tensioni' }
+      ];
+      const SpaMobile = () => html`
+        <div className="bt-home-mobile btmn btcl btspa animate-fade-in">
+        <section className="bth-hero">
+            <div className="bth-eyebrow">SPA</div>
+            <h1 className="bth-h1 btmn-h1">${richText('Il relax / che rispetta / la [cute].')}</h1>
+            <p className="bth-lead">${richText('Vapore a 35°, acqua calda / **e rituali orientali.**')}</p>
+            <div className="btmn-only"><i className="fa-solid fa-lock"></i>Riservato a chi è in percorso</div>
+        </section>
+        <div className="btspa-video-k">guarda la nostra SPA ↓</div>
+        <div className="btspa-video">
+            <iframe src="https://www.youtube.com/embed/c7hDiS4EC4M" title="Video SPA Beautrì" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+        </div>
+        <${ConsulenzaNotice} already="Sei già in percorso? La SPA è qui sotto ↓" />
+        <div className="bth-letter">
+            <div className="bth-hello">Ti do il benvenuto nella mia SPA,</div>
+            <p className="btcl-p">Qui ogni trattamento è pensato per farti stare bene <b>senza stressare cute e capelli</b>. Ti racconto cosa trovi.</p>
+            <div className="btps-sep"><span>cosa la rende diversa</span></div>
+            <div className="btspa-exp">
+                <div className="btspa-exp-top"><span className="btmn-ic"><i className="fa-solid fa-couch"></i></span><span><span className="btcl-kick">addio mal di collo</span><b>Poltrone reclinabili</b></span></div>
+                <p>Al lavatesta il collo non fa più male. Un cuscino ergonomico <b>scarica il peso della testa su più punti</b>, così ti rilassi davvero.</p>
+                <span className="btspa-photo" style=${{ backgroundImage: 'url(https://i.ibb.co/HfRD7QzN/DSF8767-1.jpg)' }} role="img" aria-label="Poltrone reclinabili Beautrì"></span>
+            </div>
+            <div className="btspa-exp">
+                <div className="btspa-exp-top"><span className="btmn-ic"><i className="fa-solid fa-cloud"></i></span><span><span className="btcl-kick">vapore delicato</span><b>Spa Mist II</b></span></div>
+                <p>Con gli ultrasuoni nebulizza l'acqua in nanoparticelle. Così i principi attivi idratanti, nutrienti e riparatori <b>penetrano senza scaldare troppo</b>.</p>
+                <div className="btspa-temp">
+                    <div className="btspa-t-row btspa-hot"><span><em className="btspa-face">🥵</em>Vapore classico</span><span className="btspa-bar"><i></i></span><span className="v">90-100°</span></div>
+                    <div className="btspa-t-row btspa-ok"><span><em className="btspa-face">😍</em>Spa Mist II</span><span className="btspa-bar"><i></i></span><span className="v">35°</span></div>
+                </div>
+            </div>
+            <div className="btspa-exp">
+                <div className="btspa-exp-top"><span className="btmn-ic"><i className="fa-solid fa-water"></i></span><span><span className="btcl-kick">una cascata di benessere</span><b>Yume Headbath</b></span></div>
+                <div className="btspa-quote">Pensa a una cascata d'acqua calda e alla tua testa immersa in una vasca…</div>
+                <p>L'acqua scende sull'attaccatura dei capelli e si raccoglie in un bacino. <b>Riscalda e stimola delicatamente la cute</b>, e accompagna tutti i nostri percorsi, dalla purificazione alla ricostruzione.</p>
+            </div>
+            <div className="btps-sep"><span>il rituale</span></div>
+            <div className="btspa-ritual">
+                <div className="btspa-r-top">
+                    <div><div className="btspa-r-kick">antico rituale orientale</div><h3>Soft Touch</h3></div>
+                    <div className="btspa-r-price">99 €</div>
+                </div>
+                <p>Per te che vuoi prenderti cura di te, a livello mentale ed emotivo. Uniamo tecniche orientali antiche per un <b>benessere dalla testa ai piedi</b>.</p>
+                <div className="btspa-stones">
+                    ${SPA_STONES.map(st => html`
+                    <div key=${st.name} className="btspa-stone"><i className=${`fa-solid ${st.icon}`} style=${{ background: st.bg, color: st.color }}></i><b>${st.name}</b><small>${st.text}</small></div>`)}
+                </div>
+            </div>
+            <div className="btcl-lock"><i className="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>
+            <div className="bth-ps">
+                <span className="bth-ps-label">P.S.</span>
+                <span className="bth-ps-text">Il vapore classico arriva a 90°. Io mi fermo a 35°: il relax non deve stressare la cute.</span>
+            </div>
+            <div className="bth-signature">— Daniela</div>
+            <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_spa')}>Candidati per la Consulenza Beautrìco</a>
+            <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
+            <div className="btcl-client">Sei già in percorso? <b>Chiedilo a Daniela in seduta</b></div>
+        </div>
+        </div>
+      `;
+
       // Avviso in cima a Menu Donna/Uomo (solo mobile): chiudibile, la scelta resta salvata sul telefono
       const NOTICE_KEY = 'btConsulenzaNoticeClosed';
       const ConsulenzaNotice = ({ text = 'Partiamo sempre dalla Consulenza Beautrìco: 90 minuti per conoscerti e analizzare cute e capelli, così ogni servizio è pensato per te.', already = 'Sei già in percorso? Il tuo menu è qui sotto ↓' }) => {
@@ -6756,7 +6859,9 @@ main.overflow-y-auto {
 
             if (section === 'spa') {
             return html`
-                <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+                <div>
+                <${SpaMobile} />
+                <div className="bt-home-desktop relative animate-zoom-in max-w-5xl mx-auto pb-12">
                 
                 <div className="bg-white rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-xl overflow-hidden border border-white mb-10">
                     <div className="bg-teal-900 p-6 md:p-12 text-center text-white relative uppercase">
@@ -6937,6 +7042,7 @@ main.overflow-y-auto {
                         </div>
                     </div>
                     </section>
+                </div>
                 </div>
                 </div>
             `;
