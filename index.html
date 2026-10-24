@@ -3360,6 +3360,32 @@ main.overflow-y-auto {
         `;
       };
 
+      // Aggiunte facoltative da portare a casa (Conditioner, Maschera Nutriente): prezzo sempre visibile nel box
+      const ADDON_CASA_DESKTOP = {
+        conditioner: { photo: 'Conditioner.png', alt: 'Conditioner idratante Beautrì', title: 'Il Conditioner, per casa', text: 'Un mix di oli essenziali, aloe ed emollienti naturali, da usare a casa dopo il colore:', items: ['Lucidità ed elasticità', 'Antistaticità (i capelli non volano)', 'Facilità nel districare i capelli'], note: 'Il risultato: un colore più duraturo e lucido nel tempo.', price: '+ 29 €' },
+        mascheraPuntiLuce: { photo: 'Maschera.png', alt: 'Maschera nutriente Beautrì', title: 'La Maschera Nutriente, per casa', text: 'Oli vegetali, burri naturali e proteine del grano, da usare a casa dopo i punti luce:', items: ['Capelli più brillanti', 'Capelli setosi al tatto', 'Riflessi che durano di più'], price: '+ 37 €', reverse: true },
+        mascheraSchiariture: { photo: 'Maschera.png', alt: 'Maschera nutriente Beautrì', title: 'La Maschera Nutriente, per casa', text: 'Il Sigillo di Garanzia è incluso in salone. A casa la routine è fondamentale per non sprecare il lavoro fatto: la Maschera prolunga i risultati del Sigillo fino al tuo prossimo appuntamento di schiaritura.', price: '+ 37 €' }
+      };
+      const AddonCasaDesktop = ({ a }) => html`
+        <div className="bg-white border-2 border-[#EAB308] rounded-[2rem] px-6 py-4 md:px-8 md:py-5 shadow-lg relative">
+          <span className="absolute -top-3 right-6 bg-[#EAB308] text-black text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">Facoltativo</span>
+          <div className=${`flex flex-col ${a.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-4`}>
+            <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
+              <img src=${a.photo} alt=${a.alt} className="w-full h-full object-contain" />
+            </div>
+            <div className="flex-1 normal-case">
+              <p className="text-xl font-black text-[#1A1A1A] leading-snug mb-2">${a.title}</p>
+              <p className="text-slate-600 text-sm leading-relaxed mb-2">${a.text}</p>
+              ${a.items && html`<ul className="text-slate-700 text-sm space-y-1 mb-2">
+                ${a.items.map(t => html`<li key=${t} className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>${t}</span></li>`)}
+              </ul>`}
+              ${a.note && html`<p className="text-base font-semibold italic text-[#EAB308]">${a.note}</p>`}
+              <p className="mt-2 text-sm font-black tracking-wide text-[#8A6A00]">${a.price}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
      const ColorazioniList = () => {
         const [showTransformerCS, setShowTransformerCS] = useState(false);
         const [showTransformerVegana, setShowTransformerVegana] = useState(false);
@@ -3437,24 +3463,7 @@ main.overflow-y-auto {
               </div>
 
               <div className="mt-10 pt-8 border-t-2 border-dashed border-[#EAB308]/30">
-                <div className="bg-white border-2 border-[#EAB308] rounded-[2rem] px-6 py-4 md:px-8 md:py-5 shadow-lg relative">
-                  <span className="absolute -top-3 right-6 bg-[#E63946] text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">NOVITÀ</span>
-                  <div className="flex flex-col md:flex-row items-center gap-4">
-                    <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
-                      <img src="Conditioner.png" alt="Conditioner Beautrì" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xl font-black text-[#1A1A1A] leading-snug mb-2">Con soli <span className="text-[#EAB308] text-2xl">29€</span> il tuo colore durerà di più!</p>
-                      <p className="text-slate-600 text-sm leading-relaxed mb-2">Grazie a un mix di olii essenziali, aloe e emollienti naturali garantiamo al capello:</p>
-                      <ul className="text-slate-700 text-sm space-y-1 mb-2">
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Lucidità + elasticità</span></li>
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Antistaticità (i capelli non volano)</span></li>
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Facilità nel districare i capelli</span></li>
-                      </ul>
-                      <p className="text-base font-semibold italic text-[#EAB308]">Con il risultato di un colore più duraturo e lucido nel tempo.</p>
-                    </div>
-                  </div>
-                </div>
+                <${AddonCasaDesktop} a=${ADDON_CASA_DESKTOP.conditioner} />
               </div>
             </section>
 
@@ -3494,24 +3503,7 @@ main.overflow-y-auto {
               </div>
 
               <div className="mt-10 pt-8 border-t-2 border-dashed border-[#EAB308]/30">
-                <div className="bg-white border-2 border-[#EAB308] rounded-[2rem] px-6 py-4 md:px-8 md:py-5 shadow-lg relative">
-                  <span className="absolute -top-3 right-6 bg-[#E63946] text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">NOVITÀ</span>
-                  <div className="flex flex-col md:flex-row-reverse items-center gap-4">
-                    <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
-                      <img src="Conditioner.png" alt="Conditioner Beautrì" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xl font-black text-[#1A1A1A] leading-snug mb-2">Con soli <span className="text-[#EAB308] text-2xl">29€</span> il tuo colore durerà di più!</p>
-                      <p className="text-slate-600 text-sm leading-relaxed mb-2">Grazie a un mix di olii essenziali, aloe e emollienti naturali garantiamo al capello:</p>
-                      <ul className="text-slate-700 text-sm space-y-1 mb-2">
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Lucidità + elasticità</span></li>
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Antistaticità (i capelli non volano)</span></li>
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Facilità nel districare i capelli</span></li>
-                      </ul>
-                      <p className="text-base font-semibold italic text-[#EAB308]">Con il risultato di un colore più duraturo e lucido nel tempo.</p>
-                    </div>
-                  </div>
-                </div>
+                <${AddonCasaDesktop} a=${ADDON_CASA_DESKTOP.conditioner} />
               </div>
             </section>
 
@@ -3522,23 +3514,7 @@ main.overflow-y-auto {
               </div>
               <p className="text-slate-600 text-lg leading-relaxed normal-case max-w-4xl">Ami avere un colore armonioso con riflessi che vanno dal caramello al biondo sabbia? Uniamo la tua colorazione con la tecnica delle "graffiature" per creare un effetto di luce sui tuoi capelli e dare quel tocco di particolarità.</p>
               <div className="mt-10 pt-8 border-t-2 border-dashed border-[#EAB308]/30">
-                <div className="bg-white border-2 border-[#EAB308] rounded-[2rem] px-6 py-4 md:px-8 md:py-5 shadow-lg relative">
-                  <span className="absolute -top-3 right-6 bg-[#E63946] text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">NOVITÀ</span>
-                  <div className="flex flex-col md:flex-row-reverse items-center gap-4">
-                    <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
-                      <img src="Maschera.png" alt="Maschera Beautrì" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xl font-black text-[#1A1A1A] leading-snug mb-2">Con l'aggiunta di soli <span className="text-[#EAB308] text-2xl">37€</span> alle tue schiariture ti garantiamo una struttura perfetta del tuo capello!</p>
-                      <ul className="text-slate-700 text-sm space-y-1 mb-2">
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Capelli più brillanti</span></li>
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Capelli al tatto setosi</span></li>
-                        <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Schiariture più durature nel tempo</span></li>
-                      </ul>
-                      <p className="text-base font-semibold italic text-[#EAB308]">Tutto questo grazie a oli vegetali/burri naturali, proteine del grano e cheratina.</p>
-                    </div>
-                  </div>
-                </div>
+                <${AddonCasaDesktop} a=${ADDON_CASA_DESKTOP.mascheraPuntiLuce} />
               </div>
             </div>
 
@@ -3584,24 +3560,7 @@ main.overflow-y-auto {
                    </div>
                  </div>
                  <div className="mt-10 pt-8 border-t-2 border-dashed border-[#EAB308]/30">
-                   <div className="bg-white border-2 border-[#EAB308] rounded-[2rem] px-6 py-4 md:px-8 md:py-5 shadow-lg relative">
-                     <span className="absolute -top-3 right-6 bg-[#E63946] text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">NOVITÀ</span>
-                     <div className="flex flex-col md:flex-row items-center gap-4">
-                       <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
-                         <img src="Conditioner.png" alt="Conditioner Beautrì" className="w-full h-full object-contain" />
-                       </div>
-                       <div className="flex-1">
-                         <p className="text-xl font-black text-[#1A1A1A] leading-snug mb-2">Con soli <span className="text-[#EAB308] text-2xl">29€</span> il tuo colore durerà di più!</p>
-                         <p className="text-slate-600 text-sm leading-relaxed mb-2">Grazie a un mix di olii essenziali, aloe e emollienti naturali garantiamo al capello:</p>
-                         <ul className="text-slate-700 text-sm space-y-1 mb-2">
-                           <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Lucidità + elasticità</span></li>
-                           <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Antistaticità (i capelli non volano)</span></li>
-                           <li className="flex items-start gap-2 font-semibold leading-normal"><span>✅</span><span>Facilità nel districare i capelli</span></li>
-                         </ul>
-                         <p className="text-base font-semibold italic text-[#EAB308]">Con il risultato di un colore più duraturo e lucido nel tempo.</p>
-                       </div>
-                     </div>
-                   </div>
+                   <${AddonCasaDesktop} a=${ADDON_CASA_DESKTOP.conditioner} />
                  </div>
                </div>
             </section>
@@ -3694,19 +3653,7 @@ main.overflow-y-auto {
                   <i className="fa-solid fa-shield-halved text-[#EAB308] text-2xl"></i>
                   <h3 className="text-2xl font-black text-black uppercase tracking-tighter group-hover:text-[#EAB308] transition-colors text-center">GARANZIA</h3>
                 </div>
-                <div className="bg-white border-2 border-[#EAB308] rounded-[2rem] px-6 py-4 md:px-8 md:py-5 shadow-lg relative">
-                  <div className="flex flex-col md:flex-row items-center gap-4">
-                    <div className="w-full md:w-56 h-56 shrink-0 flex items-center justify-center">
-                      <img src="Maschera.png" alt="Maschera Beautrì" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="flex-1">
-                      <!-- TODO: copy upsell da rifinire con Denir -->
-                      <p className="text-xl font-black text-[#1A1A1A] leading-snug mb-2">Proteggi più a lungo le tue schiariture con l'aggiunta di solo <span className="text-[#EAB308] text-2xl">37€</span> grazie alla maschera...</p>
-                      <p className="text-slate-700 text-sm font-semibold leading-relaxed normal-case mb-2">Proteggi il tuo investimento e garantisci la salute dei capelli:</p>
-                      <p className="text-slate-600 text-sm leading-relaxed normal-case">Per proteggere il tuo investimento e non sprecare il lavoro fatto in salone, la routine a casa è fondamentale. Per mantenere e prolungare nel tempo i risultati del trattamento ricevuto in omaggio, e in vista del tuo prossimo appuntamento di schiaritura, ti consigliamo:</p>
-                    </div>
-                  </div>
-                </div>
+                <${AddonCasaDesktop} a=${ADDON_CASA_DESKTOP.mascheraSchiariture} />
               </div>
             </div>
           </div>
