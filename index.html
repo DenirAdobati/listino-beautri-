@@ -1149,6 +1149,59 @@ main.overflow-y-auto {
     .btmp-pass p { font-size: 12.5px; color: rgba(255,255,255,.78); line-height: 1.5; margin: 8px 0 0; position: relative; z-index: 1; }
     .btmp-pass p b { color: #fff; }
     .btmp-pass button { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 0 0 1px !important; min-height: 0; background: none; border: 0; border-bottom: 2px solid #F5C200; font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px !important; color: #F5C200; position: relative; z-index: 1; cursor: pointer; }
+
+    /* pagina Novità e Gioco Goloso (Menu Donna e Uomo): schede con i 3 passi, ruota con pulsante recensione */
+    .btnv-card { margin-top: 14px; border-radius: 20px; overflow: hidden; box-shadow: 0 14px 30px rgba(0,0,0,.08); }
+    .btnv-head { position: relative; padding: 16px 16px 14px; }
+    .btnv-badge { display: inline-block; background: #E5383B; color: #fff; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px; }
+    .btnv-emoji { position: absolute; right: 14px; top: 10px; font-size: 40px; line-height: 1; }
+    .btnv-kick { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; line-height: 1.1; margin-top: 8px; }
+    .btnv-card h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; line-height: 1.05; margin: 2px 0 0; }
+    .btnv-head p { font-size: 13px; line-height: 1.5; margin: 6px 0 0; }
+    .btnv-body { padding: 0 16px 16px; }
+    .btnv-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+    .btnv-step { border-radius: 14px; padding: 10px 6px; text-align: center; }
+    .btnv-n { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; font-family: Poppins, sans-serif; font-weight: 800; font-size: 11px; align-items: center; justify-content: center; }
+    .btnv-step b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 11.5px; margin-top: 5px; line-height: 1.2; }
+    .btnv-step small { display: block; font-size: 10.5px; line-height: 1.3; margin-top: 2px; }
+    .btnv-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; }
+    .btnv-pz { font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -0.03em; line-height: 1; }
+    .btnv-pz small { display: block; font-family: Inter, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0; margin-top: 3px; color: #6b5545; }
+    .btnv .btnv-btn { display: inline-flex; align-items: center; gap: 7px; min-height: 0; padding: 11px 16px !important; border: 0; border-radius: 999px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px !important; white-space: nowrap; cursor: pointer; }
+    .btnv-gift { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.6); color: #5b4636; font-size: 12.5px; line-height: 1.4; }
+    .btnv-gift img { width: 34px; height: 42px; object-fit: contain; flex-shrink: 0; }
+    .btnv-gift b { font-family: Poppins, sans-serif; font-weight: 800; }
+    .btnv-reset { background: linear-gradient(160deg, #FBEEE0 0%, #F3D9BC 100%); }
+    .btnv-reset .btnv-kick { color: #C2410C; }
+    .btnv-reset .btnv-head p { color: #5b4636; }
+    .btnv-reset .btnv-step { background: rgba(255,255,255,.6); }
+    .btnv-reset .btnv-n { background: #C2410C; color: #fff; }
+    .btnv-reset .btnv-step small { color: #6b5545; }
+    .btnv-reset .btnv-btn { margin-top: 12px; background: #0A0A0A; color: #fff; }
+    .btnv-gioco { background: linear-gradient(160deg, #2C1810 0%, #4A2C1A 100%); color: #fff; }
+    .btnv-gioco h3 { color: #fff; }
+    .btnv-gioco .btnv-badge { background: #F5C200; color: #2C1810; }
+    .btnv-gioco .btnv-kick { color: #F5C200; }
+    .btnv-gioco .btnv-head p { color: #D4A574; }
+    .btnv-gioco .btnv-step { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); }
+    .btnv-gioco .btnv-n { background: #F5C200; color: #2C1810; }
+    .btnv-gioco .btnv-step small { color: rgba(255,255,255,.65); }
+    .btnv-gioco .btnv-btn { background: #F5C200; color: #2C1810; }
+    .btnv-gioco .btnv-meta > span { font-size: 12px; color: #D4A574; line-height: 1.35; }
+    .btnv-review { margin-top: 14px; padding: 14px; border-radius: 16px; background: #F6F4EF; text-align: center; }
+    .btnv-stars { color: #F5C200; font-size: 18px; letter-spacing: 3px; }
+    .btnv-review b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; margin-top: 4px; }
+    .btnv-review small { display: block; font-size: 12.5px; color: #666; margin-top: 3px; line-height: 1.4; }
+    .btnv-gbtn { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; padding: 13px 16px; border-radius: 999px; background: #fff; border: 1px solid #ddd; font-family: Poppins, sans-serif; font-weight: 700; font-size: 14px; color: #0A0A0A; box-shadow: 0 6px 16px rgba(0,0,0,.06); }
+    .btnv-gbtn svg { width: 18px; height: 18px; }
+    .btnv-wheel { position: relative; width: 236px; height: 236px; margin: 18px auto 0; }
+    .btnv-wheel svg { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 0 6px #F5C200, 0 16px 40px rgba(0,0,0,.2); }
+    .btnv-pin { position: absolute; z-index: 1; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 22px solid #0A0A0A; filter: drop-shadow(0 3px 4px rgba(0,0,0,.3)); }
+    .btnv .btnv-spin { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin: 18px 0 0; min-height: 0; padding: 15px 18px !important; border: 0; border-radius: 999px; background: #0A0A0A; color: #F5C200; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px !important; box-shadow: 0 10px 30px rgba(0,0,0,.18); cursor: pointer; }
+    .btnv .btnv-spin:disabled { opacity: .7; }
+    .btnv-prizes { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+    .btnv-prizes span { padding: 5px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: #fff; }
+    .btnv .btnv-back { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 6px auto 0; min-height: 0; padding: 6px 10px !important; background: none; border: 0; font-size: 13px !important; font-weight: 600; color: #555; cursor: pointer; }
 }
 </style>
 <script type="importmap">
@@ -4553,7 +4606,9 @@ main.overflow-y-auto {
  
         // === VIEW: GOLOSO (senza tasto indietro) ===
         if (view === 'goloso') return html`
-          <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+          <div>
+          <${GiocoGolosoMobile} rotation=${rotation} isSpinning=${isSpinning} onSpin=${spinWheel} onBack=${() => { setView(null); scrollMainTop(); }} />
+          <div className="bt-home-desktop relative animate-zoom-in max-w-5xl mx-auto pb-12">
             <div className="rounded-[2rem] sm:rounded-[3rem] shadow-2xl overflow-hidden mb-10 relative">
               <div className="bg-gradient-to-b from-[#2C1810] via-[#3D2317] to-[#4A2C1A] relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full z-10">
@@ -4671,6 +4726,7 @@ main.overflow-y-auto {
                 </div>
               </div>
             </div>
+          </div>
             ${showModal && prize && html`
               <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick=${() => setShowModal(false)}>
                 <div className="bg-gradient-to-b from-[#FDF6E3] to-[#FFF8DC] rounded-[2rem] p-8 md:p-12 max-w-md w-full text-center shadow-2xl border-4 border-[#EAB308] animate-zoom-in" onClick=${(e) => e.stopPropagation()}>
@@ -4692,7 +4748,9 @@ main.overflow-y-auto {
  
         // === HOME: due bottoni ===
         return html`
-          <div className="relative animate-zoom-in max-w-5xl mx-auto pb-12">
+          <div>
+          <${NovitaMobile} gender=${gender} onGioca=${() => { setView('goloso'); scrollMainTop(); }} />
+          <div className="bt-home-desktop relative animate-zoom-in max-w-5xl mx-auto pb-12">
             <div className="text-center mb-10">
               <div className="inline-flex items-center gap-2 bg-[#EAB308] text-black px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-[0.18em] mb-6 shadow-sm">✨ Le nostre Novità</div>
               <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tighter uppercase leading-[1.1] mb-4">Le ultime novità per te</h1>
@@ -4725,6 +4783,7 @@ main.overflow-y-auto {
                 </div>
               </button>
            </div>
+          </div>
           </div>
         `;
       };
@@ -5659,6 +5718,125 @@ main.overflow-y-auto {
             <a className="bth-cta bth-cta-bottom" href=${CONSULENZA_FORM_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('candidati_spa')}>Candidati per la Consulenza Beautrìco</a>
             <div className="bth-note">Ti ricontattiamo noi entro 24 ore</div>
             <div className="btcl-client">Sei già in percorso? <b>Chiedilo a Daniela in seduta</b></div>
+        </div>
+        </div>
+      `;
+
+      // Pagina Novità mobile (Menu Donna e Uomo): Reset Autunnale (solo Donna) e Gioco Goloso in due schede
+      const GOOGLE_REVIEW_WRITE_URL = 'https://g.page/r/CW6M9hJNV-ekEAE/review';
+      const scrollMainTop = () => { const m = document.querySelector('main.overflow-y-auto'); if (m) m.scrollTop = 0; };
+      const NovitaStep = ({ n, title, text }) => html`<div className="btnv-step"><span className="btnv-n">${n}</span><b>${title}</b><small>${text}</small></div>`;
+      const NovitaMobile = ({ gender, onGioca }) => {
+        const donna = gender !== 'uomo';
+        return html`
+        <div className="bt-home-mobile btmn btcl btnv animate-fade-in">
+        <section className="bth-hero">
+            <div className="bth-eyebrow">Novità</div>
+            <h1 className="bth-h1 btmn-h1">${richText(donna ? 'Le novità / di questa / [stagione].' : 'Le novità / pensate / per [te].')}</h1>
+            <p className="bth-lead">${richText(donna ? "Un rituale d'autunno / **e un dolcetto per te.**" : 'Un piccolo gioco / **e un dolcetto per te.**')}</p>
+        </section>
+        <div className="bth-letter">
+            <div className="bth-hello">Ecco cosa c'è di nuovo,</div>
+            ${donna
+              ? html`<p className="btcl-p">Ogni stagione i capelli chiedono qualcosa di diverso. Questo autunno ti propongo un rituale per <b>togliere gli accumuli dell'estate</b>, e un piccolo gioco per dirti grazie.</p>`
+              : html`<p className="btcl-p">Per dirti grazie della fiducia ho pensato a <b>un piccolo gioco</b>: una recensione e un giro di ruota.</p>`}
+            ${donna && html`
+            <div className="btps-sep"><span>novità d'autunno</span></div>
+            <div className="btnv-card btnv-reset">
+                <div className="btnv-head">
+                    <span className="btnv-badge">NOVITÀ</span>
+                    <span className="btnv-emoji">🍂</span>
+                    <div className="btnv-kick">pulizia profonda</div>
+                    <h3>Reset Autunnale</h3>
+                    <p>Resine, smog e accumuli di prodotto rendono il capello opaco e pesante. Lo liberiamo e lo prepariamo alla nuova stagione.</p>
+                </div>
+                <div className="btnv-body">
+                    <div className="btnv-steps">
+                        <${NovitaStep} n="1" title="Purifica" text="via resine e siliconi" />
+                        <${NovitaStep} n="2" title="Ricostruisce" text="impacco nebulizzato" />
+                        <${NovitaStep} n="3" title="Sigilla" text="conditioner acido" />
+                    </div>
+                    <div className="btnv-gift">
+                        <img src="foto-prodotti/menu-lun-conditioner.webp" alt="Conditioner idratante Beautrì" loading="lazy" />
+                        <span>In <b>omaggio</b> il Conditioner Idratante (valore 29 €) da usare a casa.</span>
+                    </div>
+                    <div className="btnv-meta"><div className="btnv-pz">119 €<small>a seduta · ciclo di 3, ogni 20-25 gg</small></div></div>
+                    <a className="btnv-btn" href="reset-autunnale.html" onClick=${() => trackHomeClick('novita_reset')}>Scopri il Reset <i className="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>`}
+            <div className="btps-sep"><span>un grazie goloso</span></div>
+            <div className="btnv-card btnv-gioco">
+                <div className="btnv-head">
+                    <span className="btnv-badge">GIOCO</span>
+                    <span className="btnv-emoji">🍫</span>
+                    <div className="btnv-kick">la tua opinione vale un dolcetto</div>
+                    <h3>Un Gioco Goloso</h3>
+                    <p>Raccontaci com'è andata e gira la ruota: c'è un dolcetto che ti aspetta.</p>
+                </div>
+                <div className="btnv-body">
+                    <div className="btnv-steps">
+                        <${NovitaStep} n="1" title="Recensione" text="su Google, in un minuto" />
+                        <${NovitaStep} n="2" title="Gira la ruota" text="qui dal telefono" />
+                        <${NovitaStep} n="3" title="Ritira" text="il dolcetto in salone" />
+                    </div>
+                    <div className="btnv-meta">
+                        <span>Lotus o Loacker:<br />scopri quale ti tocca.</span>
+                        <button type="button" className="btnv-btn" onClick=${onGioca}>Gioca <i className="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <${LetteraFirma} ps=${donna ? 'Il Reset è solo per questo autunno: chiedimelo alla prossima seduta.' : 'Hai già lasciato una recensione? Gira subito la ruota: il dolcetto è tuo.'} track="candidati_novita" />
+        </div>
+        </div>
+      `;
+      };
+      const GiocoGolosoMobile = ({ rotation, isSpinning, onSpin, onBack }) => html`
+        <div className="bt-home-mobile btmn btcl btnv animate-fade-in">
+        <section className="bth-hero">
+            <div className="bth-eyebrow">Gioco Goloso</div>
+            <h1 className="bth-h1 btmn-h1">${richText('La tua opinione / vale un / [dolcetto].')}</h1>
+            <p className="bth-lead">${richText('Una recensione, un giro di ruota / **e un premio da ritirare.**')}</p>
+        </section>
+        <div className="bth-letter">
+            <div className="bth-hello">Grazie di essere qui,</div>
+            <p className="btcl-p">Le tue parole aiutano altre persone a trovare chi si prende cura davvero dei loro capelli. Per ringraziarti, <b>c'è un dolcetto per te</b>.</p>
+            <div className="btps-sep"><span>1 · racconta com'è andata</span></div>
+            <div className="btnv-review">
+                <div className="btnv-stars">★★★★★</div>
+                <b>Lascia una recensione su Google</b>
+                <small>Bastano due righe sulla tua esperienza da Beautrì.</small>
+                <a className="btnv-gbtn" href=${GOOGLE_REVIEW_WRITE_URL} target="_blank" rel="noopener" onClick=${() => trackHomeClick('gioco_recensione')}>
+                    <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.7 6c4.5-4.2 6.9-10.3 6.9-17.7z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.7-6c-2.2 1.5-5 2.3-8.2 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>
+                    Scrivi la recensione
+                </a>
+            </div>
+            <div className="btps-sep"><span>2 · gira la ruota</span></div>
+            <div className="btnv-wheel">
+                <div className="btnv-pin"></div>
+                <svg viewBox="0 0 400 400" style=${{ transform: 'rotate(' + rotation + 'deg)', transition: isSpinning ? 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none' }}>
+                    <path d="M200,200 L200,0 A200,200 0 0,1 373.2,100 Z" fill="#C41E3A"/>
+                    <path d="M200,200 L373.2,100 A200,200 0 0,1 373.2,300 Z" fill="#B8860B"/>
+                    <path d="M200,200 L373.2,300 A200,200 0 0,1 200,400 Z" fill="#C41E3A"/>
+                    <path d="M200,200 L200,400 A200,200 0 0,1 26.8,300 Z" fill="#B8860B"/>
+                    <path d="M200,200 L26.8,300 A200,200 0 0,1 26.8,100 Z" fill="#C41E3A"/>
+                    <path d="M200,200 L26.8,100 A200,200 0 0,1 200,0 Z" fill="#B8860B"/>
+                    <g fill="#fff" fontSize="20" fontWeight="800" fontFamily="Inter, sans-serif" textAnchor="middle">
+                        ${['LOTUS', 'LOACKER', 'LOTUS', 'LOACKER', 'LOTUS', 'LOACKER'].map((t, i) => html`<text key=${i} x="200" y="75" transform=${`rotate(${30 + i * 60} 200 200)`}>${t}</text>`)}
+                    </g>
+                    <circle cx="200" cy="200" r="44" fill="#0A0A0A" stroke="#F5C200" strokeWidth="6"/>
+                    <text x="200" y="213" textAnchor="middle" fontSize="36">🍫</text>
+                </svg>
+            </div>
+            <button type="button" className="btnv-spin" onClick=${onSpin} disabled=${isSpinning}>${isSpinning ? '🎰 Sta girando…' : '🎰 Gira la ruota'}</button>
+            <div className="btnv-prizes"><span style=${{ background: '#C41E3A' }}>Lotus</span><span style=${{ background: '#B8860B' }}>Loacker</span></div>
+            <div className="btps-sep"><span>3 · ritira il premio</span></div>
+            <p className="btcl-p" style=${{ textAlign: 'center' }}>Mostra lo schermo con il premio al nostro team e <b>il dolcetto è tuo</b>.</p>
+            <div className="bth-ps">
+                <span className="bth-ps-label">P.S.</span>
+                <span className="bth-ps-text">Hai già lasciato la recensione? Allora salta al punto 2 e gira subito la ruota.</span>
+            </div>
+            <div className="bth-signature">— Daniela</div>
+            <button type="button" className="btnv-back" onClick=${onBack}><i className="fa-solid fa-arrow-left"></i>Torna alle novità</button>
         </div>
         </div>
       `;
