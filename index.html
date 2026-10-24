@@ -963,9 +963,10 @@ main.overflow-y-auto {
     .btcl-lock i { color: #8A6A00; font-size: 11px; }
     .btcl-addon { position: relative; display: flex; gap: 12px; align-items: center; margin-top: 18px; padding: 24px 14px 14px 10px; border-radius: 16px; background: #F6F4EF; }
     .btcl-addon img { width: 52px; height: 60px; object-fit: contain; flex-shrink: 0; }
-    .btcl-addon-badge { position: absolute; top: -9px; right: 14px; background: #E5383B; color: #fff; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px; }
+    .btcl-addon-badge { position: absolute; top: -9px; right: 14px; background: #F5C200; color: #0A0A0A; font-family: Poppins, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px; }
     .btcl-addon b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: -0.02em; line-height: 1.25; }
     .btcl-addon small { display: block; font-size: 12.5px; color: #555; line-height: 1.4; margin-top: 2px; }
+    .btcl-addon-price { display: inline-block; margin-top: 6px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; color: #8A6A00; }
     .btcl-lv { padding: 14px 0; border-bottom: 1px dashed #e4dfd3; }
     .btcl-lv:last-child { border-bottom: 0; }
     .btcl-lv-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
@@ -5174,7 +5175,7 @@ main.overflow-y-auto {
           ] }
         ]
       };
-      const ADDON_CONDITIONER = { type: 'addon', photo: 'menu-lun-conditioner', alt: 'Conditioner idratante Beautrì', title: '+ Conditioner: il colore dura di più', text: 'Lucido, elastico, i capelli non volano.' };
+      const ADDON_CONDITIONER = { type: 'addon', photo: 'menu-lun-conditioner', alt: 'Conditioner idratante Beautrì', title: 'Il Conditioner, per casa', text: 'Il colore dura di più: capelli lucidi, elastici, che non volano.', price: '+ 29 €' };
       const LOCK = { type: 'lock' };
       // Schede mobile dei servizi colore: blocchi in ordine (per chi è, come funziona, prezzo, aggiunta)
       const COLORE_SCHEDE_MOBILE = {
@@ -5225,7 +5226,7 @@ main.overflow-y-auto {
             { type: 'sep', label: 'come funziona' },
             { type: 'p', text: 'Uniamo la tua colorazione alla tecnica delle **"graffiature"**, che crea un effetto di luce sui capelli.' },
             { type: 'price', what: 'Colore con punti luce', amt: '117/127 €' }, LOCK,
-            { type: 'addon', photo: 'menu-lun-nutriente', alt: 'Maschera nutriente Beautrì', title: '+ Maschera: struttura perfetta', text: 'Più brillanti, setosi al tatto, riflessi che durano di più.' }
+            { type: 'addon', photo: 'menu-lun-nutriente', alt: 'Maschera nutriente Beautrì', title: 'La Maschera Nutriente, per casa', text: 'Riflessi che restano: capelli più brillanti e setosi al tatto.', price: '+ 37 €' }
           ],
           ps: 'Non è una schiaritura a parte: la luce la creiamo insieme al tuo colore.', track: 'candidati_colore_puntiluce'
         },
@@ -5244,7 +5245,7 @@ main.overflow-y-auto {
               { name: 'Luce Sublime', dots: 3, price: '169/179 €', text: 'Baby Light su misura, sfumature complesse.', ben: 'la massima schiaritura, senza compromessi sulla salute' }
             ] },
             LOCK,
-            { type: 'addon', photo: 'menu-lun-nutriente', alt: 'Maschera nutriente Beautrì', title: '+ Maschera per casa', text: 'Prolunga i risultati del Sigillo fino al prossimo appuntamento.' }
+            { type: 'addon', photo: 'menu-lun-nutriente', alt: 'Maschera nutriente Beautrì', title: 'La Maschera Nutriente, per casa', text: 'Il Sigillo è incluso in salone. A casa la Maschera ne prolunga i risultati fino al prossimo appuntamento.', price: '+ 37 €' }
           ],
           ps: 'Senza la routine a casa rischi di perdere il lavoro fatto in salone.', track: 'candidati_schiariture'
         },
@@ -5308,9 +5309,9 @@ main.overflow-y-auto {
           case 'lock': return html`<div key=${i} className="btcl-lock"><i className="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>`;
           case 'addon': return html`
             <div key=${i} className="btcl-addon">
-              <span className="btcl-addon-badge">NOVITÀ</span>
+              <span className="btcl-addon-badge">FACOLTATIVO</span>
               <img src=${`foto-prodotti/${b.photo}.webp`} alt=${b.alt} loading="lazy" />
-              <span><b>${b.title}</b><small>${b.text}</small></span>
+              <span><b>${b.title}</b><small>${b.text}</small><span className="btcl-addon-price">${b.price}</span></span>
             </div>`;
           case 'warn': return html`<div key=${i} className="btcl-warn"><i className="fa-solid fa-triangle-exclamation"></i><span>${b.text}</span></div>`;
           case 'levels': return html`
