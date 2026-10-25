@@ -363,6 +363,17 @@
   .cmp .tot.one .big { font-family: Poppins, sans-serif; font-weight: 900; font-size: 40px; letter-spacing: -0.04em; line-height: 1; color: var(--nero); white-space: nowrap; }
   .cmp .tot.one .big.lei { font-size: 29px; line-height: 1.15; }
   .cmp .tot.one .eq { font-size: 13.5px; font-weight: 600; color: var(--giallo-scuro); margin-top: 3px; }
+  /* da dove viene il risparmio: la 12ª seduta è già tolta dal totale, il resto sono omaggi in più */
+  .gifts { margin-top: 4px; border: 3px dashed var(--giallo); border-radius: 18px; background: var(--crema); padding: 14px 16px 16px; }
+  .gifts .h { font-family: Caveat, cursive; font-weight: 700; font-size: 24px; line-height: 1.1; color: var(--nero); }
+  .gifts .h b { background: linear-gradient(transparent 58%, rgba(245,194,0,.75) 58%); }
+  .gifts .gl { display: flex; align-items: stretch; gap: 6px; margin-top: 10px; }
+  .gifts .g { flex: 1; background: #fff; border-radius: 12px; padding: 10px 8px; text-align: center; box-shadow: 0 2px 0 #EFE6C8; font-size: 13.5px; font-weight: 600; line-height: 1.25; }
+  .gifts .g i { display: block; font-size: 20px; color: var(--rosso); margin-bottom: 5px; }
+  .gifts .g small { display: block; font-weight: 500; font-size: 12.5px; color: var(--giallo-scuro); margin-top: 3px; }
+  .gifts .pl { align-self: center; font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px; color: var(--giallo-scuro); }
+  .gifts .eqr { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed #E2CF86; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; }
+  .gifts .save-one { display: inline-block; background: var(--nero); color: var(--giallo); font-size: 17px; padding: 5px 12px; border-radius: 8px; transform: rotate(-2deg); white-space: nowrap; }
   .chand { display: flex; align-items: flex-start; gap: 10px; margin-top: 10px; }
   .chand p { font-family: Caveat, cursive; font-weight: 700; font-size: 25px; line-height: 1.12; color: var(--nero); flex: 1; }
   .chand p b { background: linear-gradient(transparent 58%, rgba(245,194,0,.75) 58%); }
@@ -1096,6 +1107,11 @@ P.mant = () => {
           <div class="c seat tot"><span class="eq">12 × ${p.seat}</span><span class="sum${lei}">${p.was}</span></div>
           <div class="c one tot"><s>${p.was}</s><span class="big${lei}">${p.now}</span><span class="eq">ne paghi 11 su 12</span></div>
         </div>
+        <div class="gifts"><p class="h">Scegliendo l'unica soluzione, <b>ecco cosa ti regalo io</b>:</p>
+          <div class="gl"><div class="g"><i class="fa-solid fa-calendar-plus"></i>la 12ª seduta<small>${p.seat}, già tolti dal totale</small></div><span class="pl">+</span>
+            <div class="g"><i class="fa-solid fa-gift"></i>1 prodotto<small>scelto per te, in omaggio</small></div><span class="pl">+</span>
+            <div class="g"><i class="fa-solid fa-magnifying-glass"></i>2 Beautrì Check<small>valore 94 €, in omaggio</small></div></div>
+          <div class="eqr"><span>In tutto risparmi</span><span class="save-one">${x.save}</span></div></div>
         <div class="chand"><p>Stesse sedute, stessa cura. Con l'unica soluzione <b>spendi meno e ricevi di più</b>: la 12ª seduta e il prodotto te li regalo io.</p>
           <svg width="44" height="54" viewBox="0 0 44 54" aria-hidden="true"><path d="M6 50 C 18 44, 34 34, 34 8" fill="none" stroke="#7A5D00" stroke-width="3" stroke-linecap="round"/><path d="M25 15 L 34 5 L 41 17" fill="none" stroke="#7A5D00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div></div>
