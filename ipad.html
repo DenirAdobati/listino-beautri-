@@ -657,7 +657,8 @@ const IMG = {
   p3: 'https://i.ibb.co/Hf34gVLt/Detossinare-1.jpg', p3t: 'https://i.ibb.co/6Jtrp8Vg/detossinare-1.jpg',
   p4: 'https://i.ibb.co/9HtTbKVG/Nutrire-1.jpg', p4t: 'https://i.ibb.co/5Xvcq7Ts/nutrire-1.jpg',
   laser: 'https://i.ibb.co/wrg9DJmq/DSF9006-1.jpg', riparare: 'https://i.ibb.co/C3wK2rNs/fotoringiovaniemto-1.jpg',
-  spa: 'https://i.ibb.co/HfRD7QzN/DSF8767-1.jpg'
+  spa: 'https://i.ibb.co/HfRD7QzN/DSF8767-1.jpg',
+  uomo: 'foto-uomo/uomo-8943.jpg'
 };
 const TOOL_IC = { 'nebulizzazione': 'fa-cloud', 'ultrasuoni': 'fa-wave-square', 'corrente galvanica': 'fa-bolt', 'vacuum terapia': 'fa-arrows-to-circle', 'alta frequenza': 'fa-tower-broadcast', 'cascata': 'fa-water', 'ossigenoterapia': 'fa-wind' };
 
@@ -683,10 +684,10 @@ const LASER_PERCORSO = [
 ];
 const LASER_SINGOLA = [['Alopecia androgenetica', "40'", '84', '104', '114'], ['Caduta stagionale', "40'", '84', '104', '114'], ['Psoriasi', "40'", '84', '104', '114'], ['Forfora', "40'", '84', '104', '114'], ['Dermatite seborroica', "60'", '124', '144', '154'], ['Eczema / eritema', "40'", '84', '104', '114'], ['Cute seborroica', "40'", '84', '104', '114']];
 const TRICO = [
-  { need: 'sebo, forfora, prurito', t: 'Igienizzare & Purificare', s: 'Argille e peeling naturali per la cute con eccesso di sebo e desquamazione.', p: IMG.p1, pr: { lei: '63/67', lui: '41' } },
-  { need: 'cute dolente, psoriasi', t: 'Lenire', s: 'Argille, peeling e impacchi naturali per purificare e rigenerare la cute.', p: IMG.p2, pr: { lei: '93/97', lui: '71' } },
-  { need: 'bulbo affaticato', t: 'Detossinare', s: 'Toglie i residui e porta ossigeno e nutrimento al bulbo.', p: IMG.p3, pr: { lei: '71/75', lui: '51' } },
-  { need: 'cute e capelli spenti', t: 'Nutrire', s: 'Oli essenziali e prodotti nutritivi per il capello, la cute e il bulbo.', p: IMG.p4, pr: { lei: '93/97', lui: '71' } }
+  { need: 'sebo, forfora, prurito', t: 'Igienizzare & Purificare', s: 'Argille e peeling naturali per la cute con eccesso di sebo e desquamazione.', p: IMG.p1, pu: 'foto-uomo/uomo-8914.jpg', pr: { lei: '63/67', lui: '41' } },
+  { need: 'cute dolente, psoriasi', t: 'Lenire', s: 'Argille, peeling e impacchi naturali per purificare e rigenerare la cute.', p: IMG.p2, pu: 'foto-uomo/uomo-8961.jpg', pr: { lei: '93/97', lui: '71' } },
+  { need: 'bulbo affaticato', t: 'Detossinare', s: 'Toglie i residui e porta ossigeno e nutrimento al bulbo.', p: IMG.p3, pu: 'foto-uomo/uomo-8955.jpg', pr: { lei: '71/75', lui: '51' } },
+  { need: 'cute e capelli spenti', t: 'Nutrire', s: 'Oli essenziali e prodotti nutritivi per il capello, la cute e il bulbo.', p: IMG.p4, pu: 'foto-uomo/uomo-8932.jpg', pr: { lei: '93/97', lui: '71' } }
 ];
 
 const Q = [
@@ -1119,7 +1120,7 @@ P.uomo = () => `
   <div class="R bg-white">
     <span class="hand" style="font-size:32px;color:var(--giallo-scuro)">Scegli cosa ti serve,</span>
     <div class="g22">${[
-      { t: 'Trattamenti tricologici', s: 'Sedute singole e laser per sebo, forfora, prurito e diradamento.', p: IMG.p1t, tape: 'la cute', go: 'tricologici' },
+      { t: 'Trattamenti tricologici', s: 'Sedute singole e laser per sebo, forfora, prurito e diradamento.', p: IMG.uomo, tape: 'la cute', go: 'tricologici' },
       { t: 'SPA', s: 'Vapore a 35°, non a 90° come quello classico: la cute respira, non si stressa.', p: IMG.spa, tape: 'la cute', go: 'spa' },
       { t: 'Migliori proposte', s: 'Cute No Stress: un tocco in più al servizio, per distendere la cute.', ic: 'fa-star', tape: 'la cute', go: 'migliori' },
       { t: 'Stilistico', s: 'Beautrì Cut classico, olistico o energizzante, con il massaggio.', ic: 'fa-scissors', cls: 'dark', tape: 'lo stile', go: 'stilistico' }
@@ -1131,7 +1132,7 @@ P.uomo = () => `
 P.tricologici = () => {
   const g = S.g;
   return `
-  <div class="L sd-L photo" style="background-image:url(${IMG.p1t})">
+  <div class="L sd-L photo" style="background-image:url(${g === 'lui' ? IMG.uomo : IMG.p1t})">
     ${backBtn()}
     <div class="in"><span class="tape">sedute singole e laser</span>
       <div class="h1">Il benessere parte<br>dalla <span class="y">cute</span>.</div>
@@ -1141,7 +1142,7 @@ P.tricologici = () => {
     <div class="hello">Scegli la tua seduta,</div>
     <p class="p">Ogni seduta ha un compito preciso. In tutte potenziamo i prodotti naturali con <b>strumenti tecnologici</b>.</p>
     <div class="sep"><span>le sedute tricologiche</span></div>
-    ${TRICO.map(x => `<div class="prow"><span class="ph" style="width:104px;height:86px;background:#333 url(${x.p}) center/cover"></span><div class="bd"><span class="w-lb" style="font-size:20px">${x.need}</span><h3>${x.t}</h3><p>${x.s}</p></div><div style="text-align:right"><span class="pp">${x.pr[g]} €</span><span class="pricelbl">seduta singola</span></div></div>`).join('')}
+    ${TRICO.map(x => `<div class="prow"><span class="ph" style="width:104px;height:86px;background:#333 url(${g === 'lui' ? x.pu : x.p}) center/cover"></span><div class="bd"><span class="w-lb" style="font-size:20px">${x.need}</span><h3>${x.t}</h3><p>${x.s}</p></div><div style="text-align:right"><span class="pp">${x.pr[g]} €</span><span class="pricelbl">seduta singola</span></div></div>`).join('')}
     <div class="cbox" style="background:var(--sabbia);border-color:#e2dacb"><span><span class="t">con gli strumenti giusti</span><span class="tools" style="margin-top:4px">${['ultrasuoni', 'nebulizzazione', 'corrente galvanica', 'ossigenoterapia', 'alta frequenza'].map(t => `<span class="tool" style="background:#fff"><i class="fa-solid ${TOOL_IC[t]}"></i>${t}</span>`).join('')}</span></span></div>
     <div class="sep"><span>il laser</span></div>
     <div class="bbox"><span class="k">la luce che riattiva la cute</span><h3>Laser a fotobiostimolazione</h3><p>Lavora in profondità sul cuoio capelluto e stimola la rigenerazione cellulare.</p>
