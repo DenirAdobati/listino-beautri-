@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Beautrì">
+<meta name="robots" content="noindex">
+<title>Beautrì — Menu iPad</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BZL7GX2KHM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BZL7GX2KHM');
+</script>
+<style>
+  /* Menu iPad di Beautrì: tela fissa 1180×820 (iPad in orizzontale), scalata per riempire lo schermo */
+  :root {
+    --nero: #0A0A0A; --nero-2: #151515; --nero-3: #1E1E1E; --giallo: #F5C200; --giallo-scuro: #7A5D00; --rosso: #D62F32; --verde: #17834A; --sabbia: #F6F4EF; --crema: #FFFBEA;
+    --testo: #2E2E2E; --testo-2: #4A4A4A;
+    --logo: url('https://beautri.it/cdn/shop/t/2/assets/beautri-logo.png?v=120188509770860192361789545147');
+    --daniela: url('https://beautri.it/cdn/shop/t/2/assets/beautri-chisiamo-team-daniela.webp?v=64710030799597955211789648498');
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; background: var(--nero); overflow: hidden; }
+  body { font-family: Inter, -apple-system, sans-serif; color: var(--nero); -webkit-font-smoothing: antialiased; -webkit-user-select: none; user-select: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+  #app { position: absolute; left: 50%; top: 50%; width: 1180px; height: 820px; overflow: hidden; display: flex; transform-origin: center; background: #fff; }
+  #rotate { display: none; position: fixed; inset: 0; z-index: 99; background: var(--nero); color: #fff; align-items: center; justify-content: center; flex-direction: column; gap: 18px; text-align: center; padding: 30px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 22px; }
+  #rotate i { font-size: 54px; color: var(--giallo); }
+  @media (orientation: portrait) and (max-width: 1000px) { #rotate { display: flex; } }
+
+  /* sfondi a quadretti del sito */
+  .bg-dark { background-color: var(--nero); background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 44px 44px; color: #fff; }
+  .bg-white { background-color: #fff; background-image: linear-gradient(rgba(0,0,0,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.035) 1px, transparent 1px); background-size: 44px 44px; }
+  .scr { position: absolute; inset: 0; display: flex; animation: fade .25s ease-out both; }
+  @keyframes fade { from { opacity: .4; } to { opacity: 1; } }
+
+  /* ---------- barra in alto ---------- */
+  .nav { position: absolute; left: 18px; right: 18px; top: 14px; height: 70px; border-radius: 18px; background: rgba(10,10,10,.94); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 6px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 14px; padding: 0 10px 0 20px; color: #fff; z-index: 20; }
+  .logo { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 18px; letter-spacing: .03em; white-space: nowrap; }
+  .logo i { width: 26px; height: 26px; background: var(--logo) center/contain no-repeat; }
+  .tabs { display: flex; gap: 4px; margin: 0 auto; }
+  .tab { min-height: 52px; padding: 0 18px; border-radius: 12px; display: flex; align-items: center; gap: 9px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 16px; color: rgba(255,255,255,.82); }
+  .tab i { font-size: 15px; color: rgba(255,255,255,.6); }
+  .tab.on { background: var(--giallo); color: var(--nero); box-shadow: 0 0 18px rgba(245,194,0,.3); }
+  .tab.on i { color: var(--nero); }
+  .seg { display: flex; align-items: center; gap: 8px; }
+  .seg small { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--giallo); }
+  .seg div { display: flex; background: rgba(255,255,255,.1); border-radius: 12px; padding: 4px; }
+  .seg button { min-height: 46px; min-width: 60px; padding: 0 12px; border-radius: 9px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; color: rgba(255,255,255,.82); text-align: center; }
+  .seg button.on { background: #fff; color: var(--nero); }
+
+  /* ---------- elementi comuni ---------- */
+  .eyebrow { font-family: Poppins, sans-serif; font-weight: 700; font-size: 15px; color: var(--giallo); letter-spacing: .02em; }
+  .eyebrow::before, .eyebrow::after { content: "•"; margin: 0 9px; }
+  .eyebrow::before { margin-left: 0; }
+  .eyebrow.ink { color: var(--nero); }
+  .eyebrow.ink::before, .eyebrow.ink::after { color: var(--giallo-scuro); }
+  .h1 { font-family: Poppins, sans-serif; font-weight: 900; letter-spacing: -0.045em; line-height: 1.04; color: #fff; }
+  .h1 .y, .y { color: var(--giallo); }
+  .h1 .sub { display: block; font-size: 30px; letter-spacing: -0.03em; color: #fff; margin-top: 4px; }
+  .hl { background: linear-gradient(transparent 60%, rgba(245,194,0,.7) 60%); padding: 0 3px; }
+  .lead { font-size: 17px; line-height: 1.55; letter-spacing: .03em; color: rgba(255,255,255,.88); }
+  .lead b { color: #fff; }
+  .hand { font-family: Caveat, cursive; font-weight: 700; }
+  .arrow-sq { width: 48px; height: 48px; border-radius: 13px; background: var(--giallo); color: var(--nero); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(245,194,0,.3); }
+  .arrow-sq.dark { background: var(--nero); color: var(--giallo); box-shadow: none; }
+  .tape { display: inline-block; font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--nero); background: var(--giallo); padding: 2px 14px 3px; transform: rotate(-3deg); box-shadow: 0 3px 8px rgba(0,0,0,.15); white-space: nowrap; }
+  .lockc { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 14px; border-radius: 999px; background: rgba(10,10,10,.72); border: 1px solid rgba(245,194,0,.55); font-family: Poppins, sans-serif; font-weight: 700; font-size: 14px; color: #fff; }
+  .lockc i { color: var(--giallo); }
+
+  /* tasto indietro: uguale in tutte le pagine */
+  .back { align-self: flex-start; display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 18px 0 6px; border-radius: 16px; background: rgba(10,10,10,.6); border: 1px solid rgba(255,255,255,.18); font-family: Poppins, sans-serif; font-weight: 700; font-size: 16px; color: #fff; z-index: 3; }
+  .back .b { width: 40px; height: 40px; border-radius: 11px; background: var(--giallo); color: var(--nero); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+  /* metà sinistra e foglio a destra */
+  .L { position: relative; flex-shrink: 0; display: flex; flex-direction: column; padding: 100px 32px 26px 34px; }
+  .L.photo { background: #222 center/cover no-repeat; color: #fff; }
+  .L.photo::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.6) 0%, rgba(10,10,10,.05) 28%, rgba(10,10,10,.25) 48%, rgba(10,10,10,.92) 100%); }
+  .L > * { position: relative; }
+  .L .bottom { margin-top: auto; }
+  .L .h1 { font-size: 50px; margin-top: 12px; }
+  .L .lead { margin-top: 10px; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 14px; border-radius: 999px; background: rgba(10,10,10,.75); border: 1px solid rgba(245,194,0,.55); font-family: Poppins, sans-serif; font-weight: 700; font-size: 14px; color: #fff; }
+  .badge i { color: var(--giallo); }
+  .R { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 100px 32px 24px 28px; }
+  .R.scroll { overflow-y: auto; -webkit-overflow-scrolling: touch; margin-top: 92px; padding-top: 8px; padding-bottom: 34px; scrollbar-width: none; }
+  .R.scroll::-webkit-scrollbar { display: none; }
+  .sheet { background: #fff; border-radius: 10px; padding: 22px 26px 24px; box-shadow: 0 2px 0 #eee, 0 26px 56px rgba(0,0,0,.12); }
+  .hello { font-family: Caveat, cursive; font-weight: 700; font-size: 32px; color: var(--giallo-scuro); line-height: 1.1; }
+  .p { font-size: 16.5px; color: var(--testo); line-height: 1.55; margin-top: 6px; }
+  .p b { color: var(--nero); }
+  .sep { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; }
+  .sep::before, .sep::after { content: ""; flex: 1; border-top: 1px dashed #cfc6b0; }
+  .sep span { font-family: Caveat, cursive; font-weight: 700; font-size: 25px; color: var(--giallo-scuro); }
+  .lockline { margin-top: 14px; font-size: 14.5px; color: var(--testo-2); }
+  .lockline i { color: var(--giallo-scuro); margin-right: 6px; }
+  .ps { font-family: Caveat, cursive; font-weight: 700; font-size: 24px; color: var(--rosso); line-height: 1.15; margin-top: 16px; }
+  .sign { font-family: Caveat, cursive; font-weight: 700; font-size: 30px; color: #333; text-align: right; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chips span { font-size: 14px; font-weight: 600; background: var(--sabbia); border-radius: 999px; padding: 6px 12px; color: var(--nero); }
+  .chips span i { color: var(--giallo-scuro); margin-right: 6px; }
+  .chips.green span { background: #E3F5EA; color: #0F5E33; }
+  .chips.green span i { color: #0F5E33; }
+  .tools { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+  .tool { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 600; background: var(--sabbia); border-radius: 999px; padding: 7px 13px; }
+  .tool i { color: var(--giallo-scuro); }
+  .w-t { font-family: Poppins, sans-serif; font-weight: 900; font-size: 23px; letter-spacing: -0.035em; line-height: 1.1; }
+  .w-lb { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--verde); line-height: 1; }
+  .w-p { font-size: 16px; color: var(--testo); line-height: 1.55; margin-top: 6px; }
+  .w-p b { color: var(--nero); }
+  .num { font-family: Caveat, cursive; font-weight: 700; font-size: 38px; line-height: 1; }
+  .pricelbl { display: block; font-size: 13.5px; font-weight: 600; color: var(--testo-2); margin-top: 4px; }
+
+  /* righe numerate della lettera (schede seduta, laser, riparare, mantenimento) */
+  .rows { display: flex; flex-direction: column; background: #fff; border-radius: 10px; padding: 6px 24px; box-shadow: 0 2px 0 #eee, 0 26px 56px rgba(0,0,0,.12); }
+  .row { display: flex; gap: 16px; align-items: flex-start; border-bottom: 1px dashed #ddd3bd; padding: 16px 0; }
+  .row:last-child { border-bottom: 0; }
+  .row .num { width: 24px; padding-top: 4px; flex-shrink: 0; }
+  .row .bd { flex: 1; min-width: 0; }
+
+  /* card in stile "casi studio" */
+  .card { position: relative; display: flex; flex-direction: column; background: #fff; border-radius: 20px; padding: 10px 10px 12px; border: 1px solid #ece6d8; box-shadow: 0 2px 0 #eee, 0 14px 32px rgba(0,0,0,.09); min-height: 0; }
+  .card .ph { position: relative; flex: 1; min-height: 0; border-radius: 14px; background: #333 center/cover no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .card .ph.ic { background: var(--sabbia); color: var(--giallo-scuro); font-size: 46px; }
+  .card .ph.ic.gold { background: var(--giallo); color: var(--nero); }
+  .card .ph.ic.dark { background: var(--nero); color: var(--giallo); }
+  .card .ph .tape { position: absolute; left: 10px; bottom: 10px; font-size: 19px; }
+  .card .tx { padding: 12px 4px 0; display: flex; align-items: flex-end; gap: 10px; }
+  .card .tx > span:first-child { flex: 1; min-width: 0; }
+  .card b { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 23px; letter-spacing: -0.035em; line-height: 1.08; }
+  .card small { display: block; font-size: 14.5px; color: var(--testo-2); margin-top: 4px; line-height: 1.35; }
+  .card .chips span { font-size: 12.5px; padding: 4px 9px; }
+  .card .chips span.y { background: var(--giallo); }
+
+  /* tasti di scelta in basso (sedute, famiglie, mantenimenti) */
+  .switch { display: flex; gap: 8px; flex-wrap: wrap; }
+  .switch button { display: flex; align-items: center; gap: 9px; min-height: 52px; padding: 0 14px 0 6px; border-radius: 14px; background: #fff; border: 1px solid #e6dfcf; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,.05); }
+  .switch button i.th { width: 40px; height: 40px; border-radius: 10px; background: #ddd center/cover no-repeat; display: block; }
+  .switch button.on { background: var(--nero); color: #fff; border-color: var(--nero); }
+
+  /* box nero e box crema */
+  .bbox { border-radius: 18px; background: var(--nero); color: #fff; padding: 16px 18px; }
+  .bbox .k { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--giallo); }
+  .bbox h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; }
+  .bbox p { font-size: 15.5px; color: rgba(255,255,255,.88); line-height: 1.5; margin-top: 6px; }
+  .bbox p b { color: #fff; }
+  .cbox { display: flex; gap: 12px; align-items: flex-start; margin-top: 12px; padding: 13px 15px; border-radius: 16px; background: var(--crema); border: 1px solid rgba(245,194,0,.7); font-size: 15.5px; color: var(--testo); line-height: 1.5; }
+  .cbox > i { width: 38px; height: 38px; border-radius: 50%; background: var(--giallo); color: var(--nero); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cbox b { color: var(--nero); }
+  .cbox .t { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--giallo-scuro); line-height: 1; margin-bottom: 3px; }
+
+  /* prezzo */
+  .pbox { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 14px; padding: 14px 18px; border-radius: 16px; background: var(--nero); color: #fff; }
+  .pbox .l { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--giallo); }
+  .pbox .w { font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; }
+  .pbox .a { font-family: Poppins, sans-serif; font-weight: 900; font-size: 32px; color: var(--giallo); white-space: nowrap; text-align: right; }
+  .pbox .a small { display: block; font-family: Inter, sans-serif; font-weight: 600; font-size: 13.5px; color: rgba(255,255,255,.8); }
+  .pp { font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px; background: var(--giallo); padding: 3px 11px; border-radius: 9px; white-space: nowrap; }
+
+  .addon { position: relative; display: flex; gap: 12px; align-items: center; margin-top: 14px; padding: 13px; border-radius: 16px; border: 1.5px dashed #bfb59c; }
+  .addon .bdg { position: absolute; top: -10px; left: 12px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .08em; background: #fff; padding: 0 6px; color: var(--testo-2); }
+  .addon img { width: 62px; height: 76px; object-fit: contain; flex-shrink: 0; }
+  .addon b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16.5px; }
+  .addon small { font-size: 14.5px; color: var(--testo-2); line-height: 1.4; }
+  .addon .ap { margin-left: auto; font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px; white-space: nowrap; }
+
+  /* ===================== HOME ===================== */
+  .home-L { width: 44%; }
+  .home-L .h1 { font-size: 52px; margin-top: 14px; }
+  .home-L .lead { max-width: 380px; }
+  .home-L .dani { position: absolute; left: -70px; right: 90px; bottom: 0; height: 52%; background: var(--daniela) center bottom/contain no-repeat; }
+  .home-L .note { position: absolute; right: 30px; bottom: 214px; text-align: right; color: var(--giallo); font-size: 27px; transform: rotate(-6deg); line-height: 1.05; }
+  .stats { position: absolute; right: 26px; bottom: 26px; display: flex; flex-direction: column; gap: 10px; }
+  .stats div { background: rgba(21,21,21,.94); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 12px 16px; min-width: 160px; }
+  .stats b { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -0.03em; color: var(--giallo); line-height: 1; }
+  .stats small { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.88); }
+  .home-g { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; gap: 16px; margin-top: 14px; }
+  .home-g .card b { font-size: 32px; }
+  .wid { display: flex; align-items: center; gap: 14px; padding: 12px 14px 12px 12px; border-radius: 20px; background: #fff; border: 1px solid #ece6d8; box-shadow: 0 2px 0 #eee, 0 14px 32px rgba(0,0,0,.09); }
+  .wid .sq { width: 66px; height: 66px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: Caveat, cursive; font-weight: 700; font-size: 50px; flex-shrink: 0; }
+  .wid b { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 23px; white-space: nowrap; letter-spacing: -0.035em; line-height: 1.05; }
+  .wid small { font-size: 14.5px; color: var(--testo-2); }
+  .wid .arrow-sq { margin-left: auto; }
+
+  /* ===================== PERCORSI ===================== */
+  .pc-L { width: 40%; }
+  .pc-L .h1 { font-size: 46px; }
+  .how { margin-top: 16px; background: var(--nero-2); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 16px 16px 14px; }
+  .how .t { font-family: Caveat, cursive; font-weight: 700; font-size: 28px; color: var(--giallo); line-height: 1; }
+  .how p { font-size: 15.5px; color: rgba(255,255,255,.88); margin-top: 6px; line-height: 1.5; }
+  .how p b { color: #fff; }
+  .ex { margin-top: 10px; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+  .ex span { flex: 1; text-align: center; background: rgba(255,255,255,.1); border-radius: 10px; padding: 9px 6px; }
+  .ex i { color: var(--giallo); font-size: 12px; }
+  .inc-k { font-family: Caveat, cursive; font-weight: 700; font-size: 23px; color: var(--giallo); margin-top: 12px; line-height: 1; }
+  .inc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+  .inc div { background: rgba(255,255,255,.08); border-radius: 12px; padding: 9px 6px; text-align: center; }
+  .inc i { color: var(--giallo); font-size: 17px; }
+  .inc i.fa-whatsapp { color: #25D366; }
+  .inc b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13.5px; margin-top: 4px; }
+  .inc small { display: block; font-size: 12.5px; color: rgba(255,255,255,.78); }
+  .psl { margin-top: auto; padding-top: 12px; font-family: Caveat, cursive; font-weight: 700; font-size: 24px; color: #fff; line-height: 1.1; }
+  .psl b { color: var(--giallo); font-size: 28px; margin-right: 6px; }
+  .sgrid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 10px; }
+  .sgrid .card b { font-size: 21px; }
+  .sgrid .card small { font-size: 13.5px; }
+  .sgrid .card .arrow-sq { width: 44px; height: 44px; }
+  .card.dark { background: var(--nero); border-color: var(--nero); color: #fff; }
+  .card.dark small { color: rgba(255,255,255,.8); }
+  .mstrip { margin-top: 14px; display: flex; align-items: center; gap: 14px; padding: 12px 12px 12px 18px; background: var(--nero); color: #fff; border-radius: 18px; }
+  .mstrip .k { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--giallo); line-height: 1; }
+  .mstrip b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 19px; }
+  .mstrip .btns { display: flex; gap: 8px; margin-left: auto; }
+  .mstrip .btns button { min-height: 52px; display: flex; align-items: center; gap: 8px; padding: 0 18px; border-radius: 12px; background: rgba(255,255,255,.12); font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; color: #fff; }
+  .mstrip .btns i { color: var(--giallo); font-size: 14px; }
+  .sec { display: flex; align-items: baseline; justify-content: space-between; }
+  .sec h2 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 27px; letter-spacing: -0.04em; }
+  .sec .hand { font-size: 24px; color: var(--giallo-scuro); }
+
+  /* ===================== SCHEDA SEDUTA ===================== */
+  .sd-L { width: 46%; padding: 0; }
+  .sd-L .back { position: absolute; left: 32px; top: 100px; }
+  .sd-L .in { position: absolute; left: 32px; right: 28px; bottom: 28px; }
+  .sd-L .h1 { font-size: 54px; margin-top: 12px; }
+  .sd-R { padding-top: 100px; }
+  .sd-R .rows { flex: 1; min-height: 0; transform: rotate(-.3deg); }
+  .sd-R .row { flex: 1; align-items: center; padding: 8px 0; }
+  .sd-R .row .num { align-self: flex-start; padding-top: 10px; }
+  .pr2 { display: flex; gap: 10px; margin-top: 8px; }
+  .pr2 span { flex: 1; border-radius: 12px; padding: 8px 12px; background: var(--sabbia); font-family: Poppins, sans-serif; font-weight: 700; font-size: 14px; color: var(--testo-2); }
+  .pr2 span b { display: block; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; color: var(--nero); }
+  .pr2 span.on { background: var(--giallo); color: var(--nero); }
+  .dots { display: flex; gap: 6px; margin-top: 8px; }
+  .dots i { width: 22px; height: 22px; border-radius: 50%; background: var(--giallo); }
+  .dots i.opt { background: none; border: 2px dashed var(--giallo-scuro); }
+  .sd-foot { margin-top: 12px; }
+  .sd-foot .switch { flex-wrap: nowrap; }
+  .sd-foot .switch button { flex: 1; }
+
+  /* laser, riparare, tricologici */
+  .benefit { display: flex; gap: 10px; align-items: flex-start; margin-top: 9px; font-size: 15.5px; color: var(--testo); line-height: 1.5; }
+  .benefit i { width: 24px; height: 24px; border-radius: 7px; background: var(--verde); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+  .benefit b { color: var(--nero); }
+  .ltab .tr { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px dashed #e2dacb; }
+  .ltab .tr:last-child { border-bottom: 0; }
+  .ltab .nm { flex: 1; }
+  .ltab .nm b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; }
+  .ltab .nm small { font-size: 14px; color: var(--testo-2); }
+  .ltab .tr.long .pp { background: var(--nero); color: var(--giallo); }
+  .ind { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .ind span { font-size: 14px; font-weight: 600; background: #E3F5EA; color: #0F5E33; border-radius: 999px; padding: 6px 11px; }
+  .gift { margin-top: 12px; background: #FFF1F1; border: 1.5px dashed rgba(214,47,50,.6); border-radius: 16px; padding: 10px 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .gift .gi { width: 36px; height: 36px; border-radius: 50%; background: var(--rosso); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .gift .gt { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--rosso); line-height: 1.05; }
+  .gift .gp { display: flex; gap: 8px; margin-left: auto; }
+  .gift .gp div { display: flex; align-items: center; gap: 6px; background: #fff; border-radius: 12px; padding: 4px 10px 4px 4px; }
+  .gift .gp img { width: 36px; height: 44px; object-fit: contain; }
+  .gift .gp b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; }
+  .gift .gp small { font-size: 12.5px; color: var(--testo-2); }
+  .tl3 { display: flex; gap: 8px; margin-top: 14px; }
+  .tl3 > div { flex: 1; background: var(--sabbia); border-radius: 14px; padding: 12px; position: relative; }
+  .tl3 .n { position: absolute; top: -11px; left: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--nero); color: var(--giallo); font-family: Caveat, cursive; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+  .tl3 small { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--giallo-scuro); margin-top: 6px; line-height: 1; }
+  .tl3 b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14.5px; margin-top: 3px; line-height: 1.2; }
+  .tl3 em { display: block; font-style: normal; font-size: 13.5px; color: var(--testo-2); margin-top: 2px; }
+
+  /* ===================== MANTENIMENTO ===================== */
+  .mtabs { display: flex; gap: 6px; margin-top: 14px; }
+  .mtabs button { min-height: 50px; padding: 0 16px; border-radius: 12px; background: rgba(10,10,10,.7); border: 1px solid rgba(255,255,255,.22); color: #fff; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; }
+  .mtabs button.on { background: var(--giallo); color: var(--nero); border-color: var(--giallo); }
+  .qfull { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 110px 30px; text-align: center; position: relative; }
+  .qfull .mtabs { position: absolute; top: 100px; left: 34px; margin: 0; }
+  .qfull .h1 { font-size: 46px; }
+  .qfull .intro-d { color: rgba(255,255,255,.88); font-size: 17px; line-height: 1.55; margin-top: 10px; max-width: 720px; }
+  .qfull .intro-d b { color: #fff; }
+  .q { width: 100%; max-width: 840px; margin-top: 24px; padding: 22px 26px; border-radius: 18px; background: var(--nero-2); border: 1px solid rgba(255,255,255,.1); text-align: left; animation: fade .3s ease-out both; }
+  .q-top { display: flex; justify-content: space-between; align-items: center; }
+  .q-lab { font-family: Caveat, cursive; font-weight: 700; font-size: 24px; color: var(--giallo); }
+  .bars { display: flex; gap: 4px; } .bars i { width: 26px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.2); } .bars i.on { background: var(--giallo); }
+  .q-text { font-family: Poppins, sans-serif; font-weight: 800; font-size: 25px; letter-spacing: -0.02em; line-height: 1.25; margin-top: 6px; color: #fff; }
+  .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; margin-top: 16px; }
+  .scale button { aspect-ratio: 1; border-radius: 16px; background: var(--nero-3); border: 1px solid rgba(255,255,255,.14); color: #fff; font-family: Poppins, sans-serif; font-weight: 800; font-size: 22px; text-align: center; }
+  .scale button.sel { background: var(--giallo); color: var(--nero); }
+  .ends { display: flex; justify-content: space-between; font-size: 14.5px; color: rgba(255,255,255,.75); margin-top: 8px; }
+  .who-ans { margin-top: 18px; font-family: Caveat, cursive; font-weight: 700; font-size: 25px; color: var(--giallo); }
+  .answers { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #E3F5EA; color: #0F5E33; font-weight: 600; font-size: 15px; }
+  .answers b { width: 30px; height: 30px; border-radius: 50%; background: #fff; display: inline-flex; align-items: center; justify-content: center; font-family: Poppins, sans-serif; font-weight: 900; color: var(--nero); }
+  .quote { font-family: Caveat, cursive; font-weight: 700; font-size: 26px; line-height: 1.2; color: var(--nero); margin-top: 14px; padding-left: 14px; border-left: 4px solid var(--giallo); }
+  .quote small { display: block; font-size: 24px; color: #555; text-align: right; }
+  .chain { margin-top: 10px; background: var(--sabbia); border-radius: 14px; padding: 10px 12px; }
+  .chain small { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--giallo-scuro); }
+  .chain ol { list-style: none; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 4px; }
+  .chain li { font-size: 14px; font-weight: 600; background: #fff; border-radius: 10px; padding: 8px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.3; }
+  .chain li i { color: var(--verde); margin-top: 3px; } .chain li:nth-child(2) i { color: var(--giallo-scuro); } .chain li:nth-child(3) i { color: var(--rosso); }
+  .same { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--giallo-scuro); text-align: center; margin-top: 6px; }
+  .warn { margin-top: 10px; font-family: Caveat, cursive; font-weight: 700; font-size: 24px; color: var(--rosso); }
+  .whys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+  .whys div { background: var(--nero); color: #fff; border-radius: 14px; padding: 11px; font-size: 14.5px; font-weight: 600; line-height: 1.3; }
+  .whys i { display: block; color: var(--giallo); font-size: 17px; margin-bottom: 6px; }
+  .comp { display: flex; gap: 8px; margin-top: 10px; }
+  .comp span { flex: 1; background: var(--sabbia); border-radius: 14px; padding: 10px; text-align: center; font-size: 14px; font-weight: 600; }
+  .comp b { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -0.03em; line-height: 1; }
+  .comp b.k { color: var(--giallo-scuro); }
+  .months { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; margin-top: 10px; }
+  .months i { aspect-ratio: 1; border-radius: 50%; background: var(--giallo); }
+  .months i.b { background: var(--nero); }
+  .prods { display: flex; gap: 10px; margin-top: 10px; }
+  .prods div { flex: 1; display: flex; align-items: center; gap: 10px; background: var(--sabbia); border-radius: 14px; padding: 6px 12px 6px 6px; }
+  .prods img { width: 58px; height: 72px; object-fit: contain; background: #fff; border-radius: 10px; }
+  .prods b { font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; }
+  .pay { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px; margin-top: 10px; }
+  .pay .note { grid-column: span 2; font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--giallo-scuro); }
+  .opt { position: relative; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .opt.one { background: var(--nero); color: #fff; }
+  .opt.seat { background: var(--sabbia); }
+  .opt .badge2 { position: absolute; top: -11px; right: 12px; background: var(--rosso); color: #fff; font-family: Poppins, sans-serif; font-weight: 700; font-size: 12.5px; padding: 3px 10px; border-radius: 999px; }
+  .opt .k { font-family: Caveat, cursive; font-weight: 700; font-size: 23px; line-height: 1; }
+  .opt.one .k { color: var(--giallo); } .opt.seat .k { color: var(--giallo-scuro); }
+  .opt s { font-size: 16px; opacity: .7; }
+  .opt .big { font-family: Poppins, sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -0.03em; line-height: 1.05; white-space: nowrap; }
+  .opt.one .big { color: var(--giallo); }
+  .opt .calc { font-size: 13.5px; opacity: .9; }
+  .opt ul { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; }
+  .opt li i { width: 20px; color: var(--giallo); }
+  .opt.seat li i.fa-xmark { color: var(--rosso); } .opt.seat li i.fa-check { color: var(--verde); }
+  .opt .save { align-self: flex-start; font-size: 14px; font-weight: 700; background: var(--giallo); color: var(--nero); border-radius: 8px; padding: 4px 10px; }
+  .fine { margin-top: 12px; font-size: 14px; color: var(--testo-2); line-height: 1.5; }
+  .fine b { color: var(--nero); }
+
+  /* ===================== PRODOTTI ===================== */
+  .pr-L { width: 40%; }
+  .pr-L .h1 { font-size: 46px; }
+  .grp { flex: 1; min-height: 0; margin: 4px -14px 0; background: url('foto-prodotti/menu-prodotti.webp') center bottom/contain no-repeat; position: relative; }
+  .grp span { position: absolute; font-family: Caveat, cursive; font-weight: 700; font-size: 25px; color: #fff; line-height: 1.05; max-width: 130px; }
+  .grp .n1 { right: 6px; top: 34%; transform: rotate(5deg); text-align: right; }
+  .grp .n2 { left: 6px; top: 20%; transform: rotate(-5deg); }
+  .rgrid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 10px; }
+  .rc .ph { background: #fff; align-items: flex-end; }
+  .rc .ph img { height: 92%; width: auto; margin: 0 -48px; }
+  .rc .ph img:nth-child(2) { height: 100%; position: relative; z-index: 1; }
+  .rc .ph img.solo { height: 96%; margin: 0; }
+  .rc .ph .nn { position: absolute; top: 8px; left: 10px; width: 40px; height: 40px; border-radius: 50%; background: var(--nero); color: var(--giallo); font-family: Caveat, cursive; font-weight: 700; font-size: 26px; display: flex; align-items: center; justify-content: center; z-index: 2; }
+  .rc .ph .tape { z-index: 2; }
+  .rc .meta { display: inline-block; margin-top: 6px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px; background: var(--sabbia); border-radius: 7px; padding: 3px 9px; }
+
+  /* famiglia di prodotti */
+  .fl { width: 44%; }
+  .fl .h1 { font-size: 42px; margin-top: 14px; }
+  .fl .lead { font-size: 16px; }
+  .bottle { flex: 1; min-height: 0; display: grid; grid-template-rows: 100%; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; gap: 6px; margin-top: 10px; }
+  .bottle img { height: 100%; width: 100%; object-fit: cover; object-position: center bottom; align-self: end; }
+  .bottle span { font-family: Caveat, cursive; font-weight: 700; font-size: 25px; line-height: 1.1; color: #fff; margin-top: 30%; }
+  .bottle .n2 { text-align: right; transform: rotate(-4deg); }
+  .bottle .n1 { transform: rotate(4deg); }
+  .ftabs { display: flex; gap: 6px; margin-top: 12px; }
+  .ftabs button { flex: 1; min-height: 52px; border-radius: 12px; background: var(--nero-2); border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.9); font-family: Poppins, sans-serif; font-weight: 800; font-size: 14.5px; text-align: center; }
+  .ftabs button span { font-family: Caveat, cursive; font-size: 19px; color: var(--giallo); margin-right: 4px; }
+  .ftabs button.on { background: var(--giallo); color: var(--nero); border-color: var(--giallo); }
+  .ftabs button.on span { color: var(--nero); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 13px; background: var(--sabbia); border-radius: 7px; padding: 4px 9px; }
+  .chip i { color: var(--giallo-scuro); }
+  .prow { display: flex; gap: 16px; align-items: center; padding: 13px 0; border-bottom: 1px dashed #e2dacb; }
+  .prow:last-child { border-bottom: 0; }
+  .prow .ph { width: 96px; height: 118px; flex-shrink: 0; border-radius: 14px; background: #F8F6F2; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .prow .ph img { height: 100%; }
+  .prow .bd { flex: 1; min-width: 0; }
+  .prow h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 21px; letter-spacing: -0.03em; margin-top: 4px; }
+  .prow p { font-size: 15px; color: var(--testo); line-height: 1.45; margin-top: 3px; }
+  .fbox { margin-top: 18px; border-radius: 18px; background: var(--nero); color: #fff; padding: 16px 18px; display: grid; grid-template-columns: 1fr 190px; gap: 16px; }
+  .fbox.nophoto { grid-template-columns: 1fr; }
+  .fbox .k { font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--giallo); }
+  .fbox h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; }
+  .fbox h3 span { color: var(--giallo); }
+  .fbox p { font-size: 15px; color: rgba(255,255,255,.88); line-height: 1.5; margin-top: 6px; }
+  .fbox p b { color: #fff; }
+  .fbox ol { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+  .fbox li { display: flex; gap: 8px; align-items: center; font-size: 14.5px; font-weight: 600; }
+  .fbox li b { width: 24px; height: 24px; border-radius: 50%; background: var(--giallo); color: var(--nero); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .fbox .bph { border-radius: 14px; background: #fff center/cover no-repeat; position: relative; min-height: 120px; }
+  .fbox .bph em { position: absolute; left: 8px; bottom: 8px; font-style: normal; font-family: Caveat, cursive; font-weight: 700; font-size: 19px; background: var(--giallo); color: var(--nero); padding: 0 8px; border-radius: 6px; }
+  .fbox small { display: block; margin-top: 8px; font-size: 13.5px; color: rgba(255,255,255,.8); }
+
+  /* ===================== MENU DONNA / UOMO ===================== */
+  .mn-L { width: 36%; }
+  .mn-L .h1 { font-size: 48px; }
+  .first { margin-top: auto; width: 100%; background: var(--nero-2); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 14px 16px; display: block; }
+  .first .t { font-family: Caveat, cursive; font-weight: 700; font-size: 27px; color: var(--giallo); line-height: 1; }
+  .first p { font-size: 15px; color: rgba(255,255,255,.88); line-height: 1.5; margin-top: 6px; }
+  .first p b { color: #fff; }
+  .first .go { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,.18); font-family: Poppins, sans-serif; font-weight: 800; font-size: 15.5px; color: #fff; }
+  .g32 { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
+  .g22 { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 10px; }
+  .g32 .card b { font-size: 20px; }
+  .g32 .card small { font-size: 13.5px; }
+  .g32 .card .arrow-sq { width: 44px; height: 44px; }
+  .g32 .card .tape, .g22 .card .tape { font-size: 18px; }
+  .nov { margin-top: 12px; display: flex; align-items: center; gap: 14px; padding: 10px 12px 10px 14px; border-radius: 16px; background: var(--nero); color: #fff; }
+  .nov .ic { width: 44px; height: 44px; border-radius: 12px; background: rgba(245,194,0,.18); color: var(--giallo); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .nov b { font-family: Poppins, sans-serif; font-weight: 800; font-size: 19px; }
+  .nov .arrow-sq { margin-left: auto; }
+
+  /* pagine servizio (colorazioni, migliori, forma, stilistico, novità, consulenza) */
+  .cl { width: 44%; }
+  .cl .h1 { font-size: 46px; }
+  .hchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .hchips span { font-size: 14px; font-weight: 600; background: rgba(245,194,0,.16); color: var(--giallo); border: 1px solid rgba(245,194,0,.4); border-radius: 999px; padding: 5px 11px; }
+  .hnote { font-family: Caveat, cursive; font-weight: 700; font-size: 23px; color: #fff; margin-top: 8px; line-height: 1.1; }
+  .swatch { margin-top: auto; position: relative; height: 150px; }
+  .swatch i { position: absolute; bottom: 0; width: 92px; height: 92px; border-radius: 50%; border: 4px solid var(--nero); box-shadow: 0 10px 24px rgba(0,0,0,.4); }
+  .swatch small { position: absolute; right: 0; top: 0; font-family: Caveat, cursive; font-weight: 700; font-size: 23px; color: var(--giallo); transform: rotate(-4deg); }
+  .choose { margin-top: 12px; border-radius: 16px; background: var(--crema); border: 1px solid rgba(245,194,0,.7); padding: 12px 14px; }
+  .choose h4 { font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; }
+  .choose h4 i { color: var(--giallo-scuro); margin-right: 6px; }
+  .choose .c { display: flex; gap: 8px; align-items: baseline; font-size: 15px; color: var(--testo); padding: 4px 0; }
+  .choose .c i { color: var(--giallo-scuro); font-size: 12px; }
+  .choose .c b { color: var(--nero); }
+  .choose .end { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--giallo-scuro); text-align: right; }
+  .crow { width: 100%; display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px dashed #e2dacb; text-align: left; }
+  .crow:last-child { border-bottom: 0; }
+  .crow .ic { width: 52px; height: 52px; border-radius: 15px; background: var(--sabbia); color: var(--giallo-scuro); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .crow .ic.gold { background: var(--giallo); color: var(--nero); }
+  .crow .bd { flex: 1; min-width: 0; }
+  .crow .k { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--verde); line-height: 1; }
+  .crow b.t { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px; letter-spacing: -0.03em; }
+  .crow small { display: block; font-size: 14.5px; color: var(--testo-2); line-height: 1.4; }
+  .crow .tiny { font-size: 13.5px; color: var(--testo-2); margin-top: 3px; display: block; }
+  .crow .go { color: var(--giallo-scuro); font-size: 15px; }
+  .pass { width: 100%; display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 18px; background: var(--nero); color: #fff; text-align: left; }
+  .pass .ic { width: 48px; height: 48px; border-radius: 14px; background: rgba(245,194,0,.18); color: var(--giallo); display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
+  .pass .k { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--giallo); line-height: 1; }
+  .pass b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; }
+  .pass small { font-size: 14.5px; color: rgba(255,255,255,.85); }
+  .pass .m { display: inline-flex; gap: 6px; align-items: center; margin-top: 6px; font-size: 13.5px; font-weight: 600; background: rgba(255,255,255,.12); border-radius: 999px; padding: 4px 10px; }
+  .pass .m i { color: var(--giallo); }
+  .pass .arrow-sq { margin-left: auto; }
+  .ticks { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .ticks li { display: flex; gap: 8px; font-size: 16px; color: var(--testo); align-items: flex-start; }
+  .ticks li i { color: var(--verde); margin-top: 4px; font-size: 13px; }
+  .ticks li.talk i { color: var(--giallo-scuro); }
+  .ticks li em { font-style: normal; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--giallo-scuro); }
+  .rw { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed #e2dacb; }
+  .rw:last-child { border-bottom: 0; }
+  .rw .ic { width: 42px; height: 42px; border-radius: 12px; background: var(--sabbia); color: var(--giallo-scuro); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .rw .ic.gold { background: var(--giallo); color: var(--nero); }
+  .rw b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16.5px; }
+  .rw small { font-size: 14.5px; color: var(--testo-2); }
+  .rw .v { display: inline-block; margin-top: 4px; font-size: 13.5px; font-weight: 700; background: var(--sabbia); border-radius: 6px; padding: 2px 8px; }
+  .lv { padding: 13px 15px; border-radius: 16px; background: var(--sabbia); margin-top: 8px; }
+  .lv .top { display: flex; justify-content: space-between; align-items: baseline; }
+  .lv .top b { font-family: Poppins, sans-serif; font-weight: 900; font-size: 19px; }
+  .lv .dots { display: inline-flex; gap: 3px; margin: 0 0 0 8px; vertical-align: 2px; }
+  .lv .dots i { width: 10px; height: 10px; border-radius: 50%; background: #d6ccb6; }
+  .lv .dots i.on { background: var(--giallo-scuro); }
+  .lv small { display: block; font-size: 14.5px; color: var(--testo); margin-top: 4px; }
+  .lv .ben { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--verde); }
+  .lv .seal { display: inline-flex; gap: 6px; align-items: center; margin-top: 6px; font-size: 13.5px; font-weight: 700; color: var(--rosso); }
+  .giftb { margin-top: 10px; padding: 12px 14px; border-radius: 16px; background: #FFF1F1; border: 1.5px dashed rgba(214,47,50,.6); }
+  .giftb .k { font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--rosso); }
+  .giftb b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; }
+  .giftb small { font-size: 14.5px; color: var(--testo-2); }
+  .vs { margin-top: 8px; border-radius: 14px; overflow: hidden; border: 1px solid #e2dacb; }
+  .vs div { display: grid; grid-template-columns: 1fr 1fr; }
+  .vs div span { padding: 8px 10px; font-size: 14.5px; border-top: 1px solid #efe9dc; }
+  .vs div span:first-child { font-weight: 600; }
+  .vs div span:last-child { color: var(--testo-2); }
+  .vs .h span { font-family: Poppins, sans-serif; font-weight: 800; font-size: 13.5px; background: var(--nero); color: var(--giallo); border: 0; }
+  .vs .h span:last-child { color: #fff; }
+  .warnr { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; padding: 11px 13px; border-radius: 12px; background: #FFF1F1; color: #8E1518; font-size: 15px; font-weight: 600; }
+  .warnr i { margin-top: 3px; }
+  .how3 { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+  .how3 .k { font-family: Caveat, cursive; font-weight: 700; font-size: 25px; color: var(--giallo); }
+  .how3 .s { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 16px; background: var(--nero-2); border: 1px solid rgba(255,255,255,.1); }
+  .how3 .n { width: 42px; height: 42px; border-radius: 50%; background: var(--giallo); color: var(--nero); display: flex; align-items: center; justify-content: center; font-family: Caveat, cursive; font-weight: 700; font-size: 27px; flex-shrink: 0; }
+  .how3 .ic2 { width: 42px; height: 42px; border-radius: 12px; background: rgba(245,194,0,.18); color: var(--giallo); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+  .how3 b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; color: #fff; }
+  .how3 small { font-size: 14.5px; color: rgba(255,255,255,.8); }
+  .cozy { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .cozy span { font-size: 13px; font-weight: 600; background: rgba(255,255,255,.1); color: #fff; border-radius: 999px; padding: 3px 9px; }
+  .cozy i { color: var(--giallo); margin-right: 5px; }
+  .prop { padding: 15px 17px; border-radius: 18px; background: var(--sabbia); margin-top: 10px; }
+  .prop .top { display: flex; align-items: center; gap: 12px; }
+  .prop .ic { width: 50px; height: 50px; border-radius: 15px; background: #fff; color: var(--giallo-scuro); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .prop .ic.gold { background: var(--giallo); color: var(--nero); }
+  .prop .k { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--verde); line-height: 1; }
+  .prop b.t { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 21px; letter-spacing: -0.03em; }
+  .prop .pz { margin-left: auto; text-align: right; }
+  .prop .pz small { display: block; font-size: 13px; color: var(--testo-2); margin-top: 4px; }
+  .prop .when { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; padding: 9px 11px; border-radius: 12px; background: #fff; font-size: 15px; color: var(--testo); }
+  .prop .when i { color: var(--giallo-scuro); margin-top: 3px; }
+  .prop .when b { color: var(--nero); }
+  .prop p { font-size: 15px; color: var(--testo); line-height: 1.5; margin-top: 8px; }
+  .prop p b { color: var(--nero); }
+  .prop.dark { background: var(--nero); color: #fff; }
+  .prop.dark .ic { background: rgba(245,194,0,.18); color: var(--giallo); }
+  .prop.dark .k { color: var(--giallo); }
+  .prop.dark p, .prop.dark .when { color: rgba(255,255,255,.88); }
+  .prop.dark p b, .prop.dark .when b { color: var(--giallo); }
+  .prop.dark .when { background: rgba(255,255,255,.08); }
+  .prop.dark .pz small { color: rgba(255,255,255,.75); }
+  .prop.dark .chips.green span { background: rgba(255,255,255,.12); color: #fff; }
+  .prop.dark .chips.green span i { color: var(--giallo); }
+  .svc { padding: 15px 17px; border-radius: 18px; background: var(--sabbia); }
+  .svc .top { display: flex; align-items: center; gap: 12px; }
+  .svc .ic { width: 50px; height: 50px; border-radius: 15px; background: #fff; color: var(--giallo-scuro); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .svc .ic.gold { background: var(--giallo); color: var(--nero); }
+  .svc .k { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--verde); line-height: 1; }
+  .svc b.t { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -0.03em; }
+  .svc p { font-size: 15.5px; color: var(--testo); line-height: 1.5; margin-top: 8px; }
+  .svc p b { color: var(--nero); }
+  .svc .addon { background: #fff; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+  .facts div { background: #fff; border-radius: 12px; padding: 10px; text-align: center; }
+  .facts i { color: var(--giallo-scuro); font-size: 19px; }
+  .facts b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; margin-top: 4px; }
+  .facts small { font-size: 13px; color: var(--testo-2); }
+  .life { margin-top: auto; border-radius: 18px; background: var(--nero-2); border: 1px solid rgba(255,255,255,.1); padding: 14px 16px; }
+  .life .k { font-family: Caveat, cursive; font-weight: 700; font-size: 23px; color: var(--giallo); }
+  .life b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 19px; color: #fff; }
+  .places { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+  .places div { text-align: center; padding: 10px 4px; border-radius: 12px; background: rgba(255,255,255,.08); font-size: 14px; font-weight: 600; color: #fff; }
+  .places i { display: block; font-size: 21px; color: var(--giallo); margin-bottom: 6px; }
+  .life p { font-size: 14.5px; color: rgba(255,255,255,.82); margin-top: 10px; line-height: 1.45; }
+  .respect { margin-top: 12px; display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--crema); border: 1px solid rgba(245,194,0,.7); font-size: 15px; color: var(--testo); line-height: 1.5; }
+  .respect i { color: var(--giallo-scuro); margin-top: 3px; }
+  .respect b { color: var(--nero); }
+
+  /* SPA */
+  .exp { padding: 13px 0; border-bottom: 1px dashed #e2dacb; display: grid; grid-template-columns: 1fr 160px; gap: 14px; align-items: center; }
+  .exp:last-child { border-bottom: 0; }
+  .exp.nophoto { grid-template-columns: 1fr; }
+  .exp .top { display: flex; gap: 10px; align-items: center; }
+  .exp .ic { width: 44px; height: 44px; border-radius: 13px; background: var(--sabbia); color: var(--giallo-scuro); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .exp .k { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 21px; color: var(--verde); line-height: 1; }
+  .exp b.t { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 21px; letter-spacing: -0.03em; }
+  .exp p { font-size: 15.5px; color: var(--testo); line-height: 1.5; margin-top: 6px; }
+  .exp p b { color: var(--nero); }
+  .exp .ph { height: 116px; border-radius: 12px; background: #333 center/cover no-repeat; }
+  .temp { margin-top: 10px; display: flex; flex-direction: column; gap: 7px; }
+  .temp div { display: grid; grid-template-columns: 170px 1fr 90px; gap: 10px; align-items: center; font-size: 14.5px; font-weight: 600; }
+  .temp .bar { height: 11px; border-radius: 6px; background: #eee; overflow: hidden; }
+  .temp .bar i { display: block; height: 100%; border-radius: 6px; }
+  .temp .hot .bar i { width: 100%; background: var(--rosso); } .temp .ok .bar i { width: 35%; background: var(--verde); }
+  .temp .v { font-family: Poppins, sans-serif; font-weight: 900; font-size: 17px; text-align: right; white-space: nowrap; }
+  .temp .hot .v { color: var(--rosso); } .temp .ok .v { color: var(--verde); }
+  .squote { font-family: Caveat, cursive; font-weight: 700; font-size: 23px; line-height: 1.15; margin-top: 6px; padding-left: 12px; border-left: 3px solid var(--giallo); }
+  .stones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+  .stones div { background: rgba(255,255,255,.08); border-radius: 14px; padding: 11px; text-align: center; }
+  .stones i { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; }
+  .stones b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; margin-top: 6px; }
+  .stones small { font-size: 13px; color: rgba(255,255,255,.8); }
+  .playbtn { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; min-height: 52px; padding: 0 20px 0 6px; border-radius: 999px; background: var(--giallo); color: var(--nero); font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; box-shadow: 0 0 20px rgba(245,194,0,.35); }
+  .playbtn i { width: 40px; height: 40px; border-radius: 50%; background: var(--nero); color: var(--giallo); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .ov { position: absolute; inset: 0; z-index: 30; background: rgba(10,10,10,.9); display: flex; align-items: center; justify-content: center; padding: 60px; }
+  .ov .vid { position: relative; width: 100%; max-width: 920px; aspect-ratio: 16/9; border-radius: 18px; overflow: hidden; background: #000; }
+  .ov .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .ov .x { position: absolute; top: 100px; right: 40px; width: 52px; height: 52px; border-radius: 14px; background: var(--giallo); color: var(--nero); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+  /* novità, reset, gioco */
+  .emo { margin-top: auto; display: flex; gap: 16px; }
+  .emo button { flex: 1; border-radius: 18px; background: var(--nero-2); border: 1px solid rgba(255,255,255,.1); padding: 14px; text-align: center; }
+  .emo span { display: block; font-size: 56px; line-height: 1; }
+  .emo b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; color: #fff; margin-top: 8px; }
+  .emo small { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--giallo); }
+  .nv { border-radius: 18px; overflow: hidden; border: 1px solid #e2dacb; }
+  .nv .hd { position: relative; padding: 16px 18px; background: var(--nero); color: #fff; }
+  .nv.reset .hd { background: linear-gradient(135deg, #3a2414, #0A0A0A 70%); }
+  .nv .bdg { position: absolute; top: 14px; right: 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .1em; background: var(--giallo); color: var(--nero); padding: 3px 10px; border-radius: 999px; }
+  .nv .em { font-size: 34px; }
+  .nv .k { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 22px; color: var(--giallo); line-height: 1; margin-top: 4px; }
+  .nv h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 25px; letter-spacing: -0.03em; }
+  .nv .hd p { font-size: 15px; color: rgba(255,255,255,.88); margin-top: 4px; line-height: 1.45; }
+  .nv .bd { padding: 14px 18px 16px; background: #fff; }
+  .steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .steps3 div { background: var(--sabbia); border-radius: 12px; padding: 10px; }
+  .steps3 .n { width: 28px; height: 28px; border-radius: 50%; background: var(--nero); color: var(--giallo); display: inline-flex; align-items: center; justify-content: center; font-family: Caveat, cursive; font-weight: 700; font-size: 18px; }
+  .steps3 b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15.5px; margin-top: 6px; }
+  .steps3 small { font-size: 13.5px; color: var(--testo-2); }
+  .nvgift { display: flex; align-items: center; gap: 12px; margin-top: 10px; padding: 8px 12px; border-radius: 14px; background: #FFF1F1; border: 1.5px dashed rgba(214,47,50,.6); font-size: 15px; color: var(--testo); }
+  .nvgift img { width: 46px; height: 58px; object-fit: contain; }
+  .nvgift b { color: var(--rosso); }
+  .nvfoot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+  .nvfoot .pz { font-family: Poppins, sans-serif; font-weight: 900; font-size: 28px; }
+  .nvfoot .pz small { display: block; font-family: Inter, sans-serif; font-weight: 500; font-size: 13.5px; color: var(--testo-2); }
+  .nvfoot span.t { font-size: 15px; color: var(--testo); }
+  .ybtn { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 20px; border-radius: 999px; background: var(--giallo); color: var(--nero); font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; box-shadow: 0 0 18px rgba(245,194,0,.3); white-space: nowrap; }
+  .tagc { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 7px 13px; border-radius: 999px; background: var(--giallo); color: var(--nero); font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; }
+  .leaves { margin-top: auto; font-size: 66px; letter-spacing: 8px; }
+  .rstep { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px dashed #e2dacb; }
+  .rstep:last-child { border-bottom: 0; }
+  .rstep .n { width: 36px; height: 36px; border-radius: 50%; background: var(--nero); color: var(--giallo); display: flex; align-items: center; justify-content: center; font-family: Caveat, cursive; font-weight: 700; font-size: 23px; flex-shrink: 0; }
+  .rstep .k { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--verde); line-height: 1; }
+  .rstep b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17.5px; }
+  .rstep small { font-size: 15px; color: var(--testo); line-height: 1.45; }
+  .rstep small b { display: inline; font-size: 15px; font-family: Inter, sans-serif; font-weight: 700; color: var(--nero); }
+  .omg { position: relative; display: flex; gap: 12px; align-items: center; margin-top: 14px; padding: 12px; border-radius: 16px; background: #FFF1F1; border: 1.5px dashed rgba(214,47,50,.6); }
+  .omg .bdg { position: absolute; top: -10px; left: 12px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .1em; background: var(--rosso); color: #fff; padding: 1px 9px; border-radius: 999px; }
+  .omg img { width: 58px; height: 72px; object-fit: contain; }
+  .omg b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; }
+  .omg small { font-size: 14.5px; color: var(--testo-2); }
+  .omg .v { margin-left: auto; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14.5px; color: var(--rosso); white-space: nowrap; }
+  .pay3 { display: flex; flex-direction: column; gap: 6px; }
+  .pay3 div { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border-radius: 14px; background: var(--sabbia); }
+  .pay3 .n { width: 32px; height: 32px; border-radius: 50%; background: var(--nero); color: var(--giallo); display: flex; align-items: center; justify-content: center; font-family: Caveat, cursive; font-weight: 700; font-size: 20px; flex-shrink: 0; }
+  .pay3 b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15.5px; }
+  .pay3 small { font-size: 14px; color: var(--testo-2); }
+  .pay3 .a { margin-left: auto; font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px; white-space: nowrap; }
+  .pay3 .a.z { font-size: 14.5px; color: var(--verde); font-weight: 800; }
+  .wheelbox { margin-top: auto; position: relative; width: 340px; height: 340px; align-self: center; }
+  .wheelbox svg { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 0 8px var(--nero-2), 0 0 0 10px rgba(245,194,0,.6), 0 20px 50px rgba(0,0,0,.5); }
+  .wheelbox .pin { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 32px solid var(--giallo); z-index: 2; }
+  .qr { display: flex; align-items: center; gap: 20px; padding: 18px; border-radius: 18px; background: var(--sabbia); border: 2px solid rgba(245,194,0,.45); }
+  .qimg { position: relative; flex-shrink: 0; padding-top: 24px; }
+  .qimg img { width: 176px; height: 176px; border-radius: 14px; background: #fff; padding: 10px; border: 4px solid rgba(245,194,0,.55); display: block; }
+  .qimg .bub { position: absolute; top: -6px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--giallo); color: var(--nero); font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; padding: 5px 12px; border-radius: 12px; }
+  .qtx b { display: block; font-family: Poppins, sans-serif; font-weight: 900; font-size: 21px; letter-spacing: -0.02em; line-height: 1.2; }
+  .qtx b i { color: var(--giallo-scuro); margin-right: 4px; }
+  .qtx small { display: block; font-size: 15.5px; color: var(--testo); margin-top: 6px; line-height: 1.45; }
+  .qtx .st { font-size: 24px; color: var(--giallo); letter-spacing: 3px; margin-top: 8px; }
+  .spin { width: 100%; min-height: 60px; border-radius: 999px; background: var(--giallo); color: var(--nero); font-family: Poppins, sans-serif; font-weight: 900; font-size: 19px; text-align: center; box-shadow: 0 0 22px rgba(245,194,0,.4); }
+  .spin[disabled] { opacity: .65; }
+  .prz { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+  .prz span { font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; color: #fff; padding: 4px 12px; border-radius: 999px; }
+  .modal { position: absolute; inset: 0; z-index: 40; background: rgba(10,10,10,.75); display: flex; align-items: center; justify-content: center; }
+  .modal .mc { width: 440px; border-radius: 26px; background: #fff; padding: 30px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,.4); animation: fade .3s ease-out both; }
+  .modal .em { font-size: 66px; }
+  .modal .k { font-family: Caveat, cursive; font-weight: 700; font-size: 26px; color: var(--giallo-scuro); }
+  .modal h3 { font-family: Poppins, sans-serif; font-weight: 900; font-size: 36px; letter-spacing: -0.03em; }
+  .modal p { font-size: 16px; color: var(--testo); margin-top: 6px; }
+  .modal .ybtn { margin-top: 16px; }
+  .graybtn { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; min-height: 50px; padding: 0 18px; border-radius: 999px; background: var(--sabbia); font-family: Poppins, sans-serif; font-weight: 700; font-size: 15px; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="rotate"><i class="fa-solid fa-rotate"></i>Gira l'iPad in orizzontale<small style="font-family:Inter;font-weight:500;font-size:15px;opacity:.8">Il menu è pensato per l'iPad in orizzontale.</small></div>
+
+<script>
+/* ============================================================
+   DATI (gli stessi del menu mobile, con il copy rivisto)
+   ============================================================ */
+const CONSULENZA_URL = 'https://form.typeform.com/to/QUzap8so#pagina=menu&ingresso=ipad&utm_source=menu';
+const REVIEW_URL = 'https://g.page/r/CW6M9hJNV-ekEAE/review';
+const SPA_VIDEO = 'https://www.youtube.com/embed/c7hDiS4EC4M';
+const IMG = {
+  p1: 'https://i.ibb.co/ks8QLXBV/Igienizzare-1.jpg', p1t: 'https://i.ibb.co/bw1xkyB/Igenizzare-1.jpg',
+  p2: 'https://i.ibb.co/35BzD7JD/Lenire-1.jpg', p2t: 'https://i.ibb.co/Z643hyh1/lenire-1.jpg',
+  p3: 'https://i.ibb.co/Hf34gVLt/Detossinare-1.jpg', p3t: 'https://i.ibb.co/6Jtrp8Vg/detossinare-1.jpg',
+  p4: 'https://i.ibb.co/9HtTbKVG/Nutrire-1.jpg', p4t: 'https://i.ibb.co/5Xvcq7Ts/nutrire-1.jpg',
+  laser: 'https://i.ibb.co/wrg9DJmq/DSF9006-1.jpg', riparare: 'https://i.ibb.co/C3wK2rNs/fotoringiovaniemto-1.jpg',
+  spa: 'https://i.ibb.co/HfRD7QzN/DSF8767-1.jpg'
+};
+const TOOL_IC = { 'nebulizzazione': 'fa-cloud', 'ultrasuoni': 'fa-wave-square', 'corrente galvanica': 'fa-bolt', 'vacuum terapia': 'fa-arrows-to-circle', 'alta frequenza': 'fa-tower-broadcast', 'cascata': 'fa-water', 'ossigenoterapia': 'fa-wind' };
+
+const SEDUTE = {
+  p1: { name: 'Igienizzare', title: '[Igienizzare] / e purificare.', lead: 'Per una cute pulita, leggera **e pronta a ricevere il percorso.**', need: 'sebo, forfora, prurito',
+    who: 'Capelli **appesantiti**, eccesso di **sebo**, **desquamazioni**, **prurito** e tossicità.', what: 'argille e peeling naturali', sessions: 'da 3 a 5', min: 3, max: 5,
+    tools: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'], prices: { lui: '37', lei: '59/63' } },
+  p2: { name: 'Lenire', title: '[Lenire].', lead: 'Per le cuti che hanno bisogno **di essere rigenerate e riequilibrate.**', need: 'cute dolente, psoriasi',
+    who: 'Cuti che hanno bisogno di essere **rigenerate** e riportate in **equilibrio**.', what: 'argille, peeling naturali e prodotti lenitivi', sessions: 'da 3 a 5', min: 3, max: 5,
+    tools: ['nebulizzazione', 'ultrasuoni', 'corrente galvanica'], prices: { lui: '67', lei: '89/93' } },
+  p3: { name: 'Detossinare', title: '[Detossinare].', lead: 'Per la cute che non respira: **la liberiamo dai residui e la ossigeniamo.**', need: 'bulbo affaticato',
+    who: 'Cute che **non respira**, **appesantita da residui**.', what: 'oli essenziali detossinanti', sessions: 'da 5 a 7', min: 5, max: 7,
+    tools: ['vacuum terapia', 'alta frequenza', 'cascata'], prices: { lui: '47', lei: '67/71' } },
+  p4: { name: 'Nutrire', title: '[Nutrire].', lead: 'Nutrimento **per la cute e per i capelli.**', need: 'cute e capelli spenti',
+    who: 'Cute e capelli che hanno bisogno di **nutrimento**.', what: 'prodotti e oli essenziali nutritivi e stimolanti per il bulbo', sessions: '5', min: 5, max: 5,
+    tools: ['nebulizzazione', 'ossigenoterapia', 'alta frequenza'], prices: { lui: '67', lei: '89/93' } }
+};
+const LASER_PERCORSO = [
+  ['Alopecia androgenetica', 12, "40'", { lui: '80', lei: '100/110' }], ['Caduta stagionale', 8, "40'", { lui: '80', lei: '100/110' }],
+  ['Psoriasi', 4, "40'", { lui: '80', lei: '100/110' }], ['Forfora', 4, "40'", { lui: '80', lei: '100/110' }],
+  ['Dermatite seborroica', 6, "60'", { lui: '120', lei: '140/150' }, true], ['Eczema / eritema', 4, "40'", { lui: '80', lei: '100/110' }],
+  ['Cute seborroica', 4, "40'", { lui: '80', lei: '100/110' }]
+];
+const LASER_SINGOLA = [['Alopecia androgenetica', "40'", '84', '104', '114'], ['Caduta stagionale', "40'", '84', '104', '114'], ['Psoriasi', "40'", '84', '104', '114'], ['Forfora', "40'", '84', '104', '114'], ['Dermatite seborroica', "60'", '124', '144', '154'], ['Eczema / eritema', "40'", '84', '104', '114'], ['Cute seborroica', "40'", '84', '104', '114']];
+const TRICO = [
+  { need: 'sebo, forfora, prurito', t: 'Igienizzare & Purificare', s: 'Argille e peeling naturali per la cute con eccesso di sebo e desquamazione.', p: IMG.p1, pr: { lei: '63/67', lui: '41' } },
+  { need: 'cute dolente, psoriasi', t: 'Lenire', s: 'Argille, peeling e impacchi naturali per purificare e rigenerare la cute.', p: IMG.p2, pr: { lei: '93/97', lui: '71' } },
+  { need: 'bulbo affaticato', t: 'Detossinare', s: 'Toglie i residui e porta ossigeno e nutrimento al bulbo.', p: IMG.p3, pr: { lei: '71/75', lui: '51' } },
+  { need: 'cute e capelli spenti', t: 'Nutrire', s: 'Oli essenziali e prodotti nutritivi per il capello, la cute e il bulbo.', p: IMG.p4, pr: { lei: '93/97', lui: '71' } }
+];
+
+const Q = [
+  { q: 'Quanto sei soddisfatto/a oggi della situazione dei tuoi capelli e della tua cute?', max: 'Del tutto' },
+  { q: 'Quanto senti che il tuo problema è sotto controllo oggi?', max: 'Completamente' },
+  { q: 'Quanto ti senti a tuo agio con i tuoi capelli quando sei in mezzo agli altri?', max: 'Completamente' }
+];
+const DIETA = { label: 'Dieta', icon: 'fa-burger', items: ['Risultato raggiunto', 'Torni al cibo spazzatura', 'Risultato perso in pochissimo tempo'] };
+const TECH = { neb: ['fa-wind', 'Nebulizzazione'], ult: ['fa-wave-square', 'Ultrasuoni'], gal: ['fa-bolt', 'Corrente galvanica'], vac: ['fa-arrows-to-circle', 'Vacuum terapia'], alt: ['fa-tower-broadcast', 'Alta frequenza'], cas: ['fa-water', 'Cascata'], oss: ['fa-atom', 'Ossigenoterapia'] };
+const MANT = {
+  m1: { title: 'Base', photo: IMG.p1, tape: 'dopo Igienizzazione e Purificazione',
+    complimenti: 'Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso di Igienizzazione/Purificazione</b> e stai per iniziare il mantenimento.',
+    quote: "Ricordi com'era all'inizio? Il prurito, le scaglie sugli abiti. Il lavoro fatto insieme serviva a questo.",
+    hair: { label: 'Capelli', icon: 'fa-flask', items: ['Cute pulita ed equilibrata', 'Prodotti scadenti e fai da te', 'In meno di un mese: scaglie sugli abiti e prurito'] },
+    s2: 'Ed è la più delicata: è qui che il risultato si consolida.', why: ['Mantieni i risultati raggiunti', 'Li rendi più stabili', 'Un anno intero con me'],
+    boost: 'Immagina quando amici e familiari ti chiederanno: <b>«Che cosa hai fatto per avere capelli così belli?»</b> E sarà bello rispondere.',
+    comp: [[6, 'sedute igienizzanti', ''], [6, 'sedute lenitive', 'k']], months: 'alt',
+    s3: 'Alternate ogni mese, per coprire le esigenze di ogni stagione. Argille e peeling naturali, resi più efficaci da:', tech: ['neb', 'ult', 'gal'],
+    p: { lei: { was: '888/936 €', now: '814/858 €', seat: '74/78 €' }, lui: { was: '624 €', now: '572 €', seat: '52 €' } }, save: 'da 200 a 230 €' },
+  m2: { title: 'Intermedio', photo: IMG.p3, tape: 'dopo il percorso iniziale',
+    complimenti: 'Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso iniziale</b>.',
+    quote: "Ricordi com'era all'inizio? La cute pesante, i capelli spenti e già sporchi dopo un giorno. Il lavoro fatto insieme serviva a questo.",
+    hair: { label: 'Capelli', icon: 'fa-flask', items: ['Cute leggera, che respira', 'Prodotti scadenti e fai da te', 'In poche settimane: cute pesante e capelli spenti'] },
+    s2: 'Ed è la più delicata: la cute ha imparato a respirare, ora deve restare così.', why: ['Mantieni i risultati raggiunti', 'La cute resta pulita e leggera', 'Un anno intero con me'],
+    boost: 'Immagina di toccarti i capelli a fine giornata e sentirli ancora leggeri. E quando qualcuno ti chiederà <b>«Che cosa hai fatto ai capelli?»</b>, sarà bello rispondere.',
+    comp: [[12, 'sedute di mantenimento', '']], months: 'all',
+    s3: 'Ogni mese una seduta diversa, per dare alla cute quello che le serve in ogni stagione. Argille, peeling naturali e prodotti detossinanti, resi più efficaci da:', tech: ['neb', 'ult', 'gal', 'vac', 'alt', 'cas', 'oss'],
+    p: { lei: { was: '1068/1116 €', now: '979/1023 €', seat: '89/93 €' }, lui: { was: '804 €', now: '737 €', seat: '67 €' } }, save: 'da 210 a 240 €' },
+  m3: { title: 'Avanzato', photo: IMG.laser, pos: 'center 30%', tape: 'dopo il laser',
+    complimenti: 'Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso di laser a fotobiostimolazione</b>.',
+    quote: "Ricordi com'era all'inizio? La cute arrossata e tesa, i capelli che cadevano più del solito. Il lavoro fatto insieme serviva a questo.",
+    hair: { label: 'Capelli', icon: 'fa-pause', items: ['Cute calma, capelli più forti', 'Stop al laser e fai da te', 'In pochi mesi: rossore, fastidio e capelli più deboli'] },
+    s2: 'Ed è la più delicata. Il laser è come un allenamento: tiene la cute in equilibrio anche a riposo.', why: ['Mantieni i risultati raggiunti', 'Rinforzi i benefici del laser', 'Un anno intero con me'],
+    boost: 'Immagina amici e familiari che notano i tuoi capelli più pieni e ti chiedono come hai fatto. E sarà bello rispondere.',
+    comp: [[8, 'sedute laser', 'k'], [4, 'sedute di potenziamento', '']], months: 'q',
+    s3: 'Ogni tre mesi: 2 sedute laser e 1 di potenziamento. Lo schema è indicativo: lo adatto io a quello che ti serve. Nelle sedute di potenziamento usiamo anche:', tech: ['neb', 'ult', 'gal', 'vac', 'alt', 'cas', 'oss'],
+    p: { lei: { was: '1152/1248 €', now: '1056/1144 €', seat: '96/104 €' }, lui: { was: '912 €', now: '836 €', seat: '76 €' } }, save: 'da 220 a 250 €' }
+};
+
+const BIG = { 'menu-sh-gold': 'shampoo caduta gold', 'menu-sh-silver': 'shampoo caduta silver', 'menu-sh-platinum': 'shampoo caduta platino', 'menu-sh-purificante': 'shampoo purificante', 'menu-sh-equilibrante': 'shampoo equilibrante', 'menu-sh-forfora': 'shampoo forfora', 'menu-sh-delicato': 'shampoo delicato', 'menu-sh-nutriente': 'shampoo nutriente', 'menu-loz-soft': 'Lozione soft', 'menu-loz-active': 'Lozione active', 'menu-loz-pro': 'Lozione pro', 'menu-emu-lenitiva': 'Emulsione lenitiva', 'menu-emu-avvolgente': 'Emulsione avvolgente', 'menu-lun-conditioner': 'Conditioner idratante', 'menu-lun-nutriente': 'Maschera nutriente', 'menu-lun-rigenerante': 'Maschera rigenerante' };
+const PB = n => `foto-prodotti/${encodeURIComponent(BIG[n])}.png`;
+const FAM = {
+  shampoo: { name: 'Shampoo', label: 'per preparare', hero: ['menu-sh-gold', 'menu-sh-delicato', 'menu-sh-nutriente'], one: 'menu-sh-delicato', n1: 'con oli essenziali naturali', n2: 'pH 4.5 in tutti',
+    title: 'Lo shampoo / è già un / [trattamento].', lead: 'Lava rispettando la cute **e la prepara a ciò che viene dopo.**', short: 'La detersione è il primo vero trattamento.',
+    hello: 'Ti presento i miei shampoo,', intro: 'Li chiamo Complessi Lavanti perché per me lavare è già il primo trattamento. Sono otto, in tre gruppi: **ognuno ha il suo compito.**',
+    groups: [['caduta', 'Caduta', 'per rinforzare', 'fa-arrow-trend-down'], ['cute', 'Cute anomala', 'per riequilibrare', 'fa-droplet'], ['lung', 'Lunghezze', 'per nutrire', 'fa-scissors']],
+    products: [
+      ['Shampoo Caduta Gold', '29', 'menu-sh-gold', 'caduta', 'per chi perde capelli', 'Un mix di attivi funzionali contro la caduta: agisce su più fronti e riequilibra la cute.'],
+      ['Shampoo Caduta Silver', '29', 'menu-sh-silver', 'caduta', 'per capelli sottili che cadono', "Oli essenziali per un'azione decisa, elementi nutritivi che lo rendono adatto ai capelli sottili."],
+      ['Shampoo Caduta Platinum', '29', 'menu-sh-platinum', 'caduta', 'per una cute da riequilibrare', 'A base di oli essenziali naturali, aiuta la cute a tornare alle sue condizioni normali.'],
+      ['Shampoo Purificante', '29', 'menu-sh-purificante', 'cute', 'per una cute da pulire a fondo', 'Toglie a fondo i residui da cute e capelli, senza alterare il cuoio capelluto.'],
+      ['Shampoo Equilibrante', '29', 'menu-sh-equilibrante', 'cute', 'per capelli grassi e sudati', 'Usato con costanza riporta la cute in equilibrio e ridà ai capelli morbidezza e lucentezza.'],
+      ['Shampoo Forfora', '29', 'menu-sh-forfora', 'cute', 'per la forfora accentuata', "Un'azione d'urto che allontana e riduce la desquamazione e riporta la cute in ordine."],
+      ['Shampoo Delicato', '26', 'menu-sh-delicato', 'cute', 'per cuti sensibili e bambini', "Rispetta l'equilibrio di cute e capelli. Indicato anche da 0 a 9 anni e per le cuti più delicate."],
+      ['Shampoo Nutriente', '29', 'menu-sh-nutriente', 'lung', 'per capelli secchi e sfibrati', 'Ripara la struttura del capello, ridà morbidezza e lucentezza e accentua i riflessi naturali.']],
+    box: { k: 'e in più,', t: 'Il tuo shampoo,', h: 'su misura', photo: 'menu-potenziatori-sh', tag: 'Potenziatori SH.', text: 'Quasi tutti i miei shampoo si miscelano con i **Potenziatori SH.**, direttamente a casa. **Così il trattamento è cucito sulla tua cute e cambia quando cambia lei.**', steps: ['Parti dal tuo shampoo', 'Aggiungi il Potenziatore SH. a casa', 'Il trattamento segue la tua cute'], note: "Unica eccezione: il Delicato si usa così com'è." },
+    ps: 'Non sai quale scegliere? Non serve: guardo la tua cute e scegliamo insieme shampoo e Potenziatori.' },
+  lozioni: { name: 'Lozioni', label: 'per attivare', hero: ['menu-loz-soft', 'menu-loz-pro', 'menu-loz-active'], one: 'menu-loz-pro', n1: 'da usare ogni giorno', n2: 'senza coloranti né parabeni',
+    title: 'La lozione / è il [cuore] / del trattamento.', lead: 'Si usa ogni giorno sulla cute **e lavora in profondità, fino al bulbo.**', short: 'Si usano ogni giorno: nutrono il bulbo e riequilibrano la cute.',
+    hello: 'Ti presento le mie lozioni,', intro: 'Lo shampoo prepara il terreno, la lozione fa il lavoro di ogni giorno. Sono tre, per tre livelli di necessità: **ognuna ha il suo compito.**',
+    groups: [['equilibrio', 'Equilibrio', 'per lenire', 'fa-feather'], ['densita', 'Densità', 'per rigenerare', 'fa-seedling'], ['caduta', 'Caduta', 'per fortificare', 'fa-shield-halved']],
+    products: [
+      ['Lozione Soft', '41', 'menu-loz-soft', 'equilibrio', 'per cute arrossata o che prude', 'Nutre il bulbo, lenisce i rossori e riduce il prurito. Comfort per la cute, ogni giorno.'],
+      ['Lozione Active', '45', 'menu-loz-active', 'densita', 'per capelli radi e poco sani', 'Risveglia la vitalità della cute e migliora la densità e la salute della chioma.'],
+      ['Lozione Pro', '49', 'menu-loz-pro', 'caduta', 'per capelli che cadono', 'Sostiene il bulbo quando i capelli cadono: il capello diventa più robusto, corposo e resistente.']],
+    box: { k: 'e in più,', t: 'La tua lozione,', h: 'su misura', photo: 'menu-potenziatori-loz', tag: 'Potenziatori Soft e Active', text: 'La Soft e la Active si miscelano con i loro **Potenziatori Soft e Active.** **Così il trattamento di ogni giorno è calibrato sulla tua cute e sui tuoi capelli.**', steps: ['Parti dalla tua lozione', 'Aggiungi il Potenziatore giusto', 'Il trattamento è calibrato su di te'], note: "Unica eccezione: la Pro si usa così com'è." },
+    ps: 'Non sai quale scegliere? Non serve: guardo la tua cute e scegliamo insieme lozione e Potenziatori.' },
+  emulsioni: { name: 'Emulsioni', label: 'per proteggere', hero: ['menu-emu-lenitiva', 'menu-emu-avvolgente'], one: 'menu-emu-lenitiva', n1: 'formule cremose e fluide', n2: 'per proteggere a fondo',
+    title: 'Due emulsioni, / due [fronti] / diversi.', lead: "Una si prende cura della cute, **l'altra delle lunghezze.**", short: 'Lenitiva per la cute irritata, Avvolgente per onde e ricci.',
+    hello: 'Ti presento le mie emulsioni,', intro: 'Formule cremose che proteggono e condizionano in profondità. Sono due, e lavorano su fronti diversi: **una sulla cute, una sulle lunghezze.**',
+    groups: [['cute', 'Cute', 'per lenire', 'fa-spa'], ['lunghezze', 'Lunghezze', 'per definire', 'fa-wind']],
+    products: [
+      ['Emulsione Lenitiva', '58', 'menu-emu-lenitiva', 'cute', 'per cute arrossata o irritata', 'Fa da scudo al cuoio capelluto contro ambiente e stress. Ammorbidisce e lenisce la cute.'],
+      ['Emulsione Avvolgente', '28', 'menu-emu-avvolgente', 'lunghezze', 'per lunghezze mosse o ricce', 'Un film invisibile le protegge dalla disidratazione e definisce onde e ricci, morbidi ed elastici.']],
+    box: { k: 'e in più,', t: 'Cute e lunghezze,', h: 'insieme', text: 'Le due emulsioni lavorano su fronti diversi, **quindi puoi usarle nello stesso trattamento.** Così curi cute e lunghezze, ognuna con il suo prodotto.', steps: ['La Lenitiva si prende cura della cute', "L'Avvolgente protegge le lunghezze", 'Insieme, un trattamento completo'] },
+    ps: 'Non sai quale scegliere, o se ti servono tutte e due? Guardo la tua cute e le tue lunghezze e scegliamo insieme.' },
+  lunghezze: { name: 'Lunghezze', label: 'per chiudere', group: 'prodotti per le lunghezze.png', one: 'menu-lun-conditioner', n1: 'con attivi botanici', n2: 'dedicati alla fibra capillare',
+    title: "L'ultimo passo / è per le / [lunghezze].", lead: 'Dopo la cute, la fibra capillare: **bellezza, protezione e forza.**', short: "L'ultimo passo della routine: sigillano i benefici e proteggono la fibra.",
+    hello: 'Ti presento i miei prodotti per le lunghezze,', intro: 'Lo shampoo prepara la cute, la lozione la attiva: qui chiudiamo la routine sulle lunghezze. Sono tre, per tre esigenze diverse: **ognuno ha il suo compito.**',
+    groups: [['idratazione', 'Idratazione', 'per ammorbidire', 'fa-droplet'], ['nutrimento', 'Nutrimento', 'per nutrire', 'fa-leaf'], ['ricostruzione', 'Ricostruzione', 'per ricostruire', 'fa-hammer']],
+    products: [
+      ['Conditioner Idratante', '29', 'menu-lun-conditioner', 'idratazione', 'per capelli disidratati', 'Balsamo in crema che si assorbe in fretta: morbidi e setosi dal primo utilizzo, senza appesantire.'],
+      ['Maschera Nutriente', '37', 'menu-lun-nutriente', 'nutrimento', 'per capelli secchi e crespi', 'Burri, oli vegetali e proteine del grano nutrono a fondo ed eliminano il crespo.'],
+      ['Maschera Rigenerante', '37', 'menu-lun-rigenerante', 'ricostruzione', 'per capelli sfibrati e fragili', "Cheratina e pantenolo ricostruiscono il capello dall'interno, gli oli essenziali lo rendono più resistente."]],
+    box: { k: 'e per finire,', t: 'La routine', h: 'si chiude qui', text: 'Conditioner o Maschera, questo passaggio **sigilla quello che hanno fatto shampoo e lozione.** Il risultato è una fibra capillare sana, forte e protetta, in salone e a casa.', steps: ['Lo shampoo prepara la cute', 'La lozione la attiva', 'Conditioner o Maschera chiudono la routine'] },
+    ps: 'Non sai se ti serve il Conditioner o una Maschera? Guardo i tuoi capelli e scegliamo insieme come chiudere la tua routine.' }
+};
+const FKEYS = Object.keys(FAM);
+
+const COL = {
+  choose: [['Fastidi o reazioni al colore, psoriasi o dermatite', 'Colore Sicuro'], ['Odori forti e bruciori ti danno fastidio', 'Vegana'], ['Vuoi anche una pausa di relax', 'Zen'], ['Vuoi riflessi di luce nel colore', 'Punti luce']],
+  groups: [
+    { label: 'colorazioni', rows: [
+      { id: 'col-sicuro', icon: 'fa-shield-heart', gold: true, kick: 'la più delicata', title: 'Colore Sicuro', text: 'Con probiotici, senza ammoniaca, PPD, resorcina e nichel.', chips: ['psoriasi e dermatiti', 'fastidi al colore'], tiny: 'Non cura: ti permette di colorarti.', price: '97/103 €' },
+      { id: 'col-vegana', icon: 'fa-leaf', title: 'Colorazione Vegana', text: 'Un colore senza acqua, senza odori né bruciori.', price: '89/97 €' },
+      { id: 'col-zen', icon: 'fa-spa', title: 'Colorazione Zen', text: 'Massaggi e pigmenti naturali: il colore diventa una pausa.', price: '107/117 €' },
+      { id: 'col-puntiluce', icon: 'fa-wand-sparkles', title: 'Colore con punti luce', text: 'Colore e riflessi di luce, dal caramello al biondo sabbia.', price: '117/127 €' } ] },
+    { label: 'schiariture', rows: [
+      { id: 'schiariture', icon: 'fa-sun', title: 'Schiariture Sicure', text: 'Tre livelli di luce, sempre con il Sigillo di Garanzia incluso.', price: 'da 109/119 €' } ] }
+  ]
+};
+const COND = { type: 'addon', img: 'Conditioner%20idratante.png', title: 'Il Conditioner, per casa', text: 'Il colore dura di più: capelli lucidi, elastici, che non volano.', price: '+ 29 €' };
+const MASK = (t) => ({ type: 'addon', img: 'Maschera%20nutriente.png', title: 'La Maschera Nutriente, per casa', text: t, price: '+ 37 €' });
+const LOCK = { type: 'lock' };
+const SCHEDE = {
+  'col-sicuro': { eyebrow: 'Colore Sicuro', title: 'Colora i capelli, / [rispetta] / la cute.', lead: 'Colorazione probiotica **"All Free"**', chips: ['senza ammoniaca', 'senza PPD', 'senza resorcina', 'senza nichel'], heroNote: 'gli allergeni più comuni del colore',
+    blocks: [{ type: 'who', items: ['se il colore normale ti dà fastidi o reazioni', 'se hai la cute delicata, la dermatite o la psoriasi', { talk: 'in gravidanza' }, { talk: 'dopo la chemioterapia' }] }, { type: 'sep', label: 'come funziona' },
+      { type: 'p', text: 'Sulla cute vivono microrganismi "amici" che la difendono: **sono i batteri buoni della cute**. Il loro equilibrio può essere alterato anche dalla colorazione.' },
+      { type: 'p', text: 'Il Colore Sicuro contiene **attivi probiotici** che rispettano cute e capelli mentre ti colori.' },
+      { type: 'box', icon: 'fa-heart', title: 'Cosa senti', text: 'Massimo rispetto della cute, pensato per evitare prurito e fastidi.' }, { type: 'price', what: 'Colore Sicuro', amt: '97/103 €' }, LOCK, COND],
+    ps: 'Il colore non cura la psoriasi. Ti permette di colorarti nel massimo rispetto della cute.' },
+  'col-vegana': { eyebrow: 'Colorazione Vegana', title: 'Un colore / [senza acqua].', lead: 'Più concentrato, **senza odori né bruciori.**', chips: ['senza ammoniaca', 'senza fragranze', 'senza nichel', 'vegano'],
+    blocks: [{ type: 'who', items: ["se l'odore e il bruciore del colore normale ti danno fastidio", 'se hai la cute sensibile', 'se vuoi ingredienti vegani'] }, { type: 'sep', label: 'come funziona' },
+      { type: 'p', text: "Al posto dell'acqua ci sono **sostanze idratanti**. Gli oli naturali idratano il capello mentre lo colorano e sono adatti anche alle cuti più sensibili." },
+      { type: 'chips', items: ['aloe vera', 'spirulina', 'burro di karitè', "olio d'oliva", 'aminoacidi vegetali'] },
+      { type: 'box', icon: 'fa-palette', title: '72 nuance', text: 'Si mescolano tra loro: troviamo insieme la tua.' }, { type: 'price', what: 'Colorazione Vegana', amt: '89/97 €' }, LOCK, COND],
+    ps: 'Odore forte e bruciore non devono far parte del colore. Questo è fatto apposta per evitarli.' },
+  'col-zen': { eyebrow: 'Colorazione Zen', title: 'Il colore, / [con calma].', lead: "Un rituale ispirato all'Oriente, **con pigmenti naturali.**",
+    blocks: [{ type: 'who', items: ['se vuoi un colore che rispetti il cuoio capelluto', 'se il colore vuoi viverlo come una pausa, non di corsa'] }, { type: 'sep', label: 'come funziona' },
+      { type: 'rows', rows: [{ icon: 'fa-hand-sparkles', title: 'Massaggi rilassanti', text: 'Per sciogliere le tensioni prima del colore.' }, { icon: 'fa-yin-yang', title: 'Manovre orientali', text: "Il colore diventa un'esperienza sensoriale." }, { icon: 'fa-seedling', gold: true, title: 'Pigmenti naturali', text: 'Scelti per migliorare la struttura del capello, rispettare il cuoio capelluto, dare brillantezza e far durare il colore.' }] },
+      { type: 'price', what: 'Colorazione Zen', amt: '107/117 €' }, LOCK, COND],
+    ps: 'Il colore lo fai rilassata, non di corsa.' },
+  'col-puntiluce': { eyebrow: 'Colore con punti luce', title: 'Il tuo colore, / con un tocco / di [luce].', lead: 'Riflessi dal caramello **al biondo sabbia.**',
+    blocks: [{ type: 'who', items: ['se ami un colore armonioso', 'se vuoi riflessi che danno un tocco di particolarità'] }, { type: 'sep', label: 'come funziona' },
+      { type: 'p', text: 'Uniamo la tua colorazione alla tecnica delle **"graffiature"**, che crea riflessi di luce sui capelli.' },
+      { type: 'price', what: 'Colore con punti luce', amt: '117/127 €' }, LOCK, MASK('Riflessi che restano: capelli più brillanti e setosi al tatto.')],
+    ps: 'Non è una schiaritura a parte: la luce la creiamo insieme al tuo colore.' },
+  'schiariture': { eyebrow: 'Schiariture Sicure', title: 'Più luce, / nel rispetto / della [fibra].', lead: 'Schiariamo solo **se il capello può reggerlo.**',
+    blocks: [{ type: 'who', items: ["se vuoi schiarire senza compromettere l'integrità del capello"] }, { type: 'warn', text: 'Se il tuo capello non è nelle condizioni giuste, la schiaritura non la facciamo.' }, { type: 'sep', label: 'come funziona' },
+      { type: 'p', text: 'Si parte da una **valutazione della fibra**. Poi usiamo decoloranti con molecole protettive e **protezioni che evitano la rottura del capello**.' },
+      { type: 'p', text: 'Chiudiamo sempre con il **Sigillo di Garanzia**: una ricostruzione profonda che chiude e lucida il capello, per la sua salute e per la luce del riflesso.' },
+      { type: 'sep', label: 'scegli la tua luce' },
+      { type: 'levels', items: [{ name: 'Luce Essenziale', dots: 1, price: '109/119 €', text: 'Schiaritura classica.', ben: "l'effetto luce che illumina, nel rispetto della fibra" }, { name: 'Luce Rigenerante', dots: 2, price: '139/149 €', text: 'Balayage, degradè, sfumature a mano libera, con trattamento protettivo e rinforzante integrato.', ben: 'una ricarica di idratazione e forza' }, { name: 'Luce Sublime', dots: 3, price: '169/179 €', text: 'Baby Light su misura, sfumature complesse.', ben: 'la massima schiaritura, senza compromessi sulla salute' }] },
+      LOCK, MASK('Il Sigillo è incluso in salone. A casa la Maschera ne prolunga i risultati fino al prossimo appuntamento.')],
+    ps: 'Senza la routine a casa rischi di perdere il lavoro fatto in salone.' },
+  'color-pass': { eyebrow: 'Color Pass', title: 'Il colore / sempre [in ordine], / tutto l\'anno.', lead: 'Senza lo stress **della ricrescita.**', noSwatch: true,
+    blocks: [{ type: 'who', items: ['se fai già un colore o una schiaritura da noi', "se vuoi un colore uniforme tutto l'anno, con un piano su misura"] },
+      { type: 'gift', kick: 'per chi è in percorso con me', title: 'Nel 2026 il Color Pass è in omaggio', text: "Valore 28 € al mese, 336 € l'anno. Resta attivo se rispetti le scadenze del tuo Color Pass." },
+      { type: 'sep', label: 'una volta al mese, in omaggio' }, { type: 'p', text: 'Con il colore o la schiaritura scegli una di queste:' },
+      { type: 'rows', rows: [{ icon: 'fa-droplet', title: 'Più vita al tuo riflesso', text: 'Pigmenti naturali organici, effetto temporaneo.', price: 'valore 17/23 €' }, { icon: 'fa-wind', title: 'Neutralizzante', text: "Ossigeno puro e oli essenziali con l'aerografo: pH in equilibrio, cute più confortevole dopo il colore.", price: 'valore 17/27 €' }, { icon: 'fa-water', title: 'Ossigenoterapia idrominerale', text: 'Forza ed elasticità ai capelli deboli, il colore dura di più.', price: 'valore 17/27 €' }] },
+      { type: 'sep', label: 'la differenza' },
+      { type: 'vs', rows: [['Colore luminoso e brillante', 'Colore opaco e spento'], ['Ricrescita mai evidente', 'Ricrescita marcata'], ['Cute e capelli rispettati', 'Struttura stressata dal fai da te'], ['Sfumature naturali', 'Toni irregolari e barrature'], ['Un piano su misura', "Corse all'ultimo minuto"]] },
+      { type: 'box', icon: 'fa-flag-checkered', title: 'Il risultato', text: "Capello protetto, cuoio capelluto rispettato e colore uniforme tutto l'anno." }],
+    ps: 'È il mio grazie a chi mi dà fiducia ogni mese.' }
+};
+
+/* ============================================================
+   STATO E NAVIGAZIONE
+   ============================================================ */
+const S = { page: 'home', p: {}, g: 'lei', hist: [] };
+const TABS = [['home', 'fa-house', 'Home'], ['percorsi', 'fa-route', 'Percorsi'], ['prodotti', 'fa-pump-soap', 'Prodotti'], ['donna', 'fa-spa', 'Menu Donna'], ['uomo', 'fa-scissors', 'Menu Uomo']];
+const TAB_OF = { home: 'home', percorsi: 'percorsi', seduta: 'percorsi', laser: 'percorsi', riparare: 'percorsi', mant: 'percorsi', prodotti: 'prodotti', famiglia: 'prodotti' };
+const NAMES = { home: 'Home', percorsi: 'Percorsi', seduta: 'Le sedute', laser: 'Laser', riparare: 'Riparare', mant: 'Mantenimento', prodotti: 'La routine', famiglia: 'Prodotti', donna: 'Menu Donna', uomo: 'Menu Uomo', tricologici: 'Trattamenti', spa: 'SPA', colorazioni: 'Colorazioni', scheda: 'Colorazioni', migliori: 'Migliori proposte', forma: 'Forma', stilistico: 'Stilistico', novita: 'Novità', reset: 'Reset Autunnale', gioco: 'Gioco Goloso', consulenza: 'Consulenza' };
+let menuTab = 'donna';
+
+function go(page, p = {}, push = true) {
+  if (push) S.hist.push({ page: S.page, p: S.p });
+  S.page = page; S.p = p;
+  if (page === 'donna') { menuTab = 'donna'; S.g = 'lei'; }
+  if (page === 'uomo') { menuTab = 'uomo'; S.g = 'lui'; }
+  render(true);
+  if (window.gtag) gtag('event', 'ipad_page', { page_name: page });
+}
+function back() {
+  const prev = S.hist.pop();
+  if (prev) { S.page = prev.page; S.p = prev.p; if (S.page === 'donna') S.g = 'lei'; if (S.page === 'uomo') S.g = 'lui'; render(true); }
+  else go('home', {}, false);
+}
+function tab(t) { S.hist = []; go(t, {}, false); }
+function currentTab() { return TAB_OF[S.page] || menuTab; }
+const backLabel = () => { const prev = S.hist[S.hist.length - 1]; return prev ? NAMES[prev.page] || 'Indietro' : 'Home'; };
+
+/* ============================================================
+   HELPER
+   ============================================================ */
+const md = s => s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+const title = (s, hl) => md(s).replace(/\[(.+?)\]/g, hl ? '<span class="hl">$1</span>' : '<span class="y">$1</span>').split(' / ').join('<br>');
+const G = () => S.g === 'lei' ? 'Donna' : 'Uomo';
+const backBtn = (cls = '') => `<button class="back ${cls}" data-back><span class="b"><i class="fa-solid fa-arrow-left"></i></span>${backLabel()}</button>`;
+const ps = t => `<p class="ps">P.S. ${t}</p><p class="sign">— Daniela</p>`;
+const lockLine = `<div class="lockline"><i class="fa-solid fa-lock"></i>Prezzi riservati a chi fa i percorsi</div>`;
+const lockChip = `<span class="lockc"><i class="fa-solid fa-lock"></i>Riservato a chi è in percorso</span>`;
+const toolsHtml = list => `<div class="tools">${list.map(t => `<span class="tool"><i class="fa-solid ${TOOL_IC[t]}"></i>${t}</span>`).join('')}</div>`;
+const arrow = (dark) => `<span class="arrow-sq ${dark ? 'dark' : ''}"><i class="fa-solid fa-arrow-right"></i></span>`;
+
+function nav() {
+  const t = currentTab();
+  return `<nav class="nav"><div class="logo"><i></i>Beautrì</div><div class="tabs">
+    ${TABS.map(([k, i, n]) => `<button class="tab ${t === k ? 'on' : ''}" data-tab="${k}"><i class="fa-solid ${i}"></i>${n}</button>`).join('')}</div>
+    <div class="seg"><small>prezzi per</small><div><button class="${S.g === 'lei' ? 'on' : ''}" data-g="lei">Lei</button><button class="${S.g === 'lui' ? 'on' : ''}" data-g="lui">Lui</button></div></div></nav>`;
+}
+
+/* ============================================================
+   PAGINE
+   ============================================================ */
+const P = {};
+
+P.home = () => `
+  <div class="L home-L bg-dark">
+    <div class="eyebrow">Chi ti segue</div>
+    <div class="h1">Ad ascoltarti<br>sarà <span class="y">Daniela</span>.</div>
+    <p class="lead">Tecnica tricologa dal 1989. Prima ascolta la persona, poi guarda i capelli.</p>
+    <div class="dani"></div>
+    <div class="note hand">ti mostro<br>come lavoriamo ↗</div>
+    <div class="stats"><div><b>+40</b><small>Anni di esperienza</small></div><div><b>+400</b><small>Persone seguite</small></div></div>
+  </div>
+  <div class="R bg-white">
+    <div class="sec"><span class="eyebrow ink">Cosa vediamo oggi</span><span class="hand" style="font-size:25px;color:var(--giallo-scuro)">scegli una scheda ↓</span></div>
+    <div class="home-g">
+      <button class="card" data-go="percorsi"><span class="ph" style="background-image:url(${IMG.p1t})"><span class="tape">si parte da qui</span></span><span class="tx"><span><b>Percorsi</b><span class="chips"><span class="y">6 percorsi</span><span>mantenimento</span></span></span>${arrow()}</span></button>
+      <button class="card" data-go="prodotti"><span class="ph" style="background-image:url('foto-prodotti/Prodotti.png')"><span class="tape">per casa</span></span><span class="tx"><span><b>Prodotti</b><span class="chips"><span class="y">4 passaggi</span><span>pH 4.5</span></span></span>${arrow()}</span></button>
+      <button class="wid" data-go="donna"><span class="sq" style="background:var(--giallo);color:var(--nero)">Lei</span><span><b>Menu Donna</b><small>per chi è in percorso</small></span>${arrow(1)}</button>
+      <button class="wid" data-go="uomo"><span class="sq" style="background:var(--nero);color:var(--giallo)">Lui</span><span><b>Menu Uomo</b><small>per chi è in percorso</small></span>${arrow(1)}</button>
+    </div>
+  </div>`;
+
+const SED_CARDS = [
+  { t: 'Igienizzare', s: 'Sebo, desquamazioni, prurito.', p: IMG.p1t, go: ['seduta', { id: 'p1' }] },
+  { t: 'Lenire', s: 'Cuti da rigenerare e riequilibrare.', p: IMG.p2t, go: ['seduta', { id: 'p2' }] },
+  { t: 'Detossinare', s: 'Cute che non respira.', p: IMG.p3t, go: ['seduta', { id: 'p3' }] },
+  { t: 'Nutrire', s: 'Nutrimento per cute e capelli.', p: IMG.p4t, go: ['seduta', { id: 'p4' }] },
+  { t: 'Laser', s: 'Diradamenti, psoriasi e dermatiti.', p: IMG.laser, pos: 'center 30%', go: ['laser', {}] },
+  { t: 'Riparare', s: 'Doppie punte e capelli sfibrati.', p: IMG.riparare, dark: true, tape: 'per le lunghezze', go: ['riparare', {}] }
+];
+P.percorsi = () => `
+  <div class="L pc-L bg-dark">
+    <div class="h1">Il tuo percorso,<br><span class="y">seduta</span> dopo seduta.</div>
+    <p class="lead">Per riportare cute e capelli in equilibrio.</p>
+    <div class="how">
+      <div class="t">Come è fatto un percorso?</div>
+      <p>È composto da <b>più sedute</b>, anche di tipologie diverse. Per esempio:</p>
+      <div class="ex"><span>3 Igienizzare</span><i class="fa-solid fa-plus"></i><span>5 Detossinare</span></div>
+      <div class="inc-k">ogni percorso include</div>
+      <div class="inc"><div><i class="fa-solid fa-gift"></i><b>Beautrì Check</b><small>in omaggio (47 €)</small></div><div><i class="fa-solid fa-couch"></i><b>Comfort Room</b><small>su richiesta</small></div><div><i class="fa-brands fa-whatsapp"></i><b>WhatsApp</b><small>5 giorni su 7</small></div></div>
+    </div>
+    <p class="psl"><b>P.S.</b>Paghi seduta per seduta. Le sedute giuste le scelgo io.</p>
+  </div>
+  <div class="R bg-white">
+    <div class="sec"><h2>Le nostre sedute</h2><span class="hand">tocca per prezzi e dettagli ↓</span></div>
+    <div class="sgrid">${SED_CARDS.map((x, i) => `<button class="card ${x.dark ? 'dark' : ''}" data-i="${i}" data-sed><span class="ph" style="background-image:url(${x.p});${x.pos ? `background-position:${x.pos}` : ''}"><span class="tape">${x.tape || 'seduta'}</span></span><span class="tx"><span><b>${x.t}</b><small>${x.s}</small></span>${arrow()}</span></button>`).join('')}</div>
+    <div class="mstrip"><div><span class="k">a percorso finito</span><b>Mantenimento</b></div><div class="btns">${['m1', 'm2', 'm3'].map(m => `<button data-go="mant" data-arg='{"m":"${m}"}'><i class="fa-solid fa-shield-halved"></i>${MANT[m].title}</button>`).join('')}</div></div>
+  </div>`;
+
+P.seduta = () => {
+  const id = S.p.id || 'p1', x = SEDUTE[id];
+  const dots = `<div class="dots">${Array.from({ length: x.max }, (_, i) => `<i class="${i >= x.min ? 'opt' : ''}"></i>`).join('')}</div>`;
+  return `
+  <div class="L sd-L photo" style="background-image:url(${IMG[id]})">
+    ${backBtn()}
+    <div class="in"><span class="tape">${x.need}</span><div class="h1">${title(x.title)}</div><p class="lead">${md(x.lead)}</p></div>
+  </div>
+  <div class="R sd-R bg-white">
+    <div class="hello" style="margin-bottom:8px">Ecco come funziona,</div>
+    <div class="rows">
+      <div class="row"><span class="num">1</span><div class="bd"><span class="w-t">A chi serve</span><p class="w-p">${md(x.who)}</p></div></div>
+      <div class="row"><span class="num">2</span><div class="bd"><span class="w-t">Cosa facciamo</span><p class="w-p">Usiamo <b>${x.what}</b>, potenziati con:</p>${toolsHtml(x.tools)}</div></div>
+      <div class="row"><span class="num">3</span><div class="bd"><span class="w-t">Quante sedute</span><p class="w-p">Di solito <b>${x.sessions}</b>: il numero esatto lo decido io, in base alla tua cute.</p>${dots}</div></div>
+      <div class="row"><span class="num">4</span><div class="bd"><span class="w-t">Quanto costa</span> <span class="w-lb">a seduta</span><div class="pr2">${['lei', 'lui'].map(k => `<span class="${k === S.g ? 'on' : ''}">${k === 'lei' ? 'Donna' : 'Uomo'}<b>${x.prices[k]} €</b></span>`).join('')}</div><span class="pricelbl"><i class="fa-solid fa-tag"></i> prezzo riservato a chi fa il percorso · paghi seduta per seduta</span></div></div>
+    </div>
+    <div class="sd-foot"><div class="switch">${Object.entries(SEDUTE).map(([k, s]) => `<button class="${k === id ? 'on' : ''}" data-go="seduta" data-arg='{"id":"${k}"}' data-replace><i class="th" style="background-image:url(${IMG[k + 't']})"></i>${s.name}</button>`).join('')}</div></div>
+  </div>`;
+};
+
+P.laser = () => `
+  <div class="L sd-L photo" style="background-image:url(${IMG.laser});background-position:center 30%">
+    ${backBtn()}
+    <div class="in"><span class="tape">alopecie, psoriasi, dermatiti</span>
+      <div class="h1"><span class="y">Laser</span><span class="sub">a fotobiostimolazione.</span></div>
+      <p class="lead">La luce che riattiva la cute: <b>il laser per la salute di cute e capelli.</b></p>
+      <span class="badge"><i class="fa-regular fa-calendar"></i>1 seduta a settimana · sedute già fisse</span></div>
+  </div>
+  <div class="R scroll bg-white">
+    <div class="hello" style="margin-bottom:8px">Ecco come funziona,</div>
+    <div class="rows">
+      <div class="row"><span class="num">1</span><div class="bd"><span class="w-t">A chi serve</span> <span class="w-lb">se ti riconosci qui</span><p class="w-p">Situazioni delicate come <b>alopecie</b>, <b>psoriasi</b> e <b>dermatiti</b>.</p></div></div>
+      <div class="row"><span class="num">2</span><div class="bd"><span class="w-t">Cosa facciamo</span><p class="w-p">Con la fotobiostimolazione:</p>
+        <div class="benefit"><i class="fa-solid fa-check"></i><span><b>Stimoliamo la microcircolazione</b> e l'energia del capello, favorendo la crescita dove serve.</span></div>
+        <div class="benefit"><i class="fa-solid fa-check"></i><span><b>Aiutiamo la cute a ritrovare calma ed equilibrio</b>: meno prurito, rossori e desquamazioni.</span></div>
+        <div class="benefit"><i class="fa-solid fa-check"></i><span><b>Un aiuto in più</b> per chi convive con psoriasi o dermatiti.</span></div></div></div>
+      <div class="row"><span class="num">3</span><div class="bd"><span class="w-t">I percorsi laser</span> <span class="w-lb">prezzi a seduta, per ${G()}</span>
+        <div class="cbox"><i class="fa-solid fa-calendar-check"></i><span><span class="t">qui le sedute sono già fisse</span>Sono <b>percorsi che ho creato io</b> per ogni problema: 1 seduta a settimana.</span></div>
+        <div class="ltab">${LASER_PERCORSO.map(r => `<div class="tr ${r[4] ? 'long' : ''}"><div class="nm"><b>${r[0]}</b><small>${r[1]} sedute · ${r[2]}</small></div><span class="pp">${r[3][S.g]} €</span></div>`).join('')}</div>
+        <span class="pricelbl"><i class="fa-solid fa-tag"></i> prezzo riservato a chi fa il percorso</span></div></div>
+      <div class="row"><span class="num" style="font-size:28px">P.S.</span><div class="bd" style="padding-left:14px">${ps('Ogni seduta comprende la piega. E paghi seduta per seduta.')}</div></div>
+    </div>
+  </div>`;
+
+P.riparare = () => `
+  <div class="L sd-L photo" style="background-image:url(${IMG.riparare})">
+    ${backBtn()}
+    <div class="in"><span class="tape">doppie punte, capelli sfibrati</span>
+      <div class="h1"><span class="y">Riparare</span><span class="sub">le lunghezze.</span></div>
+      <p class="lead">Per ridare vita, forza e splendore <b>ai tuoi capelli.</b></p>
+      <span class="badge"><i class="fa-solid fa-scissors"></i>percorso dedicato alle lunghezze</span></div>
+  </div>
+  <div class="R scroll bg-white">
+    <div class="hello" style="margin-bottom:8px">Ecco i due percorsi,</div>
+    <div class="rows">
+      <div class="row"><span class="num">1</span><div class="bd"><span class="w-t">Fotoringiovanimento</span> <span class="w-lb">col laser, per riparare</span>
+        <p class="w-p">Per capelli <b>spenti, rovinati, sfibrati</b> da piastre, colori e decolorazioni. Il laser stimola la rigenerazione, <b>rinforza il capello e lo rende meno fragile</b>.</p>
+        <div class="ind">${['Capelli svuotati e fragili', 'Doppie punte', 'Disidratazione', 'Capelli che si spezzano'].map(t => `<span><i class="fa-solid fa-check"></i> ${t}</span>`).join('')}</div>
+        <div class="pbox"><div><div class="l">prezzo del pacchetto completo</div><div class="w">4 sedute · 1 a settimana · tutto incluso</div></div><div class="a">${S.g === 'lei' ? '447/487 €' : 'su richiesta'}<small>prezzo riservato a chi fa il percorso</small></div></div>
+        <div class="gift"><span class="gi"><i class="fa-solid fa-gift"></i></span><span class="gt">in regalo<br>con il pacchetto</span><div class="gp"><div><img src="foto-prodotti/shampoo%20nutriente.png" alt=""><span><b>Shampoo</b><small>Nutriente</small></span></div><div><img src="foto-prodotti/Conditioner%20idratante.png" alt=""><span><b>Conditioner</b><small>per le lunghezze</small></span></div></div></div></div></div>
+      <div class="row"><span class="num">2</span><div class="bd"><span class="w-t">Oleazioni</span> <span class="w-lb">per nutrire e proteggere</span>
+        <p class="w-p">I capelli <b>perdono lipidi ogni giorno</b>: sole, phon, piastre e trattamenti tecnici. L'olio nutre la fibra in profondità e crea una <b>barriera protettiva</b>.</p>
+        <div class="tl3">${[['giorno 1', 'Oleazione intensiva', 'Nutre e crea la prima barriera.'], ['giorno 7', 'Oleazione di rinforzo', 'Rinforza la struttura.'], ['giorno 28', 'Oleazione di mantenimento', 'Mantiene il risultato nel tempo.']].map((s, i) => `<div><span class="n">${i + 1}</span><small>${s[0]}</small><b>${s[1]}</b><em>${s[2]}</em></div>`).join('')}</div>
+        <div class="pbox"><div><div class="l">prezzo a seduta</div><div class="w">3 sedute · paghi seduta per seduta</div></div><div class="a">79 €</div></div></div></div>
+      <div class="row"><span class="num" style="font-size:28px">P.S.</span><div class="bd" style="padding-left:14px">${ps('Ogni seduta comprende la piega.')}</div></div>
+    </div>
+  </div>`;
+
+/* --- mantenimento: prima le domande a tutto schermo, poi la lettera --- */
+const qBlock = (i, ans) => `<div class="q"><div class="q-top"><span class="q-lab">domanda ${i + 1} di 3</span><span class="bars">${[0, 1, 2].map(k => `<i class="${k <= i ? 'on' : ''}"></i>`).join('')}</span></div>
+  <p class="q-text">${Q[i].q}</p><div class="scale">${Array.from({ length: 10 }, (_, n) => `<button class="${ans[i] === n + 1 ? 'sel' : ''}" data-q="${i}" data-n="${n + 1}">${n + 1}</button>`).join('')}</div>
+  <div class="ends"><span>1 = Per niente</span><span>10 = ${Q[i].max}</span></div></div>`;
+const mtabs = m => `<div class="mtabs">${Object.entries(MANT).map(([k, x]) => `<button class="${k === m ? 'on' : ''}" data-go="mant" data-arg='{"m":"${k}"}' data-replace>${x.title}</button>`).join('')}</div>`;
+const chain = c => `<div class="chain"><small>${c.label}</small><ol>${c.items.map((t, i) => `<li><i class="fa-solid ${['fa-check', c.icon, 'fa-xmark'][i]}"></i>${t}</li>`).join('')}</ol></div>`;
+P.mant = () => {
+  const m = S.p.m || 'm1', x = MANT[m], ans = S.p.ans || [];
+  if (ans.length < 3) {
+    const i = ans.length;
+    return `<div class="qfull bg-dark">${mtabs(m)}
+      <div class="eyebrow">Mantenimento ${x.title}</div>
+      <div class="h1" style="margin-top:10px"><span class="y">Complimenti!</span></div>
+      <p class="intro-d">${x.complimenti}</p>
+      ${qBlock(i, ans)}
+      <div class="who-ans">tre domande veloci, rispondi tu ↑</div>
+      <button class="back" data-back style="position:absolute;left:34px;bottom:28px"><span class="b"><i class="fa-solid fa-arrow-left"></i></span>${backLabel()}</button>
+    </div>`;
+  }
+  const p = x.p[S.g];
+  const months = Array.from({ length: 12 }, (_, i) => { const b = x.months === 'alt' ? i % 2 === 1 : x.months === 'q' ? i % 3 === 2 : false; return `<i class="${b ? 'b' : ''}"></i>`; }).join('');
+  return `
+  <div class="L sd-L photo" style="background-image:url(${x.photo});${x.pos ? `background-position:${x.pos}` : ''}">
+    ${backBtn()}
+    <div class="in"><span class="tape">${x.tape}</span>
+      <div class="h1">Mantenimento<span class="sub" style="font-size:54px;letter-spacing:-0.045em"><span class="y">${x.title}</span>.</span></div>
+      <p class="lead">12 sedute in 12 mesi <b>per tenere il risultato.</b></p>${mtabs(m)}</div>
+  </div>
+  <div class="R scroll bg-white">
+    <div class="answers"><i class="fa-solid fa-circle-check"></i>Le tue risposte ${ans.map(a => `<b>${a}</b>`).join('')}</div>
+    <p class="quote">${x.quote}<small>— Daniela</small></p>
+    <div class="hello" style="margin-top:10px">Ho letto le tue risposte.</div>
+    <p class="p">Dove sei già al 10, ti aiuto a restarci. Dove non ci sei ancora, ci arriviamo insieme.</p>
+    <div class="rows" style="margin-top:12px">
+      <div class="row"><span class="num">1</span><div class="bd"><span class="w-t">Il lavoro fatto si può perdere in fretta.</span>${chain(DIETA)}<div class="same">lo stesso vale per i tuoi capelli ↓</div>${chain(x.hair)}<div class="warn">Sarebbe un peccato sprecare tempo e soldi.</div></div></div>
+      <div class="row"><span class="num">2</span><div class="bd"><span class="w-t">È la fase <span class="hl">più importante</span>.</span><p class="w-p">${x.s2}</p>
+        <div class="whys">${x.why.map((w, i) => `<div><i class="fa-solid ${['fa-shield-halved', 'fa-arrow-trend-up', 'fa-user-check'][i]}"></i>${w}</div>`).join('')}</div>
+        <div class="cbox"><i class="fa-solid fa-heart"></i><span><span class="t">sembra un impegno, ma non lo è</span>${x.boost}</span></div></div></div>
+      <div class="row"><span class="num">3</span><div class="bd"><span class="w-t">12 mesi, 1 seduta al mese.</span>
+        <div class="comp">${x.comp.map(([n, t, k]) => `<span><b class="${k}">${n}</b>${t}</span>`).join('')}</div><div class="months">${months}</div>
+        <p class="w-p">${x.s3}</p><div class="tools">${x.tech.map(k => `<span class="tool"><i class="fa-solid ${TECH[k][0]}"></i>${TECH[k][1]}</span>`).join('')}</div></div></div>
+      <div class="row"><span class="num">4</span><div class="bd"><span class="w-t">La tua routine a casa.</span><p class="w-p">Prodotti personalizzati, su misura per te.</p>
+        <div class="prods"><div><img src="foto-prodotti/shampoo%20delicato.png" alt=""><b>Shampoo</b></div><div><img src="foto-prodotti/Lozione%20soft.png" alt=""><b>Lozione</b></div></div></div></div>
+      <div class="row"><span class="num">5</span><div class="bd"><span class="w-t">Scegli come vuoi farlo.</span> <span class="w-lb">prezzi per ${G()}</span>
+        <div class="pay"><span class="note">il percorso è lo stesso, cambia solo cosa ti regalo io</span>
+          <div class="opt one"><span class="badge2">Il più scelto</span><span class="k">in unica soluzione</span><s>${p.was}</s><span class="big">${p.now}</span><span class="calc">12 sedute × ${p.seat} = ${p.was} · <b>ne paghi 11</b></span><span class="save"><i class="fa-solid fa-piggy-bank"></i> risparmi ${x.save}</span>
+            <ul><li><i class="fa-solid fa-calendar-plus"></i>la <b>12ª seduta</b> in omaggio</li><li><i class="fa-solid fa-pump-soap"></i><b>1 prodotto</b> scelto per te</li><li><i class="fa-solid fa-magnifying-glass"></i>2 Beautrì Check (94 €)</li><li><i class="fa-brands fa-whatsapp"></i>WhatsApp 5 giorni su 7</li></ul></div>
+          <div class="opt seat"><span class="k">seduta per seduta</span><span class="big">${p.seat}</span><span class="calc">a seduta</span>
+            <ul><li><i class="fa-solid fa-check"></i>2 Beautrì Check</li><li><i class="fa-solid fa-check"></i>WhatsApp 5 giorni su 7</li><li><i class="fa-solid fa-xmark"></i>senza omaggi</li><li><i class="fa-solid fa-xmark"></i>risparmio <b>0 €</b></li></ul></div>
+        </div></div></div>
+      <div class="row"><span class="num" style="font-size:28px">P.S.</span><div class="bd" style="padding-left:14px">${ps("Mantieni i tuoi risultati, non buttare i soldi che hai speso. Se scegli l'unica soluzione, la 12ª seduta te la regalo io.")}</div></div>
+    </div>
+    <p class="fine"><i class="fa-solid fa-lock"></i> <b>I prezzi sono riservati solo a chi fa i percorsi.</b><br><b>Importante:</b> se durante l'anno emergessero problemi di salute che influiscono sul percorso, potrò modificarlo. Sceglierò io prodotti, personalizzazione e modo d'uso.</p>
+  </div>`;
+};
+
+/* --- prodotti --- */
+P.prodotti = () => `
+  <div class="L pr-L bg-dark">
+    <div class="eyebrow">Prodotti</div>
+    <div class="h1">Il percorso<br><span class="y">non si ferma</span><br>in studio.</div>
+    <p class="lead">Ogni giorno a casa, <b>con i prodotti giusti per te.</b></p>
+    <div class="grp"><span class="n2">creati per te da Daniela</span><span class="n1">formulati con oli essenziali</span></div>
+    <p class="psl"><b>P.S.</b>Non ti servono tutti: ti serve quello giusto per te, e te lo indico io.</p>
+  </div>
+  <div class="R bg-white">
+    <div class="sec"><span class="hand" style="font-size:32px;color:var(--giallo-scuro)">Ecco la tua routine,</span><span class="hand" style="font-size:23px;color:var(--giallo-scuro)">ognuno ha il suo compito ↓</span></div>
+    <div class="rgrid">${FKEYS.map((k, i) => { const f = FAM[k]; return `<button class="card rc" data-go="famiglia" data-arg='{"f":"${k}"}'><span class="ph">${f.group ? `<img class="solo" src="foto-prodotti/${encodeURIComponent(f.group)}" alt="">` : f.hero.slice(0, 3).map(h => `<img src="${PB(h)}" alt="">`).join('')}<span class="nn">${i + 1}</span><span class="tape">${f.label}</span></span><span class="tx"><span><b>${f.name}</b><small>${f.short}</small><span class="meta">${f.products.length} prodotti</span></span>${arrow()}</span></button>`; }).join('')}</div>
+  </div>`;
+
+P.famiglia = () => {
+  const k = S.p.f || 'shampoo', f = FAM[k];
+  return `
+  <div class="L fl bg-dark">
+    ${backBtn()}
+    <div class="h1">${title(f.title)}</div>
+    <p class="lead">${md(f.lead)}</p>
+    <div class="bottle"><span class="n2">${f.n2}</span><img src="${PB(f.one)}" alt=""><span class="n1">${f.n1}</span></div>
+    <div class="ftabs">${FKEYS.map((kk, i) => `<button class="${kk === k ? 'on' : ''}" data-go="famiglia" data-arg='{"f":"${kk}"}' data-replace><span>${i + 1}</span>${FAM[kk].name}</button>`).join('')}</div>
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">${f.hello}</div><p class="p">${md(f.intro)}</p>
+    ${f.groups.map(([id, nm, lb, ic]) => `<div class="sep"><span>${lb}</span></div>${f.products.filter(p => p[3] === id).map(p => `<div class="prow"><span class="ph"><img src="${PB(p[2])}" alt=""></span><div class="bd"><span class="chip"><i class="fa-solid ${ic}"></i>${nm}</span><h3>${p[0]}</h3><span class="w-lb">${p[4]}</span><p>${p[5]}</p></div><span class="pp">${p[1]} €</span></div>`).join('')}`).join('')}
+    ${f.box ? `<div class="fbox ${f.box.photo ? '' : 'nophoto'}"><div><span class="k">${f.box.k}</span><h3>${f.box.t} <span>${f.box.h}</span></h3><p>${md(f.box.text)}</p><ol>${f.box.steps.map((s, i) => `<li><b>${i + 1}</b>${s}</li>`).join('')}</ol>${f.box.note ? `<small><i class="fa-solid fa-circle-info"></i> ${f.box.note}</small>` : ''}</div>${f.box.photo ? `<div class="bph" style="background-image:url(foto-prodotti/${f.box.photo}.webp)"><em>${f.box.tag}</em></div>` : ''}</div>` : ''}
+    ${ps(f.ps)}
+  </div></div>`;
+};
+
+/* --- menu donna / uomo --- */
+const firstBox = `<button class="first" data-go="consulenza"><div class="t">Prima volta da Beautrì?</div><p>Si parte sempre dalla <b>Consulenza Beautrìco</b>: 90 minuti per conoscerti e analizzare cute e capelli.</p><div class="go">Scopri la Consulenza Beautrìco ${arrow()}</div></button>`;
+const svCard = (r) => `<button class="card" data-go="${r.go}" ${r.arg ? `data-arg='${r.arg}'` : ''}><span class="ph ${r.ic ? 'ic ' + (r.cls || '') : ''}" ${r.p ? `style="background-image:url(${r.p})"` : ''}>${r.ic ? `<i class="fa-solid ${r.ic}"></i>` : ''}<span class="tape">${r.tape}</span></span><span class="tx"><span><b>${r.t}</b><small>${r.s}</small></span>${arrow()}</span></button>`;
+const novStrip = `<button class="nov" data-go="novita"><span class="ic"><i class="fa-solid fa-bell"></i></span><b>Novità</b>${arrow()}</button>`;
+P.donna = () => `
+  <div class="L mn-L bg-dark">
+    <div class="eyebrow">Menu Donna</div>
+    <div class="h1">Bellezza<br>che parte<br>dalla <span class="y">cute</span>.</div>
+    <p class="lead">Colore, forma e piega <b>pensati per rispettarla.</b></p>
+    ${lockChip}${firstBox}
+  </div>
+  <div class="R bg-white">
+    <span class="hand" style="font-size:32px;color:var(--giallo-scuro)">Scegli cosa ti serve,</span>
+    <div class="g32">${[
+      { t: 'Trattamenti tricologici', s: 'Sedute singole e laser per sebo, forfora, prurito e psoriasi.', p: IMG.p1t, tape: 'la cute', go: 'tricologici' },
+      { t: 'SPA', s: 'Vapore a 35°, non a 90°: la cute respira, non si stressa.', p: IMG.spa, tape: 'la cute', go: 'spa' },
+      { t: 'Colorazioni e schiariture', s: 'Il colore che puoi fare anche se quello normale ti dà problemi.', ic: 'fa-palette', cls: 'gold', tape: 'il colore', go: 'colorazioni' },
+      { t: 'Migliori proposte', s: "Ossigeno e oli essenziali da aggiungere al colore: pH in equilibrio.", ic: 'fa-star', tape: 'il colore', go: 'migliori' },
+      { t: 'Forma', s: 'Ricci, liscio o anti-crespo con attivi vegetali.', ic: 'fa-wand-magic-sparkles', tape: 'forma e stile', go: 'forma' },
+      { t: 'Stilistico', s: 'Taglio e piega su misura, per chiudere la seduta.', ic: 'fa-scissors', cls: 'dark', tape: 'forma e stile', go: 'stilistico' }
+    ].map(svCard).join('')}</div>
+    ${novStrip}
+  </div>`;
+P.uomo = () => `
+  <div class="L mn-L bg-dark">
+    <div class="eyebrow">Menu Uomo</div>
+    <div class="h1">Prima la <span class="y">cute</span>.<br>Poi il taglio.</div>
+    <p class="lead">Ogni servizio è pensato <b>per far stare bene la tua cute.</b></p>
+    ${lockChip}${firstBox}
+  </div>
+  <div class="R bg-white">
+    <span class="hand" style="font-size:32px;color:var(--giallo-scuro)">Scegli cosa ti serve,</span>
+    <div class="g22">${[
+      { t: 'Trattamenti tricologici', s: 'Sedute singole e laser per sebo, forfora, prurito e diradamento.', p: IMG.p1t, tape: 'la cute', go: 'tricologici' },
+      { t: 'SPA', s: 'Vapore a 35°, non a 90° come quello classico: la cute respira, non si stressa.', p: IMG.spa, tape: 'la cute', go: 'spa' },
+      { t: 'Migliori proposte', s: 'Cute No Stress: un tocco in più al servizio, per distendere la cute.', ic: 'fa-star', tape: 'la cute', go: 'migliori' },
+      { t: 'Stilistico', s: 'Beautrì Cut classico, olistico o energizzante, con il massaggio.', ic: 'fa-scissors', cls: 'dark', tape: 'lo stile', go: 'stilistico' }
+    ].map(svCard).join('')}</div>
+    ${novStrip}
+  </div>`;
+
+/* --- trattamenti tricologici --- */
+P.tricologici = () => {
+  const g = S.g;
+  return `
+  <div class="L sd-L photo" style="background-image:url(${IMG.p1t})">
+    ${backBtn()}
+    <div class="in"><span class="tape">sedute singole e laser</span>
+      <div class="h1">Il benessere parte<br>dalla <span class="y">cute</span>.</div>
+      <p class="lead">Sedute singole e laser, <b>per la salute di cute e capelli.</b></p>${lockChip}</div>
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">Scegli la tua seduta,</div>
+    <p class="p">Ogni seduta ha un compito preciso. In tutte potenziamo i prodotti naturali con <b>strumenti tecnologici</b>.</p>
+    <div class="sep"><span>le sedute tricologiche</span></div>
+    ${TRICO.map(x => `<div class="prow"><span class="ph" style="width:104px;height:86px;background:#333 url(${x.p}) center/cover"></span><div class="bd"><span class="w-lb" style="font-size:20px">${x.need}</span><h3>${x.t}</h3><p>${x.s}</p></div><div style="text-align:right"><span class="pp">${x.pr[g]} €</span><span class="pricelbl">seduta singola</span></div></div>`).join('')}
+    <div class="cbox" style="background:var(--sabbia);border-color:#e2dacb"><span><span class="t">con gli strumenti giusti</span><span class="tools" style="margin-top:4px">${['ultrasuoni', 'nebulizzazione', 'corrente galvanica', 'ossigenoterapia', 'alta frequenza'].map(t => `<span class="tool" style="background:#fff"><i class="fa-solid ${TOOL_IC[t]}"></i>${t}</span>`).join('')}</span></span></div>
+    <div class="sep"><span>il laser</span></div>
+    <div class="bbox"><span class="k">la luce che riattiva la cute</span><h3>Laser a fotobiostimolazione</h3><p>Lavora in profondità sul cuoio capelluto e stimola la rigenerazione cellulare.</p>
+      <div class="benefit" style="color:#fff"><i class="fa-solid fa-check"></i><span>Stimola la microcircolazione e la crescita del capello</span></div>
+      <div class="benefit" style="color:#fff"><i class="fa-solid fa-check"></i><span>Aiuta la cute a ritrovare calma: meno prurito, rossori e desquamazioni</span></div>
+      <div class="benefit" style="color:#fff"><i class="fa-solid fa-check"></i><span>Un aiuto in più per chi convive con psoriasi o dermatiti</span></div>
+      <table style="width:100%;border-collapse:collapse;margin-top:12px;font-family:Poppins,sans-serif">
+        <tr>${['Per', 'Min'].concat(g === 'lei' ? ['Donna', 'Donna+'] : ['Uomo']).map((h, i) => `<th style="font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75);text-align:${i ? 'right' : 'left'};padding:0 6px 6px ${i ? '6px' : 0}">${h}</th>`).join('')}</tr>
+        ${LASER_SINGOLA.map(r => `<tr style="${r[1] === "60'" ? 'background:rgba(245,194,0,.1)' : ''}"><td style="padding:7px 0;font-size:15px;font-weight:700;border-top:1px solid rgba(255,255,255,.12)">${r[0]}</td><td style="padding:7px 6px;text-align:right;font-size:14.5px;color:rgba(255,255,255,.8);border-top:1px solid rgba(255,255,255,.12)">${r[1]}</td>${(g === 'lei' ? [r[3], r[4]] : [r[2]]).map(v => `<td style="padding:7px 6px;text-align:right;font-weight:900;font-size:16px;color:var(--giallo);border-top:1px solid rgba(255,255,255,.12)">${v} €</td>`).join('')}</tr>`).join('')}
+      </table>
+      <p style="font-size:14px;margin-top:10px"><i class="fa-solid fa-circle-check" style="color:#4ADE80;margin-right:6px"></i>La piega è inclusa nel prezzo · prezzo della seduta singola</p></div>
+    ${g === 'lei' ? `<div class="sep"><span>solo per il mantenimento</span></div>
+    <div class="cbox" style="display:block"><span class="t"><i class="fa-solid fa-rotate"></i> riservate a chi ha già completato il percorso correlato</span>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px dashed #e8dfc4;margin-top:6px"><div><b style="font-family:Poppins;font-weight:800;font-size:17px">Oleazioni</b><br><small style="font-size:14.5px;color:var(--testo-2)">Nutre, idrata e protegge le lunghezze.</small></div><span class="pp" style="margin-left:auto">79 €</span></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px dashed #e8dfc4"><div><b style="font-family:Poppins;font-weight:800;font-size:17px">Fotoringiovanimento</b><br><small style="font-size:14.5px;color:var(--testo-2)">Stimola la rigenerazione e rinforza il capello.</small></div><span class="pp" style="margin-left:auto">120 €</span></div></div>` : ''}
+    ${lockLine}${ps('Quale seduta ti serve lo decidiamo insieme, guardando la tua cute.')}
+  </div></div>`;
+};
+
+/* --- SPA --- */
+P.spa = () => `
+  <div class="L sd-L photo" style="background-image:url(${IMG.spa})">
+    ${backBtn()}
+    <div class="in"><span class="tape">vapore a 35°, non a 90°</span>
+      <div class="h1">Il relax che<br>rispetta la <span class="y">cute</span>.</div>
+      <p class="lead">Vapore a 35°, acqua calda <b>e rituali orientali.</b></p>
+      ${lockChip}<br><button class="playbtn" data-video><i class="fa-solid fa-play"></i>Guarda la nostra SPA</button></div>
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">Ti do il benvenuto nella mia SPA,</div>
+    <p class="p">Qui ogni trattamento è pensato per farti stare bene <b>senza stressare cute e capelli</b>. Ti racconto cosa trovi.</p>
+    <div class="sep"><span>cosa la rende diversa</span></div>
+    <div class="exp"><div><div class="top"><span class="ic"><i class="fa-solid fa-couch"></i></span><span><span class="k">il collo sostenuto</span><b class="t">Poltrone reclinabili</b></span></div><p>Al lavatesta il collo è sostenuto e si rilassa. Un cuscino ergonomico <b>scarica il peso della testa su più punti</b>, così ti rilassi davvero.</p></div><span class="ph" style="background-image:url(${IMG.spa})"></span></div>
+    <div class="exp nophoto"><div><div class="top"><span class="ic"><i class="fa-solid fa-cloud"></i></span><span><span class="k">vapore delicato</span><b class="t">Spa Mist II</b></span></div><p>Con gli ultrasuoni crea <b>un vapore finissimo che non scalda la cute</b>: i principi attivi idratanti, nutrienti e riparatori arrivano dove servono.</p>
+      <div class="temp"><div class="hot"><span>Vapore classico</span><span class="bar"><i></i></span><span class="v">90/100°</span></div><div class="ok"><span>Spa Mist II</span><span class="bar"><i></i></span><span class="v">35°</span></div></div></div></div>
+    <div class="exp nophoto"><div><div class="top"><span class="ic"><i class="fa-solid fa-water"></i></span><span><span class="k">una cascata di benessere</span><b class="t">Yume Headbath</b></span></div><div class="squote">Pensa a una cascata d'acqua calda e alla tua testa immersa in una vasca…</div><p>L'acqua scende sull'attaccatura dei capelli e si raccoglie in un bacino. <b>Riscalda e stimola delicatamente la cute</b>, e accompagna tutti i nostri percorsi, dalla purificazione alla ricostruzione.</p></div></div>
+    <div class="sep"><span>il rituale</span></div>
+    <div class="bbox"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><span class="k">antico rituale orientale</span><h3>Soft Touch</h3></div><span class="pp">99 €</span></div>
+      <p>Per te che vuoi prenderti cura di te, a livello mentale ed emotivo. Uniamo tecniche orientali antiche per un <b>benessere dalla testa ai piedi</b>.</p>
+      <div class="stones">${[['fa-gem', '#CDEBD8', '#146B3D', 'Giada verde', 'per riequilibrare le emozioni'], ['fa-gem', '#F8D7DF', '#A23B5A', 'Quarzo rosa', 'per calmare stress e stanchezza'], ['fa-leaf', '#E8E3B8', '#6B6420', 'Bamboo', 'per sciogliere le tensioni']].map(s => `<div><i class="fa-solid ${s[0]}" style="background:${s[1]};color:${s[2]}"></i><b>${s[3]}</b><small>${s[4]}</small></div>`).join('')}</div></div>
+    ${lockLine}${ps('Il vapore classico arriva a 90°. Io mi fermo a 35°: il relax non deve stressare la cute.')}
+  </div></div>
+  ${S.p.video ? `<div class="ov"><div class="vid"><iframe src="${SPA_VIDEO}?autoplay=1" title="Video SPA Beautrì" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><button class="x" data-closevideo><i class="fa-solid fa-xmark"></i></button></div>` : ''}`;
+
+/* --- colorazioni e schede --- */
+const SWATCH = ['#2B1B14', '#5A3624', '#8B5A3C', '#B8865B', '#D9B38C', '#EAD3A8'];
+const swatch = () => `<div class="swatch">${SWATCH.map((c, i) => `<i style="background:${c};left:${i * 56}px;z-index:${i}"></i>`).join('')}<small>dal castano al biondo sabbia</small></div>`;
+const colBlock = b => {
+  switch (b.type) {
+    case 'who': return `<ul class="ticks">${b.items.map(it => typeof it === 'string' ? `<li><i class="fa-solid fa-check"></i><span>${it}</span></li>` : `<li class="talk"><i class="fa-regular fa-comments"></i><span>${it.talk}: <em>ne parliamo insieme</em></span></li>`).join('')}</ul>`;
+    case 'sep': return `<div class="sep"><span>${b.label}</span></div>`;
+    case 'p': return `<p class="p">${md(b.text)}</p>`;
+    case 'chips': return `<div class="chips">${b.items.map(c => `<span>${c}</span>`).join('')}</div>`;
+    case 'box': return `<div class="cbox"><i class="fa-solid ${b.icon}"></i><span><b>${b.title}</b><br>${b.text}</span></div>`;
+    case 'rows': return b.rows.map(r => `<div class="rw"><span class="ic ${r.gold ? 'gold' : ''}"><i class="fa-solid ${r.icon}"></i></span><span><b>${r.title}</b><small>${r.text}</small>${r.price ? `<br><span class="v">${r.price}</span>` : ''}</span></div>`).join('');
+    case 'price': return `<div class="pbox"><div><div class="l">il prezzo</div><div class="w">${b.what}</div></div><div class="a">${b.amt}</div></div>`;
+    case 'lock': return lockLine;
+    case 'addon': return `<div class="addon"><span class="bdg">FACOLTATIVO</span><img src="foto-prodotti/${b.img}" alt=""><span><b>${b.title}</b><small>${b.text}</small></span><span class="ap">${b.price}</span></div>`;
+    case 'warn': return `<div class="warnr"><i class="fa-solid fa-triangle-exclamation"></i><span>${b.text}</span></div>`;
+    case 'levels': return b.items.map(l => `<div class="lv"><div class="top"><b>${l.name}<span class="dots">${[1, 2, 3].map(n => `<i class="${n <= l.dots ? 'on' : ''}"></i>`).join('')}</span></b><span class="pp">${l.price}</span></div><small>${l.text}</small><span class="ben">${l.ben}</span><span class="seal"><i class="fa-solid fa-gift"></i>Sigillo da 27 € incluso</span></div>`).join('');
+    case 'vs': return `<div class="vs"><div class="h"><span>Con Color Pass</span><span>Senza</span></div>${b.rows.map(([y, n]) => `<div><span>${y}</span><span>${n}</span></div>`).join('')}</div>`;
+    case 'gift': return `<div class="giftb"><span class="k">${b.kick}</span><b>${b.title}</b><small>${b.text}</small></div>`;
+  }
+  return '';
+};
+P.colorazioni = () => `
+  <div class="L cl bg-dark">
+    ${backBtn()}
+    <div class="eyebrow" style="margin-top:14px">Colorazioni e schiariture</div>
+    <div class="h1">${title('Il colore / che puoi fare / [anche tu].')}</div>
+    <p class="lead">Anche se quello normale <b>ti dà problemi.</b></p>
+    ${lockChip}${swatch()}
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">Scegli il tuo colore,</div>
+    <p class="p">Ogni colore che uso è pensato per <b>rispettare la salute di cute e capelli</b>, senza sostanze aggressive.</p>
+    <div class="choose"><h4><i class="fa-solid fa-compass"></i>Quale fa per te?</h4>${COL.choose.map(([n, c]) => `<div class="c"><i class="fa-solid fa-arrow-right"></i><span>${n} → <b>${c}</b></span></div>`).join('')}<div class="end">la scelta finale la facciamo insieme</div></div>
+    ${COL.groups.map(g => `<div class="sep"><span>${g.label}</span></div>${g.rows.map(r => `<button class="crow" data-go="scheda" data-arg='{"id":"${r.id}"}'><span class="ic ${r.gold ? 'gold' : ''}"><i class="fa-solid ${r.icon}"></i></span><span class="bd">${r.kick ? `<span class="k">${r.kick}</span>` : ''}<b class="t">${r.title}</b><small>${r.text}</small>${r.chips ? `<span class="chips green">${r.chips.map(c => `<span><i class="fa-solid fa-check"></i>${c}</span>`).join('')}</span>` : ''}${r.tiny ? `<span class="tiny">${r.tiny}</span>` : ''}</span><span class="pp">${r.price}</span><i class="fa-solid fa-chevron-right go"></i></button>`).join('')}`).join('')}
+    <div class="sep"><span>con qualsiasi colore o schiaritura</span></div>
+    <button class="pass" data-go="scheda" data-arg='{"id":"color-pass"}'><span class="ic"><i class="fa-solid fa-ticket"></i></span><span><span class="k">per chi è in percorso</span><b>Color Pass</b><small>Il colore in ordine tutto l'anno, senza ricrescita evidente.</small><br><span class="m"><i class="fa-solid fa-gift"></i>nel 2026 in omaggio</span></span>${arrow()}</button>
+    ${ps('I miei colori non curano. Ti permettono di colorarti nel rispetto della cute, anche quando il colore normale non puoi farlo.')}
+  </div></div>`;
+P.scheda = () => {
+  const s = SCHEDE[S.p.id];
+  return `
+  <div class="L cl bg-dark">
+    ${backBtn()}
+    <div class="eyebrow" style="margin-top:14px">${s.eyebrow}</div>
+    <div class="h1">${title(s.title)}</div>
+    <p class="lead">${md(s.lead)}</p>
+    ${s.chips ? `<div class="hchips">${s.chips.map(c => `<span>${c === 'vegano' ? '<i class="fa-solid fa-leaf"></i> ' : ''}${c}</span>`).join('')}</div>` : ''}
+    ${s.heroNote ? `<div class="hnote">↑ ${s.heroNote}</div>` : ''}
+    ${s.noSwatch ? '' : swatch()}
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">È per te,</div>
+    ${s.blocks.map(colBlock).join('')}
+    ${ps(s.ps)}
+  </div></div>`;
+};
+
+/* --- migliori proposte --- */
+const propHtml = p => `<div class="prop ${p.dark ? 'dark' : ''}"><div class="top"><span class="ic ${p.gold ? 'gold' : ''}"><i class="fa-solid ${p.icon}"></i></span><span><span class="k">${p.kick}</span><b class="t">${p.title}</b></span><span class="pz"><span class="pp">${p.price}</span>${p.per ? `<small>${p.per}</small>` : ''}</span></div>
+  ${p.when ? `<div class="when"><i class="fa-solid fa-hand-point-right"></i><span>${p.when}</span></div>` : ''}<p>${p.text}</p>${p.chips ? `<div class="chips green">${p.chips.map(c => `<span><i class="fa-solid fa-check"></i>${c}</span>`).join('')}</div>` : ''}</div>`;
+P.migliori = () => {
+  const uomo = S.g === 'lui' && menuTab === 'uomo';
+  const left = (t, l, steps) => `<div class="L cl bg-dark">${backBtn()}<div class="eyebrow" style="margin-top:14px">Migliori proposte</div><div class="h1" style="font-size:44px">${t}</div><p class="lead">${l}</p>${lockChip}
+      <div class="how3"><span class="k">come funziona ↓</span>${steps.map((s, i) => `<div class="s"><span class="n">${i + 1}</span><span><b>${s[0]}</b><small>${s[1]}</small></span></div>`).join('')}</div></div>`;
+  if (uomo) return left('Un tocco in più<br>al tuo servizio,<br>la cute <span class="y">respira</span>.', 'Per la cute sotto stress, <b>la differenza la senti subito.</b>', [['Scegli', 'il tuo servizio'], ['Aggiungi', 'Cute No Stress'], ['Lo senti subito', 'già a fine servizio']]) + `
+    <div class="R scroll bg-white"><div class="sheet">
+      <div class="hello">La mia migliore proposta,</div>
+      <p class="p">Tensioni, ritmi frenetici, ansia e sudorazione si fanno sentire anche sul cuoio capelluto. Per questo ho pensato a <b>un'aggiunta al tuo servizio che lo distende</b>.</p>
+      <div class="sep"><span>per la tua cute</span></div>
+      ${propHtml({ icon: 'fa-brain', gold: true, kick: 'cute distesa', title: 'Cute No Stress', price: '21-29 €', per: 'a servizio', when: 'Per te se senti la cute <b>tesa, stressata o sudata</b>.', text: "Distende il cuoio capelluto e <b>allenta la tensione</b> che ritmi e stress di ogni giorno ci lasciano addosso. Delicata anche sulle cuti più sensibili.", chips: ['tensioni', 'stress', 'sudorazione'] })}
+      ${lockLine}${ps('Non sai se fa per te? Dimmi cosa senti sulla cute e lo capiamo insieme.')}
+    </div></div>`;
+  return left('Un tocco in più<br>al tuo colore,<br>la cute <span class="y">ringrazia</span>.', 'Ossigeno e oli essenziali, <b>il risultato lo vedi subito.</b>', [['Fai il colore', 'o la schiaritura'], ['Aggiungi', 'la proposta giusta per te'], ['Lo vedi subito', 'già a fine servizio']]) + `
+    <div class="R scroll bg-white"><div class="sheet">
+      <div class="hello">Le mie migliori proposte,</div>
+      <p class="p">Sono piccole aggiunte al tuo servizio colore. Danno <b>nuova vita al capello che già si vede</b> e lasciano la cute in equilibrio.</p>
+      <div class="sep"><span>scegli la tua</span></div>
+      ${[
+        { icon: 'fa-wand-magic-sparkles', gold: true, kick: 'riflessi temporanei', title: 'Più vita al tuo riflesso', price: '17-23 €', per: 'a servizio', when: 'Per te se il colore ti sembra <b>spento</b> e vuoi giocare con i riflessi.', text: "Pigmenti naturali organici per infiniti riflessi, con un effetto temporaneo: <b>massima libertà</b>. L'ossigenoterapia idrata il capello.", chips: ['collagene marino', "proteine dell'avena", 'senza solfati'] },
+        { icon: 'fa-wind', kick: 'pH in equilibrio', title: 'Neutralizzante', price: '17-27 €', per: 'a servizio', when: 'Per te se dopo il colore senti <b>prurito</b> sulla cute.', text: "Con l'aerografo eroghiamo ossigeno puro e oli essenziali. <b>Aiutiamo a togliere i residui del colore</b> e riportiamo il pH in equilibrio.", chips: ['ossigeno puro', 'timo', 'arancio amaro', 'hennè'] },
+        { icon: 'fa-droplet', kick: 'forza ed elasticità', title: 'Ossigenoterapia Idrominerale', price: '17-27 €', per: 'a servizio', when: 'Per te se hai capelli <b>deboli e senza tono</b>, che si afflosciano.', text: 'Restituisce forza, vigore ed elasticità alla fibra, così lo stelo <b>non si spezza</b> e il colore dura di più.' }
+      ].map(propHtml).join('')}
+      ${lockLine}
+      <div class="bbox" style="margin-top:14px"><span class="k">hai il Color Pass?</span><h3>Una proposta al mese <span class="y">è inclusa</span>.</h3><p>Con il Color Pass scegli <b>in omaggio, una volta al mese</b>, una di queste proposte insieme al tuo colore o alla tua schiaritura.</p><button class="ybtn" style="margin-top:10px" data-go="scheda" data-arg='{"id":"color-pass"}'>Scopri il Color Pass <i class="fa-solid fa-arrow-right"></i></button></div>
+      ${ps('Non sai quale scegliere? Dimmi cosa senti sulla cute e la scegliamo insieme.')}
+    </div></div>`;
+};
+
+/* --- forma --- */
+P.forma = () => `
+  <div class="L cl bg-dark">
+    ${backBtn()}
+    <div class="eyebrow" style="margin-top:14px">Forma</div>
+    <div class="h1">Liscio o ricci,<br>il capello<br>resta <span class="y">più forte</span>.</div>
+    <p class="lead">Attivi vegetali che <b>rinforzano la fibra, invece di stressarla.</b></p>
+    ${lockChip}
+    <div class="life"><span class="k">il risultato</span><b>Capelli in ordine, ovunque tu vada.</b>
+      <div class="places">${[['fa-briefcase', 'ufficio'], ['fa-dumbbell', 'palestra'], ['fa-umbrella-beach', 'mare'], ['fa-person-swimming', 'piscina']].map(([i, l]) => `<div><i class="fa-solid ${i}"></i>${l}</div>`).join('')}</div>
+      <p>Più sani, morbidi e luminosi. E facili da gestire, anche con una vita di corsa.</p></div>
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">Dai forma ai tuoi capelli,</div>
+    <p class="p">Liscio, anti-crespo o ricci: in ogni trattamento uso <b>attivi vegetali che rinforzano il capello</b>. Così la forma dura, e la fibra non si rovina.</p>
+    <div class="choose"><h4><i class="fa-solid fa-compass"></i>Quale fa per te?</h4>
+      <div class="c"><i class="fa-solid fa-arrow-right"></i><span>Vuoi un liscio perfetto o dire addio al crespo → <b>Disciplinante Organico</b></span></div>
+      <div class="c"><i class="fa-solid fa-arrow-right"></i><span>Vuoi ricci e volume dove servono → <b>Movimento Armonioso</b></span></div>
+      <div class="end">la scelta finale la facciamo insieme</div></div>
+    <div class="sep"><span>liscio e anti-crespo</span></div>
+    <div class="svc"><div class="top"><span class="ic gold"><i class="fa-solid fa-leaf"></i></span><span><span class="k">fino a 5 mesi</span><b class="t">Disciplinante Organico</b></span></div>
+      <p>Lavora con la struttura naturale del capello: <b>lo rinforza dall'interno</b>, con attivi vegetali simili alla cheratina naturale.</p>
+      <div class="facts"><div><i class="fa-solid fa-seedling"></i><b>Vegetale</b><small>attivi simili alla cheratina</small></div><div><i class="fa-solid fa-temperature-half"></i><b>Piastra</b><small>il calore fissa il trattamento</small></div><div><i class="fa-regular fa-calendar"></i><b>Durata</b><small>fino a 5 mesi</small></div></div>
+      <div class="chips green">${['ricci', 'crespi', 'naturali', 'colorati', 'spessi'].map(c => `<span><i class="fa-solid fa-check"></i>${c}</span>`).join('')}</div>
+      <div class="pbox"><div><div class="l">il prezzo</div><div class="w">Disciplinante Organico</div></div><div class="a" style="font-size:22px">su preventivo<small>lo definiamo in seduta</small></div></div>
+      <div class="addon" style="background:#fff"><span class="bdg">FACOLTATIVO</span><img src="foto-prodotti/Conditioner%20idratante.png" alt=""><span><b>Il Conditioner, per casa</b><small>Il disciplinante dura di più: capelli lucidi, elastici, che non volano e si districano subito.</small></span><span class="ap">+ 29 €</span></div>
+    </div>
+    <div class="sep"><span>ricci e volume</span></div>
+    <div class="svc"><div class="top"><span class="ic"><i class="fa-solid fa-wind"></i></span><span><span class="k">almeno 3 mesi</span><b class="t">Movimento Armonioso</b></span></div>
+      <p>Un'ondulazione che crea <b>ricci di ogni forma e dimensione</b>, sempre nel rispetto della salute dei tuoi capelli.</p>
+      <div class="pbox"><div><div class="l">il prezzo</div><div class="w">Movimento Armonioso</div></div><div class="a">93/103 €</div></div>
+      <div class="addon" style="background:#fff"><span class="bdg">FACOLTATIVO</span><img src="foto-prodotti/Emulsione%20avvolgente.png" alt=""><span><b>L'Emulsione Avvolgente, per casa</b><small>Il riccio prende forma, morbido e con volume dalla prima volta. Con cocco, semi di lino, malva e vitamina E.</small></span><span class="ap">+ 28 €</span></div>
+    </div>
+    ${lockLine}${ps('Una forma che rovina il capello non dura. Per questo la mia lo rinforza.')}
+  </div></div>`;
+
+/* --- stilistico --- */
+const MOMENTS = `<div class="s"><span class="ic2"><i class="fa-solid fa-hand-holding-heart"></i></span><span><b>Un'accoglienza calorosa</b><small>Tutto il team ti dà il benvenuto.</small></span></div>
+  <div class="s"><span class="ic2"><i class="fa-solid fa-spa"></i></span><span><b>Massaggio in zona SPA</b><small>Tecniche rilassanti, con musica e luci soffuse.</small></span></div>
+  <div class="s"><span class="ic2"><i class="fa-solid fa-mug-hot"></i></span><span><b>Una coccola, mentre aspetti</b><span class="cozy"><span><i class="fa-solid fa-mug-hot"></i>tisana calda</span><span><i class="fa-solid fa-cookie"></i>un dolcetto</span><span><i class="fa-solid fa-rug"></i>un caldo plaid</span></span></span></div>`;
+P.stilistico = () => {
+  const uomo = S.g === 'lui' && menuTab === 'uomo';
+  const left = (t) => `<div class="L cl bg-dark">${backBtn()}<div class="eyebrow" style="margin-top:14px">Stilistico</div><div class="h1">${t}</div><p class="lead">Un momento tutto per te, <b>che rispetta il lavoro sulla cute.</b></p>${lockChip}<div class="how3"><span class="k">cosa ti aspetta ↓</span>${MOMENTS}</div></div>`;
+  if (uomo) return left('Il taglio,<br>il finale<br>della tua <span class="y">cura</span>.') + `
+    <div class="R scroll bg-white"><div class="sheet">
+      <div class="hello">Chiudiamo in bellezza,</div>
+      <p class="p">Il taglio è l'ultimo passo della tua seduta. L'ho pensato per farti uscire in ordine <b>senza disfare il lavoro fatto su cute e capelli</b>.</p>
+      <div class="sep"><span>come ti vuoi sentire oggi?</span></div>
+      ${[
+        { icon: 'fa-tree', kick: 'calore e legno', title: 'Beautrì Cut', price: '39 €', when: 'Per te se vuoi <b>sciogliere le tensioni</b> e uscire rigenerato.', text: 'Parte dal legno: la legnoterapia scalda i muscoli e scioglie le tensioni. Con il suono della cascata e un massaggio delicato, <b>ogni gesto del taglio diventa relax</b>.', chips: ['legnoterapia', 'cascata', 'massaggio', 'taglio'] },
+        { icon: 'fa-spa', dark: true, kick: 'equilibrio e mente', title: 'Beautrì Cut Olistico', price: '39 €', when: 'Per te se lo stress di ogni giorno <b>ti pesa addosso</b>.', text: 'Un taglio che ferma il tempo: terapie olistiche e tecnologie innovative sciolgono le tensioni, <b>per un look curato e un momento tutto per te</b>.', chips: ['olistica', 'relax', 'taglio'] },
+        { icon: 'fa-bolt', kick: 'vitalità ed energia', title: 'Beautrì Cut Energizzante', price: '39 €', when: 'Per te se hai bisogno di <b>staccare la spina</b> e ricaricarti.', text: 'Sfioramenti, pressioni, frizioni e percussioni su schiena, collo e testa: <b>ritmo e intensità per una vera sferzata di energia</b>.', chips: ['massaggio', 'energia', 'taglio'] }
+      ].map(propHtml).join('')}
+      ${lockLine}<div class="respect"><i class="fa-solid fa-leaf"></i><span>Ogni prodotto che uso sul tuo capello è <b>formulato da noi per rispettare cute e capelli</b>: il tuo percorso continua anche qui.</span></div>
+      ${ps('Non faccio tagli "e basta": sono il finale della tua cura, non il suo inizio.')}
+    </div></div>`;
+  return left('Taglio e piega,<br>il finale<br>della tua <span class="y">cura</span>.') + `
+    <div class="R scroll bg-white"><div class="sheet">
+      <div class="hello">Chiudiamo in bellezza,</div>
+      <p class="p">Taglio e piega sono l'ultimo passo della tua seduta. Li ho pensati per farti uscire bella <b>senza disfare il lavoro fatto su cute e capelli</b>.</p>
+      <div class="sep"><span>scegli il tuo servizio</span></div>
+      ${propHtml({ icon: 'fa-wind', kick: 'la piega', title: 'Beautrì Styling', price: '39/41 €', text: "Un'esperienza rilassante con <b>le ultime tecniche di asciugatura</b>, per una piega di tendenza.", chips: ['massaggio', 'tisana', 'piega'] })}
+      ${propHtml({ icon: 'fa-scissors', dark: true, kick: 'taglio + piega', title: 'Beautrì Cut', price: '57/61 €', text: "Un'esperienza rilassante per creare <b>il tuo taglio su misura</b>, di tendenza e pensato per te.", chips: ['massaggio', 'tisana', 'taglio', 'piega'] })}
+      ${lockLine}<div class="respect"><i class="fa-solid fa-leaf"></i><span>Ogni prodotto che uso in piega è <b>formulato da noi per rispettare cute e capelli</b>: il tuo percorso continua anche qui.</span></div>
+      ${ps('Non faccio tagli o pieghe "e basta": sono il finale della tua cura, non il suo inizio.')}
+    </div></div>`;
+};
+
+/* --- novità, reset autunnale, gioco goloso --- */
+const steps3 = a => `<div class="steps3">${a.map(([t, s], i) => `<div><span class="n">${i + 1}</span><b>${t}</b><small>${s}</small></div>`).join('')}</div>`;
+P.novita = () => {
+  const d = menuTab !== 'uomo';
+  return `
+  <div class="L cl bg-dark">
+    ${backBtn()}
+    <div class="eyebrow" style="margin-top:14px">Novità</div>
+    <div class="h1" style="font-size:48px">${d ? 'Le novità<br>di questa<br><span class="y">stagione</span>.' : 'Le novità<br>pensate<br>per <span class="y">te</span>.'}</div>
+    <p class="lead">${d ? "Un rituale d'autunno <b>e un dolcetto per te.</b>" : 'Un piccolo gioco <b>e un dolcetto per te.</b>'}</p>
+    <div class="emo">${d ? '<button data-go="reset"><span>🍂</span><b>Reset Autunnale</b><small>solo questo autunno</small></button>' : ''}<button data-go="gioco"><span>🍫</span><b>Gioco Goloso</b><small>un grazie per te</small></button></div>
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">Ecco cosa c'è di nuovo,</div>
+    <p class="p">${d ? "Ogni stagione i capelli chiedono qualcosa di diverso. Questo autunno ti propongo un rituale per <b>togliere gli accumuli dell'estate</b>, e un piccolo gioco per dirti grazie." : 'Per dirti grazie della fiducia ho pensato a <b>un piccolo gioco</b>, con un dolcetto per te.'}</p>
+    ${d ? `<div class="sep"><span>novità d'autunno</span></div>
+    <div class="nv reset"><div class="hd"><span class="bdg">NOVITÀ</span><span class="em">🍂</span><span class="k">pulizia profonda</span><h3>Reset Autunnale</h3><p>Resine, smog e accumuli di prodotto rendono il capello opaco e pesante. Lo liberiamo e lo prepariamo alla nuova stagione.</p></div>
+      <div class="bd">${steps3([['Purifica', 'via resine e siliconi'], ['Ricostruisce', 'impacco nebulizzato'], ['Sigilla', 'conditioner acido']])}
+        <div class="nvgift"><img src="foto-prodotti/Conditioner%20idratante.png" alt=""><span>In <b>omaggio</b> il Conditioner Idratante (valore 29 €) da usare a casa.</span></div>
+        <div class="nvfoot"><span class="pz">119 €<small>a seduta · ciclo di 3, una ogni 3 settimane circa</small></span><button class="ybtn" data-go="reset">Scopri il Reset <i class="fa-solid fa-arrow-right"></i></button></div></div></div>` : ''}
+    <div class="sep"><span>un grazie goloso</span></div>
+    <div class="nv"><div class="hd"><span class="bdg">GIOCO</span><span class="em">🍫</span><span class="k">un dolcetto, per dirti grazie</span><h3>Un Gioco Goloso</h3><p>Se ti va, raccontaci com'è andata. Poi gira la ruota: c'è un dolcetto per te.</p></div>
+      <div class="bd">${steps3([['Recensione', 'su Google, se ti va'], ['Gira la ruota', "qui sull'iPad"], ['Il dolcetto', 'te lo diamo subito']])}
+        <div class="nvfoot"><span class="t">Lotus o Loacker:<br>scopri quale ti tocca.</span><button class="ybtn" data-go="gioco">Gioca <i class="fa-solid fa-arrow-right"></i></button></div></div></div>
+    ${ps(d ? 'Il Reset è solo per questo autunno: se ti interessa, possiamo iniziare già dalla prossima seduta.' : 'Hai già lasciato una recensione? Gira pure la ruota: il dolcetto è tuo.')}
+  </div></div>`;
+};
+P.reset = () => `
+  <div class="L cl bg-dark" style="background-image:linear-gradient(160deg,rgba(90,54,36,.55),rgba(10,10,10,0) 60%),linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:auto,44px 44px,44px 44px">
+    ${backBtn()}
+    <div class="eyebrow" style="margin-top:14px">Reset Autunnale</div>
+    <div class="h1" style="font-size:50px">Togli l'estate<br>dai tuoi<br><span class="y">capelli</span>.</div>
+    <p class="lead">Pulizia profonda e rigenerazione <b>in un'unica seduta.</b></p>
+    <span class="tagc">🍂 Solo per quest'autunno</span>${lockChip}
+    <div class="leaves">🍂🍁☕</div>
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello" style="font-size:29px">Dopo l'estate il capello ha bisogno di respirare,</div>
+    <p class="p">Resine, smog e accumuli di prodotto <b>soffocano la fibra</b>: i capelli diventano opachi, pesanti e non assorbono più i trattamenti. Con il Reset li liberiamo e li prepariamo alla nuova stagione.</p>
+    <div class="squote">Una chioma leggera, pulita e pronta ad accogliere ogni trattamento.</div>
+    <div class="sep"><span>3 passaggi, un'unica seduta</span></div>
+    <div class="rstep"><span class="n">1</span><span><span class="k">purificazione</span><b>Detox della fibra</b><small>Un <b>prodotto purificante specifico</b> toglie con delicatezza resine, siliconi e impurità e "riapre" le cuticole.</small></span></div>
+    <div class="rstep"><span class="n">2</span><span><span class="k">ricostruzione</span><b>Impacco rigenerante nebulizzato</b><small>A fibra pulita, la nebulizzazione <b>porta i principi attivi nel cuore del capello</b> per una ricostruzione profonda.</small></span></div>
+    <div class="rstep"><span class="n">3</span><span><span class="k">sigillatura</span><b>Conditioner acido sigillante</b><small>"Chiude" le cuticole e <b>trattiene il nutrimento dentro la fibra</b>: capelli facili da pettinare e luminosi.</small></span></div>
+    <div class="pbox"><div><div class="l">il prezzo</div><div class="w">Reset Autunnale</div></div><div class="a">119 €<small>a seduta</small></div></div>
+    <p class="p">Ti consiglio un ciclo di <b>3 sedute</b>, una ogni 3 settimane circa, per tenere il capello leggero e rigenerato per tutto il cambio di stagione.</p>
+    <div class="omg"><span class="bdg">OMAGGIO</span><img src="foto-prodotti/Conditioner%20idratante.png" alt=""><span><b>Il Conditioner Idratante, per casa</b><small>Mantiene morbidezza e lucentezza tra una seduta e l'altra.</small></span><span class="v">valore 29 €</span></div>
+    <div class="sep"><span>come paghi il ciclo</span></div>
+    <div class="pay3"><div><span class="n">1</span><span><b>1ª seduta</b><small>paghi 2 sedute · Conditioner in omaggio</small></span><span class="a">238 €</span></div>
+      <div><span class="n">2</span><span><b>2ª seduta</b><small>paghi la terza</small></span><span class="a">119 €</span></div>
+      <div><span class="n">3</span><span><b>3ª seduta</b><small>già pagata</small></span><span class="a z">nessun pagamento</span></div></div>
+    <p class="hand" style="font-size:22px;color:var(--giallo-scuro);text-align:right;margin-top:6px">sempre una seduta avanti, mai tutto subito</p>
+    ${lockLine}${ps('Il Reset è solo per questo autunno: se ti interessa, possiamo iniziare già dalla prossima seduta.')}
+  </div></div>`;
+
+const PRIZES = ['Lotus', 'Loacker', 'Lotus', 'Loacker', 'Lotus', 'Loacker'];
+let wheelRot = 0, spinning = false;
+const wheel = () => `<div class="wheelbox"><div class="pin"></div><svg viewBox="0 0 400 400" style="transform:rotate(${wheelRot}deg)">
+  <path d="M200,200 L200,0 A200,200 0 0,1 373.2,100 Z" fill="#C41E3A"/><path d="M200,200 L373.2,100 A200,200 0 0,1 373.2,300 Z" fill="#B8860B"/><path d="M200,200 L373.2,300 A200,200 0 0,1 200,400 Z" fill="#C41E3A"/>
+  <path d="M200,200 L200,400 A200,200 0 0,1 26.8,300 Z" fill="#B8860B"/><path d="M200,200 L26.8,300 A200,200 0 0,1 26.8,100 Z" fill="#C41E3A"/><path d="M200,200 L26.8,100 A200,200 0 0,1 200,0 Z" fill="#B8860B"/>
+  <g fill="#fff" font-size="20" font-weight="800" font-family="Inter, sans-serif" text-anchor="middle">${PRIZES.map((t, i) => `<text x="200" y="75" transform="rotate(${30 + i * 60} 200 200)">${t.toUpperCase()}</text>`).join('')}</g>
+  <circle cx="200" cy="200" r="44" fill="#0A0A0A" stroke="#F5C200" stroke-width="6"/><text x="200" y="213" text-anchor="middle" font-size="36">🍫</text></svg></div>`;
+P.gioco = () => `
+  <div class="L cl bg-dark">
+    ${backBtn()}
+    <div class="eyebrow" style="margin-top:14px">Gioco Goloso</div>
+    <div class="h1" style="font-size:46px">Un dolcetto,<br>per dirti <span class="y">grazie</span>.</div>
+    <p class="lead">Se ti va una recensione, poi un giro di ruota <b>e il dolcetto è tuo.</b></p>
+    ${wheel()}
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">Grazie di essere qui,</div>
+    <p class="p">Le tue parole aiutano altre persone a trovarci. <b>Grazie di cuore.</b></p>
+    <div class="sep"><span>1 · se ti va, racconta com'è andata</span></div>
+    <div class="qr"><div class="qimg"><span class="bub">📱 Inquadra qui</span><img src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=${encodeURIComponent(REVIEW_URL)}&color=0A0A0A" alt="QR Code Recensioni"></div>
+      <div class="qtx"><b><i class="fa-solid fa-qrcode"></i> Lascia qui la tua recensione</b><small>Inquadra con il tuo telefono e racconta la tua esperienza da Beautrì.</small><div class="st">★★★★★</div></div></div>
+    <div class="sep"><span>2 · gira la ruota</span></div>
+    <button class="spin" data-spin ${spinning ? 'disabled' : ''}>${spinning ? 'Sta girando…' : 'Gira la ruota'}</button>
+    <div class="prz"><span style="background:#C41E3A">Lotus</span><span style="background:#B8860B">Loacker</span></div>
+    <div class="sep"><span>3 · il dolcetto</span></div>
+    <p class="p" style="text-align:center">Il dolcetto <b>te lo diamo subito</b>.</p>
+    ${ps('Hai già lasciato la recensione? Gira pure la ruota.')}
+  </div></div>
+  ${S.p.prize ? `<div class="modal"><div class="mc"><div class="em">🍫</div><span class="k">hai vinto</span><h3>${S.p.prize}</h3><p>Il dolcetto te lo diamo subito. Buona merenda!</p><button class="ybtn" data-closeprize>Grazie <i class="fa-solid fa-check"></i></button></div></div>` : ''}`;
+
+/* --- consulenza Beautrìco (da "Prima volta da Beautrì?") --- */
+P.consulenza = () => `
+  <div class="L home-L bg-dark">
+    ${backBtn()}
+    <div class="eyebrow" style="margin-top:14px">Consulenza Beautrìco</div>
+    <div class="h1" style="font-size:46px">Si parte sempre<br>da <span class="y">qui</span>.</div>
+    <p class="lead">90 minuti con Daniela e un percorso costruito su di te. <b>Il resto lo decidi tu.</b></p>
+    <div class="dani" style="height:46%"></div>
+    <div class="stats"><div><b>90'</b><small>con Daniela</small></div><div><b>24 h</b><small>ti ricontattiamo</small></div></div>
+  </div>
+  <div class="R scroll bg-white"><div class="sheet">
+    <div class="hello">Ecco come funziona,</div>
+    <div class="rstep"><span class="n">1</span><span><span class="k">passo 1</span><b>Ci racconti cosa ti succede</b><small>Cosa senti, da quanto tempo e cosa hai già provato. Entro 24 ore ti ricontatta Giada dal numero dello studio e fissa una prima chiamata con Daniela.</small></span></div>
+    <div class="rstep"><span class="n">2</span><span><span class="k">il cuore del metodo</span><b>90 minuti con Daniela</b><small>Prima ti ascolta. Poi guarda la tua cute con videodermatoscopio e trico-analyzer. Alla fine sai cosa sta succedendo e <b>decidi tu cosa fare</b>.</small></span></div>
+    <div class="rstep"><span class="n">3</span><span><span class="k">passo 3</span><b>Un percorso su misura per te</b><small>Costruito sul tuo lavoro, sulla tua età, sul tuo stile di vita. Sedute in studio e solo i 2-3 prodotti che ti servono davvero. Mai sprechi.</small></span></div>
+    <div class="qr" style="margin-top:16px"><div class="qimg"><span class="bub">📱 Inquadra qui</span><img src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=${encodeURIComponent(CONSULENZA_URL)}&color=0A0A0A" alt="QR Consulenza"></div>
+      <div class="qtx"><b><i class="fa-solid fa-clipboard-list"></i> Candidati per la Consulenza Beautrìco</b><small>Inquadra con il tuo telefono e compila la candidatura.</small><a class="ybtn" style="margin-top:10px;text-decoration:none" href="${CONSULENZA_URL}" target="_blank" rel="noopener">Apri il modulo qui <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
+    <p class="ps">P.S. Non devi firmare nessun contratto. Paghi seduta per seduta.</p><p class="sign">— Daniela</p>
+  </div></div>`;
+
+/* ============================================================
+   RENDER E INTERAZIONI
+   ============================================================ */
+const app = document.getElementById('app');
+function render(scrollTop) {
+  const prevScroll = !scrollTop && app.querySelector('.R.scroll') ? app.querySelector('.R.scroll').scrollTop : 0;
+  app.innerHTML = `<section class="scr ${['seduta', 'mant'].includes(S.page) && !(S.page === 'mant' && (S.p.ans || []).length < 3) ? 'bg-white' : ''}">${P[S.page]()}</section>${nav()}`;
+  const sc = app.querySelector('.R.scroll'); if (sc && prevScroll) sc.scrollTop = prevScroll;
+}
+app.addEventListener('click', e => {
+  const t = e.target;
+  const tb = t.closest('[data-tab]'); if (tb) return tab(tb.dataset.tab);
+  const gb = t.closest('[data-g]'); if (gb) { S.g = gb.dataset.g; return render(false); }
+  if (t.closest('[data-back]')) return back();
+  const sed = t.closest('[data-sed]'); if (sed) { const c = SED_CARDS[+sed.dataset.i]; return go(c.go[0], c.go[1]); }
+  const gl = t.closest('[data-go]');
+  if (gl) {
+    const arg = gl.dataset.arg ? JSON.parse(gl.dataset.arg) : {};
+    if (gl.hasAttribute('data-replace')) { S.p = arg; S.page = gl.dataset.go; return render(true); }
+    return go(gl.dataset.go, arg);
+  }
+  const q = t.closest('[data-q]');
+  if (q) { const i = +q.dataset.q, ans = (S.p.ans || []).slice(0, i); ans[i] = +q.dataset.n; q.classList.add('sel'); setTimeout(() => { S.p = { ...S.p, ans }; render(true); }, 260); return; }
+  if (t.closest('[data-video]')) { S.p = { ...S.p, video: true }; return render(false); }
+  if (t.closest('[data-closevideo]')) { S.p = { ...S.p, video: false }; return render(false); }
+  if (t.closest('[data-closeprize]')) { S.p = { ...S.p, prize: null }; return render(false); }
+  const sp = t.closest('[data-spin]');
+  if (sp && !spinning) {
+    spinning = true;
+    const i = Math.floor(Math.random() * PRIZES.length), seg = 60;
+    wheelRot = wheelRot + (5 + Math.floor(Math.random() * 4)) * 360 + (360 - (i * seg + seg / 2)) - (wheelRot % 360);
+    const svg = app.querySelector('.wheelbox svg');
+    svg.style.transition = 'transform 5s cubic-bezier(0.17,0.67,0.12,0.99)';
+    requestAnimationFrame(() => { svg.style.transform = `rotate(${wheelRot}deg)`; });
+    sp.disabled = true; sp.textContent = 'Sta girando…';
+    setTimeout(() => { spinning = false; S.p = { ...S.p, prize: PRIZES[i] }; render(false); }, 5200);
+  }
+});
+
+/* la tela 1180×820 si adatta allo schermo dell'iPad */
+function fit() {
+  const s = Math.min(window.innerWidth / 1180, window.innerHeight / 820);
+  app.style.transform = `translate(-50%, -50%) scale(${s})`;
+}
+window.addEventListener('resize', fit);
+window.addEventListener('orientationchange', () => setTimeout(fit, 200));
+fit(); render(true);
+</script>
+</body>
+</html>
