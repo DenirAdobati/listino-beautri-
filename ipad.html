@@ -646,6 +646,21 @@
   .rstep b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17.5px; }
   .rstep small { font-size: 15px; color: var(--testo); line-height: 1.45; }
   .rstep small b { display: inline; font-size: 15px; font-family: Inter, sans-serif; font-weight: 700; color: var(--nero); }
+  /* consulenza Beautrìco: grafico in 3 momenti e cosa porti a casa */
+  .cflow { display: flex; align-items: flex-start; margin: 14px 0 4px; position: relative; }
+  .cflow::before { content: ""; position: absolute; top: 31px; left: 16%; right: 16%; border-top: 3px dashed var(--giallo); }
+  .cflow .st { flex: 1; text-align: center; position: relative; padding: 0 6px; }
+  .cflow .ic { width: 64px; height: 64px; margin: 0 auto; border-radius: 50%; background: var(--nero); color: var(--giallo); display: flex; align-items: center; justify-content: center; font-size: 25px; box-shadow: 0 0 0 6px #fff; position: relative; }
+  .cflow .ic .n { position: absolute; top: -4px; right: -4px; width: 24px; height: 24px; border-radius: 50%; background: var(--giallo); color: var(--nero); font-family: Poppins, sans-serif; font-weight: 900; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .cflow .k { display: block; font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--verde); margin-top: 10px; line-height: 1; }
+  .cflow b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16.5px; line-height: 1.2; margin-top: 3px; }
+  .cflow small { display: block; font-size: 14px; color: var(--testo); line-height: 1.4; margin-top: 5px; }
+  .take { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .take div { display: flex; gap: 12px; align-items: flex-start; background: var(--sabbia); border-radius: 14px; padding: 13px 14px; }
+  .take i { width: 38px; height: 38px; border-radius: 10px; background: var(--giallo); color: var(--nero); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+  .take b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15.5px; line-height: 1.25; }
+  .take small { display: block; font-size: 13.5px; color: var(--testo); line-height: 1.4; margin-top: 3px; }
+  .nobl { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 16px; padding: 13px; border-radius: 14px; background: #E3F5EA; color: #0F5E33; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; }
   .omg { position: relative; display: flex; gap: 12px; align-items: center; margin-top: 14px; padding: 12px; border-radius: 16px; background: #FFF1F1; border: 1.5px dashed rgba(214,47,50,.6); }
   .omg .bdg { position: absolute; top: -10px; left: 12px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .1em; background: var(--rosso); color: #fff; padding: 1px 9px; border-radius: 999px; }
   .omg img { width: 58px; height: 72px; object-fit: contain; }
@@ -692,7 +707,6 @@
 /* ============================================================
    DATI (gli stessi del menu mobile, con il copy rivisto)
    ============================================================ */
-const CONSULENZA_URL = 'https://form.typeform.com/to/QUzap8so#pagina=menu&ingresso=ipad&utm_source=menu';
 const REVIEW_URL = 'https://g.page/r/CW6M9hJNV-ekEAE/review';
 const SPA_VIDEO = 'https://www.youtube.com/embed/c7hDiS4EC4M';
 const IMG = {
@@ -1502,15 +1516,24 @@ P.consulenza = () => `
     <div class="h1" style="font-size:46px">Si parte sempre<br>da <span class="y">qui</span>.</div>
     <p class="lead">90 minuti con Daniela e un percorso costruito su di te. <b>Il resto lo decidi tu.</b></p>
     <div class="dani" style="height:46%"></div>
-    <div class="stats"><div><b>90'</b><small>con Daniela</small></div><div><b>24 h</b><small>ti ricontattiamo</small></div></div>
+    <div class="stats"><div><b>90'</b><small>con Daniela</small></div><div><b>+40</b><small>anni di esperienza</small></div></div>
   </div>
   <div class="R scroll bg-white"><div class="sheet">
-    <div class="hello">Ecco come funziona,</div>
-    <div class="rstep"><span class="n">1</span><span><span class="k">passo 1</span><b>Ci racconti cosa ti succede</b><small>Cosa senti, da quanto tempo e cosa hai già provato. Entro 24 ore ti ricontatta Giada dal numero dello studio e fissa una prima chiamata con Daniela.</small></span></div>
-    <div class="rstep"><span class="n">2</span><span><span class="k">il cuore del metodo</span><b>90 minuti con Daniela</b><small>Prima ti ascolta. Poi guarda la tua cute con videodermatoscopio e trico-analyzer. Alla fine sai cosa sta succedendo e <b>decidi tu cosa fare</b>.</small></span></div>
-    <div class="rstep"><span class="n">3</span><span><span class="k">passo 3</span><b>Un percorso su misura per te</b><small>Costruito sul tuo lavoro, sulla tua età, sul tuo stile di vita. Sedute in studio e solo i 2-3 prodotti che ti servono davvero. Mai sprechi.</small></span></div>
-    <div class="qr" style="margin-top:16px"><div class="qimg"><span class="bub">📱 Inquadra qui</span><img src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=${encodeURIComponent(CONSULENZA_URL)}&color=0A0A0A" alt="QR Consulenza"></div>
-      <div class="qtx"><b><i class="fa-solid fa-clipboard-list"></i> Candidati per la Consulenza Beautrìco</b><small>Inquadra con il tuo telefono e compila la candidatura.</small><a class="ybtn" style="margin-top:10px;text-decoration:none" href="${CONSULENZA_URL}" target="_blank" rel="noopener">Apri il modulo qui <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div>
+    <div class="hello">La Consulenza Beautrìco,</div>
+    <p class="p">90 minuti con Daniela, in tre momenti.</p>
+    <div class="cflow">
+      <div class="st"><div class="ic"><i class="fa-solid fa-ear-listen"></i><span class="n">1</span></div><span class="k">tutto inizia da qui</span><b>L'ascolto</b><small>Ci racconti cosa senti, da quanto tempo e cosa hai già provato.</small></div>
+      <div class="st"><div class="ic"><i class="fa-solid fa-magnifying-glass"></i><span class="n">2</span></div><span class="k">poi</span><b>Guardiamo la tua cute</b><small>Con videodermatoscopio e trico-analyzer, ingrandita sullo schermo.</small></div>
+      <div class="st"><div class="ic"><i class="fa-solid fa-lightbulb"></i><span class="n">3</span></div><span class="k">alla fine</span><b>Sai cosa succede</b><small>Daniela ti spiega cosa ha visto e da dove nasce il problema.</small></div>
+    </div>
+    <div class="sep"><span>porti a casa con te</span></div>
+    <div class="take">
+      <div><i class="fa-solid fa-file-image"></i><span><b>Il tuo report</b><small>Tutte le foto della tua cute e la relazione di Daniela.</small></span></div>
+      <div><i class="fa-solid fa-comment-dots"></i><span><b>Consigli personalizzati</b><small>Quelli di Daniela, pensati per te.</small></span></div>
+      <div><i class="fa-solid fa-route"></i><span><b>Un percorso su misura</b><small>Costruito su di te, sulla tua cute e sul tuo stile di vita.</small></span></div>
+      <div><i class="fa-solid fa-pump-soap"></i><span><b>Prodotti personalizzati</b><small>Solo quelli che servono davvero a te.</small></span></div>
+    </div>
+    <div class="nobl"><i class="fa-solid fa-circle-check"></i>Nessun obbligo di iniziare</div>
     <p class="ps">P.S. Non devi firmare nessun contratto. Paghi seduta per seduta.</p><p class="sign">— Daniela</p>
   </div></div>`;
 
