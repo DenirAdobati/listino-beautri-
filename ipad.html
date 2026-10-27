@@ -720,10 +720,11 @@ const IMG = {
 };
 /* foto uomo: le usiamo quando è selezionato Lui (Riparare resta solo donna) */
 const IMG_U = {
-  p1: 'foto-uomo/uomo-8914.jpg', p2: 'foto-uomo/uomo-8961.jpg', p3: 'foto-uomo/uomo-8955.jpg', p4: 'foto-uomo/uomo-8932.jpg', laser: IMG.uomo
+  p1: 'foto-uomo/uomo-8914.jpg', p2: 'foto-uomo/uomo-8961.jpg', p3: 'foto-uomo/uomo-8955.jpg', p4: 'foto-uomo/uomo-8932.jpg', laser: 'foto-uomo/uomo-9075.jpg'
 };
+const POS_U = { laser: '74% center' };
 const imgG = k => (S.g === 'lui' && IMG_U[k.replace(/t$/, '')]) || IMG[k];
-const posG = pos => S.g === 'lui' ? '' : pos || '';
+const posG = (k, pos) => S.g === 'lui' ? POS_U[k] || '' : pos || '';
 const TOOL_IC = { 'nebulizzazione': 'fa-cloud', 'ultrasuoni': 'fa-wave-square', 'corrente galvanica': 'fa-bolt', 'vacuum terapia': 'fa-arrows-to-circle', 'alta frequenza': 'fa-tower-broadcast', 'cascata': 'fa-water', 'ossigenoterapia': 'fa-wind' };
 
 const SEDUTE = {
@@ -991,7 +992,7 @@ P.percorsi = () => `
   </div>
   <div class="R bg-white">
     <div class="sec"><h2>Le nostre sedute</h2><span class="hand">tocca per prezzi e dettagli ↓</span></div>
-    <div class="sgrid">${SED_CARDS.map((x, i) => `<button class="card ${x.dark ? 'dark' : ''}" data-i="${i}" data-sed><span class="ph" style="background-image:url(${imgG(x.k)});${posG(x.pos) ? `background-position:${posG(x.pos)}` : ''}"><span class="tape">${x.tape || 'seduta'}</span></span><span class="tx"><span><b>${x.t}</b><small>${x.s}</small></span>${arrow()}</span></button>`).join('')}</div>
+    <div class="sgrid">${SED_CARDS.map((x, i) => `<button class="card ${x.dark ? 'dark' : ''}" data-i="${i}" data-sed><span class="ph" style="background-image:url(${imgG(x.k)});${posG(x.k, x.pos) ? `background-position:${posG(x.k, x.pos)}` : ''}"><span class="tape">${x.tape || 'seduta'}</span></span><span class="tx"><span><b>${x.t}</b><small>${x.s}</small></span>${arrow()}</span></button>`).join('')}</div>
     <div class="mstrip"><div><span class="k">a percorso finito</span><b>Mantenimento</b></div><div class="btns">${['m1', 'm2', 'm3'].map(m => `<button data-go="mant" data-arg='{"m":"${m}"}'><i class="fa-solid fa-shield-halved"></i>${MANT[m].title}</button>`).join('')}</div></div>
   </div>`;
 
@@ -1016,7 +1017,7 @@ P.seduta = () => {
 };
 
 P.laser = () => `
-  <div class="L sd-L photo" style="background-image:url(${imgG('laser')});background-position:${posG('center 30%') || 'center'}">
+  <div class="L sd-L photo" style="background-image:url(${imgG('laser')});background-position:${posG('laser', 'center 30%') || 'center'}">
     ${backBtn()}
     <div class="in"><span class="tape">alopecie, psoriasi, dermatiti</span>
       <div class="h1"><span class="y">Laser</span><span class="sub">a fotobiostimolazione.</span></div>
@@ -1085,7 +1086,7 @@ P.mant = () => {
   const p = x.p[S.g], lei = S.g === 'lei' ? ' lei' : '';
   const months = Array.from({ length: 12 }, (_, i) => { const b = x.months === 'alt' ? i % 2 === 1 : x.months === 'q' ? i % 3 === 2 : false; return `<i class="${b ? 'b' : ''}"></i>`; }).join('');
   return `
-  <div class="L sd-L photo" style="background-image:url(${imgG(x.photo)});${posG(x.pos) ? `background-position:${posG(x.pos)}` : ''}">
+  <div class="L sd-L photo" style="background-image:url(${imgG(x.photo)});${posG(x.photo, x.pos) ? `background-position:${posG(x.photo, x.pos)}` : ''}">
     ${backBtn()}
     <div class="in"><span class="tape">${x.tape}</span>
       <div class="h1">Mantenimento<span class="sub" style="font-size:54px;letter-spacing:-0.045em"><span class="y">${x.title}</span>.</span></div>
