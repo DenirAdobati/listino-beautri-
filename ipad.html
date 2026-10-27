@@ -718,6 +718,12 @@ const IMG = {
   spa: 'https://i.ibb.co/HfRD7QzN/DSF8767-1.jpg',
   uomo: 'foto-uomo/uomo-8943.jpg'
 };
+/* foto uomo: le usiamo quando è selezionato Lui (Riparare resta solo donna) */
+const IMG_U = {
+  p1: 'foto-uomo/uomo-8914.jpg', p2: 'foto-uomo/uomo-8961.jpg', p3: 'foto-uomo/uomo-8955.jpg', p4: 'foto-uomo/uomo-8932.jpg', laser: IMG.uomo
+};
+const imgG = k => (S.g === 'lui' && IMG_U[k.replace(/t$/, '')]) || IMG[k];
+const posG = pos => S.g === 'lui' ? '' : pos || '';
 const TOOL_IC = { 'nebulizzazione': 'fa-cloud', 'ultrasuoni': 'fa-wave-square', 'corrente galvanica': 'fa-bolt', 'vacuum terapia': 'fa-arrows-to-circle', 'alta frequenza': 'fa-tower-broadcast', 'cascata': 'fa-water', 'ossigenoterapia': 'fa-wind' };
 
 const SEDUTE = {
@@ -756,7 +762,7 @@ const Q = [
 const DIETA = { label: 'Dieta', icon: 'fa-burger', items: ['Risultato raggiunto', 'Torni al cibo spazzatura', 'Risultato perso in pochissimo tempo'] };
 const TECH = { neb: ['fa-wind', 'Nebulizzazione'], ult: ['fa-wave-square', 'Ultrasuoni'], gal: ['fa-bolt', 'Corrente galvanica'], vac: ['fa-arrows-to-circle', 'Vacuum terapia'], alt: ['fa-tower-broadcast', 'Alta frequenza'], cas: ['fa-water', 'Cascata'], oss: ['fa-atom', 'Ossigenoterapia'] };
 const MANT = {
-  m1: { title: 'Base', photo: IMG.p1, tape: 'dopo Igienizzazione e Purificazione',
+  m1: { title: 'Base', photo: 'p1', tape: 'dopo Igienizzazione e Purificazione',
     complimenti: 'Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso di Igienizzazione/Purificazione</b> e stai per iniziare il mantenimento.',
     quote: "Ricordi com'era all'inizio? Il prurito, le scaglie sugli abiti. Il lavoro fatto insieme serviva a questo.",
     hair: { label: 'Capelli', icon: 'fa-flask', items: ['Cute pulita ed equilibrata', 'Prodotti scadenti e fai da te', 'In meno di un mese: scaglie sugli abiti e prurito'] },
@@ -765,7 +771,7 @@ const MANT = {
     comp: [[6, 'sedute igienizzanti', ''], [6, 'sedute lenitive', 'k']], months: 'alt',
     s3: 'Alternate ogni mese, per coprire le esigenze di ogni stagione. Argille e peeling naturali, resi più efficaci da:', tech: ['neb', 'ult', 'gal'],
     p: { lei: { was: '888/936 €', now: '814/858 €', seat: '74/78 €' }, lui: { was: '624 €', now: '572 €', seat: '52 €' } }, save: 'da 200 a 230 €' },
-  m2: { title: 'Intermedio', photo: IMG.p3, tape: 'dopo il percorso iniziale',
+  m2: { title: 'Intermedio', photo: 'p3', tape: 'dopo il percorso iniziale',
     complimenti: 'Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso iniziale</b>.',
     quote: "Ricordi com'era all'inizio? La cute pesante, i capelli spenti e già sporchi dopo un giorno. Il lavoro fatto insieme serviva a questo.",
     hair: { label: 'Capelli', icon: 'fa-flask', items: ['Cute leggera, che respira', 'Prodotti scadenti e fai da te', 'In poche settimane: cute pesante e capelli spenti'] },
@@ -774,7 +780,7 @@ const MANT = {
     comp: [[12, 'sedute di mantenimento', '']], months: 'all',
     s3: 'Ogni mese una seduta diversa, per dare alla cute quello che le serve in ogni stagione. Argille, peeling naturali e prodotti detossinanti, resi più efficaci da:', tech: ['neb', 'ult', 'gal', 'vac', 'alt', 'cas', 'oss'],
     p: { lei: { was: '1068/1116 €', now: '979/1023 €', seat: '89/93 €' }, lui: { was: '804 €', now: '737 €', seat: '67 €' } }, save: 'da 210 a 240 €' },
-  m3: { title: 'Avanzato', photo: IMG.laser, pos: 'center 30%', tape: 'dopo il laser',
+  m3: { title: 'Avanzato', photo: 'laser', pos: 'center 30%', tape: 'dopo il laser',
     complimenti: 'Se Daniela ti sta presentando la fase di mantenimento è perché <b>hai terminato il tuo Percorso di laser a fotobiostimolazione</b>.',
     quote: "Ricordi com'era all'inizio? La cute arrossata e tesa, i capelli che cadevano più del solito. Il lavoro fatto insieme serviva a questo.",
     hair: { label: 'Capelli', icon: 'fa-pause', items: ['Cute calma, capelli più forti', 'Stop al laser e fai da te', 'In pochi mesi: rossore, fastidio e capelli più deboli'] },
@@ -963,12 +969,12 @@ P.home = () => `
   </div>`;
 
 const SED_CARDS = [
-  { t: 'Igienizzare', s: 'Sebo, desquamazioni, prurito.', p: IMG.p1t, go: ['seduta', { id: 'p1' }] },
-  { t: 'Lenire', s: 'Cuti da rigenerare e riequilibrare.', p: IMG.p2t, go: ['seduta', { id: 'p2' }] },
-  { t: 'Detossinare', s: 'Cute che non respira.', p: IMG.p3t, go: ['seduta', { id: 'p3' }] },
-  { t: 'Nutrire', s: 'Nutrimento per cute e capelli.', p: IMG.p4t, go: ['seduta', { id: 'p4' }] },
-  { t: 'Laser', s: 'Diradamenti, psoriasi e dermatiti.', p: IMG.laser, pos: 'center 30%', go: ['laser', {}] },
-  { t: 'Riparare', s: 'Doppie punte e capelli sfibrati.', p: IMG.riparare, dark: true, tape: 'per le lunghezze', go: ['riparare', {}] }
+  { t: 'Igienizzare', s: 'Sebo, desquamazioni, prurito.', k: 'p1t', go: ['seduta', { id: 'p1' }] },
+  { t: 'Lenire', s: 'Cuti da rigenerare e riequilibrare.', k: 'p2t', go: ['seduta', { id: 'p2' }] },
+  { t: 'Detossinare', s: 'Cute che non respira.', k: 'p3t', go: ['seduta', { id: 'p3' }] },
+  { t: 'Nutrire', s: 'Nutrimento per cute e capelli.', k: 'p4t', go: ['seduta', { id: 'p4' }] },
+  { t: 'Laser', s: 'Diradamenti, psoriasi e dermatiti.', k: 'laser', pos: 'center 30%', go: ['laser', {}] },
+  { t: 'Riparare', s: 'Doppie punte e capelli sfibrati.', k: 'riparare', dark: true, tape: 'per le lunghezze', go: ['riparare', {}] }
 ];
 P.percorsi = () => `
   <div class="L pc-L bg-dark">
@@ -985,7 +991,7 @@ P.percorsi = () => `
   </div>
   <div class="R bg-white">
     <div class="sec"><h2>Le nostre sedute</h2><span class="hand">tocca per prezzi e dettagli ↓</span></div>
-    <div class="sgrid">${SED_CARDS.map((x, i) => `<button class="card ${x.dark ? 'dark' : ''}" data-i="${i}" data-sed><span class="ph" style="background-image:url(${x.p});${x.pos ? `background-position:${x.pos}` : ''}"><span class="tape">${x.tape || 'seduta'}</span></span><span class="tx"><span><b>${x.t}</b><small>${x.s}</small></span>${arrow()}</span></button>`).join('')}</div>
+    <div class="sgrid">${SED_CARDS.map((x, i) => `<button class="card ${x.dark ? 'dark' : ''}" data-i="${i}" data-sed><span class="ph" style="background-image:url(${imgG(x.k)});${posG(x.pos) ? `background-position:${posG(x.pos)}` : ''}"><span class="tape">${x.tape || 'seduta'}</span></span><span class="tx"><span><b>${x.t}</b><small>${x.s}</small></span>${arrow()}</span></button>`).join('')}</div>
     <div class="mstrip"><div><span class="k">a percorso finito</span><b>Mantenimento</b></div><div class="btns">${['m1', 'm2', 'm3'].map(m => `<button data-go="mant" data-arg='{"m":"${m}"}'><i class="fa-solid fa-shield-halved"></i>${MANT[m].title}</button>`).join('')}</div></div>
   </div>`;
 
@@ -993,7 +999,7 @@ P.seduta = () => {
   const id = S.p.id || 'p1', x = SEDUTE[id];
   const dots = `<div class="dots">${Array.from({ length: x.max }, (_, i) => `<i class="${i >= x.min ? 'opt' : ''}"></i>`).join('')}</div>`;
   return `
-  <div class="L sd-L photo" style="background-image:url(${IMG[id]})">
+  <div class="L sd-L photo" style="background-image:url(${imgG(id)})">
     ${backBtn()}
     <div class="in"><span class="tape">${x.need}</span><div class="h1">${title(x.title)}</div><p class="lead">${md(x.lead)}</p></div>
   </div>
@@ -1003,14 +1009,14 @@ P.seduta = () => {
       <div class="row"><span class="num">1</span><div class="bd"><span class="w-t">A chi serve</span><p class="w-p">${md(x.who)}</p></div></div>
       <div class="row"><span class="num">2</span><div class="bd"><span class="w-t">Cosa facciamo</span><p class="w-p">Usiamo <b>${x.what}</b>, potenziati con:</p>${toolsHtml(x.tools)}</div></div>
       <div class="row"><span class="num">3</span><div class="bd"><span class="w-t">Quante sedute</span><p class="w-p">Di solito <b>${x.sessions}</b>: il numero esatto lo decido io, in base alla tua cute.</p>${dots}</div></div>
-      <div class="row"><span class="num">4</span><div class="bd"><span class="w-t">Quanto costa</span> <span class="w-lb">a seduta</span><div class="pr2">${['lei', 'lui'].map(k => `<span class="${k === S.g ? 'on' : ''}">${k === 'lei' ? 'Donna' : 'Uomo'}<b>${x.prices[k]} €</b></span>`).join('')}</div><span class="pricelbl"><i class="fa-solid fa-tag"></i> prezzo riservato a chi fa il percorso · paghi seduta per seduta</span></div></div>
+      <div class="row"><span class="num">4</span><div class="bd"><span class="w-t">Quanto costa</span> <span class="w-lb">a seduta</span><div class="pr2"><span class="on">${G()}<b>${x.prices[S.g]} €</b></span></div><span class="pricelbl"><i class="fa-solid fa-tag"></i> prezzo riservato a chi fa il percorso · paghi seduta per seduta</span></div></div>
     </div>
-    <div class="sd-foot"><div class="switch">${Object.entries(SEDUTE).map(([k, s]) => `<button class="${k === id ? 'on' : ''}" data-go="seduta" data-arg='{"id":"${k}"}' data-replace><i class="th" style="background-image:url(${IMG[k + 't']})"></i>${s.name}</button>`).join('')}</div></div>
+    <div class="sd-foot"><div class="switch">${Object.entries(SEDUTE).map(([k, s]) => `<button class="${k === id ? 'on' : ''}" data-go="seduta" data-arg='{"id":"${k}"}' data-replace><i class="th" style="background-image:url(${imgG(k + 't')})"></i>${s.name}</button>`).join('')}</div></div>
   </div>`;
 };
 
 P.laser = () => `
-  <div class="L sd-L photo" style="background-image:url(${IMG.laser});background-position:center 30%">
+  <div class="L sd-L photo" style="background-image:url(${imgG('laser')});background-position:${posG('center 30%') || 'center'}">
     ${backBtn()}
     <div class="in"><span class="tape">alopecie, psoriasi, dermatiti</span>
       <div class="h1"><span class="y">Laser</span><span class="sub">a fotobiostimolazione.</span></div>
@@ -1047,7 +1053,7 @@ P.riparare = () => `
       <div class="row"><span class="num">1</span><div class="bd"><span class="w-t">Fotoringiovanimento</span> <span class="w-lb">col laser, per riparare</span>
         <p class="w-p">Per capelli <b>spenti, rovinati, sfibrati</b> da piastre, colori e decolorazioni. Il laser stimola la rigenerazione, <b>rinforza il capello e lo rende meno fragile</b>.</p>
         <div class="ind">${['Capelli svuotati e fragili', 'Doppie punte', 'Disidratazione', 'Capelli che si spezzano'].map(t => `<span><i class="fa-solid fa-check"></i> ${t}</span>`).join('')}</div>
-        <div class="pbox"><div><div class="l">prezzo del pacchetto completo</div><div class="w">4 sedute · 1 a settimana · tutto incluso</div></div><div class="a">${S.g === 'lei' ? '447/487 €' : 'su richiesta'}<small>prezzo riservato a chi fa il percorso</small></div></div>
+        <div class="pbox"><div><div class="l">prezzo del pacchetto completo</div><div class="w">4 sedute · 1 a settimana · tutto incluso</div></div><div class="a">447/487 €<small>prezzo riservato a chi fa il percorso</small></div></div>
         <div class="gift"><span class="gi"><i class="fa-solid fa-gift"></i></span><span class="gt">in regalo<br>con il pacchetto</span><div class="gp"><div><img src="foto-prodotti/shampoo%20nutriente.png" alt=""><span><b>Shampoo</b><small>Nutriente</small></span></div><div><img src="foto-prodotti/Conditioner%20idratante.png" alt=""><span><b>Conditioner</b><small>per le lunghezze</small></span></div></div></div></div></div>
       <div class="row"><span class="num">2</span><div class="bd"><span class="w-t">Oleazioni</span> <span class="w-lb">per nutrire e proteggere</span>
         <p class="w-p">I capelli <b>perdono lipidi ogni giorno</b>: sole, phon, piastre e trattamenti tecnici. L'olio nutre la fibra in profondità e crea una <b>barriera protettiva</b>.</p>
@@ -1079,7 +1085,7 @@ P.mant = () => {
   const p = x.p[S.g], lei = S.g === 'lei' ? ' lei' : '';
   const months = Array.from({ length: 12 }, (_, i) => { const b = x.months === 'alt' ? i % 2 === 1 : x.months === 'q' ? i % 3 === 2 : false; return `<i class="${b ? 'b' : ''}"></i>`; }).join('');
   return `
-  <div class="L sd-L photo" style="background-image:url(${x.photo});${x.pos ? `background-position:${x.pos}` : ''}">
+  <div class="L sd-L photo" style="background-image:url(${imgG(x.photo)});${posG(x.pos) ? `background-position:${posG(x.pos)}` : ''}">
     ${backBtn()}
     <div class="in"><span class="tape">${x.tape}</span>
       <div class="h1">Mantenimento<span class="sub" style="font-size:54px;letter-spacing:-0.045em"><span class="y">${x.title}</span>.</span></div>
