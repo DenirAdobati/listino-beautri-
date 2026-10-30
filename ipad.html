@@ -45,18 +45,18 @@
   @keyframes fade { from { opacity: .4; } to { opacity: 1; } }
 
   /* ---------- barra in alto ---------- */
-  .nav { position: absolute; left: 18px; right: 18px; top: 14px; height: 70px; border-radius: 18px; background: rgba(10,10,10,.94); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 6px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 14px; padding: 0 10px 0 20px; color: #fff; z-index: 20; }
+  .nav { position: absolute; left: 18px; right: 18px; top: 14px; height: 70px; border-radius: 18px; background: rgba(10,10,10,.94); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 6px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 12px; padding: 0 10px 0 20px; color: #fff; z-index: 20; }
   .logo { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 18px; letter-spacing: .03em; white-space: nowrap; }
   .logo i { width: 26px; height: 26px; background: var(--logo) center/contain no-repeat; }
   .tabs { display: flex; gap: 4px; margin: 0 auto; }
-  .tab { min-height: 52px; padding: 0 18px; border-radius: 12px; display: flex; align-items: center; gap: 9px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 16px; color: rgba(255,255,255,.82); }
+  .tab { min-height: 52px; padding: 0 16px; border-radius: 12px; display: flex; align-items: center; gap: 9px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 16px; color: rgba(255,255,255,.82); }
   .tab i { font-size: 15px; color: rgba(255,255,255,.6); }
   .tab.on { background: var(--giallo); color: var(--nero); box-shadow: 0 0 18px rgba(245,194,0,.3); }
   .tab.on i { color: var(--nero); }
   .seg { display: flex; align-items: center; gap: 8px; }
   .seg small { font-family: Caveat, cursive; font-weight: 700; font-size: 20px; color: var(--giallo); }
   .seg div { display: flex; background: rgba(255,255,255,.1); border-radius: 12px; padding: 4px; }
-  .seg button { min-height: 46px; min-width: 60px; padding: 0 12px; border-radius: 9px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; color: rgba(255,255,255,.82); text-align: center; }
+  .seg button { min-height: 46px; min-width: 56px; padding: 0 10px; border-radius: 9px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; color: rgba(255,255,255,.82); text-align: center; }
   .seg button.on { background: #fff; color: var(--nero); }
 
   /* ---------- elementi comuni ---------- */
@@ -697,6 +697,61 @@
   .modal p { font-size: 16px; color: var(--testo); margin-top: 6px; }
   .modal .ybtn { margin-top: 16px; }
   .graybtn { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; min-height: 50px; padding: 0 18px; border-radius: 999px; background: var(--sabbia); font-family: Poppins, sans-serif; font-weight: 700; font-size: 15px; }
+
+  /* ---------- Gift Card: tasto pacco regalo nella barra + pagina dedicata ---------- */
+  .navgift { position: relative; width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 21px; color: var(--giallo); background: rgba(245,194,0,.12); border: 1px solid rgba(245,194,0,.45); flex-shrink: 0; }
+  .navgift::after { content: ""; position: absolute; top: 7px; right: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--rosso); box-shadow: 0 0 0 2px var(--nero); }
+  .navgift.on { background: var(--giallo); color: var(--nero); border-color: var(--giallo); box-shadow: 0 0 18px rgba(245,194,0,.35); }
+  .navgift.on::after { display: none; }
+
+  /* la card: nera, gialla o nera col bordo giallo, con il nastro del pacco */
+  .gf-card { position: relative; aspect-ratio: 1.586; border-radius: 18px; overflow: hidden; color: #fff; background-color: var(--nero); background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 22px 22px; box-shadow: 0 2px 0 rgba(255,255,255,.08) inset, 0 22px 44px rgba(0,0,0,.28); font-family: Poppins, sans-serif; container-type: inline-size; }
+  .gf-card::before { content: ""; position: absolute; top: 0; bottom: 0; right: 22%; width: 7%; background: var(--giallo); }
+  .gf-card::after { content: ""; position: absolute; left: 0; right: 0; top: 58%; height: 8%; background: var(--giallo); }
+  .gf-card .gf-bow { position: absolute; right: calc(22% + 3.5%); top: 58%; transform: translate(50%, -62%); font-size: 13cqw; color: var(--giallo); z-index: 2; filter: drop-shadow(0 3px 4px rgba(0,0,0,.35)); }
+  .gf-card .gf-top { position: absolute; left: 6%; top: 8%; display: flex; align-items: center; gap: 2.4cqw; font-weight: 700; font-size: 5.2cqw; letter-spacing: .03em; z-index: 2; }
+  .gf-card .gf-top i { width: 7cqw; height: 7cqw; background: var(--logo) center/contain no-repeat; }
+  .gf-card .gf-lbl { position: absolute; left: 6%; top: 24%; font-family: Caveat, cursive; font-weight: 700; font-size: 7.5cqw; color: var(--giallo); z-index: 2; }
+  .gf-card .gf-amt { position: absolute; left: 6%; bottom: 7%; font-weight: 900; font-size: 15.5cqw; letter-spacing: -0.05em; line-height: 1; z-index: 2; text-shadow: 0 3px 12px rgba(0,0,0,.4); }
+  .gf-card .gf-amt small { font-size: .5em; margin-left: 1cqw; }
+  .gf-card .gf-exp { position: absolute; right: 5%; bottom: 7%; font-size: 3.6cqw; font-weight: 700; color: rgba(255,255,255,.75); z-index: 2; text-align: right; }
+  .gf-card.gold { background-color: var(--giallo); background-image: linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px); color: var(--nero); }
+  .gf-card.gold::before, .gf-card.gold::after { background: var(--nero); }
+  .gf-card.gold .gf-bow { color: var(--nero); }
+  .gf-card.gold .gf-lbl { color: var(--giallo-scuro); }
+  .gf-card.gold .gf-exp { color: rgba(10,10,10,.65); }
+  .gf-card.gold .gf-amt { text-shadow: none; }
+  .gf-card.lux { background-color: #121212; box-shadow: 0 0 0 2px var(--giallo) inset, 0 22px 44px rgba(0,0,0,.3); }
+  .gf-card.lux .gf-amt { color: var(--giallo); }
+
+  /* lato sinistro nero: cosa ci si compra */
+  .gf-L { position: relative; width: 39%; flex-shrink: 0; padding: 104px 26px 26px 30px; display: flex; flex-direction: column; }
+  .gf-L .eyebrow { font-size: 14px; }
+  .gf-L .h1 { font-size: 38px; margin-top: 10px; }
+  .gf-L .lead { font-size: 15.5px; line-height: 1.5; margin-top: 10px; }
+  .gf-tiles { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+  .gf-tile { display: flex; border-radius: 16px; overflow: hidden; background: #151515; border: 1px solid rgba(255,255,255,.1); }
+  .gf-tile .img { position: relative; width: 140px; min-height: 140px; flex-shrink: 0; background: center/cover no-repeat; }
+  .gf-tile .img.prod { background: var(--sabbia) url(foto-prodotti/menu-prodotti.webp) center 85%/auto 92% no-repeat; }
+  .gf-tile .img.serv { background-image: url(foto-trattamenti/trattamento-donna.jpg); background-position: 60% 40%; }
+  .gf-tile .img .tape { position: absolute; left: 8px; bottom: 8px; font-size: 17px; }
+  .gf-tile .tx { align-self: center; padding: 12px 14px 13px; }
+  .gf-tile .tx b { display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.02em; line-height: 1.2; color: #fff; }
+  .gf-tile .tx p { font-size: 13.5px; line-height: 1.42; color: rgba(255,255,255,.72); margin-top: 4px; }
+  .gf-valid { margin-top: auto; display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: rgba(255,255,255,.62); }
+  .gf-valid i { font-size: 16px; color: var(--giallo); }
+  .gf-valid b { color: #fff; }
+
+  /* lato destro: card grande e importi sotto */
+  .gf-R { flex: 1; min-width: 0; padding: 108px 36px 40px; display: flex; flex-direction: column; align-items: center; }
+  .gf-R .h2 { align-self: stretch; font-family: Poppins, sans-serif; font-weight: 900; font-size: 34px; letter-spacing: -0.04em; line-height: 1.1; margin-top: 6px; }
+  .gf-stack { margin: auto 0; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+  .gf-stack .gf-card { width: 450px; }
+  .gf-amts { display: flex; gap: 12px; }
+  .gf-amts button { position: relative; width: 150px; min-height: 86px; border-radius: 18px; border: 2px solid #e6e0d0; background: #fff; display: flex; align-items: center; justify-content: center; font-family: Poppins, sans-serif; text-align: center; transition: all .2s; }
+  .gf-amts button b { font-weight: 900; font-size: 34px; letter-spacing: -0.045em; line-height: 1; }
+  .gf-amts button.on { background: var(--nero); border-color: var(--nero); color: #fff; box-shadow: 0 12px 26px rgba(0,0,0,.2); }
+  .gf-amts button.on::after { content: ""; position: absolute; left: 50%; top: -21px; transform: translateX(-50%); border: 11px solid transparent; border-bottom-color: var(--nero); }
 </style>
 </head>
 <body>
@@ -904,8 +959,8 @@ const SCHEDE = {
    ============================================================ */
 const S = { page: 'home', p: {}, g: 'lei', hist: [] };
 const TABS = [['home', 'fa-house', 'Home'], ['percorsi', 'fa-route', 'Percorsi'], ['prodotti', 'fa-pump-soap', 'Prodotti'], ['donna', 'fa-spa', 'Menu Donna'], ['uomo', 'fa-scissors', 'Menu Uomo']];
-const TAB_OF = { home: 'home', percorsi: 'percorsi', seduta: 'percorsi', laser: 'percorsi', riparare: 'percorsi', mant: 'percorsi', prodotti: 'prodotti', famiglia: 'prodotti' };
-const NAMES = { home: 'Home', percorsi: 'Percorsi', seduta: 'Le sedute', laser: 'Laser', riparare: 'Riparare', mant: 'Mantenimento', prodotti: 'La routine', famiglia: 'Prodotti', donna: 'Menu Donna', uomo: 'Menu Uomo', tricologici: 'Trattamenti', spa: 'SPA', colorazioni: 'Colorazioni', scheda: 'Colorazioni', migliori: 'Migliori proposte', forma: 'Forma', stilistico: 'Stilistico', novita: 'Novità', reset: 'Reset Autunnale', gioco: 'Gioco Goloso', consulenza: 'Consulenza' };
+const TAB_OF = { home: 'home', percorsi: 'percorsi', seduta: 'percorsi', laser: 'percorsi', riparare: 'percorsi', mant: 'percorsi', prodotti: 'prodotti', famiglia: 'prodotti', gift: 'gift' };
+const NAMES = { home: 'Home', percorsi: 'Percorsi', seduta: 'Le sedute', laser: 'Laser', riparare: 'Riparare', mant: 'Mantenimento', prodotti: 'La routine', famiglia: 'Prodotti', donna: 'Menu Donna', uomo: 'Menu Uomo', tricologici: 'Trattamenti', spa: 'SPA', colorazioni: 'Colorazioni', scheda: 'Colorazioni', migliori: 'Migliori proposte', forma: 'Forma', stilistico: 'Stilistico', novita: 'Novità', reset: 'Reset Autunnale', gioco: 'Gioco Goloso', consulenza: 'Consulenza', gift: 'Gift Card' };
 let menuTab = 'donna';
 
 function go(page, p = {}, push = true) {
@@ -942,6 +997,7 @@ function nav() {
   const t = currentTab();
   return `<nav class="nav"><div class="logo"><i></i>Beautrì</div><div class="tabs">
     ${TABS.map(([k, i, n]) => `<button class="tab ${t === k ? 'on' : ''}" data-tab="${k}"><i class="fa-solid ${i}"></i>${n}</button>`).join('')}</div>
+    <button class="navgift ${t === 'gift' ? 'on' : ''}" data-tab="gift" aria-label="Gift Card"><i class="fa-solid fa-gift"></i></button>
     <div class="seg"><small>prezzi per</small><div><button class="${S.g === 'lei' ? 'on' : ''}" data-g="lei">Lei</button><button class="${S.g === 'lui' ? 'on' : ''}" data-g="lui">Lui</button></div></div></nav>`;
 }
 
@@ -1544,6 +1600,31 @@ P.consulenza = () => `
     <p class="ps">P.S. Non devi firmare nessun contratto. Paghi seduta per seduta.</p><p class="sign">— Daniela</p>
   </div></div>`;
 
+/* --- Gift Card --- */
+const GF_TONE = { 100: '', 150: 'gold', 200: 'lux' };
+const gfCard = a => `<div class="gf-card ${GF_TONE[a]}"><div class="gf-top"><i></i>Beautrì</div><div class="gf-lbl">Gift Card</div><i class="fa-solid fa-gift gf-bow"></i><div class="gf-amt">${a}<small>€</small></div><div class="gf-exp">valida<br>60 giorni</div></div>`;
+P.gift = () => {
+  const amt = S.p.amt || 150;
+  return `
+  <div class="gf-L bg-dark">
+    <div class="eyebrow">Gift Card</div>
+    <div class="h1">Regala<br><span class="y">Beautrì</span>.</div>
+    <p class="lead">Tu scegli l'importo, <b>chi la riceve sceglie come usarla</b>: tra tutti i nostri prodotti e i servizi del menu.</p>
+    <div class="gf-tiles">
+      <div class="gf-tile"><div class="img prod"><span class="tape">per casa</span></div><div class="tx"><b>Tutti i prodotti Beautrì</b><p>La routine di casa.</p></div></div>
+      <div class="gf-tile"><div class="img serv"><span class="tape">in salone</span></div><div class="tx"><b>Tutti i servizi del menu</b><p>Per lei e per lui.</p></div></div>
+    </div>
+    <p class="gf-valid"><i class="fa-regular fa-calendar-check"></i><span>Valida <b>60 giorni</b> dall'acquisto</span></p>
+  </div>
+  <div class="gf-R bg-white">
+    <div class="h2">Scegli l'importo <span class="hl">che preferisci</span>.</div>
+    <div class="gf-stack">
+      ${gfCard(amt)}
+      <div class="gf-amts">${[100, 150, 200].map(a => `<button class="${amt === a ? 'on' : ''}" data-amt="${a}"><b>${a} €</b></button>`).join('')}</div>
+    </div>
+  </div>`;
+};
+
 /* ============================================================
    RENDER E INTERAZIONI
    ============================================================ */
@@ -1558,6 +1639,7 @@ app.addEventListener('click', e => {
   const tb = t.closest('[data-tab]'); if (tb) return tab(tb.dataset.tab);
   const gb = t.closest('[data-g]'); if (gb) { S.g = gb.dataset.g; return render(false); }
   if (t.closest('[data-back]')) return back();
+  const am = t.closest('[data-amt]'); if (am) { S.p = { ...S.p, amt: +am.dataset.amt }; return render(false); }
   const sed = t.closest('[data-sed]'); if (sed) { const c = SED_CARDS[+sed.dataset.i]; return go(c.go[0], c.go[1]); }
   const gl = t.closest('[data-go]');
   if (gl) {
