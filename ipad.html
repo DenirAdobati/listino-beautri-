@@ -790,7 +790,7 @@ const SEDUTE = {
   p3: { name: 'Detossinare', title: '[Detossinare].', lead: 'Per la cute che non respira: **la liberiamo dai residui e la ossigeniamo.**', need: 'bulbo affaticato',
     who: 'Cute che **non respira**, **appesantita da residui**.', what: 'oli essenziali detossinanti', sessions: 'da 5 a 7', min: 5, max: 7,
     tools: ['vacuum terapia', 'alta frequenza', 'cascata'], prices: { lui: '47', lei: '67/71' } },
-  p4: { name: 'Nutrire', title: '[Nutrire].', lead: 'Nutrimento **per la cute e per i capelli.**', need: 'cute e capelli spenti',
+  p4: { name: 'Nutrire', photo: 'p4t', title: '[Nutrire].', lead: 'Nutrimento **per la cute e per i capelli.**', need: 'cute e capelli spenti',
     who: 'Cute e capelli che hanno bisogno di **nutrimento**.', what: 'prodotti e oli essenziali nutritivi e stimolanti per il bulbo', sessions: '5', min: 5, max: 5,
     tools: ['nebulizzazione', 'ossigenoterapia', 'alta frequenza'], prices: { lui: '67', lei: '89/93' } }
 };
@@ -1054,7 +1054,7 @@ P.seduta = () => {
   const id = S.p.id || 'p1', x = SEDUTE[id];
   const dots = `<div class="dots">${Array.from({ length: x.max }, (_, i) => `<i class="${i >= x.min ? 'opt' : ''}"></i>`).join('')}</div>`;
   return `
-  <div class="L sd-L photo" style="background-image:url(${imgG(id)})">
+  <div class="L sd-L photo" style="background-image:url(${imgG(x.photo || id)})">
     ${backBtn()}
     <div class="in"><span class="tape">${x.need}</span><div class="h1">${title(x.title)}</div><p class="lead">${md(x.lead)}</p></div>
   </div>
